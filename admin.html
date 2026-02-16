@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Panel Administrativo — Instituto Federico Froebel</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/wizard.css">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo"><svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                    <rect width="44" height="44" rx="12" fill="#1a7a6d" /><text x="22" y="28" font-size="20"
+                        fill="white" text-anchor="middle" font-family="Nunito" font-weight="800">F</text>
+                </svg><span>Froebel Admin</span></a>
+            <nav class="header__nav" id="main-nav">
+                <span class="header__link" id="admin-user-email" style="cursor:default;"></span>
+                <button class="btn btn--sm btn--secondary" onclick="handleLogout()" id="logout-btn"
+                    style="display:none;">Cerrar sesión</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- LOGIN -->
+    <div id="admin-login-section">
+        <div class="admin-login">
+            <div style="text-align:center; margin-bottom: var(--space-6);">
+                <div style="font-size: 3rem; margin-bottom: var(--space-3);">🔐</div>
+                <h2 style="margin-bottom: var(--space-2);">Panel Administrativo</h2>
+                <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Acceso exclusivo para
+                    administración
+                    Froebel</p>
+            </div>
+
+            <form id="login-form" style="display: flex; flex-direction: column; gap: var(--space-4);">
+                <div class="wizard__field">
+                    <label for="admin-email">Correo electrónico</label>
+                    <input type="email" id="admin-email" required placeholder="admin@froebelinstituto.com.mx">
+                </div>
+                <div class="wizard__field">
+                    <label for="admin-password">Contraseña</label>
+                    <input type="password" id="admin-password" required placeholder="••••••••">
+                </div>
+                <div id="login-error"
+                    style="display:none; color: var(--color-accent); font-size: var(--text-sm); text-align: center;">
+                </div>
+                <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="admin-dashboard-section" style="display: none;">
+        <div class="admin-dashboard">
+
+            <div class="admin-header">
+                <h1>📊 Inscripciones</h1>
+                <button class="btn btn--primary btn--sm" onclick="loadEnrollments()">🔄 Actualizar</button>
+            </div>
+
+            <!-- STATS -->
+            <div class="admin-stats" id="admin-stats">
+                <div class="admin-stat-card">
+                    <div class="admin-stat-card__number" id="stat-total">0</div>
+                    <div class="admin-stat-card__label">Total</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-card__number" id="stat-pending" style="color: var(--color-secondary-dark);">0
+                    </div>
+                    <div class="admin-stat-card__label">Pendientes</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-card__number" id="stat-approved" style="color: var(--color-nature-dark);">0
+                    </div>
+                    <div class="admin-stat-card__label">Aprobadas</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-card__number" id="stat-revenue" style="color: var(--color-primary);">$0</div>
+                    <div class="admin-stat-card__label">Ingresos</div>
+                </div>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="admin-filters">
+                <button class="admin-filter-btn admin-filter-btn--active" data-filter="all"
+                    onclick="filterEnrollments(null, this)">Todas</button>
+                <button class="admin-filter-btn" data-filter="pending" onclick="filterEnrollments('pending', this)">⏳
+                    Pendientes</button>
+                <button class="admin-filter-btn" data-filter="documents_review"
+                    onclick="filterEnrollments('documents_review', this)">📄 En revisión</button>
+                <button class="admin-filter-btn" data-filter="approved" onclick="filterEnrollments('approved', this)">✅
+                    Aprobadas</button>
+                <button class="admin-filter-btn" data-filter="rejected" onclick="filterEnrollments('rejected', this)">❌
+                    Rechazadas</button>
+            </div>
+
+            <!-- TABLE -->
+            <table class="admin-table" id="enrollments-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Alumno</th>
+                        <th>Tutor</th>
+                        <th>Programa</th>
+                        <th>Plan</th>
+                        <th>Documentos</th>
+                        <th>Pago</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="enrollments-tbody">
+                    <tr>
+                        <td colspan="9"
+                            style="text-align:center; padding: var(--space-12); color: var(--color-text-muted);">
+                            Cargando inscripciones...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ENROLLMENT DETAIL MODAL -->
+    <div id="enrollment-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; overflow-y:auto;">
+        <div
+            style="max-width:700px; margin:80px auto; background:white; border-radius:var(--radius-2xl); padding:var(--space-8); position:relative;">
+            <button onclick="closeModal()"
+                style="position:absolute;top:var(--space-4);right:var(--space-4);background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- CDN: Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- App Scripts -->
+    <script src="scripts/supabase-client.js"></script>
+    <script>
+        /* === ADMIN DASHBOARD LOGIC === */
+        let allEnrollments = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await getAdminSession();
+            if (session) {
+                showDashboard(session.user.email);
+            }
+        });
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            const errorEl = document.getElementById('login-error');
+
+            try {
+                errorEl.style.display = 'none';
+                const data = await adminLogin(email, password);
+                showDashboard(data.user.email);
+            } catch (err) {
+                errorEl.textContent = 'Credenciales incorrectas: ' + err.message;
+                errorEl.style.display = 'block';
+            }
+        });
+
+        async function handleLogout() {
+            await adminLogout();
+            document.getElementById('admin-login-section').style.display = 'block';
+            document.getElementById('admin-dashboard-section').style.display = 'none';
+            document.getElementById('logout-btn').style.display = 'none';
+            document.getElementById('admin-user-email').textContent = '';
+        }
+
+        function showDashboard(email) {
+            document.getElementById('admin-login-section').style.display = 'none';
+            document.getElementById('admin-dashboard-section').style.display = 'block';
+            document.getElementById('admin-user-email').textContent = email;
+            document.getElementById('logout-btn').style.display = 'inline-flex';
+            loadEnrollments();
+        }
+
+        async function loadEnrollments() {
+            try {
+                allEnrollments = await listEnrollments();
+                updateStats();
+                renderTable(allEnrollments);
+            } catch (err) {
+                console.error('Error loading enrollments:', err);
+                document.getElementById('enrollments-tbody').innerHTML = `
+          <tr><td colspan="9" style="text-align:center;color:var(--color-accent);padding:var(--space-8);">
+            Error: ${err.message}
+          </td></tr>`;
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total').textContent = allEnrollments.length;
+            document.getElementById('stat-pending').textContent = allEnrollments.filter(e =>
+                ['pending', 'documents_review', 'payment_pending'].includes(e.status)).length;
+            document.getElementById('stat-approved').textContent = allEnrollments.filter(e => e.status === 'approved').length;
+
+            const revenue = allEnrollments.reduce((sum, e) => {
+                const payments = e.froebel_payments || [];
+                return sum + payments.filter(p => p.status === 'completed').reduce((s, p) => s + Number(p.amount), 0);
+            }, 0);
+            document.getElementById('stat-revenue').textContent = formatPrice(revenue);
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('enrollments-tbody');
+
+            if (!data.length) {
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
+          No hay inscripciones${document.querySelector('.admin-filter-btn--active')?.textContent || ''}</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = data.map(e => {
+                const student = e.froebel_students || {};
+                const guardian = e.froebel_guardians || {};
+                const docs = e.froebel_documents || [];
+                const payments = e.froebel_payments || [];
+                const paidPayments = payments.filter(p => p.status === 'completed');
+
+                const statusBadge = {
+                    pending: '<span class="wizard__status-badge wizard__status-badge--pending">⏳ Pendiente</span>',
+                    documents_review: '<span class="wizard__status-badge wizard__status-badge--pending">📄 En revisión</span>',
+                    payment_pending: '<span class="wizard__status-badge wizard__status-badge--pending">💳 Pago pendiente</span>',
+                    approved: '<span class="wizard__status-badge wizard__status-badge--approved">✅ Aprobada</span>',
+                    rejected: '<span class="wizard__status-badge wizard__status-badge--rejected">❌ Rechazada</span>',
+                    cancelled: '<span class="wizard__status-badge wizard__status-badge--rejected">🚫 Cancelada</span>'
+                };
+
+                return `<tr>
+          <td>${new Date(e.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
+          <td><strong>${student.full_name || 'N/A'}</strong><br><span style="font-size:var(--text-xs);color:var(--color-text-muted);">${student.date_of_birth || ''}</span></td>
+          <td>${guardian.full_name || 'N/A'}<br><span style="font-size:var(--text-xs);color:var(--color-text-muted);">${guardian.phone || ''}</span></td>
+          <td>${formatProgram(e.program)}</td>
+          <td>${e.plan === 'plus' ? 'Plus' : 'Base'}</td>
+          <td>${docs.length}/6</td>
+          <td>${paidPayments.length > 0 ? '✅' : '⏳'}</td>
+          <td>${statusBadge[e.status] || e.status}</td>
+          <td style="white-space:nowrap;">
+            <button class="admin-btn admin-btn--view" onclick="viewDetail('${e.id}')">👁</button>
+            ${e.status !== 'approved' && e.status !== 'rejected' ? `
+              <button class="admin-btn admin-btn--approve" onclick="handleApprove('${e.id}')">✓</button>
+              <button class="admin-btn admin-btn--reject" onclick="handleReject('${e.id}')">✗</button>
+            ` : ''}
+          </td>
+        </tr>`;
+            }).join('');
+        }
+
+        function filterEnrollments(status, btn) {
+            document.querySelectorAll('.admin-filter-btn').forEach(b => b.classList.remove('admin-filter-btn--active'));
+            btn.classList.add('admin-filter-btn--active');
+
+            const filtered = status ? allEnrollments.filter(e => e.status === status) : allEnrollments;
+            renderTable(filtered);
+        }
+
+        function formatProgram(p) {
+            const map = {
+                maternal: 'Maternal',
+                preescolar_1: 'Preesc. 1',
+                preescolar_2: 'Preesc. 2',
+                preescolar_3: 'Preesc. 3'
+            };
+            return map[p] || p;
+        }
+
+        function formatPrice(amount) {
+            return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 0 }).format(amount);
+        }
+
+        async function viewDetail(id) {
+            const e = allEnrollments.find(x => x.id === id);
+            if (!e) return;
+
+            const student = e.froebel_students || {};
+            const guardian = e.froebel_guardians || {};
+            const docs = e.froebel_documents || [];
+            const payments = e.froebel_payments || [];
+
+            document.getElementById('modal-content').innerHTML = `
+        <h2 style="margin-bottom:var(--space-6);">Detalle de Inscripción</h2>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-bottom:var(--space-6);">
+          <div>
+            <h4 style="color:var(--color-text-muted);font-size:var(--text-xs);text-transform:uppercase;margin-bottom:var(--space-2);">Alumno</h4>
+            <p><strong>${student.full_name || ''}</strong></p>
+            <p>Nacimiento: ${student.date_of_birth || ''}</p>
+            <p>CURP: ${student.curp || 'No proporcionado'}</p>
+            <p>Sangre: ${student.blood_type || 'No proporcionado'}</p>
+            <p>Alergias: ${student.allergies || 'Ninguna'}</p>
+          </div>
+          <div>
+            <h4 style="color:var(--color-text-muted);font-size:var(--text-xs);text-transform:uppercase;margin-bottom:var(--space-2);">Tutor</h4>
+            <p><strong>${guardian.full_name || ''}</strong></p>
+            <p>📧 ${guardian.email || ''}</p>
+            <p>📞 ${guardian.phone || ''}</p>
+            <p>📍 ${guardian.address || 'No proporcionado'}</p>
+            <p>🆘 ${guardian.emergency_contact_name || ''} — ${guardian.emergency_contact_phone || ''}</p>
+          </div>
+        </div>
+
+        <h4 style="margin-bottom:var(--space-3);">📄 Documentos (${docs.length})</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-6);">
+          ${docs.map(d => `
+            <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3);background:var(--color-bg);border-radius:var(--radius-md);font-size:var(--text-sm);">
+              <span>${d.status === 'verified' ? '✅' : '📎'}</span>
+              <span>${d.document_type.replace('_', ' ')}</span>
+              <span style="color:var(--color-text-muted);margin-left:auto;">${d.file_name || ''}</span>
+            </div>
+          `).join('') || '<p style="color:var(--color-text-muted);grid-column:1/-1;">Sin documentos</p>'}
+        </div>
+
+        <h4 style="margin-bottom:var(--space-3);">💰 Pagos (${payments.length})</h4>
+        <div style="margin-bottom:var(--space-6);">
+          ${payments.map(p => `
+            <div style="display:flex;justify-content:space-between;padding:var(--space-3);border-bottom:1px solid var(--color-border-light);font-size:var(--text-sm);">
+              <span>${p.payment_type === 'inscription' ? 'Inscripción' : 'Mensualidad'}</span>
+              <span>${formatPrice(p.amount)}</span>
+              <span>${p.status === 'completed' ? '✅' : '⏳'} ${p.payment_method || ''}</span>
+            </div>
+          `).join('') || '<p style="color:var(--color-text-muted);">Sin pagos registrados</p>'}
+        </div>
+
+        <div style="display:flex;gap:var(--space-3);justify-content:center;">
+          ${e.status !== 'approved' ? `<button class="btn btn--primary" onclick="handleApprove('${e.id}');closeModal();">✅ Aprobar</button>` : ''}
+          ${e.status !== 'rejected' ? `<button class="btn btn--secondary" style="border-color:var(--color-accent);color:var(--color-accent);" onclick="handleReject('${e.id}');closeModal();">❌ Rechazar</button>` : ''}
+        </div>
+      `;
+
+            document.getElementById('enrollment-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('enrollment-modal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        async function handleApprove(id) {
+            if (!confirm('¿Aprobar esta inscripción?')) return;
+            try {
+                await approveEnrollment(id, 'Aprobada por admin');
+                await loadEnrollments();
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        }
+
+        async function handleReject(id) {
+            const reason = prompt('Motivo del rechazo:');
+            if (!reason) return;
+            try {
+                await rejectEnrollment(id, reason);
+                await loadEnrollments();
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('enrollment-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+    </script>
+</body>
+
+</html>

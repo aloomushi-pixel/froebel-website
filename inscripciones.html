@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Inscripciones abiertas en Instituto Federico Froebel. Agenda tu visita gratuita al Open House Froebeliano. Maternal y Preescolar en CDMX con hasta 50% de descuento.">
+        content="Inscripciones abiertas en Instituto Federico Froebel. Inscríbete en línea, sube documentos y paga con tarjeta o transferencia. Maternal y Preescolar en CDMX.">
     <meta name="robots" content="index, follow">
 
-    <meta property="og:title" content="Inscripciones — Instituto Federico Froebel">
+    <meta property="og:title" content="Inscripciones en Línea — Instituto Federico Froebel">
     <meta property="og:description"
-        content="Inscripciones abiertas. Agenda tu visita gratuita y conoce nuestras instalaciones.">
+        content="Inscribe a tu hijo/a en línea. Pago seguro, carga de documentos y confirmación inmediata.">
 
-    <title>Inscripciones — Instituto Federico Froebel | Maternal y Preescolar CDMX</title>
+    <title>Inscripciones en Línea — Instituto Federico Froebel | Maternal y Preescolar CDMX</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/wizard.css">
 </head>
 
 <body>
@@ -46,17 +47,38 @@
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO with HOT BUTTON -->
     <section class="section"
-        style="padding-top: calc(72px + var(--space-16)); background: linear-gradient(135deg, var(--color-primary-50), var(--color-secondary-50));">
+        style="padding-top: calc(72px + var(--space-16)); padding-bottom: var(--space-16); background: linear-gradient(135deg, var(--color-primary-50), var(--color-secondary-50));">
         <div class="container text-center">
-            <div class="section-header fade-in" style="margin-bottom:0;">
+            <div class="section-header fade-in" style="margin-bottom: var(--space-8);">
                 <span class="section-header__label">🎓 Inscripciones Abiertas 2026-2027</span>
-                <h1 class="section-header__title">El primer paso: conocernos</h1>
+                <h1 class="section-header__title">Inscribe a tu hijo en línea</h1>
                 <p class="section-header__desc">
-                    Agenda tu visita gratuita al Open House Froebeliano. Tu hijo jugará con nuestros materiales mientras
-                    tú conoces el ambiente, el equipo y la metodología.
+                    Completa todo el proceso desde tu casa: datos del alumno, documentos y pago seguro.
+                    Recibe confirmación inmediata.
                 </p>
+            </div>
+
+            <!-- ★★★ HOT BUTTON ★★★ -->
+            <div class="fade-in" style="margin-bottom: var(--space-8);">
+                <button class="hot-button" onclick="openEnrollmentWizard()">
+                    <span class="hot-button__icon">🚀</span>
+                    Inscribir en Línea Ahora
+                </button>
+            </div>
+
+            <p class="fade-in" style="font-size: var(--text-sm); color: var(--color-text-muted);">
+                💳 Pago con tarjeta o transferencia · 📄 Sube documentos · ✅ Confirmación inmediata
+            </p>
+        </div>
+    </section>
+
+    <!-- ★★★ ENROLLMENT WIZARD ★★★ -->
+    <section class="section" id="wizard-section" style="display: none;">
+        <div class="container">
+            <div id="enrollment-wizard">
+                <!-- Wizard rendered by JS -->
             </div>
         </div>
     </section>
@@ -66,50 +88,148 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-header__label">¿Cómo funciona?</span>
-                <h2 class="section-header__title">3 pasos para inscribir a tu hijo</h2>
+                <h2 class="section-header__title">5 pasos para inscribir en línea</h2>
             </div>
 
-            <div class="grid grid--3">
+            <div class="grid grid--3" style="max-width: 960px; margin: 0 auto;">
                 <div class="card fade-in" style="text-align:center; position:relative;">
                     <div
                         style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:32px;height:32px;background:var(--color-primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:var(--weight-bold);font-size:var(--text-sm);">
                         1</div>
-                    <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">📅</div>
-                    <h3 class="card__title">Agenda tu Visita</h3>
-                    <p class="card__text">Escríbenos por WhatsApp o llena el formulario. Te invitamos a nuestro Open
-                        House Froebeliano para que conozcas todo en persona.</p>
+                    <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">👶</div>
+                    <h3 class="card__title">Datos del Alumno</h3>
+                    <p class="card__text">Ingresa nombre, fecha de nacimiento, programa y plan deseado.</p>
                 </div>
                 <div class="card fade-in" style="text-align:center; position:relative;">
                     <div
                         style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:32px;height:32px;background:var(--color-secondary);color:var(--color-text);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:var(--weight-bold);font-size:var(--text-sm);">
                         2</div>
-                    <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">🏫</div>
-                    <h3 class="card__title">Visita las Instalaciones</h3>
-                    <p class="card__text">Tu hijo experimentará nuestra metodología mientras te mostramos los espacios,
-                        presentamos al equipo y respondemos todas tus preguntas.</p>
+                    <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">👨‍👩‍👧</div>
+                    <h3 class="card__title">Datos del Tutor</h3>
+                    <p class="card__text">Información de contacto, emergencia y dirección del responsable.</p>
                 </div>
                 <div class="card fade-in" style="text-align:center; position:relative;">
                     <div
                         style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:32px;height:32px;background:var(--color-nature);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:var(--weight-bold);font-size:var(--text-sm);">
                         3</div>
+                    <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">📄</div>
+                    <h3 class="card__title">Sube Documentos</h3>
+                    <p class="card__text">Acta de nacimiento, CURP, cartilla de vacunación y foto del alumno.</p>
+                </div>
+            </div>
+
+            <div class="grid grid--2" style="max-width: 640px; margin: var(--space-8) auto 0;">
+                <div class="card fade-in" style="text-align:center; position:relative;">
+                    <div
+                        style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:32px;height:32px;background:var(--color-accent);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:var(--weight-bold);font-size:var(--text-sm);">
+                        4</div>
+                    <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">💳</div>
+                    <h3 class="card__title">Paga en Línea</h3>
+                    <p class="card__text">Inscripción con tarjeta o transferencia. Mensualidades automáticas.</p>
+                </div>
+                <div class="card fade-in" style="text-align:center; position:relative;">
+                    <div
+                        style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:32px;height:32px;background:var(--color-primary-dark);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:var(--weight-bold);font-size:var(--text-sm);">
+                        5</div>
                     <div style="font-size:3rem;margin-bottom:var(--space-4);margin-top:var(--space-4);">✅</div>
-                    <h3 class="card__title">¡Inscríbete!</h3>
-                    <p class="card__text">Elige tu plan (Base o Plus), aprovecha el descuento de inscripción temprana y
-                        únete a la familia Froebel. ¡Felicidades!</p>
+                    <h3 class="card__title">¡Confirmación!</h3>
+                    <p class="card__text">Recibe confirmación inmediata. Tu inscripción será revisada en 1-2 días.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FORMULARIO -->
-    <section class="section section--alt" id="formulario">
+    <!-- PRICING QUICK VIEW -->
+    <section class="section section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-header__label">💰 Transparencia total</span>
+                <h2 class="section-header__title">Costos claros, sin sorpresas</h2>
+            </div>
+
+            <div class="grid grid--2" style="max-width: 720px; margin: 0 auto;">
+                <div class="card fade-in">
+                    <div style="text-align:center;">
+                        <h3 style="color: var(--color-primary); margin-bottom: var(--space-2);">Plan Base</h3>
+                        <p
+                            style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-4);">
+                            Horario 7:30 - 13:00</p>
+                        <div
+                            style="font-size: var(--text-4xl); font-weight: var(--weight-extrabold); color: var(--color-text);">
+                            $3,800<span style="font-size: var(--text-sm); font-weight: normal;">/mes</span>
+                        </div>
+                        <ul
+                            style="margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Programa académico
+                                completo
+                            </li>
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Material didáctico
+                                incluido
+                            </li>
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Seguro escolar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card fade-in" style="border: 2px solid var(--color-secondary); position: relative;">
+                    <div
+                        style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--color-secondary); color: var(--color-text); padding: var(--space-1) var(--space-4); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: var(--weight-bold);">
+                        ⭐ MÁS POPULAR</div>
+                    <div style="text-align:center;">
+                        <h3 style="color: var(--color-primary); margin-bottom: var(--space-2);">Plan Plus</h3>
+                        <p
+                            style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-4);">
+                            Horario extendido 7:30 - 18:00</p>
+                        <div
+                            style="font-size: var(--text-4xl); font-weight: var(--weight-extrabold); color: var(--color-text);">
+                            $6,200<span style="font-size: var(--text-sm); font-weight: normal;">/mes</span>
+                        </div>
+                        <ul
+                            style="margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Todo el Plan Base
+                            </li>
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Comedor nutritivo
+                            </li>
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Talleres
+                                vespertinos</li>
+                            <li style="font-size: var(--text-sm); color: var(--color-text-light);">✓ Horario extendido
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fade-in" style="text-align: center; margin-top: var(--space-8);">
+                <div
+                    style="display: inline-block; padding: var(--space-4) var(--space-8); background: var(--color-secondary-50); border-radius: var(--radius-lg);">
+                    <p style="margin: 0; font-size: var(--text-base);">
+                        🎁 <strong>Inscripción:</strong> <span
+                            style="text-decoration: line-through; color: var(--color-text-muted);">$7,000</span>
+                        <strong style="color: var(--color-primary); font-size: var(--text-xl);"> $3,500</strong>
+                        <span style="font-size: var(--text-sm); color: var(--color-nature-dark);"> (50% descuento
+                            temprano)</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="fade-in" style="text-align: center; margin-top: var(--space-8);">
+                <button class="hot-button" onclick="openEnrollmentWizard()"
+                    style="animation: none; box-shadow: 0 6px 24px rgba(233, 168, 32, 0.3);">
+                    🚀 Inscribir Ahora — Solo $3,500
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALTERNATIVE: Info form + WhatsApp -->
+    <section class="section" id="formulario">
         <div class="container">
             <div class="grid grid--2" style="align-items:start;gap:var(--space-12);">
                 <div class="fade-in">
-                    <h2 style="margin-bottom:var(--space-4);">Solicita información o agenda tu visita</h2>
+                    <h2 style="margin-bottom:var(--space-4);">¿Prefieres que te contactemos?</h2>
                     <p style="color:var(--color-text-light);margin-bottom:var(--space-6);">
-                        Llena el formulario y te contactaremos por WhatsApp en menos de 24 horas. También puedes
-                        escribirnos directamente.
+                        Si prefieres más información antes de inscribirte, llena este formulario y te contactaremos
+                        por WhatsApp en menos de 24 horas.
                     </p>
 
                     <form id="inscripcion-form" style="display:flex;flex-direction:column;gap:var(--space-5);">
@@ -155,39 +275,17 @@
                             </select>
                         </div>
 
-                        <div>
-                            <label for="programa"
-                                style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">Programa
-                                de interés</label>
-                            <select id="programa" name="programa"
-                                style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);background:white;">
-                                <option value="">Aún no lo sé</option>
-                                <option value="base">Plan Base (7:30 - 13:00)</option>
-                                <option value="plus">Plan Plus — Extendido (7:30 - 18:00)</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="mensaje"
-                                style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">¿Alguna
-                                pregunta?</label>
-                            <textarea id="mensaje" name="mensaje" rows="3"
-                                style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);resize:vertical;"
-                                placeholder="¿Cuándo me gustaría agendar la visita? ¿Qué me preocupa?"></textarea>
-                        </div>
-
                         <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">
                             Solicitar Información →
                         </button>
                         <p
                             style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-bottom:0;">
-                            🔒 Tu información es confidencial. Nunca compartiremos tus datos.
+                            🔒 Tu información es confidencial.
                         </p>
                     </form>
                 </div>
 
                 <div class="fade-in">
-                    <!-- INFO CARDS -->
                     <div style="display:flex;flex-direction:column;gap:var(--space-6);">
                         <div class="card"
                             style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color:white;">
@@ -201,20 +299,20 @@
                         </div>
 
                         <div class="card">
-                            <h3 class="card__title">🎁 Promoción de Inscripción Temprana</h3>
-                            <p class="card__text"><strong>Hasta 50% de descuento</strong> en la inscripción anual si te
-                                registras antes de abril 2026.</p>
+                            <h3 class="card__title">🎁 Promoción Inscripción Temprana</h3>
+                            <p class="card__text"><strong>50% de descuento</strong> en inscripción antes de abril 2026.
+                            </p>
                             <div
                                 style="margin-top:var(--space-4);padding:var(--space-4);background:var(--color-secondary-50);border-radius:var(--radius-md);">
                                 <p
                                     style="font-size:var(--text-sm);color:var(--color-secondary-dark);font-weight:var(--weight-semibold);margin-bottom:0;">
-                                    💰 Inscripción regular: $7,000 → <strong>Desde $3,500</strong>
+                                    💰 $7,000 → <strong>$3,500</strong>
                                 </p>
                             </div>
                         </div>
 
                         <div class="card">
-                            <h3 class="card__title">📋 ¿Qué incluye la inscripción?</h3>
+                            <h3 class="card__title">📋 La inscripción incluye</h3>
                             <ul style="display:flex;flex-direction:column;gap:var(--space-2);">
                                 <li
                                     style="display:flex;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-light);">
@@ -231,10 +329,6 @@
                                 <li
                                     style="display:flex;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-light);">
                                     <span style="color:var(--color-primary);">✓</span> Evaluación inicial personalizada
-                                </li>
-                                <li
-                                    style="display:flex;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-light);">
-                                    <span style="color:var(--color-primary);">✓</span> Acceso a talleres para padres
                                 </li>
                             </ul>
                         </div>
@@ -281,7 +375,15 @@
         </svg>
     </a>
 
+    <!-- CDN: Supabase + Stripe -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- App Scripts -->
     <script src="scripts/main.js"></script>
+    <script src="scripts/supabase-client.js"></script>
+    <script src="scripts/stripe-payment.js"></script>
+    <script src="scripts/inscripcion-wizard.js"></script>
 </body>
 
 </html>
