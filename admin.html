@@ -723,7 +723,7 @@
 
         async function loadLeads() {
             try {
-                const { data, error } = await supabase.from('froebel_leads').select('*').order('created_at', { ascending: false });
+                const { data, error } = await getSupabase().from('froebel_leads').select('*').order('created_at', { ascending: false });
                 if (error) throw error;
                 allLeads = data || [];
                 updateLeadStats();
@@ -766,7 +766,7 @@
 
         async function updateLeadStatus(id, status) {
             try {
-                const { error } = await supabase.from('froebel_leads').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
+                const { error } = await getSupabase().from('froebel_leads').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
                 if (error) throw error;
                 await loadLeads();
             } catch (err) { alert('Error: ' + err.message); }
@@ -785,7 +785,7 @@
         document.getElementById('lead-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
-                const { error } = await supabase.from('froebel_leads').insert({
+                const { error } = await getSupabase().from('froebel_leads').insert({
                     full_name: document.getElementById('lead-name').value,
                     phone: document.getElementById('lead-phone').value,
                     email: document.getElementById('lead-email').value,
@@ -808,7 +808,7 @@
         /* === PADRES (Guardians) === */
         async function loadGuardians() {
             try {
-                const { data, error } = await supabase.from('froebel_guardians').select('*, froebel_enrollments(froebel_students(full_name))');
+                const { data, error } = await getSupabase().from('froebel_guardians').select('*, froebel_enrollments(froebel_students(full_name))');
                 if (error) throw error;
                 const tbody = document.getElementById('guardians-tbody');
                 if (!data.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">No hay padres registrados</td></tr>'; return; }
@@ -831,7 +831,7 @@
         /* === ALUMNOS (Students) === */
         async function loadStudents() {
             try {
-                const { data, error } = await supabase.from('froebel_students').select('*, froebel_enrollments(program)');
+                const { data, error } = await getSupabase().from('froebel_students').select('*, froebel_enrollments(program)');
                 if (error) throw error;
                 const tbody = document.getElementById('students-tbody');
                 if (!data.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">No hay alumnos registrados</td></tr>'; return; }
@@ -856,7 +856,7 @@
         /* === DOCUMENTOS === */
         async function loadDocuments() {
             try {
-                const { data, error } = await supabase.from('froebel_documents').select('*, froebel_enrollments(froebel_students(full_name))').order('created_at', { ascending: false });
+                const { data, error } = await getSupabase().from('froebel_documents').select('*, froebel_enrollments(froebel_students(full_name))').order('created_at', { ascending: false });
                 if (error) throw error;
 
                 document.getElementById('docs-total').textContent = data.length;
@@ -886,7 +886,7 @@
 
         async function verifyDoc(id) {
             try {
-                const { error } = await supabase.from('froebel_documents').update({ status: 'verified' }).eq('id', id);
+                const { error } = await getSupabase().from('froebel_documents').update({ status: 'verified' }).eq('id', id);
                 if (error) throw error;
                 await loadDocuments();
             } catch (err) { alert('Error: ' + err.message); }
@@ -895,7 +895,7 @@
         /* === PAGOS === */
         async function loadPayments() {
             try {
-                const { data, error } = await supabase.from('froebel_payments').select('*, froebel_enrollments(froebel_students(full_name))').order('created_at', { ascending: false });
+                const { data, error } = await getSupabase().from('froebel_payments').select('*, froebel_enrollments(froebel_students(full_name))').order('created_at', { ascending: false });
                 if (error) throw error;
 
                 const completed = data.filter(p => p.status === 'completed');
@@ -931,9 +931,9 @@
 
             try {
                 const [enr, students, guardians] = await Promise.all([
-                    supabase.from('froebel_enrollments').select('id', { count: 'exact' }),
-                    supabase.from('froebel_students').select('id', { count: 'exact' }),
-                    supabase.from('froebel_guardians').select('id', { count: 'exact' })
+                    getSupabase().from('froebel_enrollments').select('id', { count: 'exact' }),
+                    getSupabase().from('froebel_students').select('id', { count: 'exact' }),
+                    getSupabase().from('froebel_guardians').select('id', { count: 'exact' })
                 ]);
                 document.getElementById('config-stats').innerHTML = `
                     📊 ${enr.count || 0} inscripciones · 👶 ${students.count || 0} alumnos · 👨‍👩‍👧 ${guardians.count || 0} padres
