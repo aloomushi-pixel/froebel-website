@@ -900,3 +900,214 @@ p {
         padding: 0 var(--space-4);
     }
 }
+
+/* ===== ORG CHART ===== */
+.org-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-8) 0;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.org-chart__level {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-8);
+    width: 100%;
+}
+
+.org-chart__level--dual {
+    gap: var(--space-12);
+}
+
+.org-chart__level--docentes {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.org-chart__node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6) var(--space-8);
+    box-shadow: var(--shadow-md);
+    border: 2px solid transparent;
+    transition: transform var(--duration-normal), box-shadow var(--duration-normal), border-color var(--duration-normal);
+    min-width: 180px;
+}
+
+.org-chart__node:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.org-chart__node--director {
+    border-color: var(--color-primary);
+    background: linear-gradient(135deg, rgba(26, 122, 109, 0.06), var(--color-white));
+}
+
+.org-chart__node--director:hover {
+    border-color: var(--color-primary-dark);
+}
+
+.org-chart__node--admin {
+    border-color: var(--color-secondary);
+    background: linear-gradient(135deg, rgba(240, 196, 88, 0.08), var(--color-white));
+}
+
+.org-chart__node--nurse {
+    border-color: var(--color-accent);
+    background: linear-gradient(135deg, rgba(224, 122, 95, 0.08), var(--color-white));
+}
+
+.org-chart__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: var(--space-3);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.org-chart__name {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    margin: 0;
+}
+
+.org-chart__role {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+}
+
+/* Connectors */
+.org-chart__connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 40px;
+    width: 100%;
+}
+
+.org-chart__line--vertical {
+    width: 3px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-50));
+    border-radius: 2px;
+}
+
+.org-chart__line--horizontal {
+    position: absolute;
+    bottom: 0;
+    width: 260px;
+    height: 3px;
+    background: linear-gradient(to right, var(--color-secondary), var(--color-accent));
+    border-radius: 2px;
+}
+
+/* Docentes */
+.org-chart__docentes-label {
+    text-align: center;
+    padding: var(--space-4) var(--space-8);
+    background: linear-gradient(135deg, var(--color-primary-50), rgba(240, 196, 88, 0.1));
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--color-primary-50);
+}
+
+.org-chart__docentes-label span {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: var(--space-2);
+}
+
+.org-chart__docentes-label h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary-dark);
+    margin: 0;
+}
+
+.org-chart__docentes-label p {
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    margin-top: var(--space-2);
+    max-width: 400px;
+}
+
+.org-chart__docentes-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-3);
+}
+
+.org-chart__dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    box-shadow: 0 2px 8px rgba(26, 122, 109, 0.3);
+    transition: transform var(--duration-normal), box-shadow var(--duration-normal);
+    cursor: default;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.org-chart__dot:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+.org-chart__dot:nth-child(3n) {
+    animation-delay: 1s;
+}
+
+.org-chart__dot:hover {
+    transform: scale(1.3);
+    box-shadow: 0 4px 16px rgba(26, 122, 109, 0.5);
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 0.85;
+    }
+}
+
+/* Org Chart Mobile */
+@media (max-width: 640px) {
+    .org-chart__level--dual {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+    }
+
+    .org-chart__node {
+        min-width: 160px;
+        padding: var(--space-4) var(--space-6);
+    }
+
+    .org-chart__line--horizontal {
+        display: none;
+    }
+
+    .org-chart__docentes-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

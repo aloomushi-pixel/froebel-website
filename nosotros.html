@@ -136,10 +136,10 @@
 
                 <div class="card fade-in">
                     <div class="card__icon card__icon--nature">🌱</div>
-                    <h3 class="card__title">Laboratorio Natural Urbano</h3>
+                    <h3 class="card__title">Exploración Sensorial</h3>
                     <p class="card__text">
-                        Huertos verticales, estaciones sensoriales con arena, agua y semillas. Los niños observan,
-                        experimentan e hipotetizan — la ciencia comienza en la maceta, no en el pizarrón.
+                        Estaciones sensoriales con arena, agua y semillas. Los niños observan,
+                        experimentan e hipotetizan — la ciencia comienza en la experiencia, no en el pizarrón.
                     </p>
                 </div>
 
@@ -174,7 +174,7 @@
                     <div class="card__icon card__icon--nature">💚</div>
                     <h3 class="card__title">Crianza Respetuosa</h3>
                     <p class="card__text">
-                        Cero gritos. Cero castigos punitivos. Límites firmes con amor. Nuestras maestras están formadas
+                        Cero castigos punitivos. Límites firmes con amor. Nuestras maestras están formadas
                         en disciplina positiva y regulación emocional infantil.
                     </p>
                 </div>
@@ -182,7 +182,7 @@
         </div>
     </section>
 
-    <!-- EQUIPO -->
+    <!-- EQUIPO — ORGANIGRAMA -->
     <section class="section" id="equipo">
         <div class="container">
             <div class="section-header fade-in">
@@ -194,46 +194,69 @@
                 </p>
             </div>
 
-            <div class="grid grid--3">
-                <div class="card fade-in" style="text-align:center;">
-                    <div
-                        style="width:100px;height:100px;border-radius:50%;background:var(--color-primary-50);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-4);font-size:2.5rem;">
-                        👩🏽‍🏫</div>
-                    <h3 class="card__title">Directora General</h3>
-                    <p
-                        style="font-size:var(--text-sm);color:var(--color-primary);font-weight:var(--weight-semibold);margin-bottom:var(--space-2);">
-                        Licenciada en Educación Preescolar</p>
-                    <p class="card__text">
-                        Con más de 15 años de experiencia en educación infantil. Certificada en neuroeducación y
-                        metodología Froebel.
-                    </p>
+            <!-- Org Chart -->
+            <div class="org-chart fade-in">
+                <!-- Level 1: Directora -->
+                <div class="org-chart__level">
+                    <div class="org-chart__node org-chart__node--director">
+                        <div class="org-chart__avatar" style="background:var(--color-primary);">
+                            👩🏽‍🏫
+                        </div>
+                        <h3 class="org-chart__name">Directora</h3>
+                        <p class="org-chart__role">Dirección General</p>
+                    </div>
                 </div>
 
-                <div class="card fade-in" style="text-align:center;">
-                    <div
-                        style="width:100px;height:100px;border-radius:50%;background:var(--color-secondary-50);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-4);font-size:2.5rem;">
-                        👩🏻‍🏫</div>
-                    <h3 class="card__title">Coordinadora Maternal</h3>
-                    <p
-                        style="font-size:var(--text-sm);color:var(--color-primary);font-weight:var(--weight-semibold);margin-bottom:var(--space-2);">
-                        Especialista en Desarrollo Temprano</p>
-                    <p class="card__text">
-                        Experta en estimulación temprana y apego seguro. Certificada en primeros auxilios pediátricos.
-                    </p>
+                <!-- Connector -->
+                <div class="org-chart__connector">
+                    <div class="org-chart__line org-chart__line--vertical"></div>
+                    <div class="org-chart__line org-chart__line--horizontal"></div>
                 </div>
 
-                <div class="card fade-in" style="text-align:center;">
-                    <div
-                        style="width:100px;height:100px;border-radius:50%;background:rgba(224,122,95,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-4);font-size:2.5rem;">
-                        👨🏽‍🏫</div>
-                    <h3 class="card__title">Maestro de STEM</h3>
-                    <p
-                        style="font-size:var(--text-sm);color:var(--color-primary);font-weight:var(--weight-semibold);margin-bottom:var(--space-2);">
-                        Formación en Robótica Educativa</p>
-                    <p class="card__text">
-                        Lleva los Dones de Froebel al siguiente nivel con actividades de pre-ingeniería, lógica y
-                        exploración científica.
-                    </p>
+                <!-- Level 2: Administradora + Enfermera -->
+                <div class="org-chart__level org-chart__level--dual">
+                    <div class="org-chart__node org-chart__node--admin">
+                        <div class="org-chart__avatar" style="background:var(--color-secondary);">
+                            💼
+                        </div>
+                        <h3 class="org-chart__name">Administradora</h3>
+                        <p class="org-chart__role">Administración</p>
+                    </div>
+                    <div class="org-chart__node org-chart__node--nurse">
+                        <div class="org-chart__avatar" style="background:var(--color-accent);">
+                            🏥
+                        </div>
+                        <h3 class="org-chart__name">Enfermera</h3>
+                        <p class="org-chart__role">Salud y Primeros Auxilios</p>
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="org-chart__connector">
+                    <div class="org-chart__line org-chart__line--vertical"></div>
+                </div>
+
+                <!-- Level 3: Docentes -->
+                <div class="org-chart__level org-chart__level--docentes">
+                    <div class="org-chart__docentes-label fade-in">
+                        <span>👩‍🏫</span>
+                        <h3>12 Docentes</h3>
+                        <p>Maestras certificadas en educación preescolar, neuroeducación y disciplina positiva</p>
+                    </div>
+                    <div class="org-chart__docentes-grid">
+                        <div class="org-chart__dot" title="Docente 1"></div>
+                        <div class="org-chart__dot" title="Docente 2"></div>
+                        <div class="org-chart__dot" title="Docente 3"></div>
+                        <div class="org-chart__dot" title="Docente 4"></div>
+                        <div class="org-chart__dot" title="Docente 5"></div>
+                        <div class="org-chart__dot" title="Docente 6"></div>
+                        <div class="org-chart__dot" title="Docente 7"></div>
+                        <div class="org-chart__dot" title="Docente 8"></div>
+                        <div class="org-chart__dot" title="Docente 9"></div>
+                        <div class="org-chart__dot" title="Docente 10"></div>
+                        <div class="org-chart__dot" title="Docente 11"></div>
+                        <div class="org-chart__dot" title="Docente 12"></div>
+                    </div>
                 </div>
             </div>
         </div>
