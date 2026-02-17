@@ -3,37 +3,37 @@
    ============================================ */
 
 const WIZARD_STEPS = [
-    { id: 'student', title: 'Datos del Alumno', icon: '👶' },
-    { id: 'guardian', title: 'Datos del Tutor', icon: '👨‍👩‍👧' },
-    { id: 'documents', title: 'Documentos', icon: '📄' },
-    { id: 'payment', title: 'Pago', icon: '💳' },
-    { id: 'confirmation', title: 'Confirmación', icon: '✅' }
+  { id: 'student', title: 'Datos del Alumno', icon: '👶' },
+  { id: 'guardian', title: 'Datos del Tutor', icon: '👨‍👩‍👧' },
+  { id: 'documents', title: 'Documentos', icon: '📄' },
+  { id: 'payment', title: 'Pago', icon: '💳' },
+  { id: 'confirmation', title: 'Confirmación', icon: '✅' }
 ];
 
 const REQUIRED_DOCUMENTS = [
-    { type: 'acta_nacimiento', label: 'Acta de Nacimiento', required: true },
-    { type: 'curp', label: 'CURP del alumno', required: true },
-    { type: 'cartilla_vacunacion', label: 'Cartilla de Vacunación', required: true },
-    { type: 'foto_alumno', label: 'Foto reciente del alumno', required: true },
-    { type: 'comprobante_domicilio', label: 'Comprobante de domicilio', required: false },
-    { type: 'identificacion_tutor', label: 'INE del tutor', required: false }
+  { type: 'acta_nacimiento', label: 'Acta de Nacimiento', required: true },
+  { type: 'curp', label: 'CURP del alumno', required: true },
+  { type: 'cartilla_vacunacion', label: 'Cartilla de Vacunación', required: true },
+  { type: 'foto_alumno', label: 'Foto reciente del alumno', required: true },
+  { type: 'comprobante_domicilio', label: 'Comprobante de domicilio', required: false },
+  { type: 'identificacion_tutor', label: 'INE del tutor', required: false }
 ];
 
 let currentStep = 0;
 let wizardData = {
-    student: {},
-    guardian: {},
-    documents: [],
-    payment: {},
-    enrollment: null
+  student: {},
+  guardian: {},
+  documents: [],
+  payment: {},
+  enrollment: null
 };
 
 /* === RENDER WIZARD === */
 function renderWizard() {
-    const container = document.getElementById('enrollment-wizard');
-    if (!container) return;
+  const container = document.getElementById('enrollment-wizard');
+  if (!container) return;
 
-    container.innerHTML = `
+  container.innerHTML = `
     <div class="wizard">
       <div class="wizard__progress">
         ${WIZARD_STEPS.map((step, i) => `
@@ -57,25 +57,25 @@ function renderWizard() {
     </div>
   `;
 
-    attachStepListeners();
+  attachStepListeners();
 }
 
 /* === RENDER CURRENT STEP === */
 function renderCurrentStep() {
-    switch (currentStep) {
-        case 0: return renderStudentStep();
-        case 1: return renderGuardianStep();
-        case 2: return renderDocumentsStep();
-        case 3: return renderPaymentStep();
-        case 4: return renderConfirmationStep();
-        default: return '';
-    }
+  switch (currentStep) {
+    case 0: return renderStudentStep();
+    case 1: return renderGuardianStep();
+    case 2: return renderDocumentsStep();
+    case 3: return renderPaymentStep();
+    case 4: return renderConfirmationStep();
+    default: return '';
+  }
 }
 
 /* === STEP 1: STUDENT DATA === */
 function renderStudentStep() {
-    const s = wizardData.student;
-    return `
+  const s = wizardData.student;
+  return `
     <div class="wizard__section fade-in visible">
       <h2 class="wizard__title">Datos del Alumno</h2>
       <p class="wizard__desc">Ingresa la información de tu hijo/a para iniciar el proceso de inscripción.</p>
@@ -118,10 +118,11 @@ function renderStudentStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="s-plan">Plan *</label>
+          <label for="s-plan">Modalidad de pago *</label>
           <select id="s-plan" required>
-            <option value="base" ${s.plan === 'base' || !s.plan ? 'selected' : ''}>Plan Base (7:30 - 13:00) — $3,800/mes</option>
-            <option value="plus" ${s.plan === 'plus' ? 'selected' : ''}>Plan Plus (7:30 - 18:00) — $6,200/mes</option>
+            <option value="pronto_pago" ${s.plan === 'pronto_pago' || !s.plan ? 'selected' : ''}>Pronto Pago — $3,600/mes (primeros 10 días)</option>
+            <option value="normal" ${s.plan === 'normal' ? 'selected' : ''}>Mensual Normal — $4,000/mes</option>
+            <option value="anual" ${s.plan === 'anual' ? 'selected' : ''}>Pago Anual — $40,480 (8% desc.)</option>
           </select>
         </div>
 
@@ -156,8 +157,8 @@ function renderStudentStep() {
 
 /* === STEP 2: GUARDIAN DATA === */
 function renderGuardianStep() {
-    const g = wizardData.guardian;
-    return `
+  const g = wizardData.guardian;
+  return `
     <div class="wizard__section fade-in visible">
       <h2 class="wizard__title">Datos del Tutor</h2>
       <p class="wizard__desc">Información del padre, madre o tutor responsable.</p>
@@ -214,15 +215,15 @@ function renderGuardianStep() {
 
 /* === STEP 3: DOCUMENTS === */
 function renderDocumentsStep() {
-    return `
+  return `
     <div class="wizard__section fade-in visible">
       <h2 class="wizard__title">Documentos</h2>
       <p class="wizard__desc">Sube los documentos requeridos. Formatos: PDF, JPG, PNG (máx. 10MB cada uno).</p>
 
       <div class="wizard__docs-grid">
         ${REQUIRED_DOCUMENTS.map(doc => {
-        const uploaded = wizardData.documents.find(d => d.type === doc.type);
-        return `
+    const uploaded = wizardData.documents.find(d => d.type === doc.type);
+    return `
             <div class="wizard__doc-card ${uploaded ? 'wizard__doc-card--uploaded' : ''}" id="doc-${doc.type}">
               <div class="wizard__doc-icon">${uploaded ? '✅' : '📎'}</div>
               <div class="wizard__doc-info">
@@ -235,7 +236,7 @@ function renderDocumentsStep() {
               </label>
             </div>
           `;
-    }).join('')}
+  }).join('')}
       </div>
 
       <div class="wizard__note">
@@ -248,11 +249,11 @@ function renderDocumentsStep() {
 
 /* === STEP 4: PAYMENT === */
 function renderPaymentStep() {
-    const plan = wizardData.student.plan || 'base';
-    const inscriptionPrice = getInscriptionPrice(true);
-    const monthlyPrice = getMonthlyPrice(plan);
+  const plan = wizardData.student.plan || 'base';
+  const inscriptionPrice = getInscriptionPrice(true);
+  const monthlyPrice = getMonthlyPrice(plan);
 
-    return `
+  return `
     <div class="wizard__section fade-in visible">
       <h2 class="wizard__title">Pago de Inscripción</h2>
       <p class="wizard__desc">Elige tu método de pago para completar la inscripción.</p>
@@ -275,7 +276,7 @@ function renderPaymentStep() {
           <strong>${formatPrice(inscriptionPrice)}</strong>
         </div>
         <div class="wizard__payment-row wizard__payment-row--sub">
-          <span>Mensualidad recurrente (${plan === 'plus' ? 'Plan Plus' : 'Plan Base'})</span>
+          <span>Colegiatura (${plan === 'anual' ? 'Pago Anual' : plan === 'normal' ? 'Mensual Normal' : 'Pronto Pago'})</span>
           <span>${formatPrice(monthlyPrice)}/mes</span>
         </div>
       </div>
@@ -329,11 +330,11 @@ function renderPaymentStep() {
 
 /* === STEP 5: CONFIRMATION === */
 function renderConfirmationStep() {
-    const s = wizardData.student;
-    const g = wizardData.guardian;
-    const plan = s.plan || 'base';
+  const s = wizardData.student;
+  const g = wizardData.guardian;
+  const plan = s.plan || 'base';
 
-    return `
+  return `
     <div class="wizard__section wizard__section--confirmation fade-in visible">
       <div class="wizard__confirm-icon">🎉</div>
       <h2 class="wizard__title">¡Inscripción Recibida!</h2>
@@ -347,7 +348,7 @@ function renderConfirmationStep() {
           <div>
             <h4>Alumno</h4>
             <p><strong>${s.full_name || ''}</strong></p>
-            <p>${s.program ? s.program.replace('_', ' ') : ''} — Plan ${plan === 'plus' ? 'Plus' : 'Base'}</p>
+            <p>${s.program ? s.program.replace('_', ' ') : ''} — ${plan === 'anual' ? 'Pago Anual' : plan === 'normal' ? 'Mensual Normal' : 'Pronto Pago'}</p>
           </div>
           <div>
             <h4>Tutor</h4>
@@ -401,8 +402,8 @@ function renderConfirmationStep() {
 
 /* === FOOTER NAVIGATION === */
 function renderFooter() {
-    if (currentStep === 4) return '';
-    return `
+  if (currentStep === 4) return '';
+  return `
     <div class="wizard__nav">
       ${currentStep > 0 ? '<button class="btn btn--secondary" onclick="prevStep()">← Anterior</button>' : '<div></div>'}
       ${currentStep < 3 ? '<button class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
@@ -413,319 +414,319 @@ function renderFooter() {
 
 /* === NAVIGATION === */
 async function nextStep() {
-    if (!validateCurrentStep()) return;
-    saveCurrentStepData();
+  if (!validateCurrentStep()) return;
+  saveCurrentStepData();
 
-    // On step 2 completion (guardian), create records in Supabase
-    if (currentStep === 1) {
-        await createEnrollmentRecords();
-    }
+  // On step 2 completion (guardian), create records in Supabase
+  if (currentStep === 1) {
+    await createEnrollmentRecords();
+  }
 
-    currentStep++;
-    renderWizard();
+  currentStep++;
+  renderWizard();
 
-    // Mount Stripe card on payment step
-    if (currentStep === 3) {
-        setTimeout(() => mountCardElement('stripe-card-element'), 100);
-    }
+  // Mount Stripe card on payment step
+  if (currentStep === 3) {
+    setTimeout(() => mountCardElement('stripe-card-element'), 100);
+  }
 
-    window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
+  window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
 }
 
 function prevStep() {
-    saveCurrentStepData();
-    currentStep--;
-    renderWizard();
-    window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
+  saveCurrentStepData();
+  currentStep--;
+  renderWizard();
+  window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
 }
 
 /* === VALIDATION === */
 function validateCurrentStep() {
-    switch (currentStep) {
-        case 0: return validateStudentStep();
-        case 1: return validateGuardianStep();
-        case 2: return validateDocumentsStep();
-        default: return true;
-    }
+  switch (currentStep) {
+    case 0: return validateStudentStep();
+    case 1: return validateGuardianStep();
+    case 2: return validateDocumentsStep();
+    default: return true;
+  }
 }
 
 function validateStudentStep() {
-    const name = document.getElementById('s-name')?.value?.trim();
-    const dob = document.getElementById('s-dob')?.value;
-    const program = document.getElementById('s-program')?.value;
+  const name = document.getElementById('s-name')?.value?.trim();
+  const dob = document.getElementById('s-dob')?.value;
+  const program = document.getElementById('s-program')?.value;
 
-    if (!name) return showError('Ingresa el nombre del alumno');
-    if (!dob) return showError('Ingresa la fecha de nacimiento');
-    if (!program) return showError('Selecciona un programa');
-    return true;
+  if (!name) return showError('Ingresa el nombre del alumno');
+  if (!dob) return showError('Ingresa la fecha de nacimiento');
+  if (!program) return showError('Selecciona un programa');
+  return true;
 }
 
 function validateGuardianStep() {
-    const name = document.getElementById('g-name')?.value?.trim();
-    const email = document.getElementById('g-email')?.value?.trim();
-    const phone = document.getElementById('g-phone')?.value?.trim();
-    const emergName = document.getElementById('g-emergency-name')?.value?.trim();
-    const emergPhone = document.getElementById('g-emergency-phone')?.value?.trim();
+  const name = document.getElementById('g-name')?.value?.trim();
+  const email = document.getElementById('g-email')?.value?.trim();
+  const phone = document.getElementById('g-phone')?.value?.trim();
+  const emergName = document.getElementById('g-emergency-name')?.value?.trim();
+  const emergPhone = document.getElementById('g-emergency-phone')?.value?.trim();
 
-    if (!name) return showError('Ingresa tu nombre');
-    if (!email || !email.includes('@')) return showError('Ingresa un correo electrónico válido');
-    if (!phone) return showError('Ingresa tu teléfono');
-    if (!emergName) return showError('Ingresa el nombre del contacto de emergencia');
-    if (!emergPhone) return showError('Ingresa el teléfono de emergencia');
-    return true;
+  if (!name) return showError('Ingresa tu nombre');
+  if (!email || !email.includes('@')) return showError('Ingresa un correo electrónico válido');
+  if (!phone) return showError('Ingresa tu teléfono');
+  if (!emergName) return showError('Ingresa el nombre del contacto de emergencia');
+  if (!emergPhone) return showError('Ingresa el teléfono de emergencia');
+  return true;
 }
 
 function validateDocumentsStep() {
-    const requiredDocs = REQUIRED_DOCUMENTS.filter(d => d.required);
-    const uploadedTypes = wizardData.documents.map(d => d.type);
-    const missing = requiredDocs.filter(d => !uploadedTypes.includes(d.type));
+  const requiredDocs = REQUIRED_DOCUMENTS.filter(d => d.required);
+  const uploadedTypes = wizardData.documents.map(d => d.type);
+  const missing = requiredDocs.filter(d => !uploadedTypes.includes(d.type));
 
-    if (missing.length > 0) {
-        return showError(`Faltan documentos obligatorios: ${missing.map(d => d.label).join(', ')}`);
-    }
-    return true;
+  if (missing.length > 0) {
+    return showError(`Faltan documentos obligatorios: ${missing.map(d => d.label).join(', ')}`);
+  }
+  return true;
 }
 
 /* === SAVE STEP DATA === */
 function saveCurrentStepData() {
-    switch (currentStep) {
-        case 0:
-            wizardData.student = {
-                full_name: document.getElementById('s-name')?.value?.trim() || '',
-                date_of_birth: document.getElementById('s-dob')?.value || '',
-                gender: document.getElementById('s-gender')?.value || '',
-                curp: document.getElementById('s-curp')?.value?.toUpperCase() || '',
-                program: document.getElementById('s-program')?.value || '',
-                plan: document.getElementById('s-plan')?.value || 'base',
-                blood_type: document.getElementById('s-blood')?.value || '',
-                allergies: document.getElementById('s-allergies')?.value?.trim() || '',
-                medical_notes: document.getElementById('s-notes')?.value?.trim() || ''
-            };
-            break;
-        case 1:
-            wizardData.guardian = {
-                full_name: document.getElementById('g-name')?.value?.trim() || '',
-                email: document.getElementById('g-email')?.value?.trim() || '',
-                phone: document.getElementById('g-phone')?.value?.trim() || '',
-                whatsapp: document.getElementById('g-whatsapp')?.value?.trim() || '',
-                address: document.getElementById('g-address')?.value?.trim() || '',
-                relationship: document.getElementById('g-relation')?.value || 'Madre/Padre',
-                emergency_contact_name: document.getElementById('g-emergency-name')?.value?.trim() || '',
-                emergency_contact_phone: document.getElementById('g-emergency-phone')?.value?.trim() || ''
-            };
-            break;
-    }
+  switch (currentStep) {
+    case 0:
+      wizardData.student = {
+        full_name: document.getElementById('s-name')?.value?.trim() || '',
+        date_of_birth: document.getElementById('s-dob')?.value || '',
+        gender: document.getElementById('s-gender')?.value || '',
+        curp: document.getElementById('s-curp')?.value?.toUpperCase() || '',
+        program: document.getElementById('s-program')?.value || '',
+        plan: document.getElementById('s-plan')?.value || 'base',
+        blood_type: document.getElementById('s-blood')?.value || '',
+        allergies: document.getElementById('s-allergies')?.value?.trim() || '',
+        medical_notes: document.getElementById('s-notes')?.value?.trim() || ''
+      };
+      break;
+    case 1:
+      wizardData.guardian = {
+        full_name: document.getElementById('g-name')?.value?.trim() || '',
+        email: document.getElementById('g-email')?.value?.trim() || '',
+        phone: document.getElementById('g-phone')?.value?.trim() || '',
+        whatsapp: document.getElementById('g-whatsapp')?.value?.trim() || '',
+        address: document.getElementById('g-address')?.value?.trim() || '',
+        relationship: document.getElementById('g-relation')?.value || 'Madre/Padre',
+        emergency_contact_name: document.getElementById('g-emergency-name')?.value?.trim() || '',
+        emergency_contact_phone: document.getElementById('g-emergency-phone')?.value?.trim() || ''
+      };
+      break;
+  }
 }
 
 /* === CREATE RECORDS IN SUPABASE === */
 async function createEnrollmentRecords() {
-    try {
-        showLoading('Guardando información...');
+  try {
+    showLoading('Guardando información...');
 
-        // 1. Create guardian
-        const guardian = await createGuardian({
-            full_name: wizardData.guardian.full_name,
-            email: wizardData.guardian.email,
-            phone: wizardData.guardian.phone,
-            whatsapp: wizardData.guardian.whatsapp || wizardData.guardian.phone,
-            address: wizardData.guardian.address,
-            emergency_contact_name: wizardData.guardian.emergency_contact_name,
-            emergency_contact_phone: wizardData.guardian.emergency_contact_phone,
-            relationship: wizardData.guardian.relationship
-        });
+    // 1. Create guardian
+    const guardian = await createGuardian({
+      full_name: wizardData.guardian.full_name,
+      email: wizardData.guardian.email,
+      phone: wizardData.guardian.phone,
+      whatsapp: wizardData.guardian.whatsapp || wizardData.guardian.phone,
+      address: wizardData.guardian.address,
+      emergency_contact_name: wizardData.guardian.emergency_contact_name,
+      emergency_contact_phone: wizardData.guardian.emergency_contact_phone,
+      relationship: wizardData.guardian.relationship
+    });
 
-        // 2. Create student
-        const student = await createStudent({
-            guardian_id: guardian.id,
-            full_name: wizardData.student.full_name,
-            date_of_birth: wizardData.student.date_of_birth,
-            gender: wizardData.student.gender || null,
-            curp: wizardData.student.curp || null,
-            blood_type: wizardData.student.blood_type || null,
-            allergies: wizardData.student.allergies || null,
-            medical_notes: wizardData.student.medical_notes || null
-        });
+    // 2. Create student
+    const student = await createStudent({
+      guardian_id: guardian.id,
+      full_name: wizardData.student.full_name,
+      date_of_birth: wizardData.student.date_of_birth,
+      gender: wizardData.student.gender || null,
+      curp: wizardData.student.curp || null,
+      blood_type: wizardData.student.blood_type || null,
+      allergies: wizardData.student.allergies || null,
+      medical_notes: wizardData.student.medical_notes || null
+    });
 
-        // 3. Create enrollment
-        const enrollment = await createEnrollment({
-            student_id: student.id,
-            guardian_id: guardian.id,
-            program: wizardData.student.program,
-            plan: wizardData.student.plan || 'base',
-            status: 'pending'
-        });
+    // 3. Create enrollment
+    const enrollment = await createEnrollment({
+      student_id: student.id,
+      guardian_id: guardian.id,
+      program: wizardData.student.program,
+      plan: wizardData.student.plan || 'base',
+      status: 'pending'
+    });
 
-        wizardData.enrollment = enrollment;
-        wizardData.guardianId = guardian.id;
-        wizardData.studentId = student.id;
+    wizardData.enrollment = enrollment;
+    wizardData.guardianId = guardian.id;
+    wizardData.studentId = student.id;
 
-        hideLoading();
-    } catch (error) {
-        hideLoading();
-        console.error('Error creating enrollment:', error);
-        showError('Error al guardar la información. Intenta nuevamente.');
-        throw error;
-    }
+    hideLoading();
+  } catch (error) {
+    hideLoading();
+    console.error('Error creating enrollment:', error);
+    showError('Error al guardar la información. Intenta nuevamente.');
+    throw error;
+  }
 }
 
 /* === FILE UPLOAD === */
 async function handleFileSelect(input, docType) {
-    const file = input.files[0];
-    if (!file) return;
+  const file = input.files[0];
+  if (!file) return;
 
-    if (file.size > 10 * 1024 * 1024) {
-        showError('El archivo es demasiado grande. Máximo 10MB.');
-        return;
+  if (file.size > 10 * 1024 * 1024) {
+    showError('El archivo es demasiado grande. Máximo 10MB.');
+    return;
+  }
+
+  const card = document.getElementById(`doc-${docType}`);
+  card.classList.add('wizard__doc-card--uploading');
+  const statusEl = card.querySelector('.wizard__doc-status');
+  statusEl.textContent = 'Subiendo...';
+
+  try {
+    if (wizardData.enrollment) {
+      await uploadDocument(wizardData.enrollment.id, file, docType);
     }
 
-    const card = document.getElementById(`doc-${docType}`);
-    card.classList.add('wizard__doc-card--uploading');
-    const statusEl = card.querySelector('.wizard__doc-status');
-    statusEl.textContent = 'Subiendo...';
+    // Update local state
+    wizardData.documents = wizardData.documents.filter(d => d.type !== docType);
+    wizardData.documents.push({ type: docType, name: file.name, file });
 
-    try {
-        if (wizardData.enrollment) {
-            await uploadDocument(wizardData.enrollment.id, file, docType);
-        }
-
-        // Update local state
-        wizardData.documents = wizardData.documents.filter(d => d.type !== docType);
-        wizardData.documents.push({ type: docType, name: file.name, file });
-
-        card.classList.remove('wizard__doc-card--uploading');
-        card.classList.add('wizard__doc-card--uploaded');
-        card.querySelector('.wizard__doc-icon').textContent = '✅';
-        statusEl.textContent = file.name;
-        card.querySelector('.wizard__doc-btn').textContent = 'Cambiar';
-    } catch (error) {
-        card.classList.remove('wizard__doc-card--uploading');
-        statusEl.textContent = 'Error al subir';
-        showError('Error al subir el documento: ' + error.message);
-    }
+    card.classList.remove('wizard__doc-card--uploading');
+    card.classList.add('wizard__doc-card--uploaded');
+    card.querySelector('.wizard__doc-icon').textContent = '✅';
+    statusEl.textContent = file.name;
+    card.querySelector('.wizard__doc-btn').textContent = 'Cambiar';
+  } catch (error) {
+    card.classList.remove('wizard__doc-card--uploading');
+    statusEl.textContent = 'Error al subir';
+    showError('Error al subir el documento: ' + error.message);
+  }
 }
 
 /* === PAYMENT === */
 function switchPaymentMethod(method) {
-    document.querySelectorAll('.wizard__payment-tab').forEach(t => t.classList.remove('wizard__payment-tab--active'));
-    document.querySelector(`[data-method="${method}"]`).classList.add('wizard__payment-tab--active');
-    document.getElementById('payment-method-card').style.display = method === 'card' ? 'block' : 'none';
-    document.getElementById('payment-method-transfer').style.display = method === 'transfer' ? 'block' : 'none';
-    wizardData.payment.method = method;
+  document.querySelectorAll('.wizard__payment-tab').forEach(t => t.classList.remove('wizard__payment-tab--active'));
+  document.querySelector(`[data-method="${method}"]`).classList.add('wizard__payment-tab--active');
+  document.getElementById('payment-method-card').style.display = method === 'card' ? 'block' : 'none';
+  document.getElementById('payment-method-transfer').style.display = method === 'transfer' ? 'block' : 'none';
+  wizardData.payment.method = method;
 }
 
 async function submitPayment() {
-    const payBtn = document.getElementById('pay-button');
-    if (!payBtn) return;
+  const payBtn = document.getElementById('pay-button');
+  if (!payBtn) return;
 
-    const method = wizardData.payment.method || 'card';
-    const amount = getInscriptionPrice(true);
-    const enrollmentId = wizardData.enrollment?.id;
+  const method = wizardData.payment.method || 'card';
+  const amount = getInscriptionPrice(true);
+  const enrollmentId = wizardData.enrollment?.id;
 
-    if (!enrollmentId) {
-        showError('Error: No se encontró la inscripción. Recarga la página e intenta nuevamente.');
-        return;
-    }
+  if (!enrollmentId) {
+    showError('Error: No se encontró la inscripción. Recarga la página e intenta nuevamente.');
+    return;
+  }
 
-    payBtn.disabled = true;
-    payBtn.innerHTML = '<span class="wizard__spinner"></span> Procesando pago...';
+  payBtn.disabled = true;
+  payBtn.innerHTML = '<span class="wizard__spinner"></span> Procesando pago...';
 
-    try {
-        let result;
+  try {
+    let result;
 
-        if (method === 'card') {
-            result = await processPayment(amount, PRICING.inscription.description, enrollmentId);
-        } else {
-            const ref = document.getElementById('transfer-ref')?.value?.trim();
-            if (!ref) {
-                showError('Ingresa el número de referencia de tu transferencia');
-                payBtn.disabled = false;
-                payBtn.innerHTML = '💳 Pagar Inscripción';
-                return;
-            }
-            result = await processTransferPayment(amount, PRICING.inscription.description, enrollmentId, ref);
-        }
-
-        if (result.success) {
-            // Setup recurring payment
-            await setupRecurringPayment(enrollmentId, wizardData.student.plan || 'base', wizardData.guardian.email);
-
-            // Update enrollment status
-            await updateEnrollment(enrollmentId, { status: 'documents_review' });
-
-            // Move to confirmation
-            currentStep = 4;
-            renderWizard();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            showError('Error en el pago: ' + (result.error || 'Intenta nuevamente'));
-            payBtn.disabled = false;
-            payBtn.innerHTML = '💳 Pagar Inscripción';
-        }
-    } catch (error) {
-        console.error('Payment error:', error);
-        showError('Error al procesar el pago. Intenta nuevamente.');
+    if (method === 'card') {
+      result = await processPayment(amount, PRICING.inscription.description, enrollmentId);
+    } else {
+      const ref = document.getElementById('transfer-ref')?.value?.trim();
+      if (!ref) {
+        showError('Ingresa el número de referencia de tu transferencia');
         payBtn.disabled = false;
         payBtn.innerHTML = '💳 Pagar Inscripción';
+        return;
+      }
+      result = await processTransferPayment(amount, PRICING.inscription.description, enrollmentId, ref);
     }
+
+    if (result.success) {
+      // Setup recurring payment
+      await setupRecurringPayment(enrollmentId, wizardData.student.plan || 'base', wizardData.guardian.email);
+
+      // Update enrollment status
+      await updateEnrollment(enrollmentId, { status: 'documents_review' });
+
+      // Move to confirmation
+      currentStep = 4;
+      renderWizard();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      showError('Error en el pago: ' + (result.error || 'Intenta nuevamente'));
+      payBtn.disabled = false;
+      payBtn.innerHTML = '💳 Pagar Inscripción';
+    }
+  } catch (error) {
+    console.error('Payment error:', error);
+    showError('Error al procesar el pago. Intenta nuevamente.');
+    payBtn.disabled = false;
+    payBtn.innerHTML = '💳 Pagar Inscripción';
+  }
 }
 
 /* === UI HELPERS === */
 function showError(message) {
-    let toast = document.getElementById('wizard-toast');
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'wizard-toast';
-        toast.className = 'wizard__toast';
-        document.body.appendChild(toast);
-    }
-    toast.textContent = message;
-    toast.className = 'wizard__toast wizard__toast--error wizard__toast--visible';
-    setTimeout(() => toast.classList.remove('wizard__toast--visible'), 5000);
-    return false;
+  let toast = document.getElementById('wizard-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'wizard-toast';
+    toast.className = 'wizard__toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.className = 'wizard__toast wizard__toast--error wizard__toast--visible';
+  setTimeout(() => toast.classList.remove('wizard__toast--visible'), 5000);
+  return false;
 }
 
 function showLoading(message) {
-    let overlay = document.getElementById('wizard-loading');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'wizard-loading';
-        overlay.className = 'wizard__loading-overlay';
-        document.body.appendChild(overlay);
-    }
-    overlay.innerHTML = `<div class="wizard__loading-content"><div class="wizard__spinner wizard__spinner--lg"></div><p>${message}</p></div>`;
-    overlay.style.display = 'flex';
+  let overlay = document.getElementById('wizard-loading');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'wizard-loading';
+    overlay.className = 'wizard__loading-overlay';
+    document.body.appendChild(overlay);
+  }
+  overlay.innerHTML = `<div class="wizard__loading-content"><div class="wizard__spinner wizard__spinner--lg"></div><p>${message}</p></div>`;
+  overlay.style.display = 'flex';
 }
 
 function hideLoading() {
-    const overlay = document.getElementById('wizard-loading');
-    if (overlay) overlay.style.display = 'none';
+  const overlay = document.getElementById('wizard-loading');
+  if (overlay) overlay.style.display = 'none';
 }
 
 function attachStepListeners() {
-    // Focus input styling
-    document.querySelectorAll('.wizard__field input, .wizard__field select, .wizard__field textarea').forEach(el => {
-        el.addEventListener('focus', () => el.closest('.wizard__field')?.classList.add('wizard__field--focused'));
-        el.addEventListener('blur', () => el.closest('.wizard__field')?.classList.remove('wizard__field--focused'));
-    });
+  // Focus input styling
+  document.querySelectorAll('.wizard__field input, .wizard__field select, .wizard__field textarea').forEach(el => {
+    el.addEventListener('focus', () => el.closest('.wizard__field')?.classList.add('wizard__field--focused'));
+    el.addEventListener('blur', () => el.closest('.wizard__field')?.classList.remove('wizard__field--focused'));
+  });
 }
 
 /* === OPEN WIZARD (Hot Button) === */
 function openEnrollmentWizard() {
-    const wizardSection = document.getElementById('wizard-section');
-    if (wizardSection) {
-        wizardSection.style.display = 'block';
-        currentStep = 0;
-        wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
-        renderWizard();
-        wizardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  const wizardSection = document.getElementById('wizard-section');
+  if (wizardSection) {
+    wizardSection.style.display = 'block';
+    currentStep = 0;
+    wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
+    renderWizard();
+    wizardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 /* === INIT ON LOAD === */
 document.addEventListener('DOMContentLoaded', () => {
-    // If wizard container exists, check for auto-open via URL param
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('inscribir')) {
-        openEnrollmentWizard();
-    }
+  // If wizard container exists, check for auto-open via URL param
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('inscribir')) {
+    openEnrollmentWizard();
+  }
 });

@@ -8,14 +8,18 @@ const STRIPE_PUBLIC_KEY = 'pk_test_51Demo1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabc
 // Pricing (MXN)
 const PRICING = {
     inscription: {
-        regular: 7000,
-        early: 3500,
+        regular: 4500,
+        early: 3150,   // Feb 30% discount
         description: 'Inscripción Anual 2026-2027'
     },
     monthly: {
-        base: 3800,
-        plus: 6200,
-        description: 'Mensualidad'
+        pronto_pago: 3600,  // First 10 days of month
+        normal: 4000,       // After day 10
+        anual: 40480,       // Annual lump sum (8% discount)
+        // Legacy aliases for backward compatibility
+        base: 3600,
+        plus: 4000,
+        description: 'Colegiatura Mensual'
     }
 };
 
@@ -147,7 +151,7 @@ async function processTransferPayment(amount, description, enrollmentId, referen
 /* === SETUP RECURRING SUBSCRIPTION (Simulated) === */
 async function setupRecurringPayment(enrollmentId, plan, guardianEmail) {
     const subscriptionId = 'sub_sim_' + Date.now();
-    const monthlyAmount = plan === 'plus' ? PRICING.monthly.plus : PRICING.monthly.base;
+    const monthlyAmount = PRICING.monthly[plan] || PRICING.monthly.pronto_pago;
 
     // Update enrollment with subscription info
     await updateEnrollment(enrollmentId, {
@@ -164,7 +168,7 @@ async function setupRecurringPayment(enrollmentId, plan, guardianEmail) {
         status: 'pending',
         payment_method: 'card',
         stripe_invoice_id: 'inv_sim_' + Date.now(),
-        description: `Mensualidad ${plan === 'plus' ? 'Plus' : 'Base'} — Septiembre 2026`
+        description: `Colegiatura ${plan === 'anual' ? 'Anual' : plan === 'normal' ? 'Normal' : 'Pronto Pago'} — Septiembre 2026`
     });
 
     return { subscriptionId, monthlyAmount };
@@ -177,7 +181,7 @@ function getInscriptionPrice(isEarlyBird = true) {
 
 /* === GET MONTHLY PRICE === */
 function getMonthlyPrice(plan) {
-    return plan === 'plus' ? PRICING.monthly.plus : PRICING.monthly.base;
+    return PRICING.monthly[plan] || PRICING.monthly.pronto_pago;
 }
 
 /* === FORMAT PRICE === */
