@@ -1,19 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="es-MX">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Panel Administrativo — Instituto Federico Froebel</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/wizard.css">
-    <link rel="manifest" href="manifest.json">
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<link href="https://fonts.googleapis.com?family=swap" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="styles/main.css" rel="stylesheet"/>
+<link href="styles/wizard.css" rel="stylesheet"/>
+<link href="manifest.json" rel="manifest"/>
+<style>
         /* Tab Navigation */
         .admin-tabs {
             display: flex;
@@ -161,446 +158,454 @@
             }
         }
     </style>
-    <link rel="icon" href="favicon.png" type="image/png">
+<link href="favicon.png" rel="icon" type="image/png"/>
+<!-- INICIO SEO META TAGS -->
+<title>Colegio Federico Froebel | Preescolar y Maternal en Tehuacán</title>
+<meta content="El mejor colegio bilingüe en Tehuacán. Educación preescolar y maternal con enfoque integral, valores y fomento a la lectura. ¡Inscribe a tu hijo hoy!" name="description"/>
+<link href="https://froebelinstituto.com.mx/admin" rel="canonical"/>
+<!-- Open Graph / Facebook -->
+<meta content="website" property="og:type"/>
+<meta content="https://froebelinstituto.com.mx/admin" property="og:url"/>
+<meta content="Colegio Federico Froebel | Preescolar y Maternal en Tehuacán" property="og:title"/>
+<meta content="El mejor colegio bilingüe en Tehuacán. Educación preescolar y maternal con enfoque integral, valores y fomento a la lectura. ¡Inscribe a tu hijo hoy!" property="og:description"/>
+<meta content="https://froebelinstituto.com.mx/assets/images/hero-bg.jpg" property="og:image"/>
+<meta content="Colegio Federico Froebel" property="og:site_name"/>
+<meta content="es_MX" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" property="twitter:card"/>
+<meta content="https://froebelinstituto.com.mx/admin" property="twitter:url"/>
+<meta content="Colegio Federico Froebel | Preescolar y Maternal en Tehuacán" property="twitter:title"/>
+<meta content="El mejor colegio bilingüe en Tehuacán. Educación preescolar y maternal con enfoque integral, valores y fomento a la lectura. ¡Inscribe a tu hijo hoy!" property="twitter:description"/>
+<meta content="https://froebelinstituto.com.mx/assets/images/hero-bg.jpg" property="twitter:image"/>
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "School",
+  "name": "Colegio Federico Froebel",
+  "url": "https://froebelinstituto.com.mx",
+  "logo": "https://froebelinstituto.com.mx/assets/images/logo-froebel.png",
+  "image": "https://froebelinstituto.com.mx/assets/images/logo-froebel.png",
+  "description": "El Colegio Federico Froebel en Tehuacán ofrece educación integral y bilingüe con enfoque en valores para preescolar y maternal.",
+  "telephone": "+522383832161",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C. 19 Nte. 216, San Pedro Acoquiaco",
+    "addressLocality": "Tehuacán",
+    "addressRegion": "PUE",
+    "postalCode": "75770",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "18.4716751",
+    "longitude": "-97.3876077"
+  },
+  "sameAs": [
+    "https://www.facebook.com/FroebelTehuacan",
+    "https://www.instagram.com/colegiofedericofroebel_teh"
+  ]
+}
+  </script>
+<!-- FIN SEO META TAGS -->
 </head>
-
 <body>
-    <!-- PWA Install Banner -->
-    <div class="pwa-banner" id="pwa-banner">
-        📱 Instala el Panel como App &nbsp;
+<!-- PWA Install Banner -->
+<div class="pwa-banner" id="pwa-banner">
+        📱 Instala el Panel como App  
         <button class="pwa-btn" id="pwa-install-btn" onclick="installPWA()">Instalar</button>
-        <button style="background:none;border:none;color:rgba(255,255,255,0.8);cursor:pointer;font-size:1rem;"
-            onclick="document.getElementById('pwa-banner').classList.remove('show')">✕</button>
-    </div>
-
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header__inner">
-            <a href="index.html" class="header__logo"><img src="assets/images/logo-froebel.jpg" alt="Logo Federico Froebel" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover;"><span>Froebel Admin</span></a>
-            <nav class="header__nav" id="main-nav">
-                <span class="header__link" id="admin-user-email" style="cursor:default;"></span>
-                <button class="btn btn--sm btn--secondary" onclick="handleLogout()" id="logout-btn"
-                    style="display:none;">Cerrar sesión</button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- LOGIN -->
-    <div id="admin-login-section">
-        <div class="admin-login">
-            <div style="text-align:center; margin-bottom: var(--space-6);">
-                <div style="font-size: 3rem; margin-bottom: var(--space-3);">🔐</div>
-                <h2 style="margin-bottom: var(--space-2);">Panel Administrativo</h2>
-                <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Acceso exclusivo para
+<button onclick="document.getElementById('pwa-banner').classList.remove('show')" style="background:none;border:none;color:rgba(255,255,255,0.8);cursor:pointer;font-size:1rem;">✕</button>
+</div>
+<!-- HEADER -->
+<header class="header" id="header">
+<div class="header__inner">
+<a class="header__logo" href="/"><img alt="Logo Federico Froebel" height="883" loading="eager" src="assets/images/logo-froebel.jpg" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover;" width="911"/><span>Froebel Admin</span></a>
+<nav class="header__nav" id="main-nav">
+<span class="header__link" id="admin-user-email" style="cursor:default;"></span>
+<button class="btn btn--sm btn--secondary" id="logout-btn" onclick="handleLogout()" style="display:none;">Cerrar sesión</button>
+</nav>
+</div>
+</header>
+<!-- LOGIN -->
+<div id="admin-login-section">
+<div class="admin-login">
+<div style="text-align:center; margin-bottom: var(--space-6);">
+<div style="font-size: 3rem; margin-bottom: var(--space-3);">🔐</div>
+<h2 style="margin-bottom: var(--space-2);">Panel Administrativo</h2>
+<p style="color: var(--color-text-muted); font-size: var(--text-sm);">Acceso exclusivo para
                     administración Froebel</p>
-            </div>
-
-            <form id="login-form" style="display: flex; flex-direction: column; gap: var(--space-4);">
-                <div class="wizard__field">
-                    <label for="admin-email">Correo electrónico</label>
-                    <input type="email" id="admin-email" required placeholder="admin@froebelinstituto.com.mx">
-                </div>
-                <div class="wizard__field">
-                    <label for="admin-password">Contraseña</label>
-                    <input type="password" id="admin-password" required placeholder="••••••••">
-                </div>
-                <div id="login-error"
-                    style="display:none; color: var(--color-accent); font-size: var(--text-sm); text-align: center;">
-                </div>
-                <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Iniciar sesión</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div id="admin-dashboard-section" style="display: none;">
-
-        <!-- TABS -->
-        <nav class="admin-tabs" id="admin-tabs">
-            <button class="admin-tab admin-tab--active" data-tab="inscripciones"
-                onclick="switchTab('inscripciones', this)">📊 Inscripciones</button>
-            <button class="admin-tab" data-tab="leads" onclick="switchTab('leads', this)">📥 Leads</button>
-            <button class="admin-tab" data-tab="padres" onclick="switchTab('padres', this)">👨‍👩‍👧 Padres</button>
-            <button class="admin-tab" data-tab="alumnos" onclick="switchTab('alumnos', this)">👶 Alumnos</button>
-            <button class="admin-tab" data-tab="documentos" onclick="switchTab('documentos', this)">📄
+</div>
+<form id="login-form" style="display: flex; flex-direction: column; gap: var(--space-4);">
+<div class="wizard__field">
+<label for="admin-email">Correo electrónico</label>
+<input id="admin-email" placeholder="admin@froebelinstituto.com.mx" required="" type="email"/>
+</div>
+<div class="wizard__field">
+<label for="admin-password">Contraseña</label>
+<input id="admin-password" placeholder="••••••••" required="" type="password"/>
+</div>
+<div id="login-error" style="display:none; color: var(--color-accent); font-size: var(--text-sm); text-align: center;">
+</div>
+<button class="btn btn--primary btn--lg" style="width:100%;" type="submit">Iniciar sesión</button>
+</form>
+</div>
+</div>
+<!-- DASHBOARD -->
+<div id="admin-dashboard-section" style="display: none;">
+<!-- TABS -->
+<nav class="admin-tabs" id="admin-tabs">
+<button class="admin-tab admin-tab--active" data-tab="inscripciones" onclick="switchTab('inscripciones', this)">📊 Inscripciones</button>
+<button class="admin-tab" data-tab="leads" onclick="switchTab('leads', this)">📥 Leads</button>
+<button class="admin-tab" data-tab="padres" onclick="switchTab('padres', this)">👨‍👩‍👧 Padres</button>
+<button class="admin-tab" data-tab="alumnos" onclick="switchTab('alumnos', this)">👶 Alumnos</button>
+<button class="admin-tab" data-tab="documentos" onclick="switchTab('documentos', this)">📄
                 Documentos</button>
-            <button class="admin-tab" data-tab="pagos" onclick="switchTab('pagos', this)">💰 Pagos</button>
-            <button class="admin-tab" data-tab="config" onclick="switchTab('config', this)">⚙️ Config</button>
-        </nav>
-
-        <!-- ========== TAB: INSCRIPCIONES ========== -->
-        <div class="admin-panel admin-panel--active" id="panel-inscripciones">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>📊 Inscripciones</h1>
-                    <button class="btn btn--primary btn--sm" onclick="loadEnrollments()">🔄 Actualizar</button>
-                </div>
-
-                <div class="admin-stats" id="admin-stats">
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="stat-total">0</div>
-                        <div class="admin-stat-card__label">Total</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="stat-pending"
-                            style="color: var(--color-secondary-dark);">0</div>
-                        <div class="admin-stat-card__label">Pendientes</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="stat-approved"
-                            style="color: var(--color-nature-dark);">0</div>
-                        <div class="admin-stat-card__label">Aprobadas</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="stat-revenue" style="color: var(--color-primary);">$0
+<button class="admin-tab" data-tab="pagos" onclick="switchTab('pagos', this)">💰 Pagos</button>
+<button class="admin-tab" data-tab="config" onclick="switchTab('config', this)">⚙️ Config</button>
+</nav>
+<!-- ========== TAB: INSCRIPCIONES ========== -->
+<div class="admin-panel admin-panel--active" id="panel-inscripciones">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>📊 Inscripciones</h1>
+<button class="btn btn--primary btn--sm" onclick="loadEnrollments()">🔄 Actualizar</button>
+</div>
+<div class="admin-stats" id="admin-stats">
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="stat-total">0</div>
+<div class="admin-stat-card__label">Total</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="stat-pending" style="color: var(--color-secondary-dark);">0</div>
+<div class="admin-stat-card__label">Pendientes</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="stat-approved" style="color: var(--color-nature-dark);">0</div>
+<div class="admin-stat-card__label">Aprobadas</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="stat-revenue" style="color: var(--color-primary);">$0
                         </div>
-                        <div class="admin-stat-card__label">Ingresos</div>
-                    </div>
-                </div>
-
-                <div class="admin-filters">
-                    <button class="admin-filter-btn admin-filter-btn--active"
-                        onclick="filterEnrollments(null, this)">Todas</button>
-                    <button class="admin-filter-btn" onclick="filterEnrollments('pending', this)">⏳ Pendientes</button>
-                    <button class="admin-filter-btn" onclick="filterEnrollments('documents_review', this)">📄 En
+<div class="admin-stat-card__label">Ingresos</div>
+</div>
+</div>
+<div class="admin-filters">
+<button class="admin-filter-btn admin-filter-btn--active" onclick="filterEnrollments(null, this)">Todas</button>
+<button class="admin-filter-btn" onclick="filterEnrollments('pending', this)">⏳ Pendientes</button>
+<button class="admin-filter-btn" onclick="filterEnrollments('documents_review', this)">📄 En
                         revisión</button>
-                    <button class="admin-filter-btn" onclick="filterEnrollments('approved', this)">✅ Aprobadas</button>
-                    <button class="admin-filter-btn" onclick="filterEnrollments('rejected', this)">❌ Rechazadas</button>
-                </div>
-
-                <table class="admin-table" id="enrollments-table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Alumno</th>
-                            <th>Tutor</th>
-                            <th>Programa</th>
-                            <th>Plan</th>
-                            <th>Docs</th>
-                            <th>Pago</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="enrollments-tbody">
-                        <tr>
-                            <td colspan="9"
-                                style="text-align:center; padding: var(--space-12); color: var(--color-text-muted);">
+<button class="admin-filter-btn" onclick="filterEnrollments('approved', this)">✅ Aprobadas</button>
+<button class="admin-filter-btn" onclick="filterEnrollments('rejected', this)">❌ Rechazadas</button>
+</div>
+<table class="admin-table" id="enrollments-table">
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Alumno</th>
+<th>Tutor</th>
+<th>Programa</th>
+<th>Plan</th>
+<th>Docs</th>
+<th>Pago</th>
+<th>Estado</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="enrollments-tbody">
+<tr>
+<td colspan="9" style="text-align:center; padding: var(--space-12); color: var(--color-text-muted);">
                                 Cargando inscripciones...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ========== TAB: LEADS ========== -->
-        <div class="admin-panel" id="panel-leads">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>📥 Leads</h1>
-                    <div style="display:flex;gap:var(--space-3);">
-                        <button class="btn btn--primary btn--sm" onclick="showNewLeadForm()">➕ Nuevo Lead</button>
-                        <button class="btn btn--secondary btn--sm" onclick="loadLeads()">🔄 Actualizar</button>
-                    </div>
-                </div>
-
-                <div class="admin-stats" id="leads-stats">
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="leads-total">0</div>
-                        <div class="admin-stat-card__label">Total Leads</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="leads-new" style="color:#0369a1;">0</div>
-                        <div class="admin-stat-card__label">Nuevos</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="leads-contacted" style="color:#92400e;">0</div>
-                        <div class="admin-stat-card__label">Contactados</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="leads-enrolled" style="color:#065f46;">0</div>
-                        <div class="admin-stat-card__label">Inscritos</div>
-                    </div>
-                </div>
-
-                <table class="admin-table" id="leads-table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Nombre</th>
-                            <th>Teléfono</th>
-                            <th>Email</th>
-                            <th>Edad hijo</th>
-                            <th>Programa</th>
-                            <th>Fuente</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leads-tbody">
-                        <tr>
-                            <td colspan="9"
-                                style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========== TAB: LEADS ========== -->
+<div class="admin-panel" id="panel-leads">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>📥 Leads</h1>
+<div style="display:flex;gap:var(--space-3);">
+<button class="btn btn--primary btn--sm" onclick="showNewLeadForm()">➕ Nuevo Lead</button>
+<button class="btn btn--secondary btn--sm" onclick="loadLeads()">🔄 Actualizar</button>
+</div>
+</div>
+<div class="admin-stats" id="leads-stats">
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="leads-total">0</div>
+<div class="admin-stat-card__label">Total Leads</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="leads-new" style="color:#0369a1;">0</div>
+<div class="admin-stat-card__label">Nuevos</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="leads-contacted" style="color:#92400e;">0</div>
+<div class="admin-stat-card__label">Contactados</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="leads-enrolled" style="color:#065f46;">0</div>
+<div class="admin-stat-card__label">Inscritos</div>
+</div>
+</div>
+<table class="admin-table" id="leads-table">
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Nombre</th>
+<th>Teléfono</th>
+<th>Email</th>
+<th>Edad hijo</th>
+<th>Programa</th>
+<th>Fuente</th>
+<th>Estado</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="leads-tbody">
+<tr>
+<td colspan="9" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
                                 Cargando leads...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ========== TAB: PADRES ========== -->
-        <div class="admin-panel" id="panel-padres">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>👨‍👩‍👧 Directorio de Padres</h1>
-                    <button class="btn btn--secondary btn--sm" onclick="loadGuardians()">🔄 Actualizar</button>
-                </div>
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                            <th>Dirección</th>
-                            <th>Contacto Emergencia</th>
-                            <th>Hijos</th>
-                        </tr>
-                    </thead>
-                    <tbody id="guardians-tbody">
-                        <tr>
-                            <td colspan="6"
-                                style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========== TAB: PADRES ========== -->
+<div class="admin-panel" id="panel-padres">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>👨‍👩‍👧 Directorio de Padres</h1>
+<button class="btn btn--secondary btn--sm" onclick="loadGuardians()">🔄 Actualizar</button>
+</div>
+<table class="admin-table">
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Email</th>
+<th>Teléfono</th>
+<th>Dirección</th>
+<th>Contacto Emergencia</th>
+<th>Hijos</th>
+</tr>
+</thead>
+<tbody id="guardians-tbody">
+<tr>
+<td colspan="6" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
                                 Cargando padres...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ========== TAB: ALUMNOS ========== -->
-        <div class="admin-panel" id="panel-alumnos">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>👶 Alumnos</h1>
-                    <button class="btn btn--secondary btn--sm" onclick="loadStudents()">🔄 Actualizar</button>
-                </div>
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Nacimiento</th>
-                            <th>Edad</th>
-                            <th>CURP</th>
-                            <th>Sangre</th>
-                            <th>Alergias</th>
-                            <th>Programa</th>
-                        </tr>
-                    </thead>
-                    <tbody id="students-tbody">
-                        <tr>
-                            <td colspan="7"
-                                style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========== TAB: ALUMNOS ========== -->
+<div class="admin-panel" id="panel-alumnos">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>👶 Alumnos</h1>
+<button class="btn btn--secondary btn--sm" onclick="loadStudents()">🔄 Actualizar</button>
+</div>
+<table class="admin-table">
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Nacimiento</th>
+<th>Edad</th>
+<th>CURP</th>
+<th>Sangre</th>
+<th>Alergias</th>
+<th>Programa</th>
+</tr>
+</thead>
+<tbody id="students-tbody">
+<tr>
+<td colspan="7" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
                                 Cargando alumnos...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ========== TAB: DOCUMENTOS ========== -->
-        <div class="admin-panel" id="panel-documentos">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>📄 Documentos</h1>
-                    <button class="btn btn--secondary btn--sm" onclick="loadDocuments()">🔄 Actualizar</button>
-                </div>
-                <div class="admin-stats">
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="docs-total">0</div>
-                        <div class="admin-stat-card__label">Total Docs</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="docs-verified" style="color:#065f46;">0</div>
-                        <div class="admin-stat-card__label">Verificados</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="docs-pending" style="color:#92400e;">0</div>
-                        <div class="admin-stat-card__label">Pendientes</div>
-                    </div>
-                </div>
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Alumno</th>
-                            <th>Tipo</th>
-                            <th>Archivo</th>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="docs-tbody">
-                        <tr>
-                            <td colspan="6"
-                                style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========== TAB: DOCUMENTOS ========== -->
+<div class="admin-panel" id="panel-documentos">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>📄 Documentos</h1>
+<button class="btn btn--secondary btn--sm" onclick="loadDocuments()">🔄 Actualizar</button>
+</div>
+<div class="admin-stats">
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="docs-total">0</div>
+<div class="admin-stat-card__label">Total Docs</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="docs-verified" style="color:#065f46;">0</div>
+<div class="admin-stat-card__label">Verificados</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="docs-pending" style="color:#92400e;">0</div>
+<div class="admin-stat-card__label">Pendientes</div>
+</div>
+</div>
+<table class="admin-table">
+<thead>
+<tr>
+<th>Alumno</th>
+<th>Tipo</th>
+<th>Archivo</th>
+<th>Estado</th>
+<th>Fecha</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="docs-tbody">
+<tr>
+<td colspan="6" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
                                 Cargando documentos...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ========== TAB: PAGOS ========== -->
-        <div class="admin-panel" id="panel-pagos">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>💰 Pagos</h1>
-                    <button class="btn btn--secondary btn--sm" onclick="loadPayments()">🔄 Actualizar</button>
-                </div>
-                <div class="admin-stats">
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="pay-total">$0</div>
-                        <div class="admin-stat-card__label">Total Recaudado</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="pay-count">0</div>
-                        <div class="admin-stat-card__label">Pagos</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-card__number" id="pay-pending-count" style="color:#92400e;">0</div>
-                        <div class="admin-stat-card__label">Pendientes</div>
-                    </div>
-                </div>
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Alumno</th>
-                            <th>Tipo</th>
-                            <th>Monto</th>
-                            <th>Método</th>
-                            <th>Estado</th>
-                            <th>Referencia</th>
-                        </tr>
-                    </thead>
-                    <tbody id="payments-tbody">
-                        <tr>
-                            <td colspan="7"
-                                style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========== TAB: PAGOS ========== -->
+<div class="admin-panel" id="panel-pagos">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>💰 Pagos</h1>
+<button class="btn btn--secondary btn--sm" onclick="loadPayments()">🔄 Actualizar</button>
+</div>
+<div class="admin-stats">
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="pay-total">$0</div>
+<div class="admin-stat-card__label">Total Recaudado</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="pay-count">0</div>
+<div class="admin-stat-card__label">Pagos</div>
+</div>
+<div class="admin-stat-card">
+<div class="admin-stat-card__number" id="pay-pending-count" style="color:#92400e;">0</div>
+<div class="admin-stat-card__label">Pendientes</div>
+</div>
+</div>
+<table class="admin-table">
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Alumno</th>
+<th>Tipo</th>
+<th>Monto</th>
+<th>Método</th>
+<th>Estado</th>
+<th>Referencia</th>
+</tr>
+</thead>
+<tbody id="payments-tbody">
+<tr>
+<td colspan="7" style="text-align:center;padding:var(--space-12);color:var(--color-text-muted);">
                                 Cargando pagos...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ========== TAB: CONFIG ========== -->
-        <div class="admin-panel" id="panel-config">
-            <div class="admin-dashboard">
-                <div class="admin-header">
-                    <h1>⚙️ Configuración</h1>
-                </div>
-                <div class="admin-module-grid">
-                    <div class="admin-module-card">
-                        <h3>📱 PWA</h3>
-                        <p style="color:var(--color-text-light);font-size:var(--text-sm);margin-bottom:var(--space-4);">
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========== TAB: CONFIG ========== -->
+<div class="admin-panel" id="panel-config">
+<div class="admin-dashboard">
+<div class="admin-header">
+<h1>⚙️ Configuración</h1>
+</div>
+<div class="admin-module-grid">
+<div class="admin-module-card">
+<h3>📱 PWA</h3>
+<p style="color:var(--color-text-light);font-size:var(--text-sm);margin-bottom:var(--space-4);">
                             Instala el panel como aplicación nativa en tu dispositivo para acceso rápido.</p>
-                        <button class="btn btn--primary btn--sm" id="config-pwa-btn" onclick="installPWA()">Instalar
+<button class="btn btn--primary btn--sm" id="config-pwa-btn" onclick="installPWA()">Instalar
                             App</button>
-                    </div>
-                    <div class="admin-module-card">
-                        <h3>🔑 Cuenta</h3>
-                        <p style="color:var(--color-text-light);font-size:var(--text-sm);margin-bottom:var(--space-4);">
+</div>
+<div class="admin-module-card">
+<h3>🔑 Cuenta</h3>
+<p style="color:var(--color-text-light);font-size:var(--text-sm);margin-bottom:var(--space-4);">
                             Sesión activa como: <strong id="config-email"></strong></p>
-                        <button class="btn btn--secondary btn--sm" onclick="handleLogout()">Cerrar Sesión</button>
-                    </div>
-                    <div class="admin-module-card">
-                        <h3>📊 Estadísticas</h3>
-                        <p style="color:var(--color-text-light);font-size:var(--text-sm);">
-                            <span id="config-stats">Cargando...</span>
-                        </p>
-                    </div>
-                    <div class="admin-module-card">
-                        <h3>🌐 Sitio Web</h3>
-                        <p style="color:var(--color-text-light);font-size:var(--text-sm);margin-bottom:var(--space-4);">
+<button class="btn btn--secondary btn--sm" onclick="handleLogout()">Cerrar Sesión</button>
+</div>
+<div class="admin-module-card">
+<h3>📊 Estadísticas</h3>
+<p style="color:var(--color-text-light);font-size:var(--text-sm);">
+<span id="config-stats">Cargando...</span>
+</p>
+</div>
+<div class="admin-module-card">
+<h3>🌐 Sitio Web</h3>
+<p style="color:var(--color-text-light);font-size:var(--text-sm);margin-bottom:var(--space-4);">
                             Accede al sitio público del instituto.</p>
-                        <a href="index.html" class="btn btn--secondary btn--sm">Ver Sitio →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ENROLLMENT DETAIL MODAL -->
-    <div id="enrollment-modal"
-        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; overflow-y:auto;">
-        <div
-            style="max-width:700px; margin:80px auto; background:white; border-radius:var(--radius-2xl); padding:var(--space-8); position:relative;">
-            <button onclick="closeModal()"
-                style="position:absolute;top:var(--space-4);right:var(--space-4);background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
-            <div id="modal-content"></div>
-        </div>
-    </div>
-
-    <!-- NEW LEAD MODAL -->
-    <div id="lead-modal"
-        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; overflow-y:auto;">
-        <div
-            style="max-width:500px; margin:80px auto; background:white; border-radius:var(--radius-2xl); padding:var(--space-8); position:relative;">
-            <button onclick="closeLeadModal()"
-                style="position:absolute;top:var(--space-4);right:var(--space-4);background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
-            <h2 style="margin-bottom:var(--space-6);">➕ Nuevo Lead</h2>
-            <form id="lead-form" style="display:flex;flex-direction:column;gap:var(--space-4);">
-                <div class="wizard__field">
-                    <label>Nombre completo *</label>
-                    <input type="text" id="lead-name" required>
-                </div>
-                <div class="wizard__field">
-                    <label>Teléfono</label>
-                    <input type="tel" id="lead-phone">
-                </div>
-                <div class="wizard__field">
-                    <label>Email</label>
-                    <input type="email" id="lead-email">
-                </div>
-                <div class="wizard__field">
-                    <label>Edad del hijo</label>
-                    <input type="text" id="lead-age" placeholder="Ej: 2 años, 3 años">
-                </div>
-                <div class="wizard__field">
-                    <label>Programa de interés</label>
-                    <select id="lead-program">
-                        <option value="">Seleccionar...</option>
-                        <option value="maternal">Maternal (2-3 años)</option>
-                        <option value="preescolar">Preescolar (3-5 años)</option>
-                        <option value="extendido">Horario Extendido</option>
-                    </select>
-                </div>
-                <div class="wizard__field">
-                    <label>Fuente</label>
-                    <select id="lead-source">
-                        <option value="website">Sitio Web</option>
-                        <option value="whatsapp">WhatsApp</option>
-                        <option value="instagram">Instagram</option>
-                        <option value="facebook">Facebook</option>
-                        <option value="referido">Referido</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
-                <div class="wizard__field">
-                    <label>Notas</label>
-                    <textarea id="lead-notes" rows="3" style="resize:vertical;"></textarea>
-                </div>
-                <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Guardar Lead</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- CDN: Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-client.js"></script>
-
-    <script>
+<a class="btn btn--secondary btn--sm" href="/">Ver Sitio →</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENROLLMENT DETAIL MODAL -->
+<div id="enrollment-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; overflow-y:auto;">
+<div style="max-width:700px; margin:80px auto; background:white; border-radius:var(--radius-2xl); padding:var(--space-8); position:relative;">
+<button onclick="closeModal()" style="position:absolute;top:var(--space-4);right:var(--space-4);background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
+<div id="modal-content"></div>
+</div>
+</div>
+<!-- NEW LEAD MODAL -->
+<div id="lead-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; overflow-y:auto;">
+<div style="max-width:500px; margin:80px auto; background:white; border-radius:var(--radius-2xl); padding:var(--space-8); position:relative;">
+<button onclick="closeLeadModal()" style="position:absolute;top:var(--space-4);right:var(--space-4);background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
+<h2 style="margin-bottom:var(--space-6);">➕ Nuevo Lead</h2>
+<form id="lead-form" style="display:flex;flex-direction:column;gap:var(--space-4);">
+<div class="wizard__field">
+<label>Nombre completo *</label>
+<input id="lead-name" required="" type="text"/>
+</div>
+<div class="wizard__field">
+<label>Teléfono</label>
+<input id="lead-phone" type="tel"/>
+</div>
+<div class="wizard__field">
+<label>Email</label>
+<input id="lead-email" type="email"/>
+</div>
+<div class="wizard__field">
+<label>Edad del hijo</label>
+<input id="lead-age" placeholder="Ej: 2 años, 3 años" type="text"/>
+</div>
+<div class="wizard__field">
+<label>Programa de interés</label>
+<select id="lead-program">
+<option value="">Seleccionar...</option>
+<option value="maternal">Maternal (2-3 años)</option>
+<option value="preescolar">Preescolar (3-5 años)</option>
+<option value="extendido">Horario Extendido</option>
+</select>
+</div>
+<div class="wizard__field">
+<label>Fuente</label>
+<select id="lead-source">
+<option value="website">Sitio Web</option>
+<option value="whatsapp">WhatsApp</option>
+<option value="instagram">Instagram</option>
+<option value="facebook">Facebook</option>
+<option value="referido">Referido</option>
+<option value="otro">Otro</option>
+</select>
+</div>
+<div class="wizard__field">
+<label>Notas</label>
+<textarea id="lead-notes" rows="3" style="resize:vertical;"></textarea>
+</div>
+<button class="btn btn--primary btn--lg" style="width:100%;" type="submit">Guardar Lead</button>
+</form>
+</div>
+</div>
+<!-- CDN: Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="scripts/supabase-client.js"></script>
+<script>
         /* === TAB MANAGEMENT === */
         function switchTab(tab, btn) {
             document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('admin-tab--active'));
@@ -1046,5 +1051,4 @@
         }
     </script>
 </body>
-
 </html>

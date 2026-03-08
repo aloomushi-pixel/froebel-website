@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /assets/backend/
+Disallow: /*?*
+
+Sitemap: https://froebelinstituto.com.mx/sitemap.xml
