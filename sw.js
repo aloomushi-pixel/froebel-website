@@ -1,9 +1,8 @@
 const CACHE_NAME = 'froebel-admin-v1';
 const ASSETS = [
-    '/admin.html',
+    '/',
     '/styles/main.css',
-    '/styles/wizard.css',
-    '/scripts/supabase-client.js'
+    '/styles/wizard.css'
 ];
 
 self.addEventListener('install', (e) => {
@@ -24,7 +23,7 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
     // Network-first for API calls, cache-first for assets
-    if (e.request.url.includes('supabase')) {
+    if (e.request.url.includes('/api/')) {
         e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
     } else {
         e.respondWith(

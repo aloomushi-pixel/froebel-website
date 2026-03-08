@@ -407,7 +407,7 @@ function renderFooter() {
     <div class="wizard__nav">
       ${currentStep > 0 ? '<button class="btn btn--secondary" onclick="prevStep()">← Anterior</button>' : '<div></div>'}
       ${currentStep < 3 ? '<button class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
-      ${currentStep === 3 ? '<button class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitPayment()" id="pay-button">💳 Pagar Inscripción</button>' : ''}
+      ${currentStep === 3 ? '<button class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitPayment()" id="pay-button">✅ Finalizar Inscripción</button>' : ''}
     </div>
   `;
 }
@@ -417,18 +417,8 @@ async function nextStep() {
   if (!validateCurrentStep()) return;
   saveCurrentStepData();
 
-  // On step 2 completion (guardian), create records in Supabase
-  if (currentStep === 1) {
-    await createEnrollmentRecords();
-  }
-
   currentStep++;
   renderWizard();
-
-  // Mount Stripe card on payment step
-  if (currentStep === 3) {
-    setTimeout(() => mountCardElement('stripe-card-element'), 100);
-  }
 
   window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
 }
@@ -477,13 +467,7 @@ function validateGuardianStep() {
 }
 
 function validateDocumentsStep() {
-  const requiredDocs = REQUIRED_DOCUMENTS.filter(d => d.required);
-  const uploadedTypes = wizardData.documents.map(d => d.type);
-  const missing = requiredDocs.filter(d => !uploadedTypes.includes(d.type));
-
-  if (missing.length > 0) {
-    return showError(`Faltan documentos obligatorios: ${missing.map(d => d.label).join(', ')}`);
-  }
+  // Document validation removed as per business requirements to allow enrollment without all documents.
   return true;
 }
 
@@ -518,56 +502,7 @@ function saveCurrentStepData() {
   }
 }
 
-/* === CREATE RECORDS IN SUPABASE === */
-async function createEnrollmentRecords() {
-  try {
-    showLoading('Guardando información...');
-
-    // 1. Create guardian
-    const guardian = await createGuardian({
-      full_name: wizardData.guardian.full_name,
-      email: wizardData.guardian.email,
-      phone: wizardData.guardian.phone,
-      whatsapp: wizardData.guardian.whatsapp || wizardData.guardian.phone,
-      address: wizardData.guardian.address,
-      emergency_contact_name: wizardData.guardian.emergency_contact_name,
-      emergency_contact_phone: wizardData.guardian.emergency_contact_phone,
-      relationship: wizardData.guardian.relationship
-    });
-
-    // 2. Create student
-    const student = await createStudent({
-      guardian_id: guardian.id,
-      full_name: wizardData.student.full_name,
-      date_of_birth: wizardData.student.date_of_birth,
-      gender: wizardData.student.gender || null,
-      curp: wizardData.student.curp || null,
-      blood_type: wizardData.student.blood_type || null,
-      allergies: wizardData.student.allergies || null,
-      medical_notes: wizardData.student.medical_notes || null
-    });
-
-    // 3. Create enrollment
-    const enrollment = await createEnrollment({
-      student_id: student.id,
-      guardian_id: guardian.id,
-      program: wizardData.student.program,
-      plan: wizardData.student.plan || 'base',
-      status: 'pending'
-    });
-
-    wizardData.enrollment = enrollment;
-    wizardData.guardianId = guardian.id;
-    wizardData.studentId = student.id;
-
-    hideLoading();
-  } catch (error) {
-    hideLoading();
-    console.error('Error creating enrollment:', error);
-    showError('Error al guardar la información. Intenta nuevamente.');
-    throw error;
-  }
-}
+/* === CREATE RECORDS IN SUPABASE (REMOVED) === */
 
 /* === FILE UPLOAD === */
 async function handleFileSelect(input, docType) {
@@ -580,37 +515,30 @@ async function handleFileSelect(input, docType) {
   }
 
   const card = document.getElementById(`doc-${docType}`);
-  card.classList.add('wizard__doc-card--uploading');
   const statusEl = card.querySelector('.wizard__doc-status');
-  statusEl.textContent = 'Subiendo...';
 
-  try {
-    if (wizardData.enrollment) {
-      await uploadDocument(wizardData.enrollment.id, file, docType);
-    }
+  // Update local state instead of uploading to Supabase immediately
+  wizardData.documents = wizardData.documents.filter(d => d.type !== docType);
+  wizardData.documents.push({ type: docType, name: file.name, file });
 
-    // Update local state
-    wizardData.documents = wizardData.documents.filter(d => d.type !== docType);
-    wizardData.documents.push({ type: docType, name: file.name, file });
-
-    card.classList.remove('wizard__doc-card--uploading');
-    card.classList.add('wizard__doc-card--uploaded');
-    card.querySelector('.wizard__doc-icon').textContent = '✅';
-    statusEl.textContent = file.name;
-    card.querySelector('.wizard__doc-btn').textContent = 'Cambiar';
-  } catch (error) {
-    card.classList.remove('wizard__doc-card--uploading');
-    statusEl.textContent = 'Error al subir';
-    showError('Error al subir el documento: ' + error.message);
-  }
+  card.classList.add('wizard__doc-card--uploaded');
+  card.querySelector('.wizard__doc-icon').textContent = '✅';
+  statusEl.textContent = file.name;
+  card.querySelector('.wizard__doc-btn').textContent = 'Cambiar';
 }
 
 /* === PAYMENT === */
 function switchPaymentMethod(method) {
   document.querySelectorAll('.wizard__payment-tab').forEach(t => t.classList.remove('wizard__payment-tab--active'));
-  document.querySelector(`[data-method="${method}"]`).classList.add('wizard__payment-tab--active');
-  document.getElementById('payment-method-card').style.display = method === 'card' ? 'block' : 'none';
-  document.getElementById('payment-method-transfer').style.display = method === 'transfer' ? 'block' : 'none';
+  const btn = document.querySelector(`[data-method="${method}"]`);
+  if (btn) btn.classList.add('wizard__payment-tab--active');
+
+  const cardDiv = document.getElementById('payment-method-card');
+  const transferDiv = document.getElementById('payment-method-transfer');
+
+  if (cardDiv) cardDiv.style.display = method === 'card' ? 'block' : 'none';
+  if (transferDiv) transferDiv.style.display = method === 'transfer' ? 'block' : 'none';
+
   wizardData.payment.method = method;
 }
 
@@ -619,54 +547,44 @@ async function submitPayment() {
   if (!payBtn) return;
 
   const method = wizardData.payment.method || 'card';
-  const amount = getInscriptionPrice(true);
-  const enrollmentId = wizardData.enrollment?.id;
-
-  if (!enrollmentId) {
-    showError('Error: No se encontró la inscripción. Recarga la página e intenta nuevamente.');
-    return;
-  }
+  const transferRef = document.getElementById('transfer-ref')?.value?.trim() || '';
 
   payBtn.disabled = true;
-  payBtn.innerHTML = '<span class="wizard__spinner"></span> Procesando pago...';
+  payBtn.innerHTML = '<span class="wizard__spinner"></span> Procesando inscripción...';
 
   try {
-    let result;
+    const formData = new FormData();
+    formData.append('student', JSON.stringify(wizardData.student));
+    formData.append('guardian', JSON.stringify(wizardData.guardian));
+    formData.append('payment', JSON.stringify({ method, transferRef }));
 
-    if (method === 'card') {
-      result = await processPayment(amount, PRICING.inscription.description, enrollmentId);
-    } else {
-      const ref = document.getElementById('transfer-ref')?.value?.trim();
-      if (!ref) {
-        showError('Ingresa el número de referencia de tu transferencia');
-        payBtn.disabled = false;
-        payBtn.innerHTML = '💳 Pagar Inscripción';
-        return;
-      }
-      result = await processTransferPayment(amount, PRICING.inscription.description, enrollmentId, ref);
-    }
+    // Append files dynamically
+    wizardData.documents.forEach(doc => {
+      formData.append('files', doc.file, doc.name);
+    });
+
+    const response = await fetch('/api/enroll', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
 
     if (result.success) {
-      // Setup recurring payment
-      await setupRecurringPayment(enrollmentId, wizardData.student.plan || 'base', wizardData.guardian.email);
-
-      // Update enrollment status
-      await updateEnrollment(enrollmentId, { status: 'documents_review' });
-
       // Move to confirmation
       currentStep = 4;
       renderWizard();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      showError('Error en el pago: ' + (result.error || 'Intenta nuevamente'));
+      showError('Error al enviar: ' + (result.error || 'Intenta nuevamente más tarde.'));
       payBtn.disabled = false;
-      payBtn.innerHTML = '💳 Pagar Inscripción';
+      payBtn.innerHTML = '✅ Finalizar Inscripción';
     }
   } catch (error) {
-    console.error('Payment error:', error);
-    showError('Error al procesar el pago. Intenta nuevamente.');
+    console.error('API Error:', error);
+    showError('Error de red al procesar la inscripción. Revisa tu conexión.');
     payBtn.disabled = false;
-    payBtn.innerHTML = '💳 Pagar Inscripción';
+    payBtn.innerHTML = '✅ Finalizar Inscripción';
   }
 }
 
