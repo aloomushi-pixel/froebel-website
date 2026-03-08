@@ -6,7 +6,6 @@ const WIZARD_STEPS = [
   { id: 'student', title: 'Datos del Alumno', icon: '👶' },
   { id: 'guardian', title: 'Datos del Tutor', icon: '👨‍👩‍👧' },
   { id: 'documents', title: 'Documentos', icon: '📄' },
-  { id: 'payment', title: 'Pago', icon: '💳' },
   { id: 'confirmation', title: 'Confirmación', icon: '✅' }
 ];
 
@@ -66,8 +65,7 @@ function renderCurrentStep() {
     case 0: return renderStudentStep();
     case 1: return renderGuardianStep();
     case 2: return renderDocumentsStep();
-    case 3: return renderPaymentStep();
-    case 4: return renderConfirmationStep();
+    case 3: return renderConfirmationStep();
     default: return '';
   }
 }
@@ -247,88 +245,9 @@ function renderDocumentsStep() {
   `;
 }
 
-/* === STEP 4: PAYMENT === */
-function renderPaymentStep() {
-  const plan = wizardData.student.plan || 'base';
-  const inscriptionPrice = getInscriptionPrice(true);
-  const monthlyPrice = getMonthlyPrice(plan);
+/* === PAYMENT REMOVED === */
 
-  return `
-    <div class="wizard__section fade-in visible">
-      <h2 class="wizard__title">Pago de Inscripción</h2>
-      <p class="wizard__desc">Elige tu método de pago para completar la inscripción.</p>
-
-      <div class="wizard__payment-summary">
-        <div class="wizard__payment-row">
-          <span>Inscripción anual</span>
-          <span class="wizard__payment-price">
-            <span class="wizard__payment-original">${formatPrice(PRICING.inscription.regular)}</span>
-            <strong>${formatPrice(inscriptionPrice)}</strong>
-          </span>
-        </div>
-        <div class="wizard__payment-row wizard__payment-row--highlight">
-          <span>🎁 Descuento inscripción temprana</span>
-          <span class="wizard__payment-discount">-${formatPrice(PRICING.inscription.regular - inscriptionPrice)}</span>
-        </div>
-        <div class="wizard__payment-divider"></div>
-        <div class="wizard__payment-row wizard__payment-row--total">
-          <span>Total a pagar hoy</span>
-          <strong>${formatPrice(inscriptionPrice)}</strong>
-        </div>
-        <div class="wizard__payment-row wizard__payment-row--sub">
-          <span>Colegiatura (${plan === 'anual' ? 'Pago Anual' : plan === 'normal' ? 'Mensual Normal' : 'Pronto Pago'})</span>
-          <span>${formatPrice(monthlyPrice)}/mes</span>
-        </div>
-      </div>
-
-      <div class="wizard__payment-methods">
-        <h3>Método de pago</h3>
-        <div class="wizard__payment-tabs">
-          <button class="wizard__payment-tab wizard__payment-tab--active" data-method="card" onclick="switchPaymentMethod('card')">
-            💳 Tarjeta
-          </button>
-          <button class="wizard__payment-tab" data-method="transfer" onclick="switchPaymentMethod('transfer')">
-            🏦 Transferencia
-          </button>
-        </div>
-
-        <div id="payment-method-card" class="wizard__payment-form">
-          <div class="wizard__field">
-            <label>Número de tarjeta</label>
-            <div id="stripe-card-element" class="wizard__stripe-container"></div>
-            <div id="card-errors" class="wizard__field-error" style="display:none;"></div>
-          </div>
-          <p class="wizard__payment-test">🧪 <strong>Modo Test:</strong> Usa <code>4242 4242 4242 4242</code> con cualquier fecha/CVC</p>
-        </div>
-
-        <div id="payment-method-transfer" class="wizard__payment-form" style="display:none;">
-          <div class="wizard__transfer-info">
-            <h4>Datos para transferencia</h4>
-            <div class="wizard__transfer-row"><span>Banco:</span><strong>BBVA</strong></div>
-            <div class="wizard__transfer-row"><span>CLABE:</span><strong>012 180 0001 2345 6789</strong></div>
-            <div class="wizard__transfer-row"><span>Beneficiario:</span><strong>Instituto Federico Froebel SC</strong></div>
-            <div class="wizard__transfer-row"><span>Concepto:</span><strong>INSC-${wizardData.student.full_name?.split(' ')[0] || 'ALUMNO'}</strong></div>
-            <div class="wizard__transfer-row"><span>Monto:</span><strong>${formatPrice(inscriptionPrice)}</strong></div>
-          </div>
-          <div class="wizard__field" style="margin-top:var(--space-4);">
-            <label for="transfer-ref">Número de referencia de tu transferencia</label>
-            <input type="text" id="transfer-ref" placeholder="Ej: 1234567890">
-          </div>
-        </div>
-      </div>
-
-      <div class="wizard__recurring-note">
-        <span>🔄</span>
-        <div>
-          <strong>Pago recurrente de mensualidad</strong>
-          <p>Al completar la inscripción, se configurará el cobro mensual automático de <strong>${formatPrice(monthlyPrice)}</strong> a partir de septiembre 2026.</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/* === STEP 5: CONFIRMATION === */
+/* === STEP 4: CONFIRMATION === */
 function renderConfirmationStep() {
   const s = wizardData.student;
   const g = wizardData.guardian;
@@ -402,12 +321,12 @@ function renderConfirmationStep() {
 
 /* === FOOTER NAVIGATION === */
 function renderFooter() {
-  if (currentStep === 4) return '';
+  if (currentStep === 3) return '';
   return `
     <div class="wizard__nav">
       ${currentStep > 0 ? '<button class="btn btn--secondary" onclick="prevStep()">← Anterior</button>' : '<div></div>'}
-      ${currentStep < 3 ? '<button class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
-      ${currentStep === 3 ? '<button class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitPayment()" id="pay-button">✅ Finalizar Inscripción</button>' : ''}
+      ${currentStep < 2 ? '<button class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
+      ${currentStep === 2 ? '<button class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitEnrollment()" id="pay-button">✅ Finalizar Inscripción</button>' : ''}
     </div>
   `;
 }
@@ -527,27 +446,11 @@ async function handleFileSelect(input, docType) {
   card.querySelector('.wizard__doc-btn').textContent = 'Cambiar';
 }
 
-/* === PAYMENT === */
-function switchPaymentMethod(method) {
-  document.querySelectorAll('.wizard__payment-tab').forEach(t => t.classList.remove('wizard__payment-tab--active'));
-  const btn = document.querySelector(`[data-method="${method}"]`);
-  if (btn) btn.classList.add('wizard__payment-tab--active');
+/* === PAYMENT METHODS REMOVED === */
 
-  const cardDiv = document.getElementById('payment-method-card');
-  const transferDiv = document.getElementById('payment-method-transfer');
-
-  if (cardDiv) cardDiv.style.display = method === 'card' ? 'block' : 'none';
-  if (transferDiv) transferDiv.style.display = method === 'transfer' ? 'block' : 'none';
-
-  wizardData.payment.method = method;
-}
-
-async function submitPayment() {
+async function submitEnrollment() {
   const payBtn = document.getElementById('pay-button');
   if (!payBtn) return;
-
-  const method = wizardData.payment.method || 'card';
-  const transferRef = document.getElementById('transfer-ref')?.value?.trim() || '';
 
   payBtn.disabled = true;
   payBtn.innerHTML = '<span class="wizard__spinner"></span> Procesando inscripción...';
@@ -556,7 +459,7 @@ async function submitPayment() {
     const formData = new FormData();
     formData.append('student', JSON.stringify(wizardData.student));
     formData.append('guardian', JSON.stringify(wizardData.guardian));
-    formData.append('payment', JSON.stringify({ method, transferRef }));
+    formData.append('payment', JSON.stringify({ method: 'acordar_despues' }));
 
     // Append files dynamically
     wizardData.documents.forEach(doc => {
@@ -572,7 +475,7 @@ async function submitPayment() {
 
     if (result.success) {
       // Move to confirmation
-      currentStep = 4;
+      currentStep = 3;
       renderWizard();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
