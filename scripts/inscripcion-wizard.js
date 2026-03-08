@@ -11,10 +11,10 @@ const WIZARD_STEPS = [
 ];
 
 const REQUIRED_DOCUMENTS = [
-  { type: 'acta_nacimiento', label: 'Acta de Nacimiento', required: true },
-  { type: 'curp', label: 'CURP del alumno', required: true },
-  { type: 'cartilla_vacunacion', label: 'Cartilla de Vacunación', required: true },
-  { type: 'foto_alumno', label: 'Foto reciente del alumno', required: true },
+  { type: 'acta_nacimiento', label: 'Acta de Nacimiento', required: false },
+  { type: 'curp', label: 'CURP del alumno', required: false },
+  { type: 'cartilla_vacunacion', label: 'Cartilla de Vacunación', required: false },
+  { type: 'foto_alumno', label: 'Foto reciente del alumno', required: false },
   { type: 'comprobante_domicilio', label: 'Comprobante de domicilio', required: false },
   { type: 'identificacion_tutor', label: 'INE del tutor', required: false }
 ];
@@ -241,7 +241,7 @@ function renderDocumentsStep() {
 
       <div class="wizard__note">
         <span>💡</span>
-        <p>Los documentos marcados con * son obligatorios para completar la inscripción. Puedes subir los opcionales después.</p>
+        <p>Todos los documentos son opcionales en este paso. Puedes completar tu inscripción ahora y entregar los documentos físicamente o por correo más adelante.</p>
       </div>
     </div>
   `;
