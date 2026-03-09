@@ -52,6 +52,14 @@ const createEmailTemplate = (title, data) => `
   </div>
 `;
 
+const createAutoReplyTemplate = (name) => `
+  <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+    <h2 style="color: #0d47a1;">¡Hola, ${name}!</h2>
+    <p>Hemos recibido tu información exitosamente. Nos pondremos en contacto contigo muy pronto para darle seguimiento a tu solicitud.</p>
+    <p>Atentamente,<br><strong>Colegio Federico Froebel</strong></p>
+  </div>
+`;
+
 // --- API ENDPOINTS ---
 
 /**
@@ -89,6 +97,14 @@ app.post('/api/contact', async (req, res) => {
             console.error('Resend Error:', error);
             return res.status(400).json({ error: error.message });
         }
+
+        // Send confirmation email to the user
+        await resend.emails.send({
+            from: 'Colegio Froebel <info@froebelinstituto.com.mx>',
+            to: [email],
+            subject: 'Recibimos tu mensaje - Colegio Federico Froebel',
+            html: createAutoReplyTemplate(name)
+        });
 
         res.status(200).json({ success: true, message: 'Mensaje enviado correctamente' });
     } catch (error) {
@@ -158,6 +174,16 @@ app.post('/api/enroll', upload.any(), async (req, res) => {
             return res.status(400).json({ error: error.message });
         }
 
+        // Send confirmation email to the parent/guardian
+        if (guardian.email) {
+            await resend.emails.send({
+                from: 'Colegio Froebel <info@froebelinstituto.com.mx>',
+                to: [guardian.email],
+                subject: 'Recibimos tu solicitud de inscripción - Colegio Federico Froebel',
+                html: createAutoReplyTemplate(guardian.full_name || 'Familia')
+            });
+        }
+
         res.status(200).json({ success: true, message: 'Inscripción enviada exitosamente' });
     } catch (error) {
         console.error('Server Error:', error);
@@ -166,7 +192,7 @@ app.post('/api/enroll', upload.any(), async (req, res) => {
 });
 
 // Serve static files from the current directory (since server is now inside website/)
-app.use(express.static(__dirname));
+app.use(express.static(__dirname, { extensions: ['html', 'htm'] }));
 
 // ... (other routes remain same, like /api/contact)
 
