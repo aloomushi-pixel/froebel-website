@@ -1,9 +1,19 @@
-FROM nginx:alpine
+FROM node:18-alpine
 
-# Copy all website files to nginx
-COPY . /usr/share/nginx/html/
+# Set working directory
+WORKDIR /app
 
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy package.json and package-lock.json first to cache npm install
+COPY package*.json ./
 
-EXPOSE 80
+# Install dependencies
+RUN npm install --production
+
+# Copy all website files, including server.js
+COPY . .
+
+# Expose port 3000
+EXPOSE 3000
+
+# Start the Node.js server
+CMD ["node", "server.js"]
