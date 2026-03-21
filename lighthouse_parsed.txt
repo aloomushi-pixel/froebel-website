@@ -1,0 +1,9 @@
+Scores:
+Performance: 100
+Accessibility: 100
+Best Practices: 100
+SEO: 100
+
+Failing Audits:
+- label-content-name-mismatch: Elements with visible text labels do not have matching accessible names. (Score: 0)
+    Code: <a aria-label="Froebel" class="header__logo" href="/">
