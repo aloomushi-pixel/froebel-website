@@ -10,10 +10,15 @@ const app = express();
 
 app.use(compression());
 app.use(express.static(__dirname, {
-    maxAge: '1y',
     setHeaders: (res, reqPath) => {
-        if (reqPath.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'public, max-age=31536000');
+        if (reqPath.endsWith('.html') || reqPath.endsWith('.css') || reqPath.endsWith('.js')) {
+            // Never cache HTML, CSS, or JS (we don't use file hashes)
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+        } else {
+            // Cache images, fonts, etc. for 1 year
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         }
     }
 }));
