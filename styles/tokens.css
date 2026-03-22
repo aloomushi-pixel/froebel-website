@@ -120,13 +120,18 @@
   --radius-full: 9999px;
 
   /* === SHADOWS === */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-warm: 0 8px 30px rgba(30, 64, 175, 0.12);
-  /* Updated to institutional blue glow */
-  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 4px rgba(30, 64, 175, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(30, 64, 175, 0.08);
+  --shadow-lg: 0 12px 28px -4px rgba(30, 64, 175, 0.12);
+  --shadow-xl: 0 24px 48px -12px rgba(30, 64, 175, 0.16);
+  --shadow-warm: 0 12px 40px rgba(30, 64, 175, 0.15); /* Institutional blue glow */
+  --shadow-card: 0 8px 24px rgba(30, 64, 175, 0.06);
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, #1e3a8a 100%);
+  --gradient-warm: linear-gradient(135deg, #ffffff 0%, var(--color-bg-warm) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+  --gradient-mesh: radial-gradient(at 0% 0%, rgba(30,64,175,0.05) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(255,193,7,0.05) 0px, transparent 50%);
 
   /* === TRANSITIONS === */
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
