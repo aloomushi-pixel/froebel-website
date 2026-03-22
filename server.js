@@ -10,6 +10,7 @@ const app = express();
 
 app.use(compression());
 app.use(express.static(__dirname, {
+    extensions: ['html'],
     setHeaders: (res, reqPath) => {
         if (reqPath.endsWith('.html') || reqPath.endsWith('.css') || reqPath.endsWith('.js')) {
             // Never cache HTML, CSS, or JS (we don't use file hashes)
