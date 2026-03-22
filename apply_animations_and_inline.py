@@ -39,12 +39,16 @@ for root, dirs, files in os.walk(base_dir):
             
             # Add fade-in classes
             for cls in classes_to_animate:
-                pattern = re.compile(rf'class="([^"]*)\b({cls})\b(?![\w-]* fade-in)([^"]*)"')
+                pattern = re.compile(rf'class="([^"]*)(?<!-)\b({cls})\b(?!-)(?![\w\s-]*fade-in)([^"]*)"')
                 html = pattern.sub(r'class="\1\2 fade-in\3"', html)
             
-            # Remove old styles
-            html = re.sub(r'<style>.*?INSTITUTO FEDERICO FROEBEL.*?</style>', '', html, flags=re.DOTALL)
-            html = re.sub(r'<style>.*?--color-primary.*?</style>', '', html, flags=re.DOTALL)
+            # Remove old styles safely
+            def style_replacer(match):
+                text = match.group(0)
+                if 'INSTITUTO FEDERICO FROEBEL' in text or '--color-primary' in text:
+                    return ''
+                return text
+            html = re.sub(r'<style>.*?</style>', style_replacer, html, flags=re.DOTALL)
             html = re.sub(r'<style id="global-styles">.*?</style>', '', html, flags=re.DOTALL)
             
             # Reattach style

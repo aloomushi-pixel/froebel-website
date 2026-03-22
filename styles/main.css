@@ -593,11 +593,57 @@ p {
 }
 
 /* === STATS === */
-.stats {
+.stats-marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.stat-group {
     display: flex;
     justify-content: center;
     gap: var(--space-16);
     padding: var(--space-12) 0;
+}
+
+.stat-duplicate {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .stats-marquee-wrapper {
+        position: relative;
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        padding: var(--space-6) 0;
+    }
+    .stats {
+        display: flex;
+        flex-direction: row !important;
+        width: max-content !important;
+        animation: scrollMarquee 15s linear infinite;
+        gap: 0 !important;
+        padding: 0 !important;
+    }
+    .stats:hover,
+    .stats:active {
+        animation-play-state: paused;
+    }
+    .stat-group {
+        padding: 0 !important;
+        gap: var(--space-10) !important;
+        padding-right: var(--space-10) !important;
+    }
+    .stat-duplicate {
+        display: flex;
+    }
+    .stat {
+        min-width: 140px;
+    }
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .stat {
