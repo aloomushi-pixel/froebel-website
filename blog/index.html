@@ -5,7 +5,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="index, follow" name="robots"/>
-<link." name="description"/>
+<link href="https://fonts.googleapis.com?family=swap&amp;display=swap" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+
+<link href="../favicon.png" rel="icon" type="image/png"/>
+<!-- INICIO SEO META TAGS -->
+<title>Blog para Padres | Crianza, Maternal y Preescolar en CDMX | | GAM</title>
+<meta content="Guías prácticas de crianza respetuosa, control de esfínteres, adaptación al kínder, actividades con bloques Froebel y nutrición infantil por el Instituto Froebel en GAM." name="description"/>
 <link href="https://froebelinstituto.com.mx/blog/" rel="canonical"/>
 <!-- Open Graph / Facebook -->
 <meta content="website" property="og:type"/>
@@ -183,11 +189,11 @@
 <a class="header__logo" href="/"><img alt="Logo Federico Froebel" loading="eager" src="../assets/images/logo-froebel.jpg" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover;"/><span>Froebel</span></a>
 <nav class="header__nav" id="main-nav">
 <a class="header__link" href="/">Inicio</a>
-<a class="header__link" href="../nosotros.html">Nosotros</a>
-<a class="header__link" href="../programas.html">Programas</a>
+<a class="header__link" href="/nosotros">Nosotros</a>
+<a class="header__link" href="/programas">Programas</a>
 <a class="header__link header__link--active" href="/blog/">Blog</a>
-<a class="header__link" href="../contacto.html">Contacto</a>
-<a class="header__cta" href="../inscripciones.html"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16">
+<a class="header__link" href="/contacto">Contacto</a>
+<a class="header__cta" href="/inscripciones"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16">
 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
 <circle cx="9" cy="7" r="4"></circle>
 <line x1="19" x2="19" y1="8" y2="14"></line>
@@ -326,10 +332,10 @@
                     Una guía práctica con los 15 puntos esenciales que debes verificar antes de inscribir a tu hijo.
                     Compartida por educadoras certificadas.
                 </p>
-<div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;">
-<input placeholder="Tu correo electrónico" style="flex:1;min-width:220px;padding:var(--space-3) var(--space-4);border:none;border-radius:var(--radius-full);font-size:var(--text-base);font-family:var(--font-body);" type="email"/>
-<button class="btn btn--accent">Descargar Gratis →</button>
-</div>
+<form id="blog-lead-magnet-form" onsubmit="event.preventDefault(); const email=this.querySelector('input').value; const btn=this.querySelector('button'); btn.textContent='Abriendo Checklist...'; fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'Suscriptor Blog Froebel',phone:'No proporcionado',email:email,message:'Descarga Checklist Seguridad Kínder CDMX'})}).finally(()=>{ if(window.FroebelUX) window.FroebelUX.track('form_submit',{element_id:'blog-lead-magnet-form',element_text:'Descargar Checklist Seguridad'}); window.location.href='/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html'; });" style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;">
+<input placeholder="Tu correo electrónico" required style="flex:1;min-width:220px;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:var(--text-base);font-family:var(--font-body);" type="email"/>
+<button type="submit" class="btn btn--accent">Ver y Descargar Checklist Gratis →</button>
+</form>
 <p style="font-size:var(--text-xs);margin-top:var(--space-3);opacity:0.7;margin-bottom:0;">🔒 No spam.
                     Solo contenido útil para padres.</p>
 </div>
