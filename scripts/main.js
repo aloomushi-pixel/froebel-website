@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initFaqAccordions();
   initFroebelUXTelemetry();
+  initCookieConsentBanner();
 });
 
 /* === HEADER SCROLL EFFECT === */
@@ -123,6 +124,87 @@ function initFaqAccordions() {
       }
     });
   });
+}
+
+/* === COOKIE & UX TELEMETRY CONSENT BANNER === */
+function initCookieConsentBanner() {
+  const STORAGE_KEY = 'froebel_cookie_consent_v2_1';
+  try {
+    if (window.localStorage.getItem(STORAGE_KEY) === 'accepted') {
+      return;
+    }
+  } catch (_) {}
+
+  if (document.getElementById('froebel-cookie-banner')) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'froebel-cookie-banner';
+  banner.setAttribute('role', 'region');
+  banner.setAttribute('aria-label', 'Aviso de Cookies y Telemetría de Calidad UX');
+  banner.style.cssText = [
+    'position: fixed',
+    'bottom: 16px',
+    'left: 16px',
+    'right: 16px',
+    'max-width: 480px',
+    'z-index: 9998',
+    'background: rgba(15, 23, 42, 0.96)',
+    'backdrop-filter: blur(14px)',
+    '-webkit-backdrop-filter: blur(14px)',
+    'color: #f8fafc',
+    'border: 1px solid rgba(59, 130, 246, 0.45)',
+    'border-radius: 16px',
+    'box-shadow: 0 20px 45px rgba(15, 23, 42, 0.35)',
+    'padding: 16px 18px',
+    'font-family: var(--font-body, Inter, system-ui, sans-serif)',
+    'font-size: 13px',
+    'line-height: 1.5',
+    'display: flex',
+    'align-items: center',
+    'justify-content: space-between',
+    'gap: 14px',
+    'transition: opacity 0.25s ease, transform 0.25s ease'
+  ].join(';');
+
+  banner.innerHTML = `
+    <div style="flex: 1; color: #e2e8f0;">
+      <div style="font-weight: 700; color: #ffd54f; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+        🍪 Aviso de Cookies y Calidad UX
+      </div>
+      <p style="margin: 0; font-size: 12.5px; color: #cbd5e1; line-height: 1.45;">
+        Utilizamos cookies técnicas y telemetría de experiencia de usuario para mejorar continuamente la atención a familias de Maternal y Preescolar en Gustavo A. Madero, conforme a nuestro
+        <a href="/contacto" style="color: #60a5fa; text-decoration: underline; font-weight: 600;">Aviso de Privacidad</a>.
+      </p>
+    </div>
+    <button
+      type="button"
+      id="froebel-cookie-accept-btn"
+      data-ux-id="cookie-consent-accept"
+      style="flex-shrink: 0; background: #2563eb; color: #ffffff; border: none; border-radius: 999px; padding: 10px 18px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4); transition: background 0.2s ease;"
+    >
+      Entendido
+    </button>
+  `;
+
+  document.body.appendChild(banner);
+
+  const acceptBtn = document.getElementById('froebel-cookie-accept-btn');
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, 'accepted');
+      } catch (_) {}
+      if (window.FroebelUX) {
+        window.FroebelUX.track('cta_click', {
+          element_id: 'cookie_consent_accept',
+          element_text: 'Aceptar Aviso de Cookies y Telemetría UX',
+        });
+      }
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(12px)';
+      setTimeout(() => banner.remove(), 260);
+    });
+  }
 }
 
 /* ============================================================================
