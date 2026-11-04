@@ -2,7 +2,7 @@
   "project": "Instituto Federico Froebel",
   "domain": "https://froebelinstituto.com.mx",
   "standard": "Estándar Maestro v2.1 — Autonomous UX, Search Console & GEO Engine",
-  "updatedAt": "2026-11-04T04:03:25.255Z",
+  "updatedAt": "2026-11-04T04:12:06.909Z",
   "pagesMonitored": 23,
   "supabaseTable": "public.experiencia_de_usuario_froebel"
 }
