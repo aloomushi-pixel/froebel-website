@@ -338,6 +338,13 @@ async function nextStep() {
 
   currentStep++;
   renderWizard();
+  if (window.FroebelUX) {
+    window.FroebelUX.track('wizard_step', {
+      element_id: 'wizard_step_' + currentStep,
+      element_text: (WIZARD_STEPS[currentStep] && WIZARD_STEPS[currentStep].title) || ('Paso ' + (currentStep + 1)),
+      parent_profile: wizardData.student && wizardData.student.program === 'maternal' ? 'maternal_1_a_3' : 'preescolar_3_a_6'
+    });
+  }
 
   window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
 }
@@ -474,6 +481,13 @@ async function submitEnrollment() {
     const result = await response.json();
 
     if (result.success) {
+      if (window.FroebelUX) {
+        window.FroebelUX.track('form_submit', {
+          element_id: 'wizard_enrollment_completed',
+          element_text: 'Inscripción completada (' + ((wizardData.student && wizardData.student.program) || 'general') + ')',
+          parent_profile: wizardData.student && wizardData.student.program === 'maternal' ? 'maternal_1_a_3' : 'preescolar_3_a_6'
+        });
+      }
       // Move to confirmation
       currentStep = 3;
       renderWizard();
@@ -539,6 +553,12 @@ function openEnrollmentWizard() {
     currentStep = 0;
     wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
     renderWizard();
+    if (window.FroebelUX) {
+      window.FroebelUX.track('wizard_open', {
+        element_id: 'open_enrollment_wizard',
+        element_text: 'Abrir Proceso de Inscripción en Línea'
+      });
+    }
     wizardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

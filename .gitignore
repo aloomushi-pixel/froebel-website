@@ -1,0 +1,4 @@
+.env
+.env.*
+.gsc-credentials.json
+node_modules/
