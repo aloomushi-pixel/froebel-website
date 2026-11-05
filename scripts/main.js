@@ -173,7 +173,7 @@ function initCookieConsentBanner() {
       </div>
       <p style="margin: 0; font-size: 12.5px; color: #cbd5e1; line-height: 1.45;">
         Utilizamos cookies técnicas y telemetría de experiencia de usuario para mejorar continuamente la atención a familias de Maternal y Preescolar en Gustavo A. Madero, conforme a nuestro
-        <a href="/contacto" style="color: #60a5fa; text-decoration: underline; font-weight: 600;">Aviso de Privacidad</a>.
+        <a href="/contacto#aviso-privacidad" style="color: #60a5fa; text-decoration: underline; font-weight: 600;">Aviso de Privacidad</a>.
       </p>
     </div>
     <button
@@ -570,6 +570,14 @@ function initFroebelUXTelemetry() {
 
       const interactive = target.closest('a, button, [role="button"], input[type="submit"], summary, .btn, .whatsapp-float');
       if (interactive) {
+        // Avoid duplicate cta_click events for <summary> (tracked via initFaqAccordions toggle)
+        // and #froebel-cookie-accept-btn (tracked via initCookieConsentBanner)
+        if (
+          interactive.tagName.toLowerCase() === 'summary' ||
+          interactive.id === 'froebel-cookie-accept-btn'
+        ) {
+          return;
+        }
         const href = (interactive.getAttribute('href') || '').toLowerCase();
         const text = (
           interactive.getAttribute('aria-label') ||
