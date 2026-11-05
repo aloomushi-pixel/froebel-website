@@ -502,10 +502,15 @@ function initFroebelUXTelemetry() {
   // 1. Emit initial page_view after brief settle so FCP/TTFB are populated
   setTimeout(() => {
     sendTelemetry('page_view', {
-      element_id: 'document',
+      element_id: isSearchBot || isAiBot ? `bot:${deviceType}` : 'document',
       element_text: document.title,
     });
   }, 600);
+
+  // Skip section_view IntersectionObserver for headless search/AI bots (their 7000px tall viewport triggers all sections at scroll 0)
+  if (isSearchBot || isAiBot) {
+    return;
+  }
 
   // 2. Section Visibility Monitor (IntersectionObserver on key sections & cards)
   const seenSections = new Set();

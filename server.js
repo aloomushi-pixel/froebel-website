@@ -202,6 +202,42 @@ app.post('/api/enroll', upload.any(), async (req, res) => {
   }
 });
 
+// Canonical 301 Redirects for legacy .html URLs (prevents Google Search Console duplicate URLs)
+const ROOT_CLEAN_SLUGS = new Set([
+  '/nosotros',
+  '/programas',
+  '/inscripciones',
+  '/contacto',
+  '/maternal-bilingue-1-a-3-anos',
+  '/preescolar-stem-3-a-6-anos',
+  '/horario-extendido-y-comedor',
+  '/instalaciones-y-seguridad',
+]);
+
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  const p = req.path || '/';
+  const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+
+  if (p === '/index.html') {
+    return res.redirect(301, '/' + qs);
+  }
+  if (p === '/blog/index.html') {
+    return res.redirect(301, '/blog/' + qs);
+  }
+  const geoMatch = p.match(/^(\/colegio-cerca-de-mi\/[^/]+)\/index\.html$/i);
+  if (geoMatch) {
+    return res.redirect(301, `${geoMatch[1]}/${qs}`);
+  }
+  if (p.endsWith('.html')) {
+    const withoutHtml = p.slice(0, -5);
+    if (ROOT_CLEAN_SLUGS.has(withoutHtml)) {
+      return res.redirect(301, withoutHtml + qs);
+    }
+  }
+  next();
+});
+
 // Static assets with smart caching and clean URL extension resolution
 app.use(
   express.static(__dirname, {
@@ -220,7 +256,7 @@ app.use(
 );
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.status(404).sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(port, () => console.log(`Instituto Federico Froebel Server running on port ${port}`));
