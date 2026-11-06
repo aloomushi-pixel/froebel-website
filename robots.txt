@@ -4,6 +4,12 @@ Disallow: /admin.html
 Disallow: /admin
 Disallow: /api/
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
@@ -19,7 +25,18 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
 Sitemap: https://froebelinstituto.com.mx/sitemap.xml
+# LLMs Context: https://froebelinstituto.com.mx/llms.txt
+# LLMs Full Knowledge Base: https://froebelinstituto.com.mx/llms-full.txt

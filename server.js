@@ -214,11 +214,20 @@ const ROOT_CLEAN_SLUGS = new Set([
   '/instalaciones-y-seguridad',
 ]);
 
+const LEGACY_ASSET_REDIRECTS = new Map([
+  ['/assets/images/instalaciones-seguras-kinder-gam.jpg', '/assets/images/instalaciones-kinder-patio-juegos-gam.jpg'],
+  ['/assets/images/aula-preescolar-metodo-froebel.jpg', '/assets/images/material-didactico-dones-froebel.jpg'],
+  ['/assets/images/maternal-estimulacion-temprana-cdmx.jpg', '/assets/images/salon-maternal-bilingue-froebel.jpg'],
+]);
+
 app.use((req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next();
   const p = req.path || '/';
   const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
 
+  if (LEGACY_ASSET_REDIRECTS.has(p)) {
+    return res.redirect(301, LEGACY_ASSET_REDIRECTS.get(p) + qs);
+  }
   if (p === '/index.html') {
     return res.redirect(301, '/' + qs);
   }
