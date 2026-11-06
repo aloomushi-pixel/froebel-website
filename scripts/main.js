@@ -142,29 +142,211 @@ function initCookieConsentBanner() {
   banner.setAttribute('role', 'region');
   banner.setAttribute('aria-label', 'Aviso de Cookies y Telemetría de Calidad UX');
   banner.style.cssText = [
-    "position: fixed",
-    "bottom: 12px",
-    "left: 12px",
-    "right: 82px",
-    "max-width: 440px",
-    "z-index: 9998",
-    "background: rgba(15, 23, 42, 0.94)",
-    "backdrop-filter: blur(12px)",
-    "-webkit-backdrop-filter: blur(12px)",
-    "color: #f8fafc",
-    "border: 1px solid rgba(59, 130, 246, 0.45)",
-    "border-radius: 14px",
-    "box-shadow: 0 12px 30px rgba(15, 23, 42, 0.3)",
-    "padding: 10px 14px",
-    "font-family: var(--font-body, Inter, system-ui, sans-serif)",
-    "font-size: 12px",
-    "line-height: 1.35",
-    "display: flex",
-    "align-items: center",
-    "justify-content: space-between",
-    "gap: 10px",
-    "transition: opacity 0.25s ease, transform 0.25s ease"
-  ].join(";");
+    'position: fixed',
+    'bottom: 12px',
+    'left: 12px',
+    'right: 84px',
+    'max-width: 430px',
+    'z-index: 9998',
+    'background: rgba(15, 23, 42, 0.96)',
+    'backdrop-filter: blur(14px)',
+    '-webkit-backdrop-filter: blur(14px)',
+    'color: #f8fafc',
+    'border: 1px solid rgba(59, 130, 246, 0.45)',
+    'border-radius: 16px',
+    'box-shadow: 0 20px 45px rgba(15, 23, 42, 0.35)',
+    'padding: 10px 14px',
+    'font-family: var(--font-body, Inter, system-ui, sans-serif)',
+    'font-size: 13px',
+    'line-height: 1.5',
+    'display: flex',
+    'align-items: center',
+    'justify-content: space-between',
+    'gap: 14px',
+    'transition: opacity 0.25s ease, transform 0.25s ease'
+  ].join(';');
+
+  banner.innerHTML = `
+    <div style="flex: 1; color: #e2e8f0;">
+      <div style="font-weight: 700; color: #ffd54f; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+        🍪 Aviso de Cookies y Calidad UX
+      </div>
+      <p style="margin: 0; font-size: 12.5px; color: #cbd5e1; line-height: 1.45;">
+        Medimos la experiencia en nuestro sitio para mejorar la atención a familias en GAM. Consulta nuestro
+        <a href="/contacto#aviso-privacidad" style="color: #60a5fa; text-decoration: underline; font-weight: 600;">Aviso de Privacidad</a>.
+      </p>
+    </div>
+    <button
+      type="button"
+      id="froebel-cookie-accept-btn"
+      data-ux-id="cookie-consent-accept"
+      style="flex-shrink: 0; background: #2563eb; color: #ffffff; border: none; border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4); transition: background 0.2s ease;"
+    >
+      Entendido
+    </button>
+  `;
+
+  document.body.appendChild(banner);
+
+  const acceptBtn = document.getElementById('froebel-cookie-accept-btn');
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, 'accepted');
+      } catch (_) {}
+      if (window.FroebelUX) {
+        window.FroebelUX.track('cta_click', {
+          element_id: 'cookie_consent_accept',
+          element_text: 'Aceptar Aviso de Cookies y Telemetría UX',
+        });
+      }
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(12px)';
+      setTimeout(() => banner.remove(), 260);
+    });
+  }
+}
+
+/* ============================================================================
+   AUTONOMOUS UX, CWV, SEO & PARENT INTENT TELEMETRY MONITOR
+   Isolated Supabase Table: public.experiencia_de_usuario_froebel
+   ============================================================================ */
+function initFroebelUXTelemetry() {
+  const SUPABASE_RPC_URL =
+    'https://pghqeoijbtzipzziezmn.supabase.co/rest/v1/rpc/registrar_evento_ux_froebel';
+  const SUPABASE_ANON_KEY =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnaHFlb2lqYnR6aXB6emllem1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NTY1MzAsImV4cCI6MjA5MDIzMjUzMH0.e7YfCBC9diL1KDaKz52EBPfEUa8R2iahXpXF0xctsNg';
+
+  // Normalize current pathname to match public.experiencia_de_usuario_froebel.slug
+  function resolveCanonicalSlug() {
+    let p = window.location.pathname || '/';
+    p = p.replace(/\/index\.html$/i, '').replace(/\.html$/i, '');
+    if (p.length > 1 && p.endsWith('/')) {
+      p = p.slice(0, -1);
+    }
+    return p || '/';
+  }
+
+  const pageSlug = resolveCanonicalSlug();
+
+  // Visitor & Session IDs
+  function getOrSetId(storage, key, prefix) {
+    try {
+      let id = storage.getItem(key);
+      if (!id) {
+        id =
+          prefix +
+          '_' +
+          Math.random().toString(36).substring(2, 10) +
+          '_' +
+          Date.now().toString(36);
+        storage.setItem(key, id);
+      }
+      return id;
+    } catch (_) {
+      return prefix + '_' + Math.random().toString(36).substring(2, 10);
+    }
+  }
+
+  const visitorId = getOrSetId(window.localStorage, 'froebel_vid', 'v');
+  const sessionId = getOrSetId(window.sessionStorage, 'froebel_sid', 's');
+
+  // Device & Bot detection
+  const ua = navigator.userAgent || '';
+  const isAiBot =
+    /GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|ClaudeBot|Anthropic|Google-Extended|Applebot-Extended|CCBot|Bytespider/i.test(
+      ua
+    );
+  const isSearchBot = /Googlebot|bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot/i.test(ua);
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || window.innerWidth < 768;
+  const deviceType = isAiBot
+    ? 'ai_agent'
+    : isSearchBot
+    ? 'search_bot'
+    : isMobile
+    ? 'mobile'
+    : 'desktop';
+
+  // Infer Parent Intent Profile from URL + interactions
+  function inferParentProfile(extraHint) {
+    const context = (pageSlug + ' ' + (extraHint || '') + ' ' + document.referrer).toLowerCase();
+    if (
+      context.includes('maternal') ||
+      context.includes('esfinteres') ||
+      context.includes('1-a-3') ||
+      context.includes('estimulacion')
+    ) {
+      return 'maternal_1_a_3';
+    }
+    if (
+      context.includes('horario-extendido') ||
+      context.includes('aicm') ||
+      context.includes('comedor') ||
+      context.includes('colegio-cerca-de-mi') ||
+      context.includes('aragon') ||
+      context.includes('oceania') ||
+      context.includes('eduardo-molina')
+    ) {
+      return 'padres_trabajadores_aicm';
+    }
+    if (
+      context.includes('inscripciones') ||
+      context.includes('costos') ||
+      context.includes('colegiatura') ||
+      context.includes('pronto_pago')
+    ) {
+      return 'comparador_costos';
+    }
+    return 'preescolar_3_a_6';
+  }
+
+  // Real-Time On-Page SEO / GEO Health Audit (0 - 100)
+  function computeOnPageSeoScore() {
+    let score = 0;
+    const title = document.title || '';
+    const desc = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+    const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '';
+    const h1Count = document.querySelectorAll('h1').length;
+    const h2Count = document.querySelectorAll('h2').length;
+    const schemas = document.querySelectorAll('script[type="application/ld+json"]');
+    const images = Array.from(document.querySelectorAll('img'));
+    const imagesWithAlt = images.filter((img) => (img.getAttribute('alt') || '').trim().length > 0);
+
+    if (title.length >= 25 && title.length <= 75) score += 20;
+    else if (title.length > 10) score += 12;
+
+    if (desc.length >= 90 && desc.length <= 175) score += 20;
+    else if (desc.length > 40) score += 12;
+
+    if (canonical && canonical.startsWith('https://froebelinstituto.com.mx')) score += 15;
+    if (h1Count === 1) score += 15;
+    if (h2Count >= 2) score += 10;
+    if (schemas.length >= 1) score += 10;
+    if (images.length === 0 || imagesWithAlt.length / images.length >= 0.85) score += 10;
+
+    return Math.min(100, score);
+  }
+
+  // Core Web Vitals state
+  const cwv = {
+    lcp: null,
+    cls: 0,
+    inp: null,
+    fcp: null,
+    ttfb: null,
+  };
+
+  try {
+    const navEntries = performance.getEntriesByType('navigation');
+    if (navEntries && navEntries[0]) {
+      cwv.ttfb = Math.round(navEntries[0].responseStart);
+    }
+
+    if ('PerformanceObserver' in window) {
+      try {
+        const lcpObs = new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          const last = entries[entries.length - 1];
           if (last) cwv.lcp = Math.round(last.startTime);
         });
         lcpObs.observe({ type: 'largest-contentful-paint', buffered: true });
