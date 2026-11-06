@@ -327,7 +327,7 @@ function initFroebelUXTelemetry() {
     return Math.min(100, score);
   }
 
-  // Core Web Vitals state
+  // Core Web Vitals state (with background-tab offset correction)
   const cwv = {
     lcp: null,
     cls: 0,
@@ -335,6 +335,12 @@ function initFroebelUXTelemetry() {
     fcp: null,
     ttfb: null,
   };
+  let firstVisibleOffset = document.visibilityState === 'hidden' ? null : 0;
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && firstVisibleOffset === null) {
+      firstVisibleOffset = typeof performance !== 'undefined' && performance.now ? performance.now() : 0;
+    }
+  });
 
   try {
     const navEntries = performance.getEntriesByType('navigation');
@@ -347,7 +353,11 @@ function initFroebelUXTelemetry() {
         const lcpObs = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
           const last = entries[entries.length - 1];
-          if (last) cwv.lcp = Math.round(last.startTime);
+          if (last) {
+            const offset = firstVisibleOffset !== null && last.startTime >= firstVisibleOffset ? firstVisibleOffset : 0;
+            const val = Math.max(1, Math.round(last.startTime - offset));
+            if (val <= 10000) cwv.lcp = val;
+          }
         });
         lcpObs.observe({ type: 'largest-contentful-paint', buffered: true });
       } catch (_) {}
@@ -356,7 +366,9 @@ function initFroebelUXTelemetry() {
         const fcpObs = new PerformanceObserver((entryList) => {
           for (const entry of entryList.getEntries()) {
             if (entry.name === 'first-contentful-paint') {
-              cwv.fcp = Math.round(entry.startTime);
+              const offset = firstVisibleOffset !== null && entry.startTime >= firstVisibleOffset ? firstVisibleOffset : 0;
+              const val = Math.max(1, Math.round(entry.startTime - offset));
+              if (val <= 10000) cwv.fcp = val;
             }
           }
         });
