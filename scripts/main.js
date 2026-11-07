@@ -545,7 +545,7 @@ function initFroebelUXTelemetry() {
           const secId =
             el.id ||
             el.getAttribute('data-ux-section') ||
-            el.querySelector('h1, h2, h3')?.textContent?.trim()?.slice(0, 45) ||
+            el.querySelector('h1, h2, h3, th')?.textContent?.trim()?.slice(0, 45) ||
             el.className.split(' ')[0] ||
             'section';
           if (!seenSections.has(secId)) {
@@ -553,17 +553,17 @@ function initFroebelUXTelemetry() {
             sendTelemetry('section_view', {
               section_id: secId,
               element_id: secId,
-              element_text: el.querySelector('h1, h2, h3')?.textContent?.trim()?.slice(0, 80) || secId,
+              element_text: el.querySelector('h1, h2, h3, th')?.textContent?.trim()?.slice(0, 80) || secId,
             });
           }
         }
       });
     },
-    { threshold: 0.35 }
+    { threshold: 0.15 }
   );
 
   document
-    .querySelectorAll('section, .pricing-card, .program-card, .wizard, .blog-content')
+    .querySelectorAll('section, [data-ux-section], .pricing-card, .program-card, .wizard, .blog-content, table[id]')
     .forEach((sec) => sectionObserver.observe(sec));
 
   // 3. Click, CTA, WhatsApp, Phone, Rage Click & Dead Click Detector

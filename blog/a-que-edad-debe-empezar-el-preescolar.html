@@ -323,29 +323,70 @@
             <p>En el Instituto Froebel contamos con espacios diseñados neurocientíficamente para cada edad.</p>
         
             
-            <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
+            <h2 id="tabla-edades-sep" style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
                 📅 Tabla de Edades SEP en México: Maternal (1-3 años) vs. Kínder 1, 2 y 3 (3-6 años)
             </h2>
             <p style="margin-bottom:var(--space-4);">
-                En México, la edad de corte oficial considera los años cumplidos al <strong>31 de diciembre</strong> del ciclo escolar que inicia en agosto/septiembre:
+                En México, la edad de corte oficial considera los años cumplidos al <strong>31 de diciembre</strong> del ciclo escolar que inicia en agosto/septiembre. Consulta en esta tabla a qué grado ingresa tu pequeño en el <strong>Instituto Federico Froebel (San Juan de Aragón, GAM)</strong>:
             </p>
-            <ul style="display:flex;flex-direction:column;gap:var(--space-3);margin:var(--space-4) 0 var(--space-6);">
-                <li><strong>🍼 <a href="/maternal-bilingue-1-a-3-anos">Maternal Bilingüe (1 a 3 años)</a>:</strong> Estimulación sensorial, lenguaje bilingüe, psicomotricidad y acompañamiento respetuoso en control de esfínteres (aceptamos niños que aún usan pañal).</li>
-                <li><strong>🌻 <a href="/preescolar-stem-3-a-6-anos">Kínder 1 (3 años cumplidos)</a>:</strong> Socialización, las 5 vocales, números del 1 al 10, ubicación espacial y 1 hora diaria de inglés.</li>
-                <li><strong>🧠 <a href="/preescolar-stem-3-a-6-anos">Kínder 2 (4 años cumplidos)</a>:</strong> Consonantes, dictados lúdicos, números del 1 al 20, iniciación a sumas/restas y laboratorio STEM.</li>
-                <li><strong>🎓 <a href="/preescolar-stem-3-a-6-anos">Kínder 3 (5 años cumplidos)</a>:</strong> Lectoescritura fluida en español, iniciación a lectoescritura en inglés y números del 1 al 100 listos para primaria.</li>
-            </ul>
+            <div style="overflow-x:auto;margin:var(--space-4) 0 var(--space-6);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+                <table id="tabla-edades-sep-preescolar" data-ux-section="tabla-edades-sep-preescolar" style="width:100%;border-collapse:collapse;background:white;font-size:var(--text-sm);text-align:left;">
+                    <thead>
+                        <tr style="background:var(--color-primary-50);color:var(--color-primary-dark);border-bottom:2px solid var(--color-border);">
+                            <th style="padding:var(--space-3) var(--space-4);">Nivel / Grado</th>
+                            <th style="padding:var(--space-3) var(--space-4);">Edad Cumplida (Corte SEP 31 Dic)</th>
+                            <th style="padding:var(--space-3) var(--space-4);">¿Aceptan Pañal?</th>
+                            <th style="padding:var(--space-3) var(--space-4);">Enfoque Académico y Horario</th>
+                            <th style="padding:var(--space-3) var(--space-4);">Colegiatura Pronto Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--color-border);">
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;"><a href="/maternal-bilingue-1-a-3-anos">🍼 Maternal A y B</a></td>
+                            <td style="padding:var(--space-3) var(--space-4);">1 a 2 años 11 meses</td>
+                            <td style="padding:var(--space-3) var(--space-4);color:var(--color-primary-dark);font-weight:600;">✅ Sí (Transición respetuosa)</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Estimulación sensorial, lenguaje bilingüe y psicomotricidad (8:30 a 13:30h)</td>
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;color:var(--color-primary-dark);">$3,600 MXN/mes</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--color-border);background:rgba(46,125,50,0.02);">
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;"><a href="/preescolar-stem-3-a-6-anos">🌻 Kínder 1 (1° SEP)</a></td>
+                            <td style="padding:var(--space-3) var(--space-4);">3 años cumplidos al 31 dic</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Acompañamiento final</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Socialización, las 5 vocales, números 1–10 e inglés diario (9:00 a 14:00h)</td>
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;color:var(--color-primary-dark);">$3,600 MXN/mes</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--color-border);">
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;"><a href="/preescolar-stem-3-a-6-anos">🧠 Kínder 2 (2° SEP)</a></td>
+                            <td style="padding:var(--space-3) var(--space-4);">4 años cumplidos al 31 dic</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Control consolidado</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Consonantes, dictados lúdicos, números 1–20 y laboratorio STEM (9:00 a 14:00h)</td>
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;color:var(--color-primary-dark);">$3,600 MXN/mes</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;"><a href="/preescolar-stem-3-a-6-anos">🎓 Kínder 3 (3° SEP)</a></td>
+                            <td style="padding:var(--space-3) var(--space-4);">5 años cumplidos al 31 dic</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Control consolidado</td>
+                            <td style="padding:var(--space-3) var(--space-4);">Lectoescritura fluida en español/inglés y números 1–100 para Primaria (9:00 a 14:00h)</td>
+                            <td style="padding:var(--space-3) var(--space-4);font-weight:700;color:var(--color-primary-dark);">$3,600 MXN/mes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-6);">
+                💡 <strong>Nota para papás que trabajan:</strong> Todos los grados cuentan con <a href="/horario-extendido-y-comedor">Horario Extendido opcional hasta las 18:00 hrs con Comedor Nutritivo</a> (+$1,400 MXN/mes sin alimentos o +$1,900 MXN/mes con comida completa).
+            </p>
             <!-- CTA -->
-            <div style="background:linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));color:white;border-radius:var(--radius-2xl);padding:var(--space-10);text-align:center;margin:var(--space-12) 0;">
+            <div id="cta-articulo-edad" data-ux-section="cta-articulo-edad" style="background:linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));color:white;border-radius:var(--radius-2xl);padding:var(--space-10);text-align:center;margin:var(--space-12) 0;">
                 <h2 style="color:white;margin-bottom:var(--space-4);font-size:var(--text-2xl);">
-                    Conoce el Instituto Federico Froebel
+                    ¿Tienes duda sobre a qué grado entra tu pequeño por su fecha de nacimiento?
                 </h2>
-                <p style="color:rgba(255,255,255,0.9);margin-bottom:var(--space-6);max-width:500px;margin-left:auto;margin-right:auto;">
-                    Educamos con amor y respeto. Descubre nuestros programas bilingües con enfoque integral y valores para nivel Preescolar y Maternal.
+                <p style="color:rgba(255,255,255,0.9);margin-bottom:var(--space-6);max-width:560px;margin-left:auto;margin-right:auto;">
+                    Escríbenos la edad o mes de nacimiento de tu hijo y nuestra Dirección Académica te orientará al instante sobre su grado ideal y lugares disponibles en San Juan de Aragón.
                 </p>
                 <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
-                    <a href="/inscripciones" class="btn btn--accent btn--lg">Inscribir a mi hijo →</a>
-                    <a href="/programas" class="btn btn--secondary btn--lg" style="border-color:white;color:white;background:rgba(255,255,255,0.12);">Ver Programas Educativos</a>
+                    <a href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20le%C3%AD%20la%20gu%C3%ADa%20de%20edades%20y%20quiero%20saber%20a%20qu%C3%A9%20grado%20entra%20mi%20peque%C3%B1o" target="_blank" rel="noopener noreferrer" class="btn btn--accent btn--lg">💬 Consultar Grado por WhatsApp</a>
+                    <a href="/inscripciones" class="btn btn--secondary btn--lg" style="border-color:white;color:white;background:rgba(255,255,255,0.16);">Inscribir a mi hijo →</a>
+                    <a href="/programas" class="btn btn--secondary btn--lg" style="border-color:white;color:white;background:rgba(255,255,255,0.1);">Ver Programas Educativos</a>
                 </div>
             </div>
             
@@ -446,6 +487,6 @@
 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=12" defer></script>
+<script src="/scripts/main.js?v=13" defer></script>
 </body>
 </html>

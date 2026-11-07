@@ -1,11 +1,7 @@
 {
-  "version": "v2.1.23",
-  "released_at": "2026-11-07T18:15:59.819Z",
-  "cycle": 23,
-  "mode": "Estándar Maestro v2.1 — Gobernanza por Magnitud + GSC + Telemetría UX",
-  "highlights": [
-    "Optimización CRO y SEO en /blog/ (blog/index.html): adición de CTAs explícitos «Leer guía →» en las 8 tarjetas de artículos, píldoras rápidas por tema (#blog-hero-topics), acceso directo sin fricción al Checklist de Seguridad de 15 puntos e ItemList JSON-LD",
-    "Enriquecimiento semántico y CTAs above-the-fold en los 4 silos de servicio (/preescolar-stem-3-a-6-anos, /maternal-bilingue-1-a-3-anos, /horario-extendido-y-comedor, /instalaciones-y-seguridad) con precios transparentes ($3,600/mes Pronto Pago y Estancia $1,400-$1,900/mes)",
-    "Eliminación de descripción duplicada en /horario-extendido-y-comedor y refuerzo H2 para Estancias Educativas Froebel"
-  ]
+  "version": "v2.1.24",
+  "cycle": 24,
+  "updated_at": "2026-11-07T22:22:50.912Z",
+  "standard": "ESTANDAR_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
+  "notes": "Cycle #24: Added responsive SEP Age Cutoff Table (#tabla-edades-sep-preescolar) & WhatsApp CTA to /blog/a-que-edad-debe-empezar-el-preescolar.html, added Respectful Separation Comparison Table (#tabla-desapego-respetuoso) & WhatsApp CTA to /blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html, and upgraded sectionObserver in main.js (?v=13) to threshold 0.15 observing [data-ux-section] and table[id]"
 }
