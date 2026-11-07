@@ -200,6 +200,61 @@
           "item": "https://froebelinstituto.com.mx/blog/"
         }
       ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://froebelinstituto.com.mx/blog/#articulos",
+      "name": "Guías para Padres de Preescolar y Maternal — Instituto Federico Froebel GAM",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Control de Esfínteres: Guía Completa — ¿Cuándo y Cómo Empezar?",
+          "url": "https://froebelinstituto.com.mx/blog/control-de-esfinteres.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "¿Por qué mi hijo llora al dejarlo en el kínder? Desapego respetuoso",
+          "url": "https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Diferencias entre una Guardería y Neurodesarrollo en Maternal",
+          "url": "https://froebelinstituto.com.mx/blog/diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "5 actividades con bloques para hacer en casa (Método Froebel)",
+          "url": "https://froebelinstituto.com.mx/blog/5-actividades-con-bloques-para-hacer-en-casa.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Checklist de Seguridad para elegir el Kínder de tu hijo en GAM y CDMX",
+          "url": "https://froebelinstituto.com.mx/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Menú semanal nutritivo para niños con $500 pesos",
+          "url": "https://froebelinstituto.com.mx/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "¿A qué edad debe empezar el preescolar? Lo que dice la ciencia",
+          "url": "https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "5 Beneficios del Horario Extendido para Padres que Trabajan cerca del AICM",
+          "url": "https://froebelinstituto.com.mx/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html"
+        }
+      ]
     }
   ]
 }
@@ -245,15 +300,20 @@
 </div>
 </header>
 <!-- PAGE HERO -->
-<section class="section" style="padding-top: calc(72px + var(--space-16)); background: linear-gradient(135deg, var(--color-primary-50), var(--color-nature-light));">
+<section class="section" id="hero-blog" style="padding-top: calc(72px + var(--space-16)); background: linear-gradient(135deg, var(--color-primary-50), var(--color-nature-light));">
 <div class="container text-center">
 <div class="section-header fade-in" style="margin-bottom:0;">
-<span class="section-header__label">Blog para Padres</span>
-<h1 class="section-header__title">Recursos gratuitos para criar con amor e inteligencia</h1>
+<span class="section-header__label">Blog para Padres · Instituto Federico Froebel GAM</span>
+<h1 class="section-header__title">Recursos gratuitos para criar con amor e inteligencia en Maternal y Preescolar</h1>
 <p class="section-header__desc">
-                    Consejos prácticos de crianza respetuosa, nutrición infantil, desarrollo emocional y actividades
-                    educativas que puedes hacer en casa.
+                    Guías prácticas de crianza respetuosa, control de esfínteres, actividades con bloques Froebel, nutrición infantil y seguridad escolar elaboradas por nuestras educadoras en Gustavo A. Madero.
                 </p>
+<div id="blog-hero-topics" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:var(--space-6);">
+  <a href="#post-esfinteres" data-ux-id="blog-pill-esfinteres" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🍼 Control de Esfínteres y Maternal</a>
+  <a href="#post-checklist-seguridad" data-ux-id="blog-pill-checklist" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🛡️ Checklist 15 Puntos para Elegir Kínder</a>
+  <a href="#post-bloques" data-ux-id="blog-pill-bloques" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🧱 5 Actividades con Bloques en Casa</a>
+  <a href="#post-menu-500" data-ux-id="blog-pill-menu" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🍱 Menú $500 y Horario Extendido AICM</a>
+</div>
 </div>
 </div>
 </section>
@@ -262,20 +322,20 @@
 <div class="container">
 <div class="grid grid--3">
 <!-- Post 1 -->
-<article class="blog-card fade-in" style="border: 2px solid var(--color-accent); border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-esfinteres" class="blog-card fade-in" style="border: 2px solid var(--color-accent); border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="control-de-esfinteres.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
-<img src="../assets/images/blog/control-de-esfinteres.png" alt="Control de esfínteres" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<img src="../assets/images/blog/control-de-esfinteres.png" alt="Control de esfínteres" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
 <div class="blog-card__body" style="padding: var(--space-6); display: flex; flex-direction: column; flex: 1;">
 <span style="display:inline-block;background:var(--color-accent);color:white;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:var(--weight-bold);margin-bottom:var(--space-2); align-self: flex-start;">NUEVO</span>
 <span class="blog-card__tag blog-card__tag--crianza" style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Guía para Padres</span>
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="control-de-esfinteres.html" style="color: var(--color-text);">Control de Esfínteres: Guía Completa — ¿Cuándo y Cómo Empezar?</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">Señales de preparación, paso a paso, errores comunes y cómo acompañamos este proceso en el Instituto Froebel desde los 2 años.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Febrero 2026 · ⏱️ 8 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Febrero 2026 · ⏱️ 8 min</span><a href="control-de-esfinteres.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 2 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-llanto" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/llanto-kinder.png" alt="Niño llorando en kinder" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -283,11 +343,11 @@
 <span class="blog-card__tag blog-card__tag--crianza" style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-nature-dark); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Crianza Respetuosa</span>
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html" style="color: var(--color-text);">¿Por qué mi hijo llora al dejarlo en el kínder? Desapego respetuoso</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">Es normal y tiene una explicación científica. Descubre las 5 estrategias de apego seguro para que la separación sea un proceso positivo.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Febrero 2026 · ⏱️ 8 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Febrero 2026 · ⏱️ 8 min</span><a href="por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 3 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-neurodesarrollo" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/neurodesarrollo-maternal.png" alt="Neurodesarrollo maternal" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -295,11 +355,11 @@
 <span class="blog-card__tag blog-card__tag--seguridad" style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-secondary-dark); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Seguridad</span>
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html" style="color: var(--color-text);">Diferencias entre una Guardería y Neurodesarrollo en Maternal</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">No es lo mismo cuidar que educar. Te explicamos las diferencias reales en programa, personal, regulaciones y lo que tu hijo recibe.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Febrero 2026 · ⏱️ 6 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Febrero 2026 · ⏱️ 6 min</span><a href="diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 4 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-bloques" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="5-actividades-con-bloques-para-hacer-en-casa.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/actividades-bloques.png" alt="Actividades con bloques" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -308,11 +368,11 @@
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="5-actividades-con-bloques-para-hacer-en-casa.html" style="color: var(--color-text);">5 actividades con bloques para hacer en casa (mejor que
                                 una tablet)</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">Bloques de madera, LEGO o incluso cajas de cartón: 5 actividades que desarrollan inteligencia espacial y coordinación en menos de 30 min.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Marzo 2026 · ⏱️ 5 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Marzo 2026 · ⏱️ 5 min</span><a href="5-actividades-con-bloques-para-hacer-en-casa.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 5 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-checklist-seguridad" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/elegir-kinder.png" alt="Checklist para elegir kinder" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -320,11 +380,11 @@
 <span class="blog-card__tag blog-card__tag--seguridad" style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-primary-dark); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Seguridad</span>
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html" style="color: var(--color-text);">Checklist de Seguridad para elegir el Kínder de tu hijo</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">Los 15 puntos que DEBES verificar antes de inscribir: certificaciones, protocolos, personal, infraestructura y señales de alerta.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Marzo 2026 · ⏱️ 7 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Marzo 2026 · ⏱️ 7 min</span><a href="como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 6 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-menu-500" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="menu-semanal-nutritivo-para-ninos-con-500-pesos.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/menu-semanal.png" alt="Menú semanal nutritivo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -332,11 +392,11 @@
 <span class="blog-card__tag blog-card__tag--nutricion" style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-nature); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Nutrición</span>
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="menu-semanal-nutritivo-para-ninos-con-500-pesos.html" style="color: var(--color-text);">Menú semanal nutritivo para niños con $500 pesos</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">7 días de comidas completas y saludables con ingredientes accesibles. Recetas rápidas para padres que trabajan y quieren alimentar bien.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Marzo 2026 · ⏱️ 10 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Marzo 2026 · ⏱️ 10 min</span><a href="menu-semanal-nutritivo-para-ninos-con-500-pesos.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 7 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-edad-preescolar" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="a-que-edad-debe-empezar-el-preescolar.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/edad-preescolar.png" alt="Edad para preescolar" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -345,11 +405,11 @@
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="a-que-edad-debe-empezar-el-preescolar.html" style="color: var(--color-text);">¿A qué edad debe empezar el preescolar? Lo que dice la
                                 ciencia</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">¿12 meses? ¿2 años? ¿3? La respuesta depende de factores neurológicos, emocionales y familiares. Te explicamos qué dice la investigación.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Abril 2026 · ⏱️ 6 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Abril 2026 · ⏱️ 6 min</span><a href="a-que-edad-debe-empezar-el-preescolar.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 <!-- Post 8 -->
-<article class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
+<article id="post-horario-extendido" class="blog-card fade-in" style="border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
 <a href="5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html" class="blog-card__image" style="height: 200px; overflow: hidden; position: relative; display: block;">
 <img src="../assets/images/blog/horario-extendido.png" alt="Beneficios del horario extendido" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-default);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
 </a>
@@ -357,25 +417,28 @@
 <span class="blog-card__tag blog-card__tag--crianza" style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-primary-dark); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Vida Familiar</span>
 <h2 class="blog-card__title" style="font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: var(--space-3); line-height: 1.3;"><a href="5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html" style="color: var(--color-text);">5 Beneficios del Horario Extendido para Padres que Trabajan</a></h2>
 <p class="blog-card__excerpt" style="color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--space-6); flex: 1;">Cómo un buen programa After-School impacta el desarrollo de los niños y reduce el estrés de padres que trabajan cerca de la zona de AICM / Oceanía.</p>
-<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);">📅 Enero 2026 · ⏱️ 5 min</div>
+<div class="blog-card__meta" style="font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border-light);"><span>📅 Enero 2026 · ⏱️ 5 min</span><a href="5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html" style="color:var(--color-primary);font-weight:700;">Leer guía →</a></div>
 </div>
 </article>
 </div>
 </div>
 </section>
 <!-- LEAD MAGNET -->
-<section class="section section--alt">
+<section class="section section--alt" id="lead-magnet-checklist">
 <div class="container">
 <div class="lead-magnet fade-in">
 <div style="font-size:3rem;margin-bottom:var(--space-4);">📖</div>
 <h3>Descarga gratis: "Checklist de Seguridad para elegir Kínder en CDMX"</h3>
 <p style="max-width:520px;margin:0 auto var(--space-6);">
-                    Una guía práctica con los 15 puntos esenciales que debes verificar antes de inscribir a tu hijo.
-                    Compartida por educadoras certificadas.
+                    Una guía práctica con los 15 puntos esenciales que debes verificar antes de inscribir a tu hijo en Gustavo A. Madero o CDMX. Compartida por educadoras certificadas.
                 </p>
+<div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;margin-bottom:var(--space-5);">
+  <a class="btn btn--primary" data-ux-id="checklist-direct-open" href="/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html">📋 Leer los 15 puntos ahora (Sin registro) →</a>
+  <a class="btn btn--secondary" data-ux-id="checklist-whatsapp" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20me%20gustar%C3%ADa%20recibir%20el%20Checklist%20de%20Seguridad%20para%20elegir%20K%C3%ADnder%20e%20informes%20de%20admisiones" rel="noopener noreferrer" target="_blank">💬 Recibir por WhatsApp</a>
+</div>
 <form id="blog-lead-magnet-form" onsubmit="event.preventDefault(); const email=this.querySelector('input').value; const btn=this.querySelector('button'); btn.textContent='Abriendo Checklist...'; fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'Suscriptor Blog Froebel',phone:'No proporcionado',email:email,message:'Descarga Checklist Seguridad Kínder CDMX'})}).finally(()=>{ if(window.FroebelUX) window.FroebelUX.track('form_submit',{element_id:'blog-lead-magnet-form',element_text:'Descargar Checklist Seguridad'}); window.location.href='/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html'; });" style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;">
-<input placeholder="Tu correo electrónico" required style="flex:1;min-width:220px;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:var(--text-base);font-family:var(--font-body);" type="email"/>
-<button type="submit" class="btn btn--accent">Ver y Descargar Checklist Gratis →</button>
+<input placeholder="O recíbelo en tu correo electrónico" required style="flex:1;min-width:220px;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:var(--text-base);font-family:var(--font-body);" type="email"/>
+<button type="submit" class="btn btn--accent">Enviar a mi correo →</button>
 </form>
 <p style="font-size:var(--text-xs);margin-top:var(--space-3);opacity:0.7;margin-bottom:0;">🔒 No spam.
                     Solo contenido útil para padres.</p>

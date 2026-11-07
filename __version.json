@@ -1,11 +1,11 @@
 {
-  "version": "v2.1.22",
-  "released_at": "2026-11-07T14:08:23.367Z",
-  "cycle": 22,
+  "version": "v2.1.23",
+  "released_at": "2026-11-07T18:15:59.819Z",
+  "cycle": 23,
   "mode": "Estándar Maestro v2.1 — Gobernanza por Magnitud + GSC + Telemetría UX",
   "highlights": [
-    "Clasificación GEO de Meta AI (meta-webindexer/1.1, Meta-ExternalAgent, Meta-ExternalFetcher), DuckAssistBot y Amazonbot como ai_agent en scripts/main.js (?v=12) y directivas explícitas en robots.txt tras detectar rastreo real de Meta AI",
-    "Finalización estándar de lcpObs (PerformanceObserver LCP) al primer input del usuario o ventana inicial de carga (<= 4500ms) para evitar que banners diferidos sobrescriban el LCP inicial real",
-    "Barra de navegación rápida en el Hero de /programas (#programas-hero-nav) y refuerzo semántico H2 para Estancias Educativas Froebel (14:00-18:00h) y Kínder Federico Froebel"
+    "Optimización CRO y SEO en /blog/ (blog/index.html): adición de CTAs explícitos «Leer guía →» en las 8 tarjetas de artículos, píldoras rápidas por tema (#blog-hero-topics), acceso directo sin fricción al Checklist de Seguridad de 15 puntos e ItemList JSON-LD",
+    "Enriquecimiento semántico y CTAs above-the-fold en los 4 silos de servicio (/preescolar-stem-3-a-6-anos, /maternal-bilingue-1-a-3-anos, /horario-extendido-y-comedor, /instalaciones-y-seguridad) con precios transparentes ($3,600/mes Pronto Pago y Estancia $1,400-$1,900/mes)",
+    "Eliminación de descripción duplicada en /horario-extendido-y-comedor y refuerzo H2 para Estancias Educativas Froebel"
   ]
 }
