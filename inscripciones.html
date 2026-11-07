@@ -280,11 +280,16 @@
         </p>
 </div>
 <!-- ★★★ HOT BUTTON ★★★ -->
-<div class="fade-in" style="margin-bottom: var(--space-8);">
+<div class="fade-in" style="margin-bottom: var(--space-6);">
 <button class="hot-button" onclick="openEnrollmentWizard()">
 <span class="hot-button__icon">🚀</span>
           Inscribir en Línea Ahora
         </button>
+</div>
+<div class="fade-in" id="costos-resumen-hero" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;max-width:820px;margin:0 auto;">
+  <a href="#costos" style="background:white;border:1px solid var(--color-primary-100);padding:0.45rem 0.9rem;border-radius:var(--radius-full);font-size:var(--text-sm);color:var(--color-text);box-shadow:var(--shadow-sm);">💳 <strong>Colegiatura Pronto Pago:</strong> $3,600/mes</a>
+  <a href="#costos" style="background:white;border:1px solid var(--color-primary-100);padding:0.45rem 0.9rem;border-radius:var(--radius-full);font-size:var(--text-sm);color:var(--color-text);box-shadow:var(--shadow-sm);">🎓 <strong>Inscripción Anticipada:</strong> desde $3,375 (-25%)</a>
+  <a href="#costos" style="background:white;border:1px solid var(--color-primary-100);padding:0.45rem 0.9rem;border-radius:var(--radius-full);font-size:var(--text-sm);color:var(--color-text);box-shadow:var(--shadow-sm);">🍽️ <strong>Estancia 18:00h + Comedor:</strong> $1,900/mes</a>
 </div>
 </div>
 </section>
@@ -296,60 +301,8 @@
 </div>
 </div>
 </section>
-<!-- PASOS -->
-<section class="section" id="pasos">
-<div class="container">
-<div class="section-header fade-in">
-<span class="section-header__label">¿Cómo funciona?</span>
-<h2 class="section-header__title">4 pasos para inscribir en línea</h2>
-</div>
-<div class="fade-in" style="overflow-x: auto; padding-bottom: var(--space-4); margin-top: var(--space-8);">
-<div style="display: flex; min-width: 600px; justify-content: space-between; position: relative; margin: 0 auto; max-width: 800px;">
-<!-- Linea conectora de fondo -->
-<div style="position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--color-border); z-index: 0;">
-</div>
-<!-- Nodo 1 -->
-<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
-<div style="width: 48px; height: 48px; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
-              1</div>
-<div style="font-size: 2rem; margin-bottom: var(--space-2);">👶</div>
-<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">Datos del
-              Alumno</h3>
-</div>
-<!-- Nodo 2 -->
-<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
-<div style="width: 48px; height: 48px; background: var(--color-secondary); color: var(--color-text); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
-              2</div>
-<div style="font-size: 2rem; margin-bottom: var(--space-2);">👨‍👩‍👧</div>
-<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">Datos del
-              Tutor</h3>
-</div>
-<!-- Nodo 3 -->
-<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
-<div style="width: 48px; height: 48px; background: var(--color-nature); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
-              3</div>
-<div style="font-size: 2rem; margin-bottom: var(--space-2);">📄</div>
-<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">Sube
-              Documentos</h3>
-</div>
-<!-- Nodo 4 -->
-<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
-<div style="width: 48px; height: 48px; background: var(--color-primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
-              4</div>
-<div style="font-size: 2rem; margin-bottom: var(--space-2);">✅</div>
-<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">
-              ¡Confirmación!</h3>
-</div>
-</div>
-</div>
-<div class="fade-in" style="text-align: center; margin-top: var(--space-8); padding: var(--space-4); background: var(--color-secondary-50); border-radius: var(--radius-lg); max-width: 600px; margin-left: auto; margin-right: auto;">
-<p style="margin: 0; color: var(--color-text-dark); font-weight: var(--weight-medium);">Al finalizar su
-          inscripción le contactaremos para acordar el método de pago.</p>
-</div>
-</div>
-</section>
 <!-- PRICING QUICK VIEW -->
-<section class="section section--alt">
+<section class="section section--alt" id="costos" data-ux-section="costos">
 <div class="container">
 <div class="section-header fade-in">
 <span class="section-header__label">💰 Ciclo 2026-2027</span>
@@ -413,6 +366,58 @@
 <a class="btn btn--secondary btn--lg" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20me%20interesan%20los%20costos%20e%20inscripciones%202026-2027" rel="noopener noreferrer" target="_blank">
   💬 Cotizar por WhatsApp
 </a>
+</div>
+</div>
+</section>
+<!-- PASOS -->
+<section class="section" id="pasos" data-ux-section="pasos">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-header__label">¿Cómo funciona?</span>
+<h2 class="section-header__title">4 pasos para inscribir en línea</h2>
+</div>
+<div class="fade-in" style="overflow-x: auto; padding-bottom: var(--space-4); margin-top: var(--space-8);">
+<div style="display: flex; min-width: 600px; justify-content: space-between; position: relative; margin: 0 auto; max-width: 800px;">
+<!-- Linea conectora de fondo -->
+<div style="position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--color-border); z-index: 0;">
+</div>
+<!-- Nodo 1 -->
+<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
+<div style="width: 48px; height: 48px; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
+              1</div>
+<div style="font-size: 2rem; margin-bottom: var(--space-2);">👶</div>
+<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">Datos del
+              Alumno</h3>
+</div>
+<!-- Nodo 2 -->
+<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
+<div style="width: 48px; height: 48px; background: var(--color-secondary); color: var(--color-text); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
+              2</div>
+<div style="font-size: 2rem; margin-bottom: var(--space-2);">👨‍👩‍👧</div>
+<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">Datos del
+              Tutor</h3>
+</div>
+<!-- Nodo 3 -->
+<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
+<div style="width: 48px; height: 48px; background: var(--color-nature); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
+              3</div>
+<div style="font-size: 2rem; margin-bottom: var(--space-2);">📄</div>
+<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">Sube
+              Documentos</h3>
+</div>
+<!-- Nodo 4 -->
+<div style="display: flex; flex-direction: column; align-items: center; z-index: 1; width: 120px;">
+<div style="width: 48px; height: 48px; background: var(--color-primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; margin-bottom: var(--space-3); box-shadow: 0 0 0 4px var(--color-bg);">
+              4</div>
+<div style="font-size: 2rem; margin-bottom: var(--space-2);">✅</div>
+<h3 style="font-size: var(--text-sm); text-align: center; margin: 0; color: var(--color-text);">
+              ¡Confirmación!</h3>
+</div>
+</div>
+</div>
+<div class="fade-in" style="text-align: center; margin-top: var(--space-8); padding: var(--space-4); background: var(--color-secondary-50); border-radius: var(--radius-lg); max-width: 600px; margin-left: auto; margin-right: auto;">
+<p style="margin: 0; color: var(--color-text-dark); font-weight: var(--weight-medium);">Al finalizar su
+          inscripción le contactaremos para acordar el método de pago.</p>
 </div>
 </div>
 </section>
@@ -561,7 +566,7 @@
 </svg>
 </a>
 <!-- App Scripts -->
-<script src="/scripts/main.js?v=10"></script>
+<script src="/scripts/main.js?v=11"></script>
 <script src="/scripts/inscripcion-wizard.js?v=4"></script>
 <script>
     const infoForm = document.getElementById('inscripcion-form');

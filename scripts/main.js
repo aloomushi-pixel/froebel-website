@@ -257,7 +257,7 @@ function initFroebelUXTelemetry() {
     /GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|ClaudeBot|Anthropic|Google-Extended|Applebot-Extended|CCBot|Bytespider/i.test(
       ua
     );
-  const isSearchBot = /Googlebot|bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot/i.test(ua);
+  const isSearchBot = /Googlebot|bingbot|Applebot|Slurp|DuckDuckBot|Baiduspider|YandexBot|facebookexternalhit|Meta-ExternalAgent|Twitterbot|LinkedInBot|WhatsApp|SemrushBot|AhrefsBot|MJ12bot|DotBot|PetalBot|HeadlessChrome|Lighthouse/i.test(ua);
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || window.innerWidth < 768;
   const deviceType = isAiBot
     ? 'ai_agent'
