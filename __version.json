@@ -1,9 +1,11 @@
 {
-  "version": "v2.1.21",
-  "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
-  "domain": "https://froebelinstituto.com.mx",
-  "updated_at": "2026-11-07T10:02:06.903Z",
-  "pages_count": 23,
-  "ux_telemetry_table": "public.experiencia_de_usuario_froebel",
-  "gsc_property": "sc-domain:froebelinstituto.com.mx"
+  "version": "v2.1.22",
+  "released_at": "2026-11-07T14:08:23.367Z",
+  "cycle": 22,
+  "mode": "Estándar Maestro v2.1 — Gobernanza por Magnitud + GSC + Telemetría UX",
+  "highlights": [
+    "Clasificación GEO de Meta AI (meta-webindexer/1.1, Meta-ExternalAgent, Meta-ExternalFetcher), DuckAssistBot y Amazonbot como ai_agent en scripts/main.js (?v=12) y directivas explícitas en robots.txt tras detectar rastreo real de Meta AI",
+    "Finalización estándar de lcpObs (PerformanceObserver LCP) al primer input del usuario o ventana inicial de carga (<= 4500ms) para evitar que banners diferidos sobrescriban el LCP inicial real",
+    "Barra de navegación rápida en el Hero de /programas (#programas-hero-nav) y refuerzo semántico H2 para Estancias Educativas Froebel (14:00-18:00h) y Kínder Federico Froebel"
+  ]
 }

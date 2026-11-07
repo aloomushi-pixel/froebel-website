@@ -10,6 +10,9 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
@@ -35,6 +38,18 @@ User-agent: Applebot-Extended
 Allow: /
 
 User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: meta-webindexer
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Amazonbot
 Allow: /
 
 Sitemap: https://froebelinstituto.com.mx/sitemap.xml

@@ -254,10 +254,10 @@ function initFroebelUXTelemetry() {
   // Device & Bot detection
   const ua = navigator.userAgent || '';
   const isAiBot =
-    /GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|ClaudeBot|Anthropic|Google-Extended|Applebot-Extended|CCBot|Bytespider/i.test(
+    /GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|ClaudeBot|Claude-Web|Anthropic|Google-Extended|Applebot-Extended|meta-webindexer|Meta-ExternalAgent|Meta-ExternalFetcher|DuckAssistBot|YouBot|Amazonbot|Cohere-ai|CCBot|Bytespider/i.test(
       ua
     );
-  const isSearchBot = /Googlebot|bingbot|Applebot|Slurp|DuckDuckBot|Baiduspider|YandexBot|facebookexternalhit|Meta-ExternalAgent|Twitterbot|LinkedInBot|WhatsApp|SemrushBot|AhrefsBot|MJ12bot|DotBot|PetalBot|HeadlessChrome|Lighthouse/i.test(ua);
+  const isSearchBot = /Googlebot|bingbot|Applebot|Slurp|DuckDuckBot|Baiduspider|YandexBot|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|SemrushBot|AhrefsBot|MJ12bot|DotBot|PetalBot|HeadlessChrome|Lighthouse/i.test(ua);
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || window.innerWidth < 768;
   const deviceType = isAiBot
     ? 'ai_agent'
@@ -350,16 +350,27 @@ function initFroebelUXTelemetry() {
 
     if ('PerformanceObserver' in window) {
       try {
+        let lcpFinalized = false;
         const lcpObs = new PerformanceObserver((entryList) => {
+          if (lcpFinalized) return;
           const entries = entryList.getEntries();
           const last = entries[entries.length - 1];
           if (last) {
             const offset = firstVisibleOffset !== null && last.startTime >= firstVisibleOffset ? firstVisibleOffset : 0;
             const val = Math.max(1, Math.round(last.startTime - offset));
-            if (val <= 10000) cwv.lcp = val;
+            if (val <= 4500 || (cwv.lcp === null && val <= 8000)) {
+              cwv.lcp = val;
+            }
           }
         });
         lcpObs.observe({ type: 'largest-contentful-paint', buffered: true });
+        const stopLcp = () => {
+          lcpFinalized = true;
+          try { lcpObs.disconnect(); } catch (_) {}
+        };
+        ['keydown', 'pointerdown', 'wheel', 'touchstart'].forEach((evt) => {
+          window.addEventListener(evt, stopLcp, { once: true, passive: true, capture: true });
+        });
       } catch (_) {}
 
       try {
