@@ -1,7 +1,7 @@
 {
-  "version": "v2.1.25",
-  "cycle": 25,
-  "updated_at": "2026-11-08T02:30:19.165Z",
+  "version": "v2.1.26",
+  "cycle": 26,
+  "updated_at": "2026-11-08T06:36:37.581Z",
   "standard": "ESTANDAR_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
-  "notes": "Cycle #25: Added above-the-fold Hero Action Bar (#contacto-hero-actions) & local quick-info pills to /contacto, optimized /blog/5-actividades-con-bloques-para-hacer-en-casa.html for GSC Page-1 queries (actividades con bloques / cosas para hacer con bloques) with #tabla-actividades-bloques-edad & WhatsApp CTA, and added #tabla-control-esfinteres-etapas & Maternal WhatsApp CTA to /blog/control-de-esfinteres.html"
+  "notes": "Cycle #26: Added Quick-Info Summary Strips (Age/SEP Cutoff, Schedule, $3,600/mes Tuition) & direct WhatsApp CTAs to #maternal, #kinder1, #kinder2, and #kinder3 in /programas (following real visitor session s_zxcwold8_mw78w99d), and added Official Crest & Institutional Identity card (#ficha-institucional-froebel) + Hero WhatsApp CTA to /nosotros for GSC Striking Distance queries"
 }
