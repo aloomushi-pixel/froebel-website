@@ -1,7 +1,6 @@
 {
-  "version": "v2.1.27",
-  "cycle": 27,
-  "updated_at": "2026-11-08T10:40:37.321Z",
-  "standard": "ESTANDAR_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
-  "notes": "Cycle #27: Differentiated Hero subtitles, added hyperlocal route/travel-time pills, transparent $3,600/mes Pronto Pago badge, and direct WhatsApp CTAs across all 5 neighborhood geo-landings (/colegio-cerca-de-mi/*) + updated sitemap.xml lastmod to 2026-11-08"
+  "version": "v2.1.28",
+  "cycle": 28,
+  "updated_at": "2026-11-08T14:49:00Z",
+  "summary": "Ciclo Autónomo #28 (v2.1.28): CRO en silos de servicio tras sesión móvil real en Maternal Bilingüe (21 eventos, 98% scroll, apertura de los 3 FAQs): tabla diaria de horarios/costos (#tabla-rutina-maternal), corrección ratio 1:8, franjas de resumen + WhatsApp en Maternal y Kínder 1/2/3, y bloques de conversión Post-FAQ (#post-faq-cta-*) al pie de #preguntas-frecuentes en los 4 silos."
 }
