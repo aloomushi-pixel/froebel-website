@@ -1,7 +1,7 @@
 {
-  "version": "v2.1.26",
-  "cycle": 26,
-  "updated_at": "2026-11-08T06:36:37.581Z",
+  "version": "v2.1.27",
+  "cycle": 27,
+  "updated_at": "2026-11-08T10:40:37.321Z",
   "standard": "ESTANDAR_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
-  "notes": "Cycle #26: Added Quick-Info Summary Strips (Age/SEP Cutoff, Schedule, $3,600/mes Tuition) & direct WhatsApp CTAs to #maternal, #kinder1, #kinder2, and #kinder3 in /programas (following real visitor session s_zxcwold8_mw78w99d), and added Official Crest & Institutional Identity card (#ficha-institucional-froebel) + Hero WhatsApp CTA to /nosotros for GSC Striking Distance queries"
+  "notes": "Cycle #27: Differentiated Hero subtitles, added hyperlocal route/travel-time pills, transparent $3,600/mes Pronto Pago badge, and direct WhatsApp CTAs across all 5 neighborhood geo-landings (/colegio-cerca-de-mi/*) + updated sitemap.xml lastmod to 2026-11-08"
 }
