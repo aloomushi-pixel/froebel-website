@@ -1,6 +1,6 @@
 {
-  "version": "v2.1.34",
-  "cycle": 34,
-  "updated_at": "2026-11-09T15:38:00Z",
-  "summary": "Ciclo Autónomo #34 (v2.1.34): Cobertura del 100% de tablas HTML semánticas (23/23 páginas) tras rastreo de bingbot/2.0 (ChatGPT Search / Bing), añadiendo 8 tablas comparativas (#tabla-grados-kinder-sep, #tabla-modalidades-estancia-comedor, #tabla-protocolos-seguridad-cctv, #tabla-rutas-colonias-gam, #tabla-guias-padres-froebel, #tabla-checklist-elegir-kinder, #tabla-guarderia-vs-maternal y #tabla-menu-semanal-500) y corrigiendo ID duplicado en instalaciones-y-seguridad.html."
+  "version": "v2.1.35",
+  "cycle": 35,
+  "updated_at": "2026-11-09T19:54:00Z",
+  "summary": "Ciclo Autónomo #35 (v2.1.35): Optimización CRO del Asistente de Inscripción en Línea (inscripcion-wizard.js?v=6 con Paso 1 simplificado a 4 campos esenciales, cotizador dinámico en vivo #wizard-live-quote y botón directo de WhatsApp Express #wizard-wa-express-btn) tras conversión real desde Bing Search en /inscripciones, más cajas Post-FAQ y barra rápida de ubicación/costos/teléfono en #cta-final-home (/), /nosotros y /programas."
 }

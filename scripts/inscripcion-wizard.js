@@ -76,12 +76,12 @@ function renderStudentStep() {
   return `
     <div class="wizard__section fade-in visible">
       <h2 class="wizard__title">Datos del Alumno</h2>
-      <p class="wizard__desc">Ingresa la información de tu hijo/a para iniciar el proceso de inscripción.</p>
+      <p class="wizard__desc">Completa solo los 4 datos básicos para iniciar tu pre-inscripción en línea o enviar tu cotización directa por WhatsApp.</p>
 
       <div class="wizard__form-grid">
         <div class="wizard__field">
-          <label for="s-name">Nombre completo del alumno *</label>
-          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Nombre(s) y Apellidos">
+          <label for="s-name">Nombre del alumno/a *</label>
+          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
         </div>
 
         <div class="wizard__field">
@@ -90,65 +90,87 @@ function renderStudentStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="s-gender">Género</label>
-          <select id="s-gender">
-            <option value="">Seleccionar</option>
-            <option value="M" ${s.gender === 'M' ? 'selected' : ''}>Masculino</option>
-            <option value="F" ${s.gender === 'F' ? 'selected' : ''}>Femenino</option>
-            <option value="Otro" ${s.gender === 'Otro' ? 'selected' : ''}>Otro</option>
-          </select>
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-curp">CURP del alumno</label>
-          <input type="text" id="s-curp" value="${s.curp || ''}" placeholder="18 caracteres" maxlength="18" style="text-transform:uppercase;">
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-program">Programa *</label>
-          <select id="s-program" required>
+          <label for="s-program">Programa de interés *</label>
+          <select id="s-program" required onchange="updateWizardLiveQuote()">
             <option value="">Seleccionar programa</option>
-            <option value="maternal" ${s.program === 'maternal' ? 'selected' : ''}>Maternal (1-3 años)</option>
-            <option value="preescolar_1" ${s.program === 'preescolar_1' ? 'selected' : ''}>Preescolar 1 (3-4 años)</option>
-            <option value="preescolar_2" ${s.program === 'preescolar_2' ? 'selected' : ''}>Preescolar 2 (4-5 años)</option>
-            <option value="preescolar_3" ${s.program === 'preescolar_3' ? 'selected' : ''}>Preescolar 3 (5-6 años)</option>
+            <option value="maternal" ${s.program === 'maternal' ? 'selected' : ''}>Maternal Bilingüe (1 a 3 años)</option>
+            <option value="preescolar_1" ${s.program === 'preescolar_1' ? 'selected' : ''}>Kínder 1 / Preescolar 1 (3 a 4 años)</option>
+            <option value="preescolar_2" ${s.program === 'preescolar_2' ? 'selected' : ''}>Kínder 2 / Preescolar 2 (4 a 5 años)</option>
+            <option value="preescolar_3" ${s.program === 'preescolar_3' ? 'selected' : ''}>Kínder 3 / Preescolar 3 (5 a 6 años)</option>
           </select>
         </div>
 
         <div class="wizard__field">
-          <label for="s-plan">Modalidad de pago *</label>
-          <select id="s-plan" required>
+          <label for="s-plan">Modalidad de colegiatura *</label>
+          <select id="s-plan" required onchange="updateWizardLiveQuote()">
             <option value="pronto_pago" ${s.plan === 'pronto_pago' || !s.plan ? 'selected' : ''}>Pronto Pago — $3,600/mes (primeros 10 días)</option>
             <option value="normal" ${s.plan === 'normal' ? 'selected' : ''}>Mensual Normal — $4,000/mes</option>
-            <option value="anual" ${s.plan === 'anual' ? 'selected' : ''}>Pago Anual — $40,480 (8% desc.)</option>
-          </select>
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-blood">Tipo de sangre</label>
-          <select id="s-blood">
-            <option value="">Seleccionar</option>
-            <option value="A+" ${s.blood_type === 'A+' ? 'selected' : ''}>A+</option>
-            <option value="A-" ${s.blood_type === 'A-' ? 'selected' : ''}>A-</option>
-            <option value="B+" ${s.blood_type === 'B+' ? 'selected' : ''}>B+</option>
-            <option value="B-" ${s.blood_type === 'B-' ? 'selected' : ''}>B-</option>
-            <option value="AB+" ${s.blood_type === 'AB+' ? 'selected' : ''}>AB+</option>
-            <option value="AB-" ${s.blood_type === 'AB-' ? 'selected' : ''}>AB-</option>
-            <option value="O+" ${s.blood_type === 'O+' ? 'selected' : ''}>O+</option>
-            <option value="O-" ${s.blood_type === 'O-' ? 'selected' : ''}>O-</option>
+            <option value="anual" ${s.plan === 'anual' ? 'selected' : ''}>Pago Anual — $40,480 (8% desc. · ahorra $3,520)</option>
           </select>
         </div>
 
         <div class="wizard__field wizard__field--full">
-          <label for="s-allergies">Alergias o condiciones médicas</label>
-          <textarea id="s-allergies" rows="2" placeholder="Describe cualquier alergia, medicamento o condición importante">${s.allergies || ''}</textarea>
-        </div>
-
-        <div class="wizard__field wizard__field--full">
-          <label for="s-notes">Notas adicionales</label>
-          <textarea id="s-notes" rows="2" placeholder="Escuela anterior, necesidades especiales, etc.">${s.medical_notes || ''}</textarea>
+          <label for="s-estancia">Horario Extendido y Comedor (Opcional)</label>
+          <select id="s-estancia" onchange="updateWizardLiveQuote()">
+            <option value="ninguna" ${!s.estancia || s.estancia === 'ninguna' ? 'selected' : ''}>Horario Escolar Base (08:30 a 14:00 hrs — Sin costo extra)</option>
+            <option value="parcial_16h" ${s.estancia === 'parcial_16h' ? 'selected' : ''}>Estancia Parcial + Comedor 3 Tiempos (hasta 16:00 hrs — +$1,400/mes)</option>
+            <option value="completa_18h" ${s.estancia === 'completa_18h' ? 'selected' : ''}>Estancia Completa + Comedor + Talleres (hasta 18:00 hrs — +$1,900/mes)</option>
+          </select>
         </div>
       </div>
+
+      <div id="wizard-live-quote" style="margin-top:1rem;padding:0.9rem 1.1rem;background:linear-gradient(135deg,#eff6ff,#f0fdf4);border:1px solid #93c5fd;border-radius:12px;font-size:0.88rem;color:#1e3a8a;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;">
+        <div>
+          <strong>💡 Tu inversión estimada 2026-2027:</strong>
+          <span id="wizard-live-quote-text">Colegiatura <strong>$3,600 MXN/mes</strong> (Pronto Pago) · Inscripción anticipada desde <strong>$3,375 MXN (-25%)</strong></span>
+        </div>
+        <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.78rem;font-weight:700;">✓ Validez Oficial SEP</span>
+      </div>
+
+      <details id="wizard-optional-medical" style="margin-top:1rem;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:0.75rem 1rem;">
+        <summary style="font-weight:700;color:#1e3a8a;cursor:pointer;font-size:0.88rem;">➕ Agregar CURP, tipo de sangre y alergias ahora (Opcional — puedes entregarlos después)</summary>
+        <div class="wizard__form-grid" style="margin-top:0.85rem;">
+          <div class="wizard__field">
+            <label for="s-gender">Género</label>
+            <select id="s-gender">
+              <option value="">Seleccionar</option>
+              <option value="M" ${s.gender === 'M' ? 'selected' : ''}>Masculino</option>
+              <option value="F" ${s.gender === 'F' ? 'selected' : ''}>Femenino</option>
+              <option value="Otro" ${s.gender === 'Otro' ? 'selected' : ''}>Otro</option>
+            </select>
+          </div>
+
+          <div class="wizard__field">
+            <label for="s-curp">CURP del alumno</label>
+            <input type="text" id="s-curp" value="${s.curp || ''}" placeholder="18 caracteres (opcional)" maxlength="18" style="text-transform:uppercase;">
+          </div>
+
+          <div class="wizard__field">
+            <label for="s-blood">Tipo de sangre</label>
+            <select id="s-blood">
+              <option value="">Seleccionar</option>
+              <option value="A+" ${s.blood_type === 'A+' ? 'selected' : ''}>A+</option>
+              <option value="A-" ${s.blood_type === 'A-' ? 'selected' : ''}>A-</option>
+              <option value="B+" ${s.blood_type === 'B+' ? 'selected' : ''}>B+</option>
+              <option value="B-" ${s.blood_type === 'B-' ? 'selected' : ''}>B-</option>
+              <option value="AB+" ${s.blood_type === 'AB+' ? 'selected' : ''}>AB+</option>
+              <option value="AB-" ${s.blood_type === 'AB-' ? 'selected' : ''}>AB-</option>
+              <option value="O+" ${s.blood_type === 'O+' ? 'selected' : ''}>O+</option>
+              <option value="O-" ${s.blood_type === 'O-' ? 'selected' : ''}>O-</option>
+            </select>
+          </div>
+
+          <div class="wizard__field wizard__field--full">
+            <label for="s-allergies">Alergias o condiciones médicas</label>
+            <textarea id="s-allergies" rows="2" placeholder="Describe cualquier alergia, medicamento o condición importante">${s.allergies || ''}</textarea>
+          </div>
+
+          <div class="wizard__field wizard__field--full">
+            <label for="s-notes">Notas adicionales</label>
+            <textarea id="s-notes" rows="2" placeholder="Escuela anterior, necesidades especiales, etc.">${s.medical_notes || ''}</textarea>
+          </div>
+        </div>
+      </details>
     </div>
   `;
 }
@@ -323,12 +345,109 @@ function renderConfirmationStep() {
 function renderFooter() {
   if (currentStep === 3) return '';
   return `
-    <div class="wizard__nav">
-      ${currentStep > 0 ? '<button class="btn btn--secondary" onclick="prevStep()">← Anterior</button>' : '<div></div>'}
-      ${currentStep < 2 ? '<button class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
-      ${currentStep === 2 ? '<button class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitEnrollment()" id="pay-button">✅ Finalizar Inscripción</button>' : ''}
+    <div class="wizard__nav" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.75rem;">
+      <div>
+        ${currentStep > 0 ? '<button type="button" class="btn btn--secondary" onclick="prevStep()">← Anterior</button>' : ''}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.65rem;align-items:center;justify-content:flex-end;">
+        <button type="button" class="btn btn--secondary" id="wizard-wa-express-btn" onclick="sendWizardToWhatsApp()" style="border-color:#16a34a;color:#15803d;background:#f0fdf4;font-weight:700;">
+          💬 Enviar estos datos o Agendar por WhatsApp
+        </button>
+        ${currentStep < 2 ? '<button type="button" class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
+        ${currentStep === 2 ? '<button type="button" class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitEnrollment()" id="pay-button">✅ Finalizar Inscripción</button>' : ''}
+      </div>
     </div>
   `;
+}
+
+/* === LIVE QUOTE & EXPRESS WHATSAPP === */
+function updateWizardLiveQuote() {
+  const quoteEl = document.getElementById('wizard-live-quote-text');
+  if (!quoteEl) return;
+
+  const progVal = document.getElementById('s-program')?.value || '';
+  const planVal = document.getElementById('s-plan')?.value || 'pronto_pago';
+  const estVal = document.getElementById('s-estancia')?.value || 'ninguna';
+
+  const progMap = {
+    maternal: 'Maternal Bilingüe (1-3 años)',
+    preescolar_1: 'Kínder 1 SEP (3-4 años)',
+    preescolar_2: 'Kínder 2 SEP (4-5 años)',
+    preescolar_3: 'Kínder 3 SEP (5-6 años)'
+  };
+  const progLabel = progMap[progVal] || 'Maternal / Preescolar SEP';
+
+  let baseCost = 3600;
+  let planLabel = 'Pronto Pago';
+  if (planVal === 'normal') {
+    baseCost = 4000;
+    planLabel = 'Mensual Normal';
+  }
+
+  let estCost = 0;
+  let estLabel = '08:30–14:00h';
+  if (estVal === 'parcial_16h') {
+    estCost = 1400;
+    estLabel = 'con Estancia + Comedor hasta 16:00h';
+  } else if (estVal === 'completa_18h') {
+    estCost = 1900;
+    estLabel = 'con Estancia + Comedor hasta 18:00h';
+  }
+
+  if (planVal === 'anual') {
+    const estExtraText = estCost > 0 ? ` + $${estCost.toLocaleString('es-MX')}/mes (${estLabel})` : ` (${estLabel})`;
+    quoteEl.innerHTML = `${progLabel}: <strong>$40,480 MXN/año</strong> (8% desc.)${estExtraText} · Inscripción desde <strong>$3,375 MXN</strong>`;
+  } else {
+    const totalMes = baseCost + estCost;
+    quoteEl.innerHTML = `${progLabel}: <strong>$${totalMes.toLocaleString('es-MX')} MXN/mes</strong> (${planLabel} ${estLabel}) · Inscripción desde <strong>$3,375 MXN</strong>`;
+  }
+}
+
+function sendWizardToWhatsApp() {
+  trackWizardOpenOnce('Envío Express de Asistente a WhatsApp');
+  if (currentStep === 0) {
+    saveCurrentStepData();
+  } else if (currentStep === 1) {
+    saveCurrentStepData();
+  }
+
+  const s = wizardData.student || {};
+  const g = wizardData.guardian || {};
+  const progMap = {
+    maternal: 'Maternal Bilingüe (1 a 3 años)',
+    preescolar_1: 'Kínder 1 SEP (3 a 4 años)',
+    preescolar_2: 'Kínder 2 SEP (4 a 5 años)',
+    preescolar_3: 'Kínder 3 SEP (5 a 6 años)'
+  };
+  const planMap = {
+    pronto_pago: 'Pronto Pago ($3,600/mes)',
+    normal: 'Mensual Normal ($4,000/mes)',
+    anual: 'Pago Anual ($40,480/año)'
+  };
+  const estMap = {
+    ninguna: 'Horario base (08:30 a 14:00 hrs)',
+    parcial_16h: 'Estancia Parcial + Comedor hasta 16:00 hrs (+$1,400/mes)',
+    completa_18h: 'Estancia Completa + Comedor hasta 18:00 hrs (+$1,900/mes)'
+  };
+
+  const parts = ['Hola Instituto Federico Froebel, estoy en el asistente de inscripciones 2026-2027 y quiero atención por WhatsApp:'];
+  if (s.full_name) parts.push(`• Alumno/a: ${s.full_name}`);
+  if (s.date_of_birth) parts.push(`• Fecha de nacimiento: ${s.date_of_birth}`);
+  parts.push(`• Programa: ${progMap[s.program] || 'Maternal / Preescolar (por confirmar)'}`);
+  parts.push(`• Modalidad: ${planMap[s.plan] || 'Pronto Pago ($3,600/mes)'}`);
+  parts.push(`• Horario: ${estMap[s.estancia] || 'Horario base (08:30 a 14:00 hrs)'}`);
+  if (g.full_name) parts.push(`• Tutor: ${g.full_name} (${g.phone || ''})`);
+
+  if (window.FroebelUX) {
+    window.FroebelUX.track('whatsapp_click', {
+      element_id: 'wa:wizard-express-quote',
+      element_text: '💬 Enviar estos datos o Agendar por WhatsApp',
+      parent_profile: s.program === 'maternal' ? 'maternal_1_a_3' : 'preescolar_3_a_6'
+    });
+  }
+
+  const waUrl = `https://wa.me/525554148872?text=${encodeURIComponent(parts.join('\n'))}`;
+  window.open(waUrl, '_blank', 'noopener,noreferrer');
 }
 
 /* === NAVIGATION === */
@@ -407,7 +526,8 @@ function saveCurrentStepData() {
         gender: document.getElementById('s-gender')?.value || '',
         curp: document.getElementById('s-curp')?.value?.toUpperCase() || '',
         program: document.getElementById('s-program')?.value || '',
-        plan: document.getElementById('s-plan')?.value || 'base',
+        plan: document.getElementById('s-plan')?.value || 'pronto_pago',
+        estancia: document.getElementById('s-estancia')?.value || 'ninguna',
         blood_type: document.getElementById('s-blood')?.value || '',
         allergies: document.getElementById('s-allergies')?.value?.trim() || '',
         medical_notes: document.getElementById('s-notes')?.value?.trim() || ''
@@ -558,6 +678,9 @@ function attachStepListeners() {
     });
     el.addEventListener('blur', () => el.closest('.wizard__field')?.classList.remove('wizard__field--focused'));
   });
+  if (currentStep === 0) {
+    updateWizardLiveQuote();
+  }
 }
 
 /* === OPEN WIZARD (Hot Button) === */
