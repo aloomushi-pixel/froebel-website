@@ -258,7 +258,7 @@
 </div>
 </header>
 <!-- PAGE HERO -->
-<section class="section" style="padding-top: calc(72px + var(--space-16)); background: linear-gradient(135deg, var(--color-primary-50), var(--color-bg));">
+<section class="section" style="padding-top: calc(72px + var(--space-12)); padding-bottom: var(--space-10); background: linear-gradient(135deg, var(--color-primary-50), var(--color-bg));">
 <div class="container text-center">
 <div class="section-header fade-in" style="margin-bottom:0;">
 <span class="section-header__label">Colegio y Jardín de Niños en San Juan de Aragón, GAM</span>
@@ -279,11 +279,42 @@
 </div>
 </div>
 </section>
-<!-- HISTORIA -->
-<section class="section" id="historia">
+<!-- HISTORIA Y FICHA OFICIAL ABOVE THE FOLD -->
+<section class="section" id="historia" style="padding-top: var(--space-10);">
 <div class="container">
-<div class="fade-in" style="margin-bottom: var(--space-12);">
-<img alt="Comunidad activa de padres de familia Froebel" height="816" loading="eager" fetchpriority="high" src="assets/images/comunidad-padres-familia-froebel.jpg" style="width:100%;height:450px;object-fit:cover;border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);" width="1230"/>
+<div id="ficha-institucional-froebel" data-ux-section="ficha-institucional-froebel" class="card fade-in" style="margin-bottom:var(--space-10);padding:var(--space-6);background:var(--color-primary-50);border:1px solid var(--color-primary-100);display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;">
+  <img src="assets/images/logo-froebel.jpg" alt="Escudo y Logo Oficial del Colegio e Instituto Federico Froebel en Gustavo A. Madero, CDMX" width="88" height="88" loading="eager" style="width:88px;height:88px;border-radius:var(--radius-xl);object-fit:cover;box-shadow:var(--shadow-md);flex-shrink:0;"/>
+  <div style="flex:1;min-width:260px;">
+    <h2 style="font-size:var(--text-lg);color:var(--color-primary-dark);margin-bottom:var(--space-2);">🛡️ Identidad Oficial, Escudo y Legado de Federico Froebel (Froebel School GAM)</h2>
+    <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-4);line-height:var(--leading-relaxed);">
+      Nuestra escuela honra a <strong>Friedrich Fröbel (Federico Froebel, 1782–1852)</strong>, pedagogo creador del primer <em>Kindergarten</em> y de los bloques geométricos conocidos como <strong>Dones de Froebel</strong>. Nuestro escudo institucional simboliza el crecimiento armónico entre familia, naturaleza, ciencia (<a href="/preescolar-stem-3-a-6-anos">Preescolar STEM</a>) y bilingüismo (<a href="/maternal-bilingue-1-a-3-anos">Maternal y Kínder Bilingüe</a>) en nuestro único plantel de San Juan de Aragón, Gustavo A. Madero.
+    </p>
+    <div style="overflow-x:auto;">
+      <table id="tabla-ficha-oficial-colegio" data-ux-section="tabla-ficha-oficial-colegio" style="width:100%;border-collapse:collapse;font-size:0.82rem;background:white;border-radius:var(--radius-md);overflow:hidden;">
+        <tbody>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;width:36%;">Nombre Oficial y Plantel</th>
+            <td style="padding:8px 10px;"><strong>Instituto y Jardín de Niños Federico Froebel</strong> (Plantel Único en CDMX, fundado en 1980)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;">Validez y Niveles</th>
+            <td style="padding:8px 10px;">Incorporado a la <strong>SEP</strong> · <a href="/maternal-bilingue-1-a-3-anos">Maternal Bilingüe (1–3 años)</a> y <a href="/preescolar-stem-3-a-6-anos">Preescolar Kínder 1, 2 y 3 (3–6 años)</a></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;">Dirección en GAM</th>
+            <td style="padding:8px 10px;"><a href="https://maps.app.goo.gl/gAZ6ZtXKoNPa157g6" target="_blank" rel="noopener noreferrer">📍 Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 CDMX</a> (a 2 cuadras de Metro Aragón)</td>
+          </tr>
+          <tr>
+            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;">Costos y Horarios 2026-2027</th>
+            <td style="padding:8px 10px;">Colegiatura <strong>$3,600 MXN/mes Pronto Pago</strong> · Inscripción desde <strong>$3,375 MXN</strong> · <a href="/horario-extendido-y-comedor">Estancia hasta 18:00 hrs</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="fade-in" style="margin-bottom: var(--space-10);">
+<img alt="Comunidad activa de padres de familia Froebel" height="816" loading="eager" fetchpriority="high" src="assets/images/comunidad-padres-familia-froebel.jpg" style="width:100%;height:340px;object-fit:cover;border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);" width="1230"/>
 </div>
 <div class="fade-in">
 <h2 style="margin-bottom: var(--space-8); text-align: center;">Nuestra Historia: Colegio y Centro Educativo Federico Froebel en Ciudad de México (Desde 1980)</h2>
@@ -316,36 +347,53 @@
                     </p>
 </div>
 </div>
-<div id="ficha-institucional-froebel" data-ux-section="ficha-institucional-froebel" class="card" style="margin-top:var(--space-8);padding:var(--space-6);background:var(--color-primary-50);border:1px solid var(--color-primary-100);display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;">
-  <img src="assets/images/logo-froebel.jpg" alt="Escudo y Logo Oficial del Colegio e Instituto Federico Froebel en Gustavo A. Madero, CDMX" width="88" height="88" loading="lazy" style="width:88px;height:88px;border-radius:var(--radius-xl);object-fit:cover;box-shadow:var(--shadow-md);flex-shrink:0;"/>
-  <div style="flex:1;min-width:260px;">
-    <h3 style="font-size:var(--text-lg);color:var(--color-primary-dark);margin-bottom:var(--space-2);">🛡️ Identidad Oficial, Escudo y Legado de Federico Froebel (Froebel School GAM)</h3>
-    <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-4);line-height:var(--leading-relaxed);">
-      Nuestra escuela honra a <strong>Friedrich Fröbel (Federico Froebel, 1782–1852)</strong>, pedagogo creador del primer <em>Kindergarten</em> y de los bloques geométricos conocidos como <strong>Dones de Froebel</strong>. Nuestro escudo institucional simboliza el crecimiento armónico entre familia, naturaleza, ciencia (<a href="/preescolar-stem-3-a-6-anos">Preescolar STEM</a>) y bilingüismo (<a href="/maternal-bilingue-1-a-3-anos">Maternal y Kínder Bilingüe</a>) en nuestro único plantel de San Juan de Aragón, Gustavo A. Madero.
-    </p>
-    <div style="overflow-x:auto;">
-      <table id="tabla-ficha-oficial-colegio" data-ux-section="tabla-ficha-oficial-colegio" style="width:100%;border-collapse:collapse;font-size:0.82rem;background:white;border-radius:var(--radius-md);overflow:hidden;">
-        <tbody>
-          <tr style="border-bottom:1px solid var(--color-border);">
-            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;width:36%;">Nombre Oficial y Plantel</th>
-            <td style="padding:8px 10px;"><strong>Instituto y Jardín de Niños Federico Froebel</strong> (Plantel Único en CDMX, fundado en 1980)</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--color-border);">
-            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;">Validez y Niveles</th>
-            <td style="padding:8px 10px;">Incorporado a la <strong>SEP</strong> · <a href="/maternal-bilingue-1-a-3-anos">Maternal Bilingüe (1–3 años)</a> y <a href="/preescolar-stem-3-a-6-anos">Preescolar Kínder 1, 2 y 3 (3–6 años)</a></td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--color-border);">
-            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;">Dirección en GAM</th>
-            <td style="padding:8px 10px;"><a href="https://maps.app.goo.gl/gAZ6ZtXKoNPa157g6" target="_blank" rel="noopener noreferrer">📍 Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 CDMX</a> (a 2 cuadras de Metro Aragón)</td>
-          </tr>
-          <tr>
-            <th style="padding:8px 10px;background:var(--color-primary-50);color:var(--color-primary-dark);text-align:left;">Costos y Horarios 2026-2027</th>
-            <td style="padding:8px 10px;">Colegiatura <strong>$3,600 MXN/mes Pronto Pago</strong> · Inscripción desde <strong>$3,375 MXN</strong> · <a href="/horario-extendido-y-comedor">Estancia hasta 18:00 hrs</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+</div>
+</div>
+</section>
+<!-- PILARES Y ECOSISTEMA EDUCATIVO EN GAM -->
+<section class="section section--alt" id="pilares-institucionales">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-header__label">Respaldo y Confianza en Gustavo A. Madero</span>
+<h2 class="section-header__title">¿Por qué las familias eligen al Colegio e Instituto Federico Froebel?</h2>
+<p class="section-header__desc">
+                    Ubicados en Av. 521 No. 20, San Juan de Aragón I Secc (a 2 cuadras de Metro Aragón), combinamos calidez humana, rigor psicopedagógico y protocolos de seguridad clínica.
+                </p>
+</div>
+<div class="grid grid--2" style="gap: var(--space-8);">
+<div class="card fade-in">
+<h3 class="card__title" style="color: var(--color-primary);">👶 Maternal Bilingüe y Neurodesarrollo (1 a 3 años)</h3>
+<p class="card__text" style="margin-bottom: var(--space-4);">
+                        Grupos reducidos (ratio 1:8), estimulación sensorial, acompañamiento respetuoso en control de esfínteres, inmersión temprana al inglés y colegiatura desde <strong>$3,600/mes Pronto Pago</strong>.
+                    </p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-2);">
+<a class="btn btn--secondary btn--sm" href="/maternal-bilingue-1-a-3-anos">Explorar Maternal Bilingüe →</a>
+<a class="btn btn--primary btn--sm" href="https://wa.me/525554148872?text=Hola%20Colegio%20Federico%20Froebel%2C%20me%20interesa%20Maternal%20Biling%C3%BCe%20(1-3%20a%C3%B1os)" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+</div>
+</div>
+<div class="card fade-in">
+<h3 class="card__title" style="color: var(--color-primary);">🔬 Kínder y Preescolar STEM Incorporado a la SEP (3 a 6 años)</h3>
+<p class="card__text" style="margin-bottom: var(--space-4);">
+                        Nuestros alumnos de Kínder 1, 2 y 3 (ratio 1:15) egresan leyendo y escribiendo en español, con pensamiento matemático, ciencia experimental (STEM), inglés diario y colegiatura de <strong>$3,600/mes Pronto Pago</strong>.
+                    </p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-2);">
+<a class="btn btn--secondary btn--sm" href="/preescolar-stem-3-a-6-anos">Explorar Kínder y Preescolar STEM →</a>
+<a class="btn btn--primary btn--sm" href="https://wa.me/525554148872?text=Hola%20Colegio%20Federico%20Froebel%2C%20me%20interesa%20Preescolar%20K%C3%ADnder%20SEP%20(3-6%20a%C3%B1os)" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+</div>
+</div>
+<div class="card fade-in">
+<h3 class="card__title" style="color: var(--color-primary);">🍲 Estancias Educativas Froebel y Comedor (hasta 18:00 hrs)</h3>
+<p class="card__text" style="margin-bottom: var(--space-4);">
+                        Diseñado para padres que trabajan en GAM, Venustiano Carranza o el AICM: menú nutritivo de 3 tiempos, apoyo en tareas y talleres vespertinos hasta las 6:00 PM ($1,400 a $1,900/mes).
+                    </p>
+<a class="btn btn--secondary btn--sm" href="/horario-extendido-y-comedor">Conocer Horario Extendido y Comedor →</a>
+</div>
+<div class="card fade-in">
+<h3 class="card__title" style="color: var(--color-primary);">🛡️ Enfermería Escolar, CCTV y Puertas Abiertas</h3>
+<p class="card__text" style="margin-bottom: var(--space-4);">
+                        Circuito Cerrado de Televisión (CCTV) sin puntos ciegos, enfermera escolar de tiempo completo, filtro sanitario diario y entrega con credencial verificada.
+                    </p>
+<a class="btn btn--secondary btn--sm" href="/instalaciones-y-seguridad">Ver Instalaciones y Seguridad →</a>
 </div>
 </div>
 </div>
@@ -425,48 +473,6 @@
 </div>
 </div>
 </section>
-<!-- PILARES Y ECOSISTEMA EDUCATIVO EN GAM -->
-<section class="section section--alt" id="pilares-institucionales">
-<div class="container">
-<div class="section-header fade-in">
-<span class="section-header__label">Respaldo y Confianza en Gustavo A. Madero</span>
-<h2 class="section-header__title">¿Por qué las familias eligen al Colegio e Instituto Federico Froebel?</h2>
-<p class="section-header__desc">
-                    Ubicados en Av. 521 No. 20, San Juan de Aragón I Secc (a 2 cuadras de Metro Aragón), combinamos calidez humana, rigor psicopedagógico y protocolos de seguridad clínica.
-                </p>
-</div>
-<div class="grid grid--2" style="gap: var(--space-8);">
-<div class="card fade-in">
-<h3 class="card__title" style="color: var(--color-primary);">👶 Maternal Bilingüe y Neurodesarrollo (1 a 3 años)</h3>
-<p class="card__text" style="margin-bottom: var(--space-4);">
-                        Grupos reducidos (máximo 12 pequeños), estimulación sensorial, acompañamiento respetuoso en control de esfínteres e inmersión temprana al inglés.
-                    </p>
-<a class="btn btn--secondary btn--sm" href="/maternal-bilingue-1-a-3-anos">Explorar Maternal Bilingüe →</a>
-</div>
-<div class="card fade-in">
-<h3 class="card__title" style="color: var(--color-primary);">🔬 Kínder y Preescolar STEM Incorporado a la SEP (3 a 6 años)</h3>
-<p class="card__text" style="margin-bottom: var(--space-4);">
-                        Nuestros alumnos de Kínder 1, 2 y 3 egresan leyendo y escribiendo en español, con pensamiento matemático, ciencia experimental (STEM) e inglés diario.
-                    </p>
-<a class="btn btn--secondary btn--sm" href="/preescolar-stem-3-a-6-anos">Explorar Kínder y Preescolar STEM →</a>
-</div>
-<div class="card fade-in">
-<h3 class="card__title" style="color: var(--color-primary);">🍲 Estancias Educativas Froebel y Comedor (hasta 18:00 hrs)</h3>
-<p class="card__text" style="margin-bottom: var(--space-4);">
-                        Diseñado para padres que trabajan en GAM, Venustiano Carranza o el AICM: menú nutritivo de 3 tiempos, apoyo en tareas y talleres vespertinos hasta las 6:00 PM.
-                    </p>
-<a class="btn btn--secondary btn--sm" href="/horario-extendido-y-comedor">Conocer Horario Extendido y Comedor →</a>
-</div>
-<div class="card fade-in">
-<h3 class="card__title" style="color: var(--color-primary);">🛡️ Enfermería Escolar, CCTV y Puertas Abiertas</h3>
-<p class="card__text" style="margin-bottom: var(--space-4);">
-                        Circuito Cerrado de Televisión (CCTV) sin puntos ciegos, enfermera escolar de tiempo completo, filtro sanitario diario y entrega con credencial verificada.
-                    </p>
-<a class="btn btn--secondary btn--sm" href="/instalaciones-y-seguridad">Ver Instalaciones y Seguridad →</a>
-</div>
-</div>
-</div>
-</section>
 <!-- PREGUNTAS FRECUENTES COLEGIO Y ESCUELA FEDERICO FROEBEL -->
 <section class="section" id="faq-nosotros" data-ux-section="faq-nosotros">
 <div class="container" style="max-width: 860px;">
@@ -476,7 +482,7 @@
 <p class="section-header__desc">Conoce nuestra trayectoria de más de 46 años formando niños seguros, bilingües y felices en San Juan de Aragón, CDMX.</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-<details class="card fade-in faq-item" style="padding: var(--space-5) var(--space-6);">
+<details class="card fade-in faq-item" open style="padding: var(--space-5) var(--space-6);">
 <summary style="font-weight: 700; color: var(--color-primary-dark); font-size: var(--text-lg); cursor: pointer;">¿Dónde se encuentra el Colegio y Escuela Federico Froebel en Ciudad de México?</summary>
 <p style="margin-top: var(--space-3); margin-bottom: 0; color: var(--color-text-light);">El <strong>Instituto y Colegio Federico Froebel</strong> cuenta con un único plantel en la Ciudad de México, ubicado en <a href="https://maps.app.goo.gl/gAZ6ZtXKoNPa157g6" rel="noopener noreferrer" style="font-weight: 700; text-decoration: underline;" target="_blank">📍 Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, CDMX</a> (a 2 cuadras de Metro Aragón Línea 5 y cerca del Bosque de Aragón).</p>
 </details>

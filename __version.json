@@ -1,6 +1,6 @@
 {
-  "version": "v2.1.31",
-  "cycle": 31,
-  "updated_at": "2026-11-09T03:11:30Z",
-  "summary": "Ciclo Autónomo #31 (v2.1.31): Pre-renderizado automático del Asistente de Inscripción de 4 pasos (#enrollment-wizard) visible dentro de #pasos en /inscripciones tras la sesión orgánica de 119s (s_7fufyqcl_mw8lk8wi, 91% scroll), apertura por defecto del FAQ #1 de costos, telemetría de inicio de wizard por foco o clic (inscripcion-wizard.js?v=5), y mejora de etiquetas de tablas + fallback LCP en Safari/WebKit (main.js?v=14 en las 23 páginas)."
+  "version": "v2.1.32",
+  "cycle": 32,
+  "updated_at": "2026-11-09T07:19:45Z",
+  "summary": "Ciclo Autónomo #32 (v2.1.32): Promoción above-the-fold de #ficha-institucional-froebel y #tabla-ficha-oficial-colegio en /nosotros tras sesión orgánica de escritorio desde Google (s_1imuuzhl_mw8trr33, 14s al 0% de scroll), promoción de #pilares-institucionales por encima de #filosofia con homologación ratio 1:8 y botones WhatsApp, y tabla comparativa #tabla-programas-y-estancias en el Hero de /programas."
 }
