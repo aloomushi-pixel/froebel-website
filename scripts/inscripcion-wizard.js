@@ -537,10 +537,25 @@ function hideLoading() {
   if (overlay) overlay.style.display = 'none';
 }
 
+let wizardOpenedTracked = false;
+function trackWizardOpenOnce(triggerLabel) {
+  if (wizardOpenedTracked) return;
+  wizardOpenedTracked = true;
+  if (window.FroebelUX) {
+    window.FroebelUX.track('wizard_open', {
+      element_id: 'open_enrollment_wizard',
+      element_text: triggerLabel || 'Abrir Proceso de Inscripción en Línea'
+    });
+  }
+}
+
 function attachStepListeners() {
-  // Focus input styling
+  // Focus input styling & track first interaction with pre-rendered wizard
   document.querySelectorAll('.wizard__field input, .wizard__field select, .wizard__field textarea').forEach(el => {
-    el.addEventListener('focus', () => el.closest('.wizard__field')?.classList.add('wizard__field--focused'));
+    el.addEventListener('focus', () => {
+      el.closest('.wizard__field')?.classList.add('wizard__field--focused');
+      trackWizardOpenOnce('Interacción Directa con Paso 1 de Inscripción');
+    });
     el.addEventListener('blur', () => el.closest('.wizard__field')?.classList.remove('wizard__field--focused'));
   });
 }
@@ -550,22 +565,26 @@ function openEnrollmentWizard() {
   const wizardSection = document.getElementById('wizard-section');
   if (wizardSection) {
     wizardSection.style.display = 'block';
-    currentStep = 0;
-    wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
-    renderWizard();
-    if (window.FroebelUX) {
-      window.FroebelUX.track('wizard_open', {
-        element_id: 'open_enrollment_wizard',
-        element_text: 'Abrir Proceso de Inscripción en Línea'
-      });
+    if (!document.querySelector('#enrollment-wizard .wizard')) {
+      currentStep = 0;
+      wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
+      renderWizard();
     }
+    trackWizardOpenOnce('Abrir Proceso de Inscripción en Línea');
     wizardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => {
+      document.getElementById('s-name')?.focus({ preventScroll: true });
+    }, 450);
   }
 }
 
 /* === INIT ON LOAD === */
 document.addEventListener('DOMContentLoaded', () => {
-  // If wizard container exists, check for auto-open via URL param
+  // Pre-render Step 1 on load so visitors scrolling down #pasos immediately see the interactive wizard
+  const container = document.getElementById('enrollment-wizard');
+  if (container && !container.querySelector('.wizard')) {
+    renderWizard();
+  }
   const params = new URLSearchParams(window.location.search);
   if (params.has('inscribir')) {
     openEnrollmentWizard();

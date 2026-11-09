@@ -449,6 +449,7 @@ function initFroebelUXTelemetry() {
     const profileCode = extra.parent_profile || inferParentProfile(extra.element_text || '');
     const activeSec = Math.round(Math.min(activeNow, 600000) / 1000);
     const seoScoreVal = computeOnPageSeoScore();
+    const effectiveLcp = cwv.lcp !== null ? cwv.lcp : cwv.fcp;
 
     const payload = {
       p_slug: pageSlug,
@@ -481,13 +482,13 @@ function initFroebelUXTelemetry() {
           scroll_max_pct: maxScrollPct,
           tiempo_activo_s: activeSec,
           seo_score: seoScoreVal,
-          cwv_lcp_ms: cwv.lcp,
+          cwv_lcp_ms: effectiveLcp,
           cwv_cls: cwv.cls,
           cwv_inp_ms: cwv.inp,
         },
         seo_score: seoScoreVal,
         cwv: {
-          lcp: cwv.lcp,
+          lcp: effectiveLcp,
           cls: cwv.cls,
           inp: cwv.inp,
           fcp: cwv.fcp,
@@ -550,10 +551,14 @@ function initFroebelUXTelemetry() {
             'section';
           if (!seenSections.has(secId)) {
             seenSections.add(secId);
+            const headingText =
+              el.querySelector('h1, h2, h3, caption')?.textContent?.trim() ||
+              (el.tagName === 'TABLE' ? el.closest('.card, section')?.querySelector('h3, h2')?.textContent?.trim() : '') ||
+              secId;
             sendTelemetry('section_view', {
               section_id: secId,
               element_id: secId,
-              element_text: el.querySelector('h1, h2, h3, th')?.textContent?.trim()?.slice(0, 80) || secId,
+              element_text: headingText.slice(0, 80),
             });
           }
         }

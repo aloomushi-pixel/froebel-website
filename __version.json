@@ -1,6 +1,6 @@
 {
-  "version": "v2.1.30",
-  "cycle": 30,
-  "updated_at": "2026-11-08T23:04:00Z",
-  "summary": "Ciclo Autónomo #30 (v2.1.30): Optimización de /inscripciones tras sesión orgánica desde Google Search (s_ah4h4ul6_mw8di1t1): píldora de ubicación y WhatsApp en Hero, tabla resumen #tabla-desglose-costos-2026 con botones de navegación a Maternal/Kínder/Instalaciones dentro de #costos, activación directa de openEnrollmentWizard() desde FAQs, y tabla institucional #tabla-ficha-oficial-colegio en /nosotros."
+  "version": "v2.1.31",
+  "cycle": 31,
+  "updated_at": "2026-11-09T03:11:30Z",
+  "summary": "Ciclo Autónomo #31 (v2.1.31): Pre-renderizado automático del Asistente de Inscripción de 4 pasos (#enrollment-wizard) visible dentro de #pasos en /inscripciones tras la sesión orgánica de 119s (s_7fufyqcl_mw8lk8wi, 91% scroll), apertura por defecto del FAQ #1 de costos, telemetría de inicio de wizard por foco o clic (inscripcion-wizard.js?v=5), y mejora de etiquetas de tablas + fallback LCP en Safari/WebKit (main.js?v=14 en las 23 páginas)."
 }
