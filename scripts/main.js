@@ -454,6 +454,24 @@ function initFroebelUXTelemetry() {
     const profileCode = extra.parent_profile || inferParentProfile(extra.element_text || '');
     const activeSec = Math.round(Math.min(activeNow, 600000) / 1000);
     const seoScoreVal = computeOnPageSeoScore();
+
+    if (cwv.fcp === null && typeof performance !== 'undefined' && performance.getEntriesByType) {
+      try {
+        const paints = performance.getEntriesByType('paint') || [];
+        for (const p of paints) {
+          if (p.name === 'first-contentful-paint' && p.startTime > 0 && p.startTime <= 15000) {
+            cwv.fcp = Math.round(p.startTime);
+          }
+        }
+        if (cwv.fcp === null) {
+          const nav = (performance.getEntriesByType('navigation') || [])[0];
+          if (nav && nav.domContentLoadedEventEnd > 0 && nav.domContentLoadedEventEnd <= 15000) {
+            cwv.fcp = Math.round(nav.domContentLoadedEventEnd);
+          }
+        }
+      } catch (_) {}
+    }
+
     const effectiveLcp = cwv.lcp !== null ? cwv.lcp : cwv.fcp;
 
     const payload = {

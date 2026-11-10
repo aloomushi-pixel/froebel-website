@@ -1,6 +1,6 @@
 {
-  "version": "2.1.38",
-  "cycle": 38,
-  "updated_at": "2026-11-10T08:24:00.000Z",
-  "summary": "Ciclo #38 (v2.1.38): Eliminación de bloqueo LCP por opacity:0 (.fade-in) en las 23 páginas, carga asíncrona no bloqueante de wizard.css + promoción above-the-fold de #tabla-desglose-costos-2026 en /inscripciones, y optimización SEO/CRO móvil (#accesos-rapidos-nosotros) en /nosotros."
+  "version": "2.1.39",
+  "cycle": 39,
+  "updated_at": "2026-11-10T12:34:00.000Z",
+  "summary": "Ciclo #39 (v2.1.39): Verificación de caída LCP a 352ms en /inscripciones (-93.5%), promoción above-the-fold de #tabla-grados-kinder-sep en /preescolar-stem-3-a-6-anos, enlaces de pre-inscripción por grado en /programas y /maternal-bilingue-1-a-3-anos, cobertura 100% (23/23) de cajas Post-FAQ y FAQs pre-abiertas, y captura universal FCP/LCP en Safari iOS y bots IA (main.js?v=16)."
 }
