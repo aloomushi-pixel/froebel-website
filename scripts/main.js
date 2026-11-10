@@ -113,10 +113,15 @@ function initSmoothScroll() {
 /* === FAQ ACCORDIONS ENHANCEMENT === */
 function initFaqAccordions() {
   document.querySelectorAll('details.faq-item, details').forEach((detail) => {
-    detail.addEventListener('toggle', () => {
-      if (detail.open && window.FroebelUX) {
-        const summary = detail.querySelector('summary');
-        const label = summary ? summary.textContent.trim().slice(0, 80) : 'faq-item';
+    const summary = detail.querySelector('summary');
+    if (!summary) return;
+    summary.addEventListener('click', (e) => {
+      if (!e.isTrusted) return;
+      if (window.FroebelUX && typeof window.FroebelUX.isBot === 'function' && window.FroebelUX.isBot()) {
+        return;
+      }
+      if (!detail.open && window.FroebelUX) {
+        const label = summary.textContent.trim().slice(0, 80) || 'faq-item';
         window.FroebelUX.track('cta_click', {
           element_id: detail.id || 'faq-toggle',
           element_text: label,
@@ -521,6 +526,7 @@ function initFroebelUXTelemetry() {
   window.FroebelUX = {
     track: (eventType, extra) => sendTelemetry(eventType, extra, true),
     getSlug: () => pageSlug,
+    isBot: () => isSearchBot || isAiBot,
   };
 
   // 1. Emit initial page_view after brief settle so FCP/TTFB are populated

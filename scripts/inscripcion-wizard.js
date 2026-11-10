@@ -684,11 +684,17 @@ function attachStepListeners() {
 }
 
 /* === OPEN WIZARD (Hot Button) === */
-function openEnrollmentWizard() {
+function openEnrollmentWizard(preset) {
   const wizardSection = document.getElementById('wizard-section');
   if (wizardSection) {
     wizardSection.style.display = 'block';
-    if (!document.querySelector('#enrollment-wizard .wizard')) {
+    if (preset && typeof preset === 'object') {
+      if (preset.program) wizardData.student.program = preset.program;
+      if (preset.plan) wizardData.student.plan = preset.plan;
+      if (preset.estancia) wizardData.student.estancia = preset.estancia;
+      currentStep = 0;
+      renderWizard();
+    } else if (!document.querySelector('#enrollment-wizard .wizard')) {
       currentStep = 0;
       wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
       renderWizard();
@@ -703,13 +709,26 @@ function openEnrollmentWizard() {
 
 /* === INIT ON LOAD === */
 document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const qProgram = params.get('programa') || params.get('grado');
+  const qPlan = params.get('plan') || params.get('modalidad');
+  const qEstancia = params.get('estancia');
+  if (qProgram && ['maternal', 'preescolar_1', 'preescolar_2', 'preescolar_3'].includes(qProgram)) {
+    wizardData.student.program = qProgram;
+  }
+  if (qPlan && ['pronto_pago', 'normal', 'anual'].includes(qPlan)) {
+    wizardData.student.plan = qPlan;
+  }
+  if (qEstancia && ['ninguna', 'parcial_16h', 'completa_18h'].includes(qEstancia)) {
+    wizardData.student.estancia = qEstancia;
+  }
+
   // Pre-render Step 1 on load so visitors scrolling down #pasos immediately see the interactive wizard
   const container = document.getElementById('enrollment-wizard');
   if (container && !container.querySelector('.wizard')) {
     renderWizard();
   }
-  const params = new URLSearchParams(window.location.search);
-  if (params.has('inscribir')) {
+  if (params.has('inscribir') || qProgram || qPlan || qEstancia) {
     openEnrollmentWizard();
   }
 });

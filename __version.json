@@ -1,6 +1,6 @@
 {
-  "version": "v2.1.35",
-  "cycle": 35,
-  "updated_at": "2026-11-09T19:54:00Z",
-  "summary": "Ciclo Autónomo #35 (v2.1.35): Optimización CRO del Asistente de Inscripción en Línea (inscripcion-wizard.js?v=6 con Paso 1 simplificado a 4 campos esenciales, cotizador dinámico en vivo #wizard-live-quote y botón directo de WhatsApp Express #wizard-wa-express-btn) tras conversión real desde Bing Search en /inscripciones, más cajas Post-FAQ y barra rápida de ubicación/costos/teléfono en #cta-final-home (/), /nosotros y /programas."
+  "version": "v2.1.36",
+  "cycle": 36,
+  "updated_at": "2026-11-10T00:04:00Z",
+  "summary": "Ciclo Autónomo #36 (v2.1.36): Depuración de telemetría de acordeones FAQ en main.js?v=15 (eliminando eventos sintéticos toggle de <details open> en carga inicial y rastreos de Googlebot), pre-selección automática de grado y estancia por URL/botones en inscripcion-wizard.js?v=7, botones de pre-inscripción por grado en / e /inscripciones, y 0 enlaces o anclas internas rotas en las 23 páginas."
 }
