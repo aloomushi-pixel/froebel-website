@@ -1,6 +1,6 @@
 {
-  "version": "v2.1.36",
-  "cycle": 36,
-  "updated_at": "2026-11-10T00:04:00Z",
-  "summary": "Ciclo Autónomo #36 (v2.1.36): Depuración de telemetría de acordeones FAQ en main.js?v=15 (eliminando eventos sintéticos toggle de <details open> en carga inicial y rastreos de Googlebot), pre-selección automática de grado y estancia por URL/botones en inscripcion-wizard.js?v=7, botones de pre-inscripción por grado en / e /inscripciones, y 0 enlaces o anclas internas rotas en las 23 páginas."
+  "version": "2.1.37",
+  "cycle": 37,
+  "updated_at": "2026-11-10T04:15:00.000Z",
+  "summary": "Ciclo #37 (v2.1.37): Promoción above-the-fold de #tabla-grados-y-costos-home y #selector-rapido-grado-home en móvil (scroll=7%), optimización de INP móvil (<150ms) en Hero/Stats, enriquecimiento de #tabla-actividades-bloques-edad y cajas #post-faq-cta-blog + FAQs pre-abiertas en los 8 artículos del blog."
 }
