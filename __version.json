@@ -1,11 +1,11 @@
 {
-  "version": "2.1.40",
-  "cycle": 40,
-  "updatedAt": "2026-11-10T16:41:52.458Z",
+  "version": "2.1.41",
+  "cycle": 41,
+  "updatedAt": "2026-11-10T20:50:14.328Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "changes": [
-    "Enriched mobile navigation menu (#main-nav / initMobileNav in main.js?v=17) across all 23 pages with #mobile-nav-quick-panel providing 1-tap links to Maternal, Kínder SEP, Estancia 18:00h, Seguridad CCTV, $3,600/mes cost table, and WhatsApp Directo after session s_gkx70dfk_mwav64qb opened/closed #nav-toggle at scroll=27%",
-    "Added #resumen-inscripcion-home below #tabla-grados-y-costos-home on homepage (/) with annual enrollment fee summary ($3,375 MXN early bird) and 1-tap Pre-enrollment, WhatsApp, and CCTV links",
-    "Added #selector-grado-colonia 1-click grade pre-enrollment pills below #tabla-ruta-costos-* across all 5 neighborhood geo-landings"
+    "Eliminated all 5 rage_click friction points on neighborhood geo-landings (colegio-cerca-de-mi/*/index.html) and across contacto.html, nosotros.html, index.html, and programas.html by converting non-clickable <span> pill badges into actionable <a> links and promoting #tabla-ruta-costos-* + #selector-grado-colonia above the 3 summary cards",
+    "Promoted #tabla-desglose-costos-2026 and 1-click grade pre-enrollment buttons directly into #hero-inscripciones (above the fold) on /inscripciones after session s_gc7tjw7f_mwaz06kq spent 33s at scroll=0%-2%",
+    "Enforced mobile text-first column ordering (.grid--2 > * { order: initial !important } in main.js?v=18) so Kínder 1, 2, 3 headings and enrollment CTAs appear before photos on mobile screens"
   ]
 }
