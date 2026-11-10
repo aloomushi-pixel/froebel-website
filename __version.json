@@ -1,6 +1,11 @@
 {
-  "version": "2.1.39",
-  "cycle": 39,
-  "updated_at": "2026-11-10T12:34:00.000Z",
-  "summary": "Ciclo #39 (v2.1.39): Verificación de caída LCP a 352ms en /inscripciones (-93.5%), promoción above-the-fold de #tabla-grados-kinder-sep en /preescolar-stem-3-a-6-anos, enlaces de pre-inscripción por grado en /programas y /maternal-bilingue-1-a-3-anos, cobertura 100% (23/23) de cajas Post-FAQ y FAQs pre-abiertas, y captura universal FCP/LCP en Safari iOS y bots IA (main.js?v=16)."
+  "version": "2.1.40",
+  "cycle": 40,
+  "updatedAt": "2026-11-10T16:41:52.458Z",
+  "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
+  "changes": [
+    "Enriched mobile navigation menu (#main-nav / initMobileNav in main.js?v=17) across all 23 pages with #mobile-nav-quick-panel providing 1-tap links to Maternal, Kínder SEP, Estancia 18:00h, Seguridad CCTV, $3,600/mes cost table, and WhatsApp Directo after session s_gkx70dfk_mwav64qb opened/closed #nav-toggle at scroll=27%",
+    "Added #resumen-inscripcion-home below #tabla-grados-y-costos-home on homepage (/) with annual enrollment fee summary ($3,375 MXN early bird) and 1-tap Pre-enrollment, WhatsApp, and CCTV links",
+    "Added #selector-grado-colonia 1-click grade pre-enrollment pills below #tabla-ruta-costos-* across all 5 neighborhood geo-landings"
+  ]
 }

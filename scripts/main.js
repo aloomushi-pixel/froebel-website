@@ -37,6 +37,113 @@ function initMobileNav() {
   const nav = document.querySelector('.header__nav');
   if (!toggle || !nav) return;
 
+  if (!document.getElementById('froebel-mobile-nav-styles')) {
+    const style = document.createElement('style');
+    style.id = 'froebel-mobile-nav-styles';
+    style.textContent = `
+      .mobile-nav-quick-panel { display: none; }
+      @media (max-width: 768px) {
+        .header__nav--open {
+          justify-content: flex-start !important;
+          padding: 4.75rem 1.25rem 1.5rem !important;
+          gap: 0.55rem !important;
+          overflow-y: auto !important;
+        }
+        .header__nav--open .header__link {
+          font-size: 1.2rem !important;
+          padding: 0.25rem 0.5rem !important;
+        }
+        .header__nav--open .header__cta {
+          margin-top: 0.35rem !important;
+          max-width: 340px !important;
+          padding: 0.7rem 1rem !important;
+          font-size: 0.95rem !important;
+        }
+        .header__nav--open .mobile-nav-quick-panel {
+          display: flex;
+          flex-direction: column;
+          gap: 0.55rem;
+          width: 100%;
+          max-width: 340px;
+          margin-top: 0.5rem;
+          padding-top: 0.75rem;
+          border-top: 1px solid #cbd5e1;
+          text-align: center;
+        }
+        .mobile-nav-quick-title {
+          font-size: 0.75rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: #475569;
+        }
+        .mobile-nav-quick-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.45rem;
+        }
+        .mobile-nav-pill {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.3rem;
+          padding: 0.55rem 0.5rem;
+          background: #ffffff;
+          border: 1px solid #bfdbfe;
+          border-radius: 10px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: #1e3a8a !important;
+          box-shadow: 0 2px 5px rgba(30, 64, 175, 0.06);
+        }
+        .mobile-nav-wa-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.4rem;
+          width: 100%;
+          padding: 0.7rem 1rem;
+          background: #16a34a;
+          color: #ffffff !important;
+          border-radius: 999px;
+          font-size: 0.9rem;
+          font-weight: 700;
+          box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  if (!nav.querySelector('#mobile-nav-quick-panel')) {
+    const panel = document.createElement('div');
+    panel.id = 'mobile-nav-quick-panel';
+    panel.className = 'mobile-nav-quick-panel';
+    panel.innerHTML = `
+      <div class="mobile-nav-quick-title">⚡ Acceso Rápido a Niveles y Costos 2026-2027</div>
+      <div class="mobile-nav-quick-grid">
+        <a class="mobile-nav-pill" href="/maternal-bilingue-1-a-3-anos">🍼 Maternal (1-3a)</a>
+        <a class="mobile-nav-pill" href="/preescolar-stem-3-a-6-anos">🎓 Kínder SEP (3-6a)</a>
+        <a class="mobile-nav-pill" href="/horario-extendido-y-comedor">⏰ Estancia 18:00h</a>
+        <a class="mobile-nav-pill" href="/instalaciones-y-seguridad">🛡️ Seguridad CCTV</a>
+      </div>
+      <a class="mobile-nav-pill" href="/inscripciones#costos" style="background:#fef9c3;border-color:#fde047;color:#854d0e !important;">💳 Colegiatura $3,600/mes Pronto Pago · Ver Tabla →</a>
+      <a class="mobile-nav-wa-btn" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20me%20interesa%20pedir%20informes%20y%20agendar%20una%20visita" rel="noopener noreferrer" target="_blank">💬 WhatsApp Directo: 55 5414 8872</a>
+    `;
+    nav.appendChild(panel);
+  }
+
+  const closeMenu = () => {
+    nav.classList.remove('header__nav--open');
+    toggle.classList.remove('header__toggle--active');
+    const spans = toggle.querySelectorAll('span');
+    if (spans.length >= 3) {
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '';
+      spans[2].style.transform = '';
+    }
+  };
+
   toggle.addEventListener('click', () => {
     nav.classList.toggle('header__nav--open');
     toggle.classList.toggle('header__toggle--active');
@@ -53,15 +160,8 @@ function initMobileNav() {
     }
   });
 
-  nav.querySelectorAll('.header__link').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('header__nav--open');
-      toggle.classList.remove('header__toggle--active');
-      const spans = toggle.querySelectorAll('span');
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
-    });
+  nav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
   });
 }
 
