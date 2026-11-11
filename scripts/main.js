@@ -44,6 +44,7 @@ function initMobileNav() {
       .mobile-nav-quick-panel { display: none; }
       @media (max-width: 768px) {
         .grid--2 > * { order: initial !important; }
+        .hero__image img { max-height: 210px !important; width: 100% !important; }
         .header__nav--open {
           justify-content: flex-start !important;
           padding: 4.75rem 1.25rem 1.5rem !important;
