@@ -45,6 +45,7 @@ function initMobileNav() {
       @media (max-width: 768px) {
         .grid--2 > * { order: initial !important; }
         .hero__image img { max-height: 210px !important; width: 100% !important; }
+        img[src*="assets/images/blog/"] { max-height: 200px !important; margin-bottom: 1rem !important; }
         .header__nav--open {
           justify-content: flex-start !important;
           padding: 4.75rem 1.25rem 1.5rem !important;
