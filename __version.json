@@ -1,19 +1,19 @@
 {
-  "version": "2.1.44",
-  "cycle": 44,
-  "deployed_at": "2026-11-11T09:31:36.867Z",
+  "version": "2.1.45",
+  "cycle": 45,
+  "deployed_at": "2026-11-11T20:20:27.546Z",
   "app_uuid": "ybimjvjq180r82wr5oji4pvw",
   "features": [
+    "pure-human-telemetry-bot-exclusion-rpc",
+    "colonia-hyperlocal-html-corruption-repair-5-pages",
+    "footer-clickable-brand-and-whatsapp-pills-23-pages",
+    "mid-page-testimonials-whatsapp-cta-strip-home",
+    "mobile-384x742-hero-table-compaction-nosotros-inscripciones",
+    "gsc-striking-distance-ctr-titles-and-descriptions",
     "seo-score-100-on-all-23-pages-title-length-fix",
     "site-wide-webp-image-optimization-2.3mb-saved",
     "above-the-fold-summary-tables-on-all-23-pages",
-    "contacto-and-blog-hub-hero-tables-at-scroll-0",
-    "mobile-blog-hero-image-height-cap-200px",
-    "hero-above-the-fold-tables-and-grade-selectors-on-core-pages",
-    "wizard-step1-live-quote-and-whatsapp-express",
     "cookie-consent-banner-visible",
-    "supabase-ux-telemetry-rpc",
-    "core-web-vitals-ios-safari-and-chromium-observer",
-    "search-console-striking-distance-optimizations"
+    "supabase-ux-telemetry-rpc"
   ]
 }

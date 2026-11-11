@@ -46,6 +46,23 @@ function initMobileNav() {
         .grid--2 > * { order: initial !important; }
         .hero__image img { max-height: 210px !important; width: 100% !important; }
         img[src*="assets/images/blog/"] { max-height: 200px !important; margin-bottom: 1rem !important; }
+        .section[id^="hero-"], .section#contacto-hero {
+          padding-top: calc(72px + 0.85rem) !important;
+          padding-bottom: 1.25rem !important;
+        }
+        .section[id^="hero-"] .section-header__label, .section#contacto-hero .section-header__label {
+          margin-bottom: 0.35rem !important;
+          font-size: 0.72rem !important;
+        }
+        .section[id^="hero-"] .section-header__title, .section#contacto-hero .section-header__title {
+          font-size: 1.48rem !important;
+          line-height: 1.22 !important;
+          margin-bottom: 0.45rem !important;
+        }
+        .section[id^="hero-"] .section-header__desc, .section#contacto-hero .section-header__desc {
+          font-size: 0.9rem !important;
+          line-height: 1.42 !important;
+        }
         .header__nav--open {
           justify-content: flex-start !important;
           padding: 4.75rem 1.25rem 1.5rem !important;
@@ -708,7 +725,7 @@ function initFroebelUXTelemetry() {
       const target = e.target;
       if (!target || !(target instanceof Element)) return;
 
-      // Check for Rage Clicks (3+ clicks within 800ms inside 40px radius)
+      // Check for Rage Clicks (3+ clicks within 800ms inside 40px radius, excluding desktop triple-click text selection)
       recentClicks = recentClicks.filter((c) => now - c.t < 800);
       recentClicks.push({ t: now, x: e.clientX, y: e.clientY });
       if (recentClicks.length >= 3) {
@@ -716,15 +733,19 @@ function initFroebelUXTelemetry() {
         const dist = Math.hypot(e.clientX - first.x, e.clientY - first.y);
         if (dist < 40) {
           recentClicks = [];
-          const rageLabel =
-            target.id ||
-            target.closest('[id]')?.id ||
-            target.textContent?.trim()?.slice(0, 50) ||
-            target.tagName;
-          sendTelemetry('rage_click', {
-            element_id: `rage:${rageLabel}`,
-            element_text: target.textContent?.trim()?.slice(0, 80) || target.tagName,
-          });
+          const selectedTxt = window.getSelection ? window.getSelection().toString().trim() : '';
+          const isSelectingText = !target.closest('a, button, [role="button"], input, select, summary, .btn') && selectedTxt.length >= 3;
+          if (!isSelectingText) {
+            const rageLabel =
+              target.id ||
+              target.closest('[id]')?.id ||
+              target.textContent?.trim()?.slice(0, 50) ||
+              target.tagName;
+            sendTelemetry('rage_click', {
+              element_id: `rage:${rageLabel}`,
+              element_text: target.textContent?.trim()?.slice(0, 80) || target.tagName,
+            });
+          }
         }
       }
 

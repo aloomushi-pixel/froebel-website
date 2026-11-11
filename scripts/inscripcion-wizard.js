@@ -657,9 +657,14 @@ function hideLoading() {
   if (overlay) overlay.style.display = 'none';
 }
 
+function isAutomatedCrawler() {
+  const ua = navigator.userAgent || '';
+  return /Googlebot|bingbot|Applebot|Slurp|DuckDuckBot|Baiduspider|YandexBot|GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|ClaudeBot|Google-Extended|HeadlessChrome|Lighthouse/i.test(ua);
+}
+
 let wizardOpenedTracked = false;
 function trackWizardOpenOnce(triggerLabel) {
-  if (wizardOpenedTracked) return;
+  if (wizardOpenedTracked || isAutomatedCrawler()) return;
   wizardOpenedTracked = true;
   if (window.FroebelUX) {
     window.FroebelUX.track('wizard_open', {
@@ -728,7 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (container && !container.querySelector('.wizard')) {
     renderWizard();
   }
-  if (params.has('inscribir') || qProgram || qPlan || qEstancia) {
+  if ((params.has('inscribir') || qProgram || qPlan || qEstancia) && !isAutomatedCrawler()) {
     openEnrollmentWizard();
   }
 });
