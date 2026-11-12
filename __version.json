@@ -1,11 +1,11 @@
 {
-  "version": "2.1.49",
-  "cycle": 49,
-  "deployedAt": "2026-11-12T13:10:55.415Z",
+  "version": "2.1.50",
+  "cycle": 50,
+  "deployedAt": "2026-11-12T17:20:46.714Z",
   "standard": "Estándar Maestro v2.1 + GSC + Gobernanza por Magnitud",
   "highlights": [
-    "Fixed visible CSS text corruption ($3 regex expansion bug), removed render-blocking /styles/main.css (26.5 KB), fixed false active nav state, compacted hero controls, and replaced broken mobile .stats marquee across all 5 /colegio-cerca-de-mi/* local landing pages",
-    "Upgraded /contacto with WCAG AAA hero contrast and full-surface 1-tap clickable cards for Google Maps, WhatsApp, phone, and email",
-    "Optimized GSC Striking Distance & Low-CTR Titles/Meta/WebPage JSON-LD across /, /inscripciones, /programas, /maternal-bilingue-1-a-3-anos, /preescolar-stem-3-a-6-anos, /horario-extendido-y-comedor, /instalaciones-y-seguridad, /contacto, and 5 local landing pages"
+    "Express server.js hardening: Chrome Mobile bfcache-friendly Cache-Control, 24h+SWR JS/CSS caching, GEO Link rel=llms-txt HTTP header, security headers, 301 canonical redirects for trailing-slash clean slugs & /colegio-cerca-de-mi hub, and sanitized /api/enroll optional email + Estancia/birth_date fields",
+    "Wizard v11 confirmation UX: clean phone-only confirmation without blank email line, selected Estancia/Plan summary, conditional 0-docs messaging, pre-filled WhatsApp follow-up, and removal of stale September/August 2026 dates",
+    "Deep-linked all /programas grade & Estancia CTAs directly into pre-calculated /inscripciones states, compacted /nosotros hero, and added Friedrich Fröbel (Federico Froebel) pedagogical legacy table + Person entity schema for Striking Distance queries"
   ]
 }

@@ -162,15 +162,25 @@ app.post('/api/enroll', upload.any(), async (req, res) => {
       console.error('Error parsing enrollment JSON data', e);
     }
 
+    const cleanGuardianEmail = typeof guardian.email === 'string' ? guardian.email.trim() : '';
+    const hasValidGuardianEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanGuardianEmail);
+    const estanciaLabels = {
+      ninguna: 'Sin estancia (Horario base)',
+      parcial_16h: 'Estancia Parcial hasta 16:00h (+$1,400/mes)',
+      completa_18h: 'Estancia Completa hasta 18:00h (+$1,900/mes)',
+    };
+
     const htmlContent = createEmailTemplate('Nueva Solicitud de Inscripción — Instituto Federico Froebel', {
       'Tutor - Nombre': guardian.full_name,
-      'Tutor - Correo': guardian.email,
-      'Tutor - Teléfono': guardian.phone,
+      'Tutor - Teléfono / WhatsApp': guardian.phone,
+      'Tutor - Correo': hasValidGuardianEmail ? cleanGuardianEmail : 'No proporcionado',
       'Tutor - Parentesco': guardian.relationship,
       'Alumno - Nombre': student.full_name,
+      'Alumno - Fecha de Nacimiento': student.birth_date,
       'Alumno - Programa': student.program,
       'Alumno - CURP': student.curp,
-      'Plan de Pago': student.plan,
+      'Plan de Colegiatura': student.plan,
+      'Estancia / Comedor': estanciaLabels[student.estancia] || student.estancia || 'Sin estancia (Horario base)',
       'Método de Pago Seleccionado': payment.method,
       'Referencia de Transferencia': payment.transferRef,
       'Archivos Adjuntos': `${files.length} documento(s)`,
@@ -181,24 +191,28 @@ app.post('/api/enroll', upload.any(), async (req, res) => {
       content: file.buffer,
     }));
 
-    const { error } = await resend.emails.send({
+    const enrollEmailPayload = {
       from: 'Instituto Federico Froebel Inscripciones <info@froebelinstituto.com.mx>',
       to: [DESTINATION_EMAIL],
-      subject: `Inscripción: ${student.full_name || 'Nuevo Alumno'}`,
+      subject: `Inscripción: ${student.full_name || 'Nuevo Alumno'} (${student.program || 'Preescolar/Maternal'})`,
       html: htmlContent,
-      reply_to: guardian.email || DESTINATION_EMAIL,
       attachments,
-    });
+    };
+    if (hasValidGuardianEmail) {
+      enrollEmailPayload.reply_to = cleanGuardianEmail;
+    }
+
+    const { error } = await resend.emails.send(enrollEmailPayload);
 
     if (error) {
       console.error('Resend Error:', error);
       return res.status(400).json({ error: error.message });
     }
 
-    if (guardian.email) {
+    if (hasValidGuardianEmail) {
       await resend.emails.send({
         from: 'Instituto Federico Froebel <info@froebelinstituto.com.mx>',
-        to: [guardian.email],
+        to: [cleanGuardianEmail],
         subject: 'Recibimos tu solicitud de inscripción - Instituto Federico Froebel',
         html: createAutoReplyTemplate(guardian.full_name || 'Familia'),
       });
@@ -232,6 +246,14 @@ const LEGACY_ASSET_REDIRECTS = new Map([
   ['/assets/images/maternal-estimulacion-temprana-cdmx.webp', '/assets/images/salon-maternal-bilingue-froebel.webp'],
 ]);
 
+// Security & GEO AI-Discovery headers on all responses
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  next();
+});
+
 app.use((req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next();
   const p = req.path || '/';
@@ -246,9 +268,18 @@ app.use((req, res, next) => {
   if (p === '/blog/index.html') {
     return res.redirect(301, '/blog/' + qs);
   }
+  if (p === '/colegio-cerca-de-mi' || p === '/colegio-cerca-de-mi/') {
+    return res.redirect(301, '/contacto' + (qs || '#como-llegar'));
+  }
   const geoMatch = p.match(/^(\/colegio-cerca-de-mi\/[^/]+)\/index\.html$/i);
   if (geoMatch) {
     return res.redirect(301, `${geoMatch[1]}/${qs}`);
+  }
+  if (p.length > 1 && p.endsWith('/')) {
+    const withoutSlash = p.slice(0, -1);
+    if (ROOT_CLEAN_SLUGS.has(withoutSlash)) {
+      return res.redirect(301, withoutSlash + qs);
+    }
   }
   if (p.endsWith('.html')) {
     const withoutHtml = p.slice(0, -5);
@@ -259,16 +290,19 @@ app.use((req, res, next) => {
   next();
 });
 
-// Static assets with smart caching and clean URL extension resolution
+// Static assets with bfcache-friendly HTML revalidation, cached JS/CSS, and immutable media
 app.use(
   express.static(__dirname, {
     dotfiles: 'deny',
     extensions: ['html', 'htm'],
     setHeaders: (res, reqPath) => {
-      if (reqPath.endsWith('.html') || reqPath.endsWith('.css') || reqPath.endsWith('.js') || reqPath.endsWith('.json') || reqPath.endsWith('.xml') || reqPath.endsWith('.txt')) {
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
+      if (reqPath.endsWith('.html') || reqPath.endsWith('.htm')) {
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        res.setHeader('Link', '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt"');
+      } else if (reqPath.endsWith('.json') || reqPath.endsWith('.xml') || reqPath.endsWith('.txt')) {
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+      } else if (reqPath.endsWith('.js') || reqPath.endsWith('.css')) {
+        res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
       } else {
         res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
       }

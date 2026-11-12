@@ -296,34 +296,62 @@ function renderDocumentsStep() {
 function renderConfirmationStep() {
   const s = wizardData.student;
   const g = wizardData.guardian;
-  const plan = s.plan || 'base';
+  const plan = s.plan || 'pronto_pago';
+  const estancia = s.estancia || 'ninguna';
+  const cleanEmail = (g.email || '').trim();
+  const docsCount = Array.isArray(wizardData.documents) ? wizardData.documents.length : 0;
+
+  const progNames = {
+    maternal: 'Maternal Bilingüe (1–3 años)',
+    preescolar_1: 'Kínder 1 SEP (3–4 años)',
+    preescolar_2: 'Kínder 2 SEP (4–5 años)',
+    preescolar_3: 'Kínder 3 SEP (5–6 años)'
+  };
+  const planNames = {
+    pronto_pago: 'Pronto Pago ($3,600/mes)',
+    normal: 'Mensual Normal ($4,000/mes)',
+    anual: 'Anualidad -8% ($40,480)'
+  };
+  const estanciaNames = {
+    ninguna: 'Horario base escolar',
+    parcial_16h: '+ Estancia 16:00h (+$1,400/mes)',
+    completa_18h: '+ Estancia 18:00h (+$1,900/mes)'
+  };
+
+  const progLabel = progNames[s.program] || (s.program ? s.program.replace('_', ' ') : 'Por confirmar');
+  const planLabel = planNames[plan] || 'Pronto Pago ($3,600/mes)';
+  const estanciaLabel = estanciaNames[estancia] || 'Horario base escolar';
+  const waConfirmMsg = encodeURIComponent(
+    `Hola Instituto Froebel, acabo de enviar la solicitud de inscripción en línea para ${s.full_name || 'mi hijo/a'} (${progLabel}, ${planLabel}, ${estanciaLabel}).`
+  );
 
   return `
     <div class="wizard__section wizard__section--confirmation fade-in visible">
       <div class="wizard__confirm-icon">🎉</div>
-      <h2 class="wizard__title">¡Inscripción Recibida!</h2>
-      <p class="wizard__desc">Hemos recibido la solicitud de inscripción. Nuestro equipo revisará los documentos y te contactaremos pronto.</p>
+      <h2 class="wizard__title">¡Solicitud de Inscripción Recibida!</h2>
+      <p class="wizard__desc">Hemos registrado los datos de tu pequeño/a. Nuestro equipo de admisiones te contactará a la brevedad para confirmar su lugar y agendar tu visita.</p>
 
       <div class="wizard__confirm-card">
         <div class="wizard__confirm-status">
-          <span class="wizard__status-badge wizard__status-badge--pending">⏳ Pendiente de revisión</span>
+          <span class="wizard__status-badge wizard__status-badge--pending">✅ Solicitud registrada · Ciclo 2026-2027</span>
         </div>
         <div class="wizard__confirm-grid">
           <div>
-            <h4>Alumno</h4>
+            <h4>Alumno y Modalidad</h4>
             <p><strong>${s.full_name || ''}</strong></p>
-            <p>${s.program ? s.program.replace('_', ' ') : ''} — ${plan === 'anual' ? 'Pago Anual' : plan === 'normal' ? 'Mensual Normal' : 'Pronto Pago'}</p>
+            <p>${progLabel}</p>
+            <p style="font-size:0.85rem;color:var(--color-primary-dark);font-weight:600;">${planLabel} · ${estanciaLabel}</p>
           </div>
           <div>
-            <h4>Tutor</h4>
+            <h4>Tutor de Contacto</h4>
             <p><strong>${g.full_name || ''}</strong></p>
-            <p>${g.email || ''}</p>
-            <p>${g.phone || ''}</p>
+            <p>📱 ${g.phone || ''}</p>
+            ${cleanEmail ? `<p>📧 ${cleanEmail}</p>` : ''}
           </div>
         </div>
         <div class="wizard__confirm-footer">
-          <p>📧 Recibirás una confirmación por correo a <strong>${g.email || ''}</strong></p>
-          <p>📱 También te contactaremos por WhatsApp al <strong>${g.phone || ''}</strong></p>
+          <p>📱 Te escribiremos por WhatsApp o llamada al <strong>${g.phone || ''}</strong>.</p>
+          ${cleanEmail ? `<p>📧 También enviamos copia de recepción a <strong>${cleanEmail}</strong>.</p>` : ''}
         </div>
       </div>
 
@@ -333,32 +361,32 @@ function renderConfirmationStep() {
           <div class="wizard__confirm-step">
             <span class="wizard__confirm-num">1</span>
             <div>
-              <strong>Revisión de documentos</strong>
-              <p>Nuestro equipo verificará los documentos subidos (1-2 días hábiles).</p>
+              <strong>Contacto de Admisiones</strong>
+              <p>${docsCount > 0 ? `Revisaremos los ${docsCount} documento(s) adjuntos y confirmaremos tu cita en menos de 24 horas hábiles.` : 'Confirmaremos disponibilidad de grupo por WhatsApp; los documentos podrás entregarlos después en el plantel.'}</p>
             </div>
           </div>
           <div class="wizard__confirm-step">
             <span class="wizard__confirm-num">2</span>
             <div>
-              <strong>Aprobación</strong>
-              <p>Recibirás un correo de confirmación con los datos de acceso.</p>
+              <strong>Recorrido y Evaluación Diagnóstica</strong>
+              <p>Conocerás nuestras aulas, CCTV y enfermería en Av. 521 No. 20, San Juan de Aragón I Secc.</p>
             </div>
           </div>
           <div class="wizard__confirm-step">
             <span class="wizard__confirm-num">3</span>
             <div>
-              <strong>¡Bienvenidos!</strong>
-              <p>Tu hijo/a comienza su aventura Froebel en septiembre 2026.</p>
+              <strong>¡Bienvenidos a la Familia Froebel!</strong>
+              <p>Tu hijo/a asegura su lugar en el Ciclo Escolar 2026-2027 (ingreso inmediato sujeto a cupo o reserva de ciclo).</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:var(--space-8);">
-        <a href="/" class="btn btn--primary">Volver al Inicio</a>
-        <a href="https://wa.me/525554148872?text=Hola%2C%20acabo%20de%20completar%20mi%20inscripción%20en%20línea" class="btn btn--secondary" target="_blank" rel="noopener">
-          Contactar por WhatsApp
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-top:var(--space-8);">
+        <a href="https://wa.me/525554148872?text=${waConfirmMsg}" class="btn btn--accent" target="_blank" rel="noopener noreferrer" style="font-weight:800;">
+          💬 Confirmar ahora por WhatsApp →
         </a>
+        <a href="/" class="btn btn--secondary">Volver al Inicio</a>
       </div>
     </div>
   `;
