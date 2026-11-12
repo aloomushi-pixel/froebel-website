@@ -9,9 +9,111 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothScroll();
   initFaqAccordions();
+  initFacilityPhotoLightbox();
+  initInteractiveComparisonTables();
   initFroebelUXTelemetry();
   initCookieConsentBanner();
 });
+
+/* === INTERACTIVE PHOTO LIGHTBOX (Eliminates Mobile Photo Dead Clicks + Adds Conversion Bar) === */
+function initFacilityPhotoLightbox() {
+  const candidates = Array.from(document.querySelectorAll('main img, section img')).filter((img) => {
+    if (img.closest('a, button, header, footer')) return false;
+    const src = img.getAttribute('src') || '';
+    if (src.includes('logo-froebel')) return false;
+    const wAttr = parseInt(img.getAttribute('width') || '0', 10);
+    if (wAttr > 0 && wAttr < 120) return false;
+    return true;
+  });
+  if (!candidates.length) return;
+
+  candidates.forEach((img) => {
+    img.style.cursor = 'zoom-in';
+    img.setAttribute('role', 'button');
+    img.setAttribute('tabindex', '0');
+    if (!img.getAttribute('data-ux-id')) {
+      const cleanAlt = (img.getAttribute('alt') || 'foto-plantel')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .slice(0, 32);
+      img.setAttribute('data-ux-id', `photo-zoom-${cleanAlt}`);
+    }
+    const openModal = () => openFroebelPhotoLightbox(img);
+    img.addEventListener('click', openModal);
+    img.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        openModal();
+      }
+    });
+  });
+}
+
+function openFroebelPhotoLightbox(imgEl) {
+  let modal = document.getElementById('froebel-photo-lightbox');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'froebel-photo-lightbox';
+    modal.style.cssText =
+      'position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,0.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity 0.2s ease;';
+    modal.innerHTML = `
+      <button type="button" id="froebel-lightbox-close" aria-label="Cerrar foto" style="position:absolute;top:1rem;right:1rem;width:42px;height:42px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.14);color:#ffffff;font-size:1.35rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+      <img id="froebel-lightbox-img" alt="" style="max-width:96vw;max-height:68vh;object-fit:contain;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);" />
+      <p id="froebel-lightbox-caption" style="color:#f8fafc;font-size:0.92rem;text-align:center;max-width:640px;margin:0.85rem 0 0.75rem;line-height:1.4;"></p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;">
+        <a id="froebel-lightbox-wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20vi%20las%20fotos%20del%20plantel%20y%20quiero%20agendar%20un%20recorrido" target="_blank" rel="noopener noreferrer" style="padding:0.55rem 1.05rem;border-radius:999px;background:#16a34a;color:#ffffff;font-size:0.85rem;font-weight:700;text-decoration:none;">💬 Agendar Recorrido por WhatsApp</a>
+        <a href="/inscripciones" style="padding:0.55rem 1.05rem;border-radius:999px;background:#ffffff;color:#1e3a8a;font-size:0.85rem;font-weight:700;text-decoration:none;">💰 Ver Costos ($3,600/mes) →</a>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    const closeFn = () => {
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 180);
+    };
+    modal.addEventListener('click', (ev) => {
+      if (ev.target === modal || ev.target.id === 'froebel-lightbox-close') closeFn();
+    });
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && modal.style.display === 'flex') closeFn();
+    });
+  }
+
+  const modalImg = document.getElementById('froebel-lightbox-img');
+  const modalCap = document.getElementById('froebel-lightbox-caption');
+  modalImg.src = imgEl.currentSrc || imgEl.src;
+  modalImg.alt = imgEl.alt || 'Instalaciones Instituto Federico Froebel';
+  modalCap.textContent = imgEl.alt || 'Instalaciones seguras del Instituto Federico Froebel en San Juan de Aragón, GAM.';
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => {
+    modal.style.opacity = '1';
+  });
+}
+
+/* === INTERACTIVE COMPARISON TABLE ROWS (Eliminates Table Cell Dead Clicks) === */
+function initInteractiveComparisonTables() {
+  document.querySelectorAll('table[id^="tabla-"] tbody tr').forEach((row) => {
+    const primaryLink =
+      row.querySelector('a[href*="/inscripciones"]') ||
+      row.querySelector('a[href*="/colegio-cerca-de-mi/"]') ||
+      row.querySelector('a[href]');
+    if (!primaryLink) return;
+    row.style.cursor = 'pointer';
+    row.setAttribute('role', 'button');
+    if (!row.getAttribute('data-ux-id')) {
+      const label = (row.cells[0]?.textContent || 'fila-tabla')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .slice(0, 32);
+      row.setAttribute('data-ux-id', `table-row-${label}`);
+    }
+    row.addEventListener('click', (ev) => {
+      if (ev.target.closest('a, button, input, select')) return;
+      primaryLink.click();
+    });
+  });
+}
 
 /* === HEADER SCROLL EFFECT === */
 function initHeader() {
@@ -564,8 +666,23 @@ function initFroebelUXTelemetry() {
     { passive: true }
   );
 
+  // Persist UTM / AI Agent Referral Attribution (?utm_source=chatgpt.com, perplexity, gemini, etc.)
+  let persistedUtmSource = '';
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const qUtm = (urlParams.get('utm_source') || urlParams.get('ref') || '').trim();
+    if (qUtm) {
+      const qMed = (urlParams.get('utm_medium') || '').trim();
+      persistedUtmSource = qMed ? `utm:${qUtm}/${qMed}` : `utm:${qUtm}`;
+      sessionStorage.setItem('froebel_utm_source', persistedUtmSource);
+    } else {
+      persistedUtmSource = sessionStorage.getItem('froebel_utm_source') || '';
+    }
+  } catch (_) {}
+
   // Transmit event to Supabase RPC
   function sendTelemetry(eventType, extra = {}, keepalive = false) {
+    const effectiveSource = persistedUtmSource || document.referrer || 'direct';
     const activeNow =
       document.visibilityState === 'visible'
         ? accumulatedActiveMs + (Date.now() - activeStartTs)
@@ -611,12 +728,12 @@ function initFroebelUXTelemetry() {
         active_sec: activeSec,
         device: deviceType,
         device_type: deviceType,
-        source: document.referrer || 'direct',
+        source: effectiveSource,
         user_agent: ua.slice(0, 220),
         parent_profile: {
           perfil: profileCode,
           dispositivo: deviceType,
-          fuente: document.referrer || 'direct',
+          fuente: effectiveSource,
         },
         session_summary: {
           visitor_id: visitorId,

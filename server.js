@@ -87,9 +87,12 @@ const createAutoReplyTemplate = (name) => `
 app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
+    const cleanEmail = typeof email === 'string' ? email.trim() : '';
+    const cleanPhone = typeof phone === 'string' ? phone.trim() : '';
+    const hasValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail);
 
-    if (!name || !email) {
-      return res.status(400).json({ error: 'Nombre y correo son obligatorios' });
+    if (!name || (!hasValidEmail && !cleanPhone)) {
+      return res.status(400).json({ error: 'Nombre y teléfono o correo válido son obligatorios' });
     }
 
     if (!resend) {
@@ -97,32 +100,38 @@ app.post('/api/contact', async (req, res) => {
       return res.status(500).json({ error: 'Configuración de servidor incompleta.' });
     }
 
-    const htmlContent = createEmailTemplate('Nuevo Mensaje de Contacto — Instituto Federico Froebel', {
+    const htmlContent = createEmailTemplate('Nuevo Mensaje / Pre-Registro — Instituto Federico Froebel', {
       Nombre: name,
-      Correo: email,
-      Teléfono: phone,
+      Teléfono: cleanPhone || 'No proporcionado',
+      Correo: hasValidEmail ? cleanEmail : 'No proporcionado',
       Mensaje: message,
     });
 
-    const { error } = await resend.emails.send({
+    const emailPayload = {
       from: 'Instituto Federico Froebel Web <info@froebelinstituto.com.mx>',
       to: [DESTINATION_EMAIL],
-      subject: `Nuevo mensaje de contacto de: ${name}`,
+      subject: `Nuevo contacto / pre-registro de: ${name}`,
       html: htmlContent,
-      reply_to: email,
-    });
+    };
+    if (hasValidEmail) {
+      emailPayload.reply_to = cleanEmail;
+    }
+
+    const { error } = await resend.emails.send(emailPayload);
 
     if (error) {
       console.error('Resend Error:', error);
       return res.status(400).json({ error: error.message });
     }
 
-    await resend.emails.send({
-      from: 'Instituto Federico Froebel <info@froebelinstituto.com.mx>',
-      to: [email],
-      subject: 'Recibimos tu mensaje - Instituto Federico Froebel',
-      html: createAutoReplyTemplate(name),
-    });
+    if (hasValidEmail) {
+      await resend.emails.send({
+        from: 'Instituto Federico Froebel <info@froebelinstituto.com.mx>',
+        to: [cleanEmail],
+        subject: 'Recibimos tu solicitud - Instituto Federico Froebel',
+        html: createAutoReplyTemplate(name),
+      });
+    }
 
     res.status(200).json({ success: true, message: 'Mensaje enviado correctamente' });
   } catch (error) {

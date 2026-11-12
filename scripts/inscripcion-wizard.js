@@ -73,22 +73,30 @@ function renderCurrentStep() {
 /* === STEP 1: STUDENT DATA === */
 function renderStudentStep() {
   const s = wizardData.student;
+  const g = wizardData.guardian || {};
   return `
     <div class="wizard__section fade-in visible">
-      <h2 class="wizard__title">Datos del Alumno</h2>
-      <p class="wizard__desc">Completa solo los 4 datos básicos para iniciar tu pre-inscripción en línea o enviar tu cotización directa por WhatsApp.</p>
+      <div id="wizard-express-top-bar" style="margin-bottom:1.15rem;padding:0.95rem 1.1rem;background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:14px;display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;font-size:0.88rem;color:#1e3a8a;">
+          <div>
+            <strong>💡 Cotización seleccionada 2026-2027:</strong>
+            <span id="wizard-live-quote-text">Colegiatura <strong>$3,600 MXN/mes</strong> (Pronto Pago) · Inscripción anticipada desde <strong>$3,375 MXN (-25%)</strong></span>
+          </div>
+          <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.76rem;font-weight:700;">✓ SEP RVOE 09050141</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.55rem;align-items:center;">
+          <button type="button" id="wizard-wa-top-btn" onclick="sendWizardToWhatsApp()" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:0.45rem;padding:0.75rem 1rem;border-radius:999px;border:none;background:#16a34a;color:#ffffff;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(22,163,74,0.28);">
+            💬 Agendar Visita o Apartar Lugar por WhatsApp (1 clic · sin llenar todo)
+          </button>
+        </div>
+      </div>
+
+      <h2 class="wizard__title" style="font-size:1.3rem;">Pre-Registro en Línea o Inscripción Completa</h2>
+      <p class="wizard__desc" style="margin-bottom:0.9rem;">Deja solo el nombre y tu WhatsApp para apartar lugar en 15 segundos, o continúa los 4 pasos si deseas subir documentos ahora.</p>
+
+      <div id="wizard-express-success" style="display:none;margin-bottom:1rem;padding:1rem;background:#dcfce7;border:2px solid #16a34a;border-radius:12px;color:#14532d;font-size:0.92rem;font-weight:600;"></div>
 
       <div class="wizard__form-grid">
-        <div class="wizard__field">
-          <label for="s-name">Nombre del alumno/a *</label>
-          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-dob">Fecha de nacimiento *</label>
-          <input type="date" id="s-dob" value="${s.date_of_birth || ''}" required>
-        </div>
-
         <div class="wizard__field">
           <label for="s-program">Programa de interés *</label>
           <select id="s-program" required onchange="updateWizardLiveQuote()">
@@ -101,15 +109,30 @@ function renderStudentStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="s-plan">Modalidad de colegiatura *</label>
-          <select id="s-plan" required onchange="updateWizardLiveQuote()">
+          <label for="s-name">Nombre del alumno/a (o del tutor) *</label>
+          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
+        </div>
+
+        <div class="wizard__field">
+          <label for="s-parent-phone">Tu WhatsApp o teléfono celular *</label>
+          <input type="tel" id="s-parent-phone" value="${g.phone || s.parent_phone || ''}" required placeholder="Ej: 55 1234 5678">
+        </div>
+
+        <div class="wizard__field">
+          <label for="s-dob">Fecha de nacimiento del alumno (opcional)</label>
+          <input type="date" id="s-dob" value="${s.date_of_birth || ''}">
+        </div>
+
+        <div class="wizard__field">
+          <label for="s-plan">Modalidad de colegiatura</label>
+          <select id="s-plan" onchange="updateWizardLiveQuote()">
             <option value="pronto_pago" ${s.plan === 'pronto_pago' || !s.plan ? 'selected' : ''}>Pronto Pago — $3,600/mes (primeros 10 días)</option>
             <option value="normal" ${s.plan === 'normal' ? 'selected' : ''}>Mensual Normal — $4,000/mes</option>
             <option value="anual" ${s.plan === 'anual' ? 'selected' : ''}>Pago Anual — $40,480 (8% desc. · ahorra $3,520)</option>
           </select>
         </div>
 
-        <div class="wizard__field wizard__field--full">
+        <div class="wizard__field">
           <label for="s-estancia">Horario Extendido y Comedor (Opcional)</label>
           <select id="s-estancia" onchange="updateWizardLiveQuote()">
             <option value="ninguna" ${!s.estancia || s.estancia === 'ninguna' ? 'selected' : ''}>Horario Escolar Base (08:30 a 14:00 hrs — Sin costo extra)</option>
@@ -117,14 +140,6 @@ function renderStudentStep() {
             <option value="completa_18h" ${s.estancia === 'completa_18h' ? 'selected' : ''}>Estancia Completa + Comedor + Talleres (hasta 18:00 hrs — +$1,900/mes)</option>
           </select>
         </div>
-      </div>
-
-      <div id="wizard-live-quote" style="margin-top:1rem;padding:0.9rem 1.1rem;background:linear-gradient(135deg,#eff6ff,#f0fdf4);border:1px solid #93c5fd;border-radius:12px;font-size:0.88rem;color:#1e3a8a;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;">
-        <div>
-          <strong>💡 Tu inversión estimada 2026-2027:</strong>
-          <span id="wizard-live-quote-text">Colegiatura <strong>$3,600 MXN/mes</strong> (Pronto Pago) · Inscripción anticipada desde <strong>$3,375 MXN (-25%)</strong></span>
-        </div>
-        <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.78rem;font-weight:700;">✓ Validez Oficial SEP</span>
       </div>
 
       <details id="wizard-optional-medical" style="margin-top:1rem;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:0.75rem 1rem;">
@@ -215,18 +230,18 @@ function renderGuardianStep() {
         </div>
 
         <div class="wizard__field wizard__field--full">
-          <label for="g-address">Dirección</label>
+          <label for="g-address">Dirección (opcional)</label>
           <input type="text" id="g-address" value="${g.address || ''}" placeholder="Calle, número, colonia, CP">
         </div>
 
         <div class="wizard__field">
-          <label for="g-emergency-name">Contacto de emergencia *</label>
-          <input type="text" id="g-emergency-name" value="${g.emergency_contact_name || ''}" required placeholder="Nombre del contacto">
+          <label for="g-emergency-name">Contacto de emergencia (opcional)</label>
+          <input type="text" id="g-emergency-name" value="${g.emergency_contact_name || ''}" placeholder="Nombre del contacto">
         </div>
 
         <div class="wizard__field">
-          <label for="g-emergency-phone">Teléfono de emergencia *</label>
-          <input type="tel" id="g-emergency-phone" value="${g.emergency_contact_phone || ''}" required placeholder="55 9876 5432">
+          <label for="g-emergency-phone">Teléfono de emergencia (opcional)</label>
+          <input type="tel" id="g-emergency-phone" value="${g.emergency_contact_phone || ''}" placeholder="55 9876 5432">
         </div>
       </div>
     </div>
@@ -350,10 +365,11 @@ function renderFooter() {
         ${currentStep > 0 ? '<button type="button" class="btn btn--secondary" onclick="prevStep()">← Anterior</button>' : ''}
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:0.65rem;align-items:center;justify-content:flex-end;">
+        ${currentStep === 0 ? '<button type="button" class="btn btn--accent" id="wizard-express-save-btn" onclick="submitExpressPreRegistration()" style="font-weight:800;">⚡ Guardar Pre-Registro Rápido (15s)</button>' : ''}
         <button type="button" class="btn btn--secondary" id="wizard-wa-express-btn" onclick="sendWizardToWhatsApp()" style="border-color:#16a34a;color:#15803d;background:#f0fdf4;font-weight:700;">
-          💬 Enviar estos datos o Agendar por WhatsApp
+          💬 Enviar por WhatsApp
         </button>
-        ${currentStep < 2 ? '<button type="button" class="btn btn--primary" onclick="nextStep()">Siguiente →</button>' : ''}
+        ${currentStep < 2 ? '<button type="button" class="btn btn--primary" onclick="nextStep()">' + (currentStep === 0 ? 'Inscripción Completa →' : 'Siguiente →') + '</button>' : ''}
         ${currentStep === 2 ? '<button type="button" class="btn btn--primary btn--lg wizard__pay-btn" onclick="submitEnrollment()" id="pay-button">✅ Finalizar Inscripción</button>' : ''}
       </div>
     </div>
@@ -374,6 +390,12 @@ function updateWizardLiveQuote() {
     preescolar_1: 'Kínder 1 SEP (3-4 años)',
     preescolar_2: 'Kínder 2 SEP (4-5 años)',
     preescolar_3: 'Kínder 3 SEP (5-6 años)'
+  };
+  const progShortMap = {
+    maternal: 'Maternal Bilingüe',
+    preescolar_1: 'Kínder 1 SEP',
+    preescolar_2: 'Kínder 2 SEP',
+    preescolar_3: 'Kínder 3 SEP'
   };
   const progLabel = progMap[progVal] || 'Maternal / Preescolar SEP';
 
@@ -400,6 +422,80 @@ function updateWizardLiveQuote() {
   } else {
     const totalMes = baseCost + estCost;
     quoteEl.innerHTML = `${progLabel}: <strong>$${totalMes.toLocaleString('es-MX')} MXN/mes</strong> (${planLabel} ${estLabel}) · Inscripción desde <strong>$3,375 MXN</strong>`;
+  }
+
+  const topWaBtn = document.getElementById('wizard-wa-top-btn');
+  if (topWaBtn) {
+    const shortName = progShortMap[progVal] || 'Lugar 2026-2027';
+    topWaBtn.textContent = `💬 Apartar ${shortName} o Agendar Visita por WhatsApp (1 clic)`;
+  }
+}
+
+async function submitExpressPreRegistration() {
+  const name = document.getElementById('s-name')?.value?.trim() || '';
+  const phone = document.getElementById('s-parent-phone')?.value?.trim() || '';
+  const program = document.getElementById('s-program')?.value || '';
+  if (!program) return showError('Selecciona el programa de interés');
+  if (!name) return showError('Ingresa el nombre del alumno/a o tutor');
+  if (!phone || phone.replace(/\D/g, '').length < 8) return showError('Ingresa un teléfono o WhatsApp válido (10 dígitos)');
+
+  saveCurrentStepData();
+  const btn = document.getElementById('wizard-express-save-btn');
+  const origText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Guardando pre-registro...';
+  }
+
+  const s = wizardData.student || {};
+  const progMap = {
+    maternal: 'Maternal Bilingüe (1 a 3 años)',
+    preescolar_1: 'Kínder 1 SEP (3 a 4 años)',
+    preescolar_2: 'Kínder 2 SEP (4 a 5 años)',
+    preescolar_3: 'Kínder 3 SEP (5 a 6 años)'
+  };
+  const planMap = {
+    pronto_pago: 'Pronto Pago ($3,600/mes)',
+    normal: 'Mensual Normal ($4,000/mes)',
+    anual: 'Pago Anual ($40,480/año)'
+  };
+  const estMap = {
+    ninguna: 'Horario base (08:30 a 14:00 hrs)',
+    parcial_16h: 'Estancia Parcial + Comedor hasta 16:00h (+$1,400/mes)',
+    completa_18h: 'Estancia Completa + Comedor hasta 18:00h (+$1,900/mes)'
+  };
+
+  try {
+    const msg = `Pre-registro rápido en línea — Programa: ${progMap[s.program] || s.program} | Plan: ${planMap[s.plan] || s.plan} | Horario: ${estMap[s.estancia] || s.estancia}${s.date_of_birth ? ' | Nac: ' + s.date_of_birth : ''}`;
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email: '', message: msg })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    if (window.FroebelUX) {
+      window.FroebelUX.track('form_submit', {
+        element_id: 'wizard_express_preregister',
+        element_text: `Pre-registro rápido (${s.program || 'general'})`,
+        parent_profile: s.program === 'maternal' ? 'maternal_1_a_3' : 'preescolar_3_a_6'
+      });
+    }
+
+    const box = document.getElementById('wizard-express-success');
+    if (box) {
+      box.style.display = 'block';
+      box.innerHTML = `✅ <strong>¡Pre-registro recibido para ${progMap[s.program] || 'tu pequeño/a'}!</strong> Nuestro equipo de admisiones te contactará al <strong>${phone}</strong>. ¿Deseas atención inmediata? <a href="#" onclick="sendWizardToWhatsApp();return false;" style="color:#15803d;text-decoration:underline;font-weight:800;">Confirmar ahora por WhatsApp →</a>`;
+    }
+    if (btn) {
+      btn.textContent = '✅ ¡Pre-Registro Guardado!';
+    }
+  } catch (err) {
+    showError('No se pudo guardar en línea. Por favor envíalo en 1 clic con el botón verde de WhatsApp.');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
   }
 }
 
@@ -487,12 +583,10 @@ function validateCurrentStep() {
 
 function validateStudentStep() {
   const name = document.getElementById('s-name')?.value?.trim();
-  const dob = document.getElementById('s-dob')?.value;
   const program = document.getElementById('s-program')?.value;
 
-  if (!name) return showError('Ingresa el nombre del alumno');
-  if (!dob) return showError('Ingresa la fecha de nacimiento');
   if (!program) return showError('Selecciona un programa');
+  if (!name) return showError('Ingresa el nombre del alumno/a');
   return true;
 }
 
@@ -500,14 +594,10 @@ function validateGuardianStep() {
   const name = document.getElementById('g-name')?.value?.trim();
   const email = document.getElementById('g-email')?.value?.trim();
   const phone = document.getElementById('g-phone')?.value?.trim();
-  const emergName = document.getElementById('g-emergency-name')?.value?.trim();
-  const emergPhone = document.getElementById('g-emergency-phone')?.value?.trim();
 
   if (!name) return showError('Ingresa tu nombre');
   if (!email || !email.includes('@')) return showError('Ingresa un correo electrónico válido');
   if (!phone) return showError('Ingresa tu teléfono');
-  if (!emergName) return showError('Ingresa el nombre del contacto de emergencia');
-  if (!emergPhone) return showError('Ingresa el teléfono de emergencia');
   return true;
 }
 
@@ -519,9 +609,11 @@ function validateDocumentsStep() {
 /* === SAVE STEP DATA === */
 function saveCurrentStepData() {
   switch (currentStep) {
-    case 0:
+    case 0: {
+      const parentPhone = document.getElementById('s-parent-phone')?.value?.trim() || '';
       wizardData.student = {
         full_name: document.getElementById('s-name')?.value?.trim() || '',
+        parent_phone: parentPhone,
         date_of_birth: document.getElementById('s-dob')?.value || '',
         gender: document.getElementById('s-gender')?.value || '',
         curp: document.getElementById('s-curp')?.value?.toUpperCase() || '',
@@ -532,7 +624,11 @@ function saveCurrentStepData() {
         allergies: document.getElementById('s-allergies')?.value?.trim() || '',
         medical_notes: document.getElementById('s-notes')?.value?.trim() || ''
       };
+      if (parentPhone && !wizardData.guardian.phone) {
+        wizardData.guardian.phone = parentPhone;
+      }
       break;
+    }
     case 1:
       wizardData.guardian = {
         full_name: document.getElementById('g-name')?.value?.trim() || '',
@@ -688,13 +784,36 @@ function attachStepListeners() {
   }
 }
 
+function normalizeProgramCode(raw) {
+  if (!raw) return '';
+  const k = String(raw).trim().toLowerCase();
+  const aliasMap = {
+    maternal: 'maternal',
+    maternal_bilingue: 'maternal',
+    preescolar_1: 'preescolar_1',
+    kinder1: 'preescolar_1',
+    kinder_1: 'preescolar_1',
+    k1: 'preescolar_1',
+    preescolar_2: 'preescolar_2',
+    kinder2: 'preescolar_2',
+    kinder_2: 'preescolar_2',
+    k2: 'preescolar_2',
+    preescolar_3: 'preescolar_3',
+    kinder3: 'preescolar_3',
+    kinder_3: 'preescolar_3',
+    k3: 'preescolar_3'
+  };
+  return aliasMap[k] || '';
+}
+
 /* === OPEN WIZARD (Hot Button) === */
 function openEnrollmentWizard(preset) {
   const wizardSection = document.getElementById('wizard-section');
   if (wizardSection) {
     wizardSection.style.display = 'block';
     if (preset && typeof preset === 'object') {
-      if (preset.program) wizardData.student.program = preset.program;
+      const normProg = normalizeProgramCode(preset.program);
+      if (normProg) wizardData.student.program = normProg;
       if (preset.plan) wizardData.student.plan = preset.plan;
       if (preset.estancia) wizardData.student.estancia = preset.estancia;
       currentStep = 0;
@@ -706,19 +825,16 @@ function openEnrollmentWizard(preset) {
     }
     trackWizardOpenOnce('Abrir Proceso de Inscripción en Línea');
     wizardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => {
-      document.getElementById('s-name')?.focus({ preventScroll: true });
-    }, 450);
   }
 }
 
 /* === INIT ON LOAD === */
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
-  const qProgram = params.get('programa') || params.get('grado');
+  const qProgram = normalizeProgramCode(params.get('programa') || params.get('grado'));
   const qPlan = params.get('plan') || params.get('modalidad');
   const qEstancia = params.get('estancia');
-  if (qProgram && ['maternal', 'preescolar_1', 'preescolar_2', 'preescolar_3'].includes(qProgram)) {
+  if (qProgram) {
     wizardData.student.program = qProgram;
   }
   if (qPlan && ['pronto_pago', 'normal', 'anual'].includes(qPlan)) {

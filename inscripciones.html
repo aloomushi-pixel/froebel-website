@@ -613,8 +613,8 @@
 </div>
 <div>
 <div class="footer__heading">Zonas y Comunidad</div>
-<a class="footer__link" href="/nosotros">Nuestra Historia y Equipo</a>
-<a class="footer__link" href="/inscripciones">Inscripciones en Línea</a>
+<a class="footer__link" href="/nosotros">Colegio Federico Froebel (SEP 1980)</a>
+<a class="footer__link" href="/inscripciones">Colegio Froebel Costos e Inscripción</a>
 <a class="footer__link" href="/blog/">Blog para Padres</a>
 <a class="footer__link" href="/colegio-cerca-de-mi/san-juan-de-aragon/">Kínder en San Juan de Aragón</a>
 <a class="footer__link" href="/colegio-cerca-de-mi/romero-rubio/">Kínder cerca de Romero Rubio</a>
@@ -643,8 +643,8 @@
 </svg>
 </a>
 <!-- App Scripts -->
-<script src="/scripts/main.js?v=21"></script>
-<script src="/scripts/inscripcion-wizard.js?v=8"></script>
+<script src="/scripts/main.js?v=22"></script>
+<script src="/scripts/inscripcion-wizard.js?v=9"></script>
 <script>
     const infoForm = document.getElementById('inscripcion-form');
     if (infoForm) {
@@ -660,7 +660,7 @@
           const data = {
             name: formData.get('nombre'),
             phone: formData.get('telefono'),
-            email: formData.get('email') || 'No proporcionado',
+            email: (formData.get('email') || '').trim(),
             message: 'Edad de interés: ' + formData.get('edad-hijo')
           };
 
