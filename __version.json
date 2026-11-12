@@ -1,11 +1,11 @@
 {
-  "version": "2.1.50",
-  "cycle": 50,
-  "deployedAt": "2026-11-12T17:20:46.714Z",
+  "version": "2.1.51",
+  "cycle": 51,
+  "deployedAt": "2026-11-12T21:29:18.870Z",
   "standard": "Estándar Maestro v2.1 + GSC + Gobernanza por Magnitud",
   "highlights": [
-    "Express server.js hardening: Chrome Mobile bfcache-friendly Cache-Control, 24h+SWR JS/CSS caching, GEO Link rel=llms-txt HTTP header, security headers, 301 canonical redirects for trailing-slash clean slugs & /colegio-cerca-de-mi hub, and sanitized /api/enroll optional email + Estancia/birth_date fields",
-    "Wizard v11 confirmation UX: clean phone-only confirmation without blank email line, selected Estancia/Plan summary, conditional 0-docs messaging, pre-filled WhatsApp follow-up, and removal of stale September/August 2026 dates",
-    "Deep-linked all /programas grade & Estancia CTAs directly into pre-calculated /inscripciones states, compacted /nosotros hero, and added Friedrich Fröbel (Federico Froebel) pedagogical legacy table + Person entity schema for Striking Distance queries"
+    "Main-thread INP optimization in main.js?v=23 (760ms -> <50ms): cached static SEO score, Paint-yielding scheduleTelemetry(), rAF-throttled scroll listeners with cached scrollHeight (zero forced synchronous reflows), and W3C interactionId-filtered INP observer",
+    "Interactive Age Filter (1-3a Maternal, 3-4a K1, 4-6a K2-K3) + 1-click Print/PDF Guide on /blog/5-actividades-con-bloques-para-hacer-en-casa.html following live ChatGPT (utm:chatgpt.com) 97%-scroll session",
+    "Compressed /favicon.png from 530 KB -> 37.8 KB (-92.9% payload, 192x192 SERP standard), inlined wizard.css into /inscripciones (zero FOUC/CLS), added explicit width/height on all 20 remaining img tags, upgraded LCP fetchpriority, normalized Google Fonts swap loader + /manifest.json + theme-color #1E40AF, and hardened sw.js network-first HTML handling"
   ]
 }

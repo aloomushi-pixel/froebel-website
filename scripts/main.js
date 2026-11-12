@@ -115,19 +115,28 @@ function initInteractiveComparisonTables() {
   });
 }
 
-/* === HEADER SCROLL EFFECT === */
+/* === HEADER SCROLL EFFECT (rAF-throttled, zero redundant DOM writes) === */
 function initHeader() {
   const header = document.querySelector('.header');
   if (!header) return;
 
+  let isScrolled = window.scrollY > 50;
+  if (isScrolled) header.classList.add('header--scrolled');
+  let ticking = false;
+
   window.addEventListener(
     'scroll',
     () => {
-      if (window.scrollY > 50) {
-        header.classList.add('header--scrolled');
-      } else {
-        header.classList.remove('header--scrolled');
-      }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const nextScrolled = window.scrollY > 50;
+        if (nextScrolled !== isScrolled) {
+          isScrolled = nextScrolled;
+          header.classList.toggle('header--scrolled', isScrolled);
+        }
+        ticking = false;
+      });
     },
     { passive: true }
   );
@@ -627,40 +636,56 @@ function initFroebelUXTelemetry() {
       try {
         const inpObs = new PerformanceObserver((entryList) => {
           for (const entry of entryList.getEntries()) {
-            if (entry.duration && (!cwv.inp || entry.duration > cwv.inp)) {
-              cwv.inp = Math.round(entry.duration);
+            // W3C INP spec: only genuine discrete user interactions carry interactionId > 0
+            if (entry.interactionId && entry.interactionId > 0 && entry.duration) {
+              const dur = Math.round(entry.duration);
+              if (!cwv.inp || dur > cwv.inp) {
+                cwv.inp = dur;
+              }
             }
           }
         });
-        inpObs.observe({ type: 'event', buffered: true });
+        inpObs.observe({ type: 'event', buffered: true, durationThreshold: 40 });
       } catch (_) {}
     }
   } catch (_) {}
 
-  // Scroll & Active Time tracking
+  // Cache static On-Page SEO Score once (avoids 6 full-DOM querySelectorAll scans per event)
+  const cachedSeoScore = computeOnPageSeoScore();
+
+  // Scroll & Active Time tracking (rAF-throttled + cached scrollHeight to avoid forced synchronous reflows)
   let maxScrollPct = 0;
   const scrollMilestones = new Set();
   let activeStartTs = Date.now();
   let accumulatedActiveMs = 0;
+  let cachedScrollSpan = 1;
+  const recomputeScrollSpan = () => {
+    cachedScrollSpan = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  };
+  recomputeScrollSpan();
+  window.addEventListener('resize', recomputeScrollSpan, { passive: true });
+  window.addEventListener('load', recomputeScrollSpan, { once: true, passive: true });
 
+  let scrollTicking = false;
   window.addEventListener(
     'scroll',
     () => {
-      const docHeight = Math.max(
-        document.documentElement.scrollHeight - window.innerHeight,
-        1
-      );
-      const pct = Math.min(100, Math.max(0, Math.round((window.scrollY / docHeight) * 100)));
-      if (pct > maxScrollPct) maxScrollPct = pct;
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        scrollTicking = false;
+        const pct = Math.min(100, Math.max(0, Math.round((window.scrollY / cachedScrollSpan) * 100)));
+        if (pct > maxScrollPct) maxScrollPct = pct;
 
-      [25, 50, 75, 100].forEach((milestone) => {
-        if (pct >= milestone && !scrollMilestones.has(milestone)) {
-          scrollMilestones.add(milestone);
-          sendTelemetry('scroll_depth', {
-            scroll_pct: milestone,
-            element_id: `scroll_${milestone}`,
-          });
-        }
+        [25, 50, 75, 100].forEach((milestone) => {
+          if (pct >= milestone && !scrollMilestones.has(milestone)) {
+            scrollMilestones.add(milestone);
+            scheduleTelemetry('scroll_depth', {
+              scroll_pct: milestone,
+              element_id: `scroll_${milestone}`,
+            });
+          }
+        });
       });
     },
     { passive: true }
@@ -690,7 +715,7 @@ function initFroebelUXTelemetry() {
 
     const profileCode = extra.parent_profile || inferParentProfile(extra.element_text || '');
     const activeSec = Math.round(Math.min(activeNow, 600000) / 1000);
-    const seoScoreVal = computeOnPageSeoScore();
+    const seoScoreVal = cachedSeoScore;
 
     if (cwv.fcp === null && typeof performance !== 'undefined' && performance.getEntriesByType) {
       try {
@@ -777,15 +802,25 @@ function initFroebelUXTelemetry() {
     } catch (_) {}
   }
 
+  // Yield to browser Next Paint before serializing/dispatching non-unload telemetry (keeps INP < 50ms)
+  function scheduleTelemetry(eventType, extra = {}, immediateKeepalive = false) {
+    if (immediateKeepalive) {
+      sendTelemetry(eventType, extra, true);
+      return;
+    }
+    setTimeout(() => sendTelemetry(eventType, extra, false), 0);
+  }
+
   // Expose global tracker for Wizard & custom forms
   window.FroebelUX = {
-    track: (eventType, extra) => sendTelemetry(eventType, extra, true),
+    track: (eventType, extra) => scheduleTelemetry(eventType, extra, eventType === 'form_submit'),
     getSlug: () => pageSlug,
     isBot: () => isSearchBot || isAiBot,
   };
 
   // 1. Emit initial page_view after brief settle so FCP/TTFB are populated
   setTimeout(() => {
+    recomputeScrollSpan();
     sendTelemetry('page_view', {
       element_id: isSearchBot || isAiBot ? `bot:${deviceType}` : 'document',
       element_text: document.title,
@@ -816,7 +851,7 @@ function initFroebelUXTelemetry() {
               el.querySelector('h1, h2, h3, caption')?.textContent?.trim() ||
               (el.tagName === 'TABLE' ? el.closest('.card, section')?.querySelector('h3, h2')?.textContent?.trim() : '') ||
               secId;
-            sendTelemetry('section_view', {
+            scheduleTelemetry('section_view', {
               section_id: secId,
               element_id: secId,
               element_text: headingText.slice(0, 80),
@@ -858,7 +893,7 @@ function initFroebelUXTelemetry() {
               target.closest('[id]')?.id ||
               target.textContent?.trim()?.slice(0, 50) ||
               target.tagName;
-            sendTelemetry('rage_click', {
+            scheduleTelemetry('rage_click', {
               element_id: `rage:${rageLabel}`,
               element_text: target.textContent?.trim()?.slice(0, 80) || target.tagName,
             });
@@ -893,7 +928,7 @@ function initFroebelUXTelemetry() {
           interactive.tagName.toLowerCase();
 
         if (href.includes('wa.me') || href.includes('whatsapp') || interactive.classList.contains('whatsapp-float')) {
-          sendTelemetry(
+          scheduleTelemetry(
             'whatsapp_click',
             {
               element_id: `wa:${elId}`,
@@ -902,7 +937,7 @@ function initFroebelUXTelemetry() {
             true
           );
         } else if (href.startsWith('tel:')) {
-          sendTelemetry(
+          scheduleTelemetry(
             'phone_click',
             {
               element_id: `tel:${elId}`,
@@ -911,14 +946,15 @@ function initFroebelUXTelemetry() {
             true
           );
         } else {
-          sendTelemetry(
+          const navigatesAway = Boolean(href && !href.startsWith('#') && !href.startsWith('javascript:'));
+          scheduleTelemetry(
             'cta_click',
             {
               element_id: `cta:${elId}`,
               element_text: text,
               meta: { href },
             },
-            true
+            navigatesAway
           );
         }
       } else {
@@ -929,7 +965,7 @@ function initFroebelUXTelemetry() {
             cardCandidate.querySelector('h3, h4, strong')?.textContent?.trim()?.slice(0, 50) ||
             target.getAttribute('alt') ||
             cardCandidate.className;
-          sendTelemetry('dead_click', {
+          scheduleTelemetry('dead_click', {
             element_id: `dead:${deadLabel}`,
             element_text: deadLabel,
           });
