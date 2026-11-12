@@ -3,9 +3,9 @@
    ============================================ */
 
 const WIZARD_STEPS = [
-  { id: 'student', title: 'Datos del Alumno', icon: '👶' },
+  { id: 'student', title: 'Cotiza y Aparta', icon: '👶' },
   { id: 'guardian', title: 'Datos del Tutor', icon: '👨‍👩‍👧' },
-  { id: 'documents', title: 'Documentos', icon: '📄' },
+  { id: 'documents', title: 'Documentos (Opcional)', icon: '📄' },
   { id: 'confirmation', title: 'Confirmación', icon: '✅' }
 ];
 
@@ -76,30 +76,38 @@ function renderStudentStep() {
   const g = wizardData.guardian || {};
   return `
     <div class="wizard__section fade-in visible">
-      <div id="wizard-express-top-bar" style="margin-bottom:1.15rem;padding:0.95rem 1.1rem;background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:14px;display:flex;flex-direction:column;gap:0.65rem;">
-        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;font-size:0.88rem;color:#1e3a8a;">
+      <div id="wizard-express-top-bar" style="margin-bottom:1.15rem;padding:1rem 1.15rem;background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:14px;display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;font-size:0.9rem;color:#1e3a8a;">
           <div>
-            <strong>💡 Cotización seleccionada 2026-2027:</strong>
+            <strong>🧮 Cotización en Vivo 2026-2027:</strong>
             <span id="wizard-live-quote-text">Colegiatura <strong>$3,600 MXN/mes</strong> (Pronto Pago) · Inscripción anticipada desde <strong>$3,375 MXN (-25%)</strong></span>
           </div>
-          <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.76rem;font-weight:700;">✓ SEP RVOE 09050141</span>
+          <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.76rem;font-weight:700;">✓ SEP RVOE 09050141 · Sin documentos hoy</span>
+        </div>
+        <div id="wizard-quick-grade-pills" style="display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center;">
+          <span style="font-size:0.76rem;font-weight:700;color:#166534;">Elige en 1 clic:</span>
+          <button type="button" onclick="quickSelectWizardOption('program','maternal')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🍼 Maternal (1-3a)</button>
+          <button type="button" onclick="quickSelectWizardOption('program','preescolar_1')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🌻 Kínder 1 (3a)</button>
+          <button type="button" onclick="quickSelectWizardOption('program','preescolar_2')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🧠 Kínder 2 (4a)</button>
+          <button type="button" onclick="quickSelectWizardOption('program','preescolar_3')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🎓 Kínder 3 (5a)</button>
+          <button type="button" onclick="quickSelectWizardOption('estancia','completa_18h')" style="padding:4px 10px;border-radius:999px;border:1px solid #fde047;background:#fef9c3;color:#854d0e;font-size:0.76rem;font-weight:700;cursor:pointer;">🍽️ +Estancia 18:00h (+$1,900)</button>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:0.55rem;align-items:center;">
           <button type="button" id="wizard-wa-top-btn" onclick="sendWizardToWhatsApp()" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:0.45rem;padding:0.75rem 1rem;border-radius:999px;border:none;background:#16a34a;color:#ffffff;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(22,163,74,0.28);">
-            💬 Agendar Visita o Apartar Lugar por WhatsApp (1 clic · sin llenar todo)
+            💬 Enviar esta Cotización o Agendar Visita por WhatsApp (1 clic · sin llenar todo)
           </button>
         </div>
       </div>
 
-      <h2 class="wizard__title" style="font-size:1.3rem;">Pre-Registro en Línea o Inscripción Completa</h2>
-      <p class="wizard__desc" style="margin-bottom:0.9rem;">Deja solo el nombre y tu WhatsApp para apartar lugar en 15 segundos, o continúa los 4 pasos si deseas subir documentos ahora.</p>
+      <h2 class="wizard__title" style="font-size:1.3rem;">Calcula tu Mensualidad y Aparta Lugar en 15 Segundos</h2>
+      <p class="wizard__desc" style="margin-bottom:0.9rem;">Ajusta el programa y horario para ver tu colegiatura exacta. Para apartar lugar en línea deja solo nombre y WhatsApp (sin subir documentos hoy).</p>
 
       <div id="wizard-express-success" style="display:none;margin-bottom:1rem;padding:1rem;background:#dcfce7;border:2px solid #16a34a;border-radius:12px;color:#14532d;font-size:0.92rem;font-weight:600;"></div>
 
       <div class="wizard__form-grid">
         <div class="wizard__field">
-          <label for="s-program">Programa de interés *</label>
-          <select id="s-program" required onchange="updateWizardLiveQuote()">
+          <label for="s-program">1. Programa / Grado de interés *</label>
+          <select id="s-program" required onchange="onWizardCalculatorChange()">
             <option value="">Seleccionar programa</option>
             <option value="maternal" ${s.program === 'maternal' ? 'selected' : ''}>Maternal Bilingüe (1 a 3 años)</option>
             <option value="preescolar_1" ${s.program === 'preescolar_1' ? 'selected' : ''}>Kínder 1 / Preescolar 1 (3 a 4 años)</option>
@@ -109,23 +117,8 @@ function renderStudentStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="s-name">Nombre del alumno/a (o del tutor) *</label>
-          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-parent-phone">Tu WhatsApp o teléfono celular *</label>
-          <input type="tel" id="s-parent-phone" value="${g.phone || s.parent_phone || ''}" required placeholder="Ej: 55 1234 5678">
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-dob">Fecha de nacimiento del alumno (opcional)</label>
-          <input type="date" id="s-dob" value="${s.date_of_birth || ''}">
-        </div>
-
-        <div class="wizard__field">
-          <label for="s-plan">Modalidad de colegiatura</label>
-          <select id="s-plan" onchange="updateWizardLiveQuote()">
+          <label for="s-plan">2. Modalidad de colegiatura</label>
+          <select id="s-plan" onchange="onWizardCalculatorChange()">
             <option value="pronto_pago" ${s.plan === 'pronto_pago' || !s.plan ? 'selected' : ''}>Pronto Pago — $3,600/mes (primeros 10 días)</option>
             <option value="normal" ${s.plan === 'normal' ? 'selected' : ''}>Mensual Normal — $4,000/mes</option>
             <option value="anual" ${s.plan === 'anual' ? 'selected' : ''}>Pago Anual — $40,480 (8% desc. · ahorra $3,520)</option>
@@ -133,12 +126,27 @@ function renderStudentStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="s-estancia">Horario Extendido y Comedor (Opcional)</label>
-          <select id="s-estancia" onchange="updateWizardLiveQuote()">
-            <option value="ninguna" ${!s.estancia || s.estancia === 'ninguna' ? 'selected' : ''}>Horario Escolar Base (08:30 a 14:00 hrs — Sin costo extra)</option>
+          <label for="s-estancia">3. Horario Extendido y Comedor (Opcional)</label>
+          <select id="s-estancia" onchange="onWizardCalculatorChange()">
+            <option value="ninguna" ${!s.estancia || s.estancia === 'ninguna' ? 'selected' : ''}>Horario Escolar Base (08:30 a 14:00 hrs — $0 extra)</option>
             <option value="parcial_16h" ${s.estancia === 'parcial_16h' ? 'selected' : ''}>Estancia Parcial + Comedor 3 Tiempos (hasta 16:00 hrs — +$1,400/mes)</option>
             <option value="completa_18h" ${s.estancia === 'completa_18h' ? 'selected' : ''}>Estancia Completa + Comedor + Talleres (hasta 18:00 hrs — +$1,900/mes)</option>
           </select>
+        </div>
+
+        <div class="wizard__field">
+          <label for="s-name">4. Nombre del alumno/a (o del tutor) *</label>
+          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
+        </div>
+
+        <div class="wizard__field">
+          <label for="s-parent-phone">5. Tu WhatsApp o teléfono celular *</label>
+          <input type="tel" id="s-parent-phone" value="${g.phone || s.parent_phone || ''}" required placeholder="Ej: 55 1234 5678">
+        </div>
+
+        <div class="wizard__field">
+          <label for="s-dob">6. Fecha de nacimiento (opcional)</label>
+          <input type="date" id="s-dob" value="${s.date_of_birth || ''}">
         </div>
       </div>
 
@@ -347,7 +355,7 @@ function renderConfirmationStep() {
       </div>
 
       <div style="text-align:center;margin-top:var(--space-8);">
-        <a href="index.html" class="btn btn--primary">Volver al Inicio</a>
+        <a href="/" class="btn btn--primary">Volver al Inicio</a>
         <a href="https://wa.me/525554148872?text=Hola%2C%20acabo%20de%20completar%20mi%20inscripción%20en%20línea" class="btn btn--secondary" target="_blank" rel="noopener">
           Contactar por WhatsApp
         </a>
@@ -377,6 +385,34 @@ function renderFooter() {
 }
 
 /* === LIVE QUOTE & EXPRESS WHATSAPP === */
+function onWizardCalculatorChange() {
+  trackWizardOpenOnce('Interacción con Calculadora de Colegiatura');
+  updateWizardLiveQuote();
+  if (window.FroebelUX && !isAutomatedCrawler()) {
+    const progVal = document.getElementById('s-program')?.value || 'sin_programa';
+    const estVal = document.getElementById('s-estancia')?.value || 'ninguna';
+    window.FroebelUX.track('cta_click', {
+      element_id: 'wizard_quote_calculator',
+      element_text: `Cotizador: ${progVal} | ${estVal}`
+    });
+  }
+}
+
+function quickSelectWizardOption(field, val) {
+  if (field === 'program') {
+    const sel = document.getElementById('s-program');
+    if (sel) sel.value = val;
+    wizardData.student.program = val;
+  } else if (field === 'estancia') {
+    const sel = document.getElementById('s-estancia');
+    if (sel) {
+      sel.value = sel.value === val ? 'ninguna' : val;
+      wizardData.student.estancia = sel.value;
+    }
+  }
+  onWizardCalculatorChange();
+}
+
 function updateWizardLiveQuote() {
   const quoteEl = document.getElementById('wizard-live-quote-text');
   if (!quoteEl) return;

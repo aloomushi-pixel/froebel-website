@@ -1,13 +1,13 @@
 {
-  "version": "2.1.47",
-  "cycle": 47,
-  "deployedAt": "2026-11-12T04:43:52.960Z",
+  "version": "2.1.48",
+  "cycle": 48,
+  "deployedAt": "2026-11-12T08:58:12.753Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "seoScoreTarget": 100,
   "highlights": [
-    "Enrollment Wizard v9: promoted live quote + 1-tap WhatsApp top bar above inputs, added 15s Express Online Pre-Registration, normalized programa aliases, and removed intrusive mobile keyboard auto-focus",
-    "Fixed /api/contact Resend validation in server.js so Name + WhatsApp/Phone leads without email succeed 100% of the time",
-    "Eliminated mobile photo & table dead_clicks via interactive Facility Photo Lightbox + tappable comparison table rows in main.js?v=22, plus persistent utm_source (chatgpt.com) session attribution",
-    "Compacted contacto.html mobile Hero above-the-fold and upgraded 23/23 sitewide footer internal anchors for \"Colegio Federico Froebel\" (/nosotros) and \"Colegio Froebel Costos\" (/inscripciones)"
+    "Enrollment Wizard v10 & inscripciones.html compaction: added 1-tap Interactive Tuition + Estancia Calculator pills, removed redundant 4-circle stepper & 'Sube Documentos' deterrent, lifting #wizard-section ~520px higher for organic cost-comparing parents",
+    "Styled and upgraded #lead-magnet-checklist on /blog/ into a high-contrast 15-Point SEP & CCTV Safety Checklist preview card + removed redundant hero pill bar above #tabla-guias-crianza-froebel",
+    "Injected E-E-A-T institutional author byline (-> /nosotros 'Colegio Federico Froebel') and a balanced Topic-Cluster related-guides ring across all 8 blog posts, plus upgraded /nosotros (pos 11.08 -> Top 10) and / Low-CTR snippets",
+    "Modernized 100% of OpenGraph, Twitter Card, and JSON-LD Schema image/logo URLs across all 23 HTML pages to .webp and aligned llms.txt + llms-full.txt to 11 monthly installments (Sep-Jul)"
   ]
 }
