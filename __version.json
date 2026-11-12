@@ -1,13 +1,11 @@
 {
-  "version": "2.1.48",
-  "cycle": 48,
-  "deployedAt": "2026-11-12T08:58:12.753Z",
-  "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
-  "seoScoreTarget": 100,
+  "version": "2.1.49",
+  "cycle": 49,
+  "deployedAt": "2026-11-12T13:10:55.415Z",
+  "standard": "Estándar Maestro v2.1 + GSC + Gobernanza por Magnitud",
   "highlights": [
-    "Enrollment Wizard v10 & inscripciones.html compaction: added 1-tap Interactive Tuition + Estancia Calculator pills, removed redundant 4-circle stepper & 'Sube Documentos' deterrent, lifting #wizard-section ~520px higher for organic cost-comparing parents",
-    "Styled and upgraded #lead-magnet-checklist on /blog/ into a high-contrast 15-Point SEP & CCTV Safety Checklist preview card + removed redundant hero pill bar above #tabla-guias-crianza-froebel",
-    "Injected E-E-A-T institutional author byline (-> /nosotros 'Colegio Federico Froebel') and a balanced Topic-Cluster related-guides ring across all 8 blog posts, plus upgraded /nosotros (pos 11.08 -> Top 10) and / Low-CTR snippets",
-    "Modernized 100% of OpenGraph, Twitter Card, and JSON-LD Schema image/logo URLs across all 23 HTML pages to .webp and aligned llms.txt + llms-full.txt to 11 monthly installments (Sep-Jul)"
+    "Fixed visible CSS text corruption ($3 regex expansion bug), removed render-blocking /styles/main.css (26.5 KB), fixed false active nav state, compacted hero controls, and replaced broken mobile .stats marquee across all 5 /colegio-cerca-de-mi/* local landing pages",
+    "Upgraded /contacto with WCAG AAA hero contrast and full-surface 1-tap clickable cards for Google Maps, WhatsApp, phone, and email",
+    "Optimized GSC Striking Distance & Low-CTR Titles/Meta/WebPage JSON-LD across /, /inscripciones, /programas, /maternal-bilingue-1-a-3-anos, /preescolar-stem-3-a-6-anos, /horario-extendido-y-comedor, /instalaciones-y-seguridad, /contacto, and 5 local landing pages"
   ]
 }
