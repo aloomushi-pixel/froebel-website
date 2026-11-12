@@ -45,7 +45,13 @@
         "Kínder Federico Froebel",
         "Colegio Federico Froebel Gustavo A. Madero",
         "Preescolar Federico Froebel San Juan de Aragón",
-        "Estancias Educativas Froebel"
+        "Estancias Educativas Froebel",
+        "Colegio Federico Froebel",
+        "Instituto Froebel",
+        "Centro Educativo Froebel",
+        "Centro Escolar Federico Froebel",
+        "Centro Infantil Froebel",
+        "Kindergarten Federico Froebel"
       ],
       "url": "https://froebelinstituto.com.mx/",
       "logo": "https://froebelinstituto.com.mx/assets/images/logo-froebel.png",
@@ -147,6 +153,18 @@
             "url": "https://froebelinstituto.com.mx/horario-extendido-y-comedor"
           }
         ]
+      },
+      "foundingDate": "1980",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Incorporación Oficial SEP Educación Preescolar",
+        "name": "Reconocimiento de Validez Oficial de Estudios SEP (RVOE 09050141)",
+        "identifier": "09050141",
+        "recognizedBy": {
+          "@type": "GovernmentOrganization",
+          "name": "Secretaría de Educación Pública (SEP)",
+          "url": "https://www.gob.mx/sep"
+        }
       }
     },
     {
@@ -207,6 +225,47 @@
           "item": "https://froebelinstituto.com.mx/preescolar-stem-3-a-6-anos"
         }
       ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://froebelinstituto.com.mx/preescolar-stem-3-a-6-anos#course",
+      "name": "Preescolar y Kínder 1, 2 y 3 Bilingüe STEM (SEP RVOE 09050141)",
+      "description": "Educación preescolar oficial incorporada a la SEP (3 a 6 años) con inglés diario, Dones de Froebel, pensamiento lógico-matemático STEM y lectoescritura fluida para primaria.",
+      "url": "https://froebelinstituto.com.mx/preescolar-stem-3-a-6-anos",
+      "provider": {
+        "@id": "https://froebelinstituto.com.mx/#organization"
+      },
+      "inLanguage": [
+        "es-MX",
+        "en"
+      ],
+      "typicalAgeRange": "3-6",
+      "educationalCredentialAwarded": "Certificado Oficial de Educación Preescolar SEP (RVOE 09050141)",
+      "offers": {
+        "@type": "Offer",
+        "category": "Colegiatura Mensual Pronto Pago",
+        "price": "3600",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "url": "https://froebelinstituto.com.mx/inscripciones?inscribir=1&programa=preescolar_1"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "onsite",
+        "courseSchedule": {
+          "@type": "Schedule",
+          "repeatFrequency": "P1W",
+          "byDay": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "startTime": "08:30",
+          "endTime": "14:00"
+        }
+      }
     }
   ]
 }
@@ -252,18 +311,12 @@
 </div>
 </header>
 <!-- PAGE HERO -->
-<section class="section" id="hero-preescolar-stem" style="padding-top: calc(72px + var(--space-16)); background: linear-gradient(135deg, var(--color-secondary-50), var(--color-bg));">
+<section class="section" id="hero-preescolar-stem" style="padding-top: calc(72px + var(--space-6)); padding-bottom: var(--space-8); background: linear-gradient(135deg, var(--color-secondary-50), var(--color-bg));">
 <div class="container text-center">
 <div class="section-header fade-in" style="margin-bottom:0;">
 <span class="section-header__label">Validez Oficial SEP · Kínder 1, 2 y 3 (3 a 6 años)</span>
 <h1 class="section-header__title">Preescolar y Kínder Bilingüe STEM Federico Froebel en Gustavo A. Madero</h1>
 <p class="section-header__desc">Formamos niños lectores, bilingües y con pensamiento lógico-matemático desde Kínder 1 hasta Kínder 3 con Dones de Froebel, robótica y neurociencia en San Juan de Aragón.</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:var(--space-6);">
-  <a href="#kinder1" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🌻 Kínder 1 (3-4 años)</a>
-  <a href="#kinder2" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🧠 Kínder 2 (4-5 años)</a>
-  <a href="#kinder3" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🎓 Kínder 3 — Primaria (5-6 años)</a>
-  <a href="/inscripciones#costos" style="background:#fef9c3;border:1px solid #fde047;border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:#854d0e;box-shadow:var(--shadow-sm);">💳 Colegiatura $3,600/mes Pronto Pago →</a>
-</div>
 <div class="card fade-in" style="max-width:960px;margin:var(--space-6) auto 0;padding:var(--space-5);overflow-x:auto;text-align:left;border:2px solid var(--color-primary-100);">
 <h2 style="font-size:var(--text-base);color:var(--color-primary-dark);margin-bottom:var(--space-3);text-align:center;">📊 Tabla Comparativa de Grados: Kínder 1, Kínder 2 y Kínder 3 SEP (Ciclo 2026-2027)</h2>
 <table id="tabla-grados-kinder-sep" data-ux-section="tabla-grados-kinder-sep" style="width:100%;border-collapse:collapse;font-size:0.84rem;text-align:left;">

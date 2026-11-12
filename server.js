@@ -215,9 +215,12 @@ const ROOT_CLEAN_SLUGS = new Set([
 ]);
 
 const LEGACY_ASSET_REDIRECTS = new Map([
-  ['/assets/images/instalaciones-seguras-kinder-gam.jpg', '/assets/images/instalaciones-kinder-patio-juegos-gam.jpg'],
-  ['/assets/images/aula-preescolar-metodo-froebel.jpg', '/assets/images/material-didactico-dones-froebel.jpg'],
-  ['/assets/images/maternal-estimulacion-temprana-cdmx.jpg', '/assets/images/salon-maternal-bilingue-froebel.jpg'],
+  ['/assets/images/instalaciones-seguras-kinder-gam.jpg', '/assets/images/instalaciones-kinder-patio-juegos-gam.webp'],
+  ['/assets/images/instalaciones-seguras-kinder-gam.webp', '/assets/images/instalaciones-kinder-patio-juegos-gam.webp'],
+  ['/assets/images/aula-preescolar-metodo-froebel.jpg', '/assets/images/material-didactico-dones-froebel.webp'],
+  ['/assets/images/aula-preescolar-metodo-froebel.webp', '/assets/images/material-didactico-dones-froebel.webp'],
+  ['/assets/images/maternal-estimulacion-temprana-cdmx.jpg', '/assets/images/salon-maternal-bilingue-froebel.webp'],
+  ['/assets/images/maternal-estimulacion-temprana-cdmx.webp', '/assets/images/salon-maternal-bilingue-froebel.webp'],
 ]);
 
 app.use((req, res, next) => {

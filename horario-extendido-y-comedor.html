@@ -45,7 +45,13 @@
         "Kínder Federico Froebel",
         "Colegio Federico Froebel Gustavo A. Madero",
         "Preescolar Federico Froebel San Juan de Aragón",
-        "Estancias Educativas Froebel"
+        "Estancias Educativas Froebel",
+        "Colegio Federico Froebel",
+        "Instituto Froebel",
+        "Centro Educativo Froebel",
+        "Centro Escolar Federico Froebel",
+        "Centro Infantil Froebel",
+        "Kindergarten Federico Froebel"
       ],
       "url": "https://froebelinstituto.com.mx/",
       "logo": "https://froebelinstituto.com.mx/assets/images/logo-froebel.png",
@@ -147,6 +153,18 @@
             "url": "https://froebelinstituto.com.mx/horario-extendido-y-comedor"
           }
         ]
+      },
+      "foundingDate": "1980",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Incorporación Oficial SEP Educación Preescolar",
+        "name": "Reconocimiento de Validez Oficial de Estudios SEP (RVOE 09050141)",
+        "identifier": "09050141",
+        "recognizedBy": {
+          "@type": "GovernmentOrganization",
+          "name": "Secretaría de Educación Pública (SEP)",
+          "url": "https://www.gob.mx/sep"
+        }
       }
     },
     {
@@ -199,6 +217,45 @@
           "item": "https://froebelinstituto.com.mx/horario-extendido-y-comedor"
         }
       ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://froebelinstituto.com.mx/horario-extendido-y-comedor#course",
+      "name": "Estancias Educativas Froebel, Talleres Vespertinos y Comedor (14:00 a 18:00 hrs)",
+      "description": "Servicio vespertino con comedor nutritivo caliente de 3 tiempos, supervisión de tareas, música, arte y activación física hasta las 18:00 hrs en Gustavo A. Madero.",
+      "url": "https://froebelinstituto.com.mx/horario-extendido-y-comedor",
+      "provider": {
+        "@id": "https://froebelinstituto.com.mx/#organization"
+      },
+      "inLanguage": [
+        "es-MX"
+      ],
+      "typicalAgeRange": "1-6",
+      "offers": {
+        "@type": "Offer",
+        "category": "Estancia Educativa Vespertina Mensual",
+        "price": "1400",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "url": "https://froebelinstituto.com.mx/inscripciones?inscribir=1&estancia=completa_18h"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "onsite",
+        "courseSchedule": {
+          "@type": "Schedule",
+          "repeatFrequency": "P1W",
+          "byDay": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "startTime": "14:00",
+          "endTime": "18:00"
+        }
+      }
     }
   ]
 }
@@ -244,17 +301,12 @@
 </div>
 </header>
 <!-- PAGE HERO -->
-<section class="section" id="hero-horario-extendido" style="padding-top: calc(72px + var(--space-16)); background: linear-gradient(135deg, var(--color-secondary-50), var(--color-bg));">
+<section class="section" id="hero-horario-extendido" style="padding-top: calc(72px + var(--space-6)); padding-bottom: var(--space-8); background: linear-gradient(135deg, var(--color-secondary-50), var(--color-bg));">
 <div class="container text-center">
 <div class="section-header fade-in" style="margin-bottom:0;">
 <span class="section-header__label">Estancias Educativas Froebel · 07:30 a 18:00 hrs</span>
 <h1 class="section-header__title">Estancia Educativa, Horario Extendido y Comedor hasta las 18:00 hrs en GAM</h1>
 <p class="section-header__desc">La solución integral para familias que trabajan en Gustavo A. Madero, Venustiano Carranza y zona AICM: menú nutritivo de 3 tiempos, apoyo en tareas y talleres vespertinos.</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:var(--space-6);">
-  <a href="#estancia" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🎨 Parcial 14:00-16:00h: $1,400/mes</a>
-  <a href="#estancia" style="background:#eff6ff;border:1px solid #93c5fd;border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary);box-shadow:var(--shadow-sm);">🌟 Completa 14:00-18:00h: $1,900/mes</a>
-  <a href="#rutina-vespertina" style="background:#ffffff;border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:0.86rem;font-weight:700;color:var(--color-primary-dark);box-shadow:var(--shadow-sm);">🍱 Ver Menú y Rutina Vespertina →</a>
-</div>
 </div>
 <div class="card fade-in" style="max-width:980px;margin:var(--space-6) auto 0;padding:var(--space-5);overflow-x:auto;text-align:left;border:2px solid var(--color-primary-100);">
 <h2 style="font-size:var(--text-base);color:var(--color-primary-dark);margin-bottom:var(--space-3);">📊 Tabla Comparativa de Horarios, Estancia Vespertina y Comedor Nutritivo (Ciclo 2026-2027)</h2>

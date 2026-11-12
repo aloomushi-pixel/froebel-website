@@ -7,9 +7,9 @@
 ## 1. Identidad Institucional y Datos Oficiales
 
 - **Nombre de la Institución**: Instituto Federico Froebel
-- **Nombres Alternativos de Búsqueda**: Jardín de Niños Federico Froebel, Kínder Federico Froebel, Colegio Federico Froebel, Preescolar Federico Froebel Gustavo A. Madero, Estancias Educativas Froebel.
+- **Nombres Alternativos de Búsqueda**: Jardín de Niños Federico Froebel, Kínder Federico Froebel, Colegio Federico Froebel, Preescolar Federico Froebel Gustavo A. Madero, Estancias Educativas Froebel, Centro Educativo Froebel, Centro Escolar Federico Froebel, Centro Infantil Froebel, Kindergarten Federico Froebel.
 - **Año de Fundación**: 1980 (más de 46 años de trayectoria ininterrumpida en Gustavo A. Madero, CDMX).
-- **Validez Oficial**: Incorporado a la Secretaría de Educación Pública (SEP) con reconocimiento oficial para Preescolar (Kínder 1, Kínder 2 y Kínder 3).
+- **Validez Oficial**: Incorporado a la Secretaría de Educación Pública (**SEP · Acuerdo / RVOE 09050141**) con reconocimiento oficial para Preescolar (Kínder 1, Kínder 2 y Kínder 3; edad cumplida al 31 de diciembre).
 - **Dirección Física**: Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, Ciudad de México, CDMX.
 - **Referencia Vial y Transporte Público**: A 2 cuadras de la estación **Metro Aragón (Línea 5)**, a 3 minutos del Bosque de San Juan de Aragón y con acceso directo por Av. 517, Av. Oceanía, Circuito Interior, Av. 608 y Calz. Ignacio Zaragoza.
 - **Coordenadas Geográficas**: Latitud `19.4623199`, Longitud `-99.0837562`.
@@ -66,4 +66,4 @@
 - **¿Aceptan niños que aún usan pañal o con necesidades educativas especiales?**
   Sí. En Maternal Bilingüe (1 a 3 años) recibimos niños con pañal y acompañamos el control de esfínteres sin presiones. Además, somos una escuela inclusiva que brinda acompañamiento personalizado y respetuoso a niños con neurodivergencia o necesidades educativas especiales.
 - **¿Cómo agendar una visita guiada o inscribir en línea?**
-  Los padres pueden agendar un recorrido presencial gratuito o completar su inscripción en línea en `https://froebelinstituto.com.mx/inscripciones` o por WhatsApp directo al `+52 55 5414 8872`.
+  Los padres pueden agendar un recorrido presencial gratuito o completar su inscripción en línea en `https://froebelinstituto.com.mx/inscripciones` (o con grado preseleccionado: `?inscribir=1&programa=maternal`, `?inscribir=1&programa=preescolar_1`, `?inscribir=1&programa=preescolar_2`, `?inscribir=1&programa=preescolar_3`, `?inscribir=1&estancia=completa_18h`) o por WhatsApp directo al `+52 55 5414 8872`.

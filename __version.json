@@ -1,19 +1,13 @@
 {
-  "version": "2.1.45",
-  "cycle": 45,
-  "deployed_at": "2026-11-11T20:20:27.546Z",
-  "app_uuid": "ybimjvjq180r82wr5oji4pvw",
-  "features": [
-    "pure-human-telemetry-bot-exclusion-rpc",
-    "colonia-hyperlocal-html-corruption-repair-5-pages",
-    "footer-clickable-brand-and-whatsapp-pills-23-pages",
-    "mid-page-testimonials-whatsapp-cta-strip-home",
-    "mobile-384x742-hero-table-compaction-nosotros-inscripciones",
-    "gsc-striking-distance-ctr-titles-and-descriptions",
-    "seo-score-100-on-all-23-pages-title-length-fix",
-    "site-wide-webp-image-optimization-2.3mb-saved",
-    "above-the-fold-summary-tables-on-all-23-pages",
-    "cookie-consent-banner-visible",
-    "supabase-ux-telemetry-rpc"
+  "version": "2.1.46",
+  "cycle": 46,
+  "deployedAt": "2026-11-12T00:31:42.444Z",
+  "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
+  "seoScoreTarget": 100,
+  "highlights": [
+    "Fixed duplicate FAQPage JSON-LD in instalaciones-y-seguridad.html + added SEP RVOE 09050141 credential & Course Rich Results across core silos",
+    "GSC CTR & Striking Distance title/meta optimization for /, /programas, and /blog/5-actividades-con-bloques-para-hacer-en-casa.html",
+    "Zero-CLS static Hero compaction + removal of redundant duplicate pill rows above Hero comparison tables on /programas, /preescolar-stem-3-a-6-anos, and /horario-extendido-y-comedor",
+    "Enriched llms.txt & llms-full.txt with SEP RVOE 09050141, GSC entity synonyms, and 1-click pre-enrollment deep links + WebP 301 legacy redirects in server.js"
   ]
 }
