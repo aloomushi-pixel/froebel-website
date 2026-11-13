@@ -6,14 +6,23 @@
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileNav();
-  initScrollAnimations();
-  initSmoothScroll();
-  initFaqAccordions();
-  initFacilityPhotoLightbox();
-  initInteractiveComparisonTables();
-  initInstantLinkPrefetch();
   initFroebelUXTelemetry();
-  initCookieConsentBanner();
+
+  const runDeferredEnhancements = () => {
+    initScrollAnimations();
+    initSmoothScroll();
+    initFaqAccordions();
+    initFacilityPhotoLightbox();
+    initInteractiveComparisonTables();
+    initInstantLinkPrefetch();
+    initCookieConsentBanner();
+  };
+
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(runDeferredEnhancements, { timeout: 350 });
+  } else {
+    setTimeout(runDeferredEnhancements, 0);
+  }
 });
 
 /* === INSTANT SUBPAGE PREFETCH (iOS Safari & Browsers without Speculation Rules) === */
@@ -58,7 +67,7 @@ function initInstantLinkPrefetch() {
 
 /* === INTERACTIVE PHOTO LIGHTBOX (Eliminates Mobile Photo Dead Clicks + Adds Conversion Bar) === */
 function initFacilityPhotoLightbox() {
-  const candidates = Array.from(document.querySelectorAll('main img, section img')).filter((img) => {
+  const candidates = Array.from(document.querySelectorAll('main img, section img, article img')).filter((img) => {
     if (img.closest('a, button, header, footer')) return false;
     const src = img.getAttribute('src') || '';
     if (src.includes('logo-froebel')) return false;
@@ -425,9 +434,7 @@ function initCookieConsentBanner() {
     'right: 84px',
     'max-width: 430px',
     'z-index: 9998',
-    'background: rgba(15, 23, 42, 0.96)',
-    'backdrop-filter: blur(14px)',
-    '-webkit-backdrop-filter: blur(14px)',
+    'background: rgba(15, 23, 42, 0.97)',
     'color: #f8fafc',
     'border: 1px solid rgba(59, 130, 246, 0.45)',
     'border-radius: 16px',

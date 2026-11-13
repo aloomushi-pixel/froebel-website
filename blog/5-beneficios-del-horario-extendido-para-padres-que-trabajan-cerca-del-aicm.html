@@ -390,6 +390,121 @@
         </ul>
       </div>
 
+<div id="calculadora-estancia-aicm-blog" data-ux-section="calculadora-estancia-aicm-blog" class="card fade-in" style="margin:var(--space-6) auto;max-width:960px;padding:var(--space-6);background:linear-gradient(135deg,#ffffff 0%,#f0f9ff 100%);border:2px solid var(--color-primary-light);box-shadow:var(--shadow-lg);text-align:left;">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--space-4);">
+    <div>
+      <span style="display:inline-block;background:#dbeafe;color:#1e3a8a;font-size:0.74rem;font-weight:800;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">🧮 Simulador Interactivo 2026-2027</span>
+      <h3 style="font-size:var(--text-xl);color:var(--color-primary-dark);margin:0;">¿Qué te conviene más: Hora Suelta ($50/h), Estancia 16:00h o Estancia 18:00h con Comedor?</h3>
+    </div>
+    <span style="font-size:0.78rem;font-weight:700;color:#166534;background:#dcfce7;padding:4px 10px;border-radius:999px;">🍲 Incluye cálculo con Pronto Pago ($3,600/mes)</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-4);margin-bottom:var(--space-4);">
+    <div>
+      <label for="sim-grado-blog" style="display:block;font-size:0.8rem;font-weight:700;color:var(--color-text);margin-bottom:4px;">1. Grado de tu pequeño(a)</label>
+      <select id="sim-grado-blog" onchange="updateSimuladorEstanciaFroebel('blog')" style="width:100%;padding:9px 11px;border-radius:var(--radius-lg);border:1px solid var(--color-primary-light);background:#ffffff;font-size:0.86rem;font-weight:600;color:var(--color-text);">
+        <option value="maternal" data-label="Maternal Bilingüe (1–3 años)">🍼 Maternal Bilingüe (1 a 3 años)</option>
+        <option value="preescolar_1" data-label="Kínder 1 SEP (3–4 años)" selected>🌻 Kínder 1 SEP (3 a 4 años)</option>
+        <option value="preescolar_2" data-label="Kínder 2 SEP (4–5 años)">🧠 Kínder 2 SEP (4 a 5 años)</option>
+        <option value="preescolar_3" data-label="Kínder 3 SEP (5–6 años)">🎓 Kínder 3 SEP (5 a 6 años)</option>
+      </select>
+    </div>
+    <div>
+      <label for="sim-hora-blog" style="display:block;font-size:0.8rem;font-weight:700;color:var(--color-text);margin-bottom:4px;">2. Hora habitual de recogida</label>
+      <select id="sim-hora-blog" onchange="updateSimuladorEstanciaFroebel('blog')" style="width:100%;padding:9px 11px;border-radius:var(--radius-lg);border:1px solid var(--color-primary-light);background:#ffffff;font-size:0.86rem;font-weight:600;color:var(--color-text);">
+        <option value="15">15:00 hrs (+1 hora vespertina)</option>
+        <option value="16">16:00 hrs (+2 horas vespertinas)</option>
+        <option value="17">17:00 hrs (+3 horas vespertinas)</option>
+        <option value="18" selected>18:00 hrs (+4 horas · Jornada completa)</option>
+      </select>
+    </div>
+    <div>
+      <label for="sim-dias-blog" style="display:block;font-size:0.8rem;font-weight:700;color:var(--color-text);margin-bottom:4px;">3. Días por semana que la usas</label>
+      <select id="sim-dias-blog" onchange="updateSimuladorEstanciaFroebel('blog')" style="width:100%;padding:9px 11px;border-radius:var(--radius-lg);border:1px solid var(--color-primary-light);background:#ffffff;font-size:0.86rem;font-weight:600;color:var(--color-text);">
+        <option value="1">1 día/semana (solo imprevistos)</option>
+        <option value="2">2 días/semana</option>
+        <option value="3">3 días/semana</option>
+        <option value="5" selected>4 a 5 días/semana (lunes a viernes)</option>
+      </select>
+    </div>
+  </div>
+  <div id="sim-resultado-blog" style="background:#ffffff;border:1px solid var(--color-primary-100);border-radius:var(--radius-xl);padding:var(--space-4);margin-bottom:var(--space-4);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+      <div>
+        <div id="sim-badge-blog" style="font-size:0.78rem;font-weight:800;color:#15803d;margin-bottom:2px;">✅ Modalidad recomendada: Estancia Completa 18:00h + Comedor 3 Tiempos</div>
+        <div id="sim-total-blog" style="font-size:1.25rem;font-weight:800;color:var(--color-primary-dark);">Total mensual integrado: $5,500 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,900 estancia)</span></div>
+        <div id="sim-ahorro-blog" style="font-size:0.82rem;color:var(--color-text-light);margin-top:3px;">Equivale a <strong>$275 MXN/día todo incluido</strong> (07:30 a 18:00h con comida caliente, tareas y talleres). Frente a pagar 4h sueltas diarias ($4,000/mes sin comida), <strong>ahorras $2,100 MXN/mes</strong>.</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:0.65rem;align-items:center;">
+    <a id="sim-cta-inscribir-blog" href="/inscripciones?inscribir=1&programa=preescolar_1&estancia=completa_18h" class="btn btn--primary btn--sm">📝 Pre-inscribir Kínder 1 + Estancia 18h ($5,500/mes) →</a>
+    <a id="sim-cta-wa-blog" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20calcul%C3%A9%20K%C3%ADnder%201%20con%20Estancia%20Completa%2018%3A00h%20(%245%2C500%2Fmes%20Pronto%20Pago)%20y%20quiero%20agendar%20visita" target="_blank" rel="noopener noreferrer" class="btn btn--accent btn--sm">💬 Enviar esta cotización por WhatsApp</a>
+  </div>
+</div>
+<script>
+  if (typeof window.updateSimuladorEstanciaFroebel !== 'function') {
+    window.updateSimuladorEstanciaFroebel = function(pfx) {
+      var gradoEl = document.getElementById('sim-grado-' + pfx);
+      var horaEl = document.getElementById('sim-hora-' + pfx);
+      var diasEl = document.getElementById('sim-dias-' + pfx);
+      if (!gradoEl || !horaEl || !diasEl) return;
+      var gradoCode = gradoEl.value;
+      var gradoLabel = gradoEl.options[gradoEl.selectedIndex].getAttribute('data-label') || 'Kínder SEP';
+      var pickup = parseInt(horaEl.value, 10) || 18;
+      var dias = parseInt(diasEl.value, 10) || 5;
+      var extraHrs = Math.max(1, pickup - 14);
+      var sueltaMes = extraHrs * dias * 4 * 50;
+      var base = 3600;
+      var badgeEl = document.getElementById('sim-badge-' + pfx);
+      var totalEl = document.getElementById('sim-total-' + pfx);
+      var ahorroEl = document.getElementById('sim-ahorro-' + pfx);
+      var ctaIns = document.getElementById('sim-cta-inscribir-' + pfx);
+      var ctaWa = document.getElementById('sim-cta-wa-' + pfx);
+
+      var modalidadNombre = '';
+      var estanciaParam = 'sin_estancia';
+      var totalIntegrado = base;
+
+      if (sueltaMes < 1200 && dias <= 2) {
+        modalidadNombre = 'Hora Suelta Flexible ($50 MXN/hora)';
+        totalIntegrado = base + sueltaMes;
+        estanciaParam = pickup <= 16 ? 'parcial_16h' : 'completa_18h';
+        badgeEl.textContent = '💡 Modalidad sugerida por uso ocasional: ' + modalidadNombre;
+        totalEl.innerHTML = 'Total mensual estimado: $' + totalIntegrado.toLocaleString('es-MX') + ' MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 Pronto Pago + $' + sueltaMes.toLocaleString('es-MX') + ' en horas sueltas sin comedor)</span>';
+        ahorroEl.innerHTML = 'Ideal si solo requieres apoyo ' + dias + ' día(s)/semana hasta las ' + pickup + ':00 hrs. Si deseas incluir <strong>Comedor caliente de 3 tiempos todos los días</strong>, la Estancia Parcial (16:00h) queda en <strong>$5,000/mes</strong>.';
+      } else if (pickup <= 16) {
+        modalidadNombre = 'Estancia Parcial 16:00h + Comedor 3 Tiempos';
+        totalIntegrado = base + 1400;
+        estanciaParam = 'parcial_16h';
+        var diff16 = sueltaMes - 1400;
+        badgeEl.textContent = '✅ Modalidad recomendada: ' + modalidadNombre;
+        totalEl.innerHTML = 'Total mensual integrado: $5,000 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,400 estancia 16:00h)</span>';
+        ahorroEl.innerHTML = 'Equivale a <strong>$250 MXN/día con comida de 3 tiempos y taller</strong> (07:30 a 16:00h). ' + (diff16 > 0 ? 'Frente a pagar horas sueltas ($' + sueltaMes.toLocaleString('es-MX') + '/mes sin comida), <strong>ahorras $' + diff16.toLocaleString('es-MX') + ' MXN/mes</strong>.' : 'Incluye menú casero diario de 3 tiempos supervisado por enfermería.');
+      } else {
+        modalidadNombre = 'Estancia Completa 18:00h + Comedor 3 Tiempos';
+        totalIntegrado = base + 1900;
+        estanciaParam = 'completa_18h';
+        var diff18 = sueltaMes - 1900;
+        badgeEl.textContent = '✅ Modalidad recomendada: ' + modalidadNombre;
+        totalEl.innerHTML = 'Total mensual integrado: $5,500 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,900 estancia 18:00h)</span>';
+        ahorroEl.innerHTML = 'Equivale a <strong>$275 MXN/día todo incluido</strong> (07:30 a 18:00h con comida de 3 tiempos, apoyo en tareas y talleres). ' + (diff18 > 0 ? 'Frente a pagar horas sueltas ($' + sueltaMes.toLocaleString('es-MX') + '/mes sin comida), <strong>ahorras $' + diff18.toLocaleString('es-MX') + ' MXN/mes</strong>.' : 'Incluye comida de 3 tiempos, tareas resueltas, talleres y colación.');
+      }
+
+      ctaIns.href = '/inscripciones?inscribir=1&programa=' + encodeURIComponent(gradoCode) + '&estancia=' + encodeURIComponent(estanciaParam);
+      ctaIns.textContent = '📝 Pre-inscribir ' + gradoLabel.split(' (')[0] + ' ($' + totalIntegrado.toLocaleString('es-MX') + '/mes) →';
+      var waMsg = 'Hola Instituto Froebel, calculé ' + gradoLabel + ' con salida a las ' + pickup + ':00 hrs (' + modalidadNombre + ' · $' + totalIntegrado.toLocaleString('es-MX') + '/mes Pronto Pago) y me gustaría agendar visita';
+      ctaWa.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(waMsg);
+
+      if (window.FroebelUX) {
+        window.FroebelUX.track('cta_click', {
+          element_id: 'sim_estancia_' + pfx + '_' + gradoCode + '_' + pickup + 'h',
+          element_text: 'Simulador Estancia: ' + gradoCode + ' ' + pickup + 'h (' + dias + 'd)',
+        });
+      }
+    };
+  }
+</script>
+
       <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
         5. 🛡️ Seguridad de Puertas Abiertas y Ubicación Estratégica
       </h2>
@@ -527,7 +642,7 @@
 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=24" defer></script>
+<script src="/scripts/main.js?v=25" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

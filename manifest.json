@@ -18,9 +18,39 @@
     },
     {
       "src": "/assets/images/logo-froebel.webp",
-      "sizes": "160x94",
+      "sizes": "911x883",
       "type": "image/webp",
       "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Costos e Inscripción ($3,600/mes)",
+      "short_name": "Costos",
+      "description": "Calculadora de colegiatura Pronto Pago y pre-registro en 15s",
+      "url": "/inscripciones?inscribir=1",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Programas SEP y Maternal",
+      "short_name": "Programas",
+      "description": "Maternal Bilingüe (1-3a) y Kínder 1, 2 y 3 SEP en GAM",
+      "url": "/programas",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Estancia 18:00h y Comedor",
+      "short_name": "Estancia 18h",
+      "description": "Simulador de Horario Extendido y Comedor de 3 tiempos",
+      "url": "/horario-extendido-y-comedor",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Ubicación y Visitas Guiadas",
+      "short_name": "Contacto",
+      "description": "Av. 521 No. 20, San Juan de Aragón I Secc (Metro Aragón)",
+      "url": "/contacto",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }

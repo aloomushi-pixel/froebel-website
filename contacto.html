@@ -343,6 +343,68 @@
       <a href="https://maps.app.goo.gl/gAZ6ZtXKoNPa157g6" target="_blank" rel="noopener noreferrer" style="background:#1e40af;color:#ffffff;padding:5px 12px;border-radius:999px;font-weight:700;">📍 Cómo Llegar (Google Maps) ↗</a>
     </div>
   </div>
+  <div id="planificador-ruta-gam" data-ux-section="planificador-ruta-gam" style="margin-top:var(--space-3);padding:12px 14px;background:linear-gradient(135deg,#eff6ff 0%,#ffffff 100%);border:1px solid var(--color-primary-light);border-radius:var(--radius-lg);text-align:left;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
+      <strong style="font-size:0.86rem;color:var(--color-primary-dark);">🧭 Planificador Rápido de Ruta y Visita Guiada desde tu Colonia:</strong>
+      <span style="font-size:0.75rem;font-weight:700;color:#1e40af;background:#dbeafe;padding:2px 8px;border-radius:999px;">Plantel único · Av. 521 No. 20 (Metro Aragón L5)</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin-bottom:10px;">
+      <div>
+        <label for="ruta-colonia-sel" style="display:block;font-size:0.75rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">1. Tu colonia o zona de salida</label>
+        <select id="ruta-colonia-sel" onchange="updatePlanificadorRutaGam()" style="width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--color-primary-100);background:#ffffff;font-size:0.82rem;font-weight:600;color:var(--color-text);">
+          <option value="aragon" selected>🚇 San Juan de Aragón (Secciones I a VII)</option>
+          <option value="aicm">✈️ Peñón de los Baños / Aeropuerto AICM T1–T2</option>
+          <option value="romero">🚗 Romero Rubio / Moctezuma / Av. Oceanía</option>
+          <option value="gertrudis">🚌 Gertrudis Sánchez / Eduardo Molina (MB L5)</option>
+          <option value="tenochtitlan">🏡 Nueva Tenochtitlán / Bondojito / DM Nacional</option>
+          <option value="villagam">📍 Villa GAM / Lindavista / Aragón Inguarán</option>
+        </select>
+      </div>
+      <div>
+        <label for="ruta-hora-sel" style="display:block;font-size:0.75rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">2. Horario preferido para conocer el plantel</label>
+        <select id="ruta-hora-sel" onchange="updatePlanificadorRutaGam()" style="width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--color-primary-100);background:#ffffff;font-size:0.82rem;font-weight:600;color:var(--color-text);">
+          <option value="09:30 hrs (clases en vivo)">09:30 hrs · Ver clases bilingües y STEM</option>
+          <option value="11:00 hrs (recorrido completo)" selected>11:00 hrs · Recorrido de aulas y CCTV</option>
+          <option value="12:30 hrs (informes rápidos)">12:30 hrs · Informes de costos ($3,600/mes)</option>
+          <option value="14:30 hrs (comedor y estancia)">14:30 hrs · Conocer Comedor y Estancia 18h</option>
+        </select>
+      </div>
+    </div>
+    <div id="ruta-detalle-box" style="font-size:0.82rem;color:var(--color-text);background:#ffffff;border:1px solid var(--color-border);border-radius:8px;padding:8px 10px;margin-bottom:8px;">
+      ⏱️ <strong>2 a 6 minutos</strong> desde San Juan de Aragón por <strong>Av. Loreto Fabela, Av. 510 o caminando a 2 cuadras de Metro Aragón (Línea 5)</strong> · <a id="ruta-guia-link" href="/colegio-cerca-de-mi/san-juan-de-aragon/" style="font-weight:700;color:var(--color-primary);">Ver guía de Aragón →</a>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <a id="ruta-wa-btn" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20les%20escribo%20desde%20San%20Juan%20de%20Arag%C3%B3n%20para%20agendar%20visita%20guiada%20a%20las%2011%3A00%20hrs" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:6px 13px;border-radius:999px;font-size:0.8rem;font-weight:700;">💬 Agendar recorrido (11:00 hrs) por WhatsApp →</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=19.4623199,-99.0837562&travelmode=driving" target="_blank" rel="noopener noreferrer" style="background:#ffffff;border:1px solid var(--color-primary);color:var(--color-primary-dark);padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;">🗺️ Trazar ruta GPS desde mi ubicación ↗</a>
+    </div>
+  </div>
+  <script>
+    function updatePlanificadorRutaGam() {
+      var data = {
+        aragon: { nombre: 'San Juan de Aragón', min: '2 a 6 minutos', via: 'Av. Loreto Fabela, Av. 510 o caminando a 2 cuadras de Metro Aragón (Línea 5)', url: '/colegio-cerca-de-mi/san-juan-de-aragon/', guia: 'Ver guía de Aragón →' },
+        aicm: { nombre: 'Peñón de los Baños / Zona AICM', min: '6 a 9 minutos', via: 'Circuito Interior Blvd. Puerto Aéreo, Av. Oceanía y Metro Línea 5', url: '/colegio-cerca-de-mi/penon-de-los-banos/', guia: 'Ver guía Peñón / AICM →' },
+        romero: { nombre: 'Romero Rubio / Oceanía', min: '6 a 8 minutos', via: 'Av. Oceanía o conexión Metro Línea B → Línea 5 (estación Aragón)', url: '/colegio-cerca-de-mi/romero-rubio/', guia: 'Ver guía Romero Rubio →' },
+        gertrudis: { nombre: 'Gertrudis Sánchez / Eduardo Molina', min: '7 a 9 minutos', via: 'Eje 3 Oriente (Eduardo Molina / Metrobús L5) y Calz. San Juan de Aragón', url: '/colegio-cerca-de-mi/gertrudis-sanchez/', guia: 'Ver guía Gertrudis Sánchez →' },
+        tenochtitlan: { nombre: 'Nueva Tenochtitlán / Bondojito', min: '8 a 10 minutos', via: 'Eje 3 Norte (Ángel Albino Corzo) y Ferrocarril Hidalgo hacia Av. 521', url: '/colegio-cerca-de-mi/nueva-tenochtitlan/', guia: 'Ver guía Nueva Tenochtitlán →' },
+        villagam: { nombre: 'Villa GAM / Lindavista', min: '10 a 14 minutos', via: 'Calzada San Juan de Aragón y Av. Loreto Fabela hacia Av. 521 No. 20', url: '/programas', guia: 'Ver niveles y costos →' }
+      };
+      var colSel = document.getElementById('ruta-colonia-sel');
+      var hrSel = document.getElementById('ruta-hora-sel');
+      if (!colSel || !hrSel) return;
+      var info = data[colSel.value] || data.aragon;
+      var hr = hrSel.value;
+      var hrShort = hr.split(' (')[0];
+      var box = document.getElementById('ruta-detalle-box');
+      box.innerHTML = '⏱️ <strong>' + info.min + '</strong> desde ' + info.nombre + ' por <strong>' + info.via + '</strong> · <a href="' + info.url + '" style="font-weight:700;color:var(--color-primary);">' + info.guia + '</a>';
+      var waBtn = document.getElementById('ruta-wa-btn');
+      waBtn.textContent = '💬 Agendar recorrido (' + hrShort + ') por WhatsApp →';
+      var msg = 'Hola Instituto Froebel, les escribo desde ' + info.nombre + ' para agendar visita guiada alrededor de las ' + hr + ' y conocer costos ($3,600/mes Pronto Pago)';
+      waBtn.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(msg);
+      if (window.FroebelUX) {
+        window.FroebelUX.track('cta_click', { element_id: 'ruta_gam_' + colSel.value, element_text: 'Planificador Ruta: ' + info.nombre + ' ' + hrShort });
+      }
+    }
+  </script>
 </div>
 </div>
 </section>
@@ -566,7 +628,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=24" defer></script>
+<script src="/scripts/main.js?v=25" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

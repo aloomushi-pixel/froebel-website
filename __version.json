@@ -1,11 +1,6 @@
 {
-  "version": "2.1.54",
-  "cycle": 54,
-  "deployedAt": "2026-11-13T10:05:08.676Z",
-  "standard": "Estándar Maestro v2.1 + GSC + Gobernanza por Magnitud",
-  "highlights": [
-    "100% Google Rich-Snippet FAQPage Parity & GSC Striking Distance Push on /inscripciones (\"instituto froebel\" pos 11.87, \"colegio federico froebel costos\" pos 6.64), /programas (\"federico froebel kinder\" pos 7.91), and /instalaciones-y-seguridad: achieved 23/23 exact 1:1 parity between visible <details> FAQs and JSON-LD FAQPage schemas, added #guias-padres-inscripciones, and eliminated the last 4 legacy \"12 en Maternal\" strings in favor of official ratio 1:8",
-    "Level-2 Interactive Parent Calculators on Top Informational Guides: added interactive SEP Dec-31 Cutoff Grade Calculator (#calculadora-grado-sep) with 1-tap grade-specific pre-enrollment + WhatsApp deep links on /blog/a-que-edad-debe-empezar-el-preescolar.html, and interactive 6-Signal Potty Readiness Test (#test-control-esfinteres) on /blog/control-de-esfinteres.html",
-    "Sitewide OpenGraph & Twitter/X Card Spec Standardization across all 23 HTML pages: synced og:title, og:description, twitter:title, and twitter:description 1:1 with winning <title> and <meta name=\"description\"> tags and standardized <meta name=\"twitter:*\"> attributes"
-  ]
+  "version": "2.1.55",
+  "cycle": 55,
+  "deployedAt": "2026-11-13T14:17:53.288Z",
+  "standard": "Estándar Maestro v2.1 — SEO + GEO + GSC + UX Telemetry + Simulador Estancia + Ruta GAM + INP Idle Yield"
 }

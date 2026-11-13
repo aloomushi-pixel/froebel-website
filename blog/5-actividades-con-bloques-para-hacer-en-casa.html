@@ -455,27 +455,89 @@
               }
             </script>
             <ul id="lista-actividades-bloques" style="display:flex;flex-direction:column;gap:var(--space-4);margin:var(--space-4) 0;">
-                <li class="card" data-ages="1-3" style="padding:var(--space-5);">
-                    <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);display:block;margin-bottom:var(--space-1);">1. El reto de la torre de equilibrio y gravedad (1 a 3 años)</strong>
+                <li class="card" data-ages="1-3" data-reto-idx="1" style="padding:var(--space-5);">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-1);">
+                        <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);">1. El reto de la torre de equilibrio y gravedad (1 a 3 años)</strong>
+                        <button type="button" class="reto-bloq-btn" data-idx="1" onclick="toggleRetoBloque(1, this)" style="border:1px solid var(--color-primary-light);background:#eff6ff;color:var(--color-primary-dark);border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;">⬜ Marcar lograda</button>
+                    </div>
                     <span>Coloquen una base firme en el piso y apilen bloques uno por uno contando en voz alta en español e inglés. Pregúntale: <em>"¿Qué pasa si ponemos un bloque grande arriba de uno pequeño?"</em>. Desarrolla motricidad fina, coordinación visomotora y noción intuitiva de física y centro de gravedad.</span>
                 </li>
-                <li class="card" data-ages="1-3,3-4" style="padding:var(--space-5);">
-                    <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);display:block;margin-bottom:var(--space-1);">2. Clasificación por colores, tamaños y formas geométricas (2 a 4 años)</strong>
+                <li class="card" data-ages="1-3,3-4" data-reto-idx="2" style="padding:var(--space-5);">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-1);">
+                        <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);">2. Clasificación por colores, tamaños y formas geométricas (2 a 4 años)</strong>
+                        <button type="button" class="reto-bloq-btn" data-idx="2" onclick="toggleRetoBloque(2, this)" style="border:1px solid var(--color-primary-light);background:#eff6ff;color:var(--color-primary-dark);border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;">⬜ Marcar lograda</button>
+                    </div>
                     <span>Dibuja 3 círculos en una cartulina y pide a tu pequeño agrupar los bloques por atributo: primero solo por color, luego por forma (cubos, cilindros, prismas) y finalmente por tamaño. Estimula la discriminación visual y la teoría de conjuntos previa al cálculo.</span>
                 </li>
-                <li class="card" data-ages="3-4,4-6" style="padding:var(--space-5);">
-                    <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);display:block;margin-bottom:var(--space-1);">3. Sigue el patrón lógico y musical (3 a 5 años)</strong>
+                <li class="card" data-ages="3-4,4-6" data-reto-idx="3" style="padding:var(--space-5);">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-1);">
+                        <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);">3. Sigue el patrón lógico y musical (3 a 5 años)</strong>
+                        <button type="button" class="reto-bloq-btn" data-idx="3" onclick="toggleRetoBloque(3, this)" style="border:1px solid var(--color-primary-light);background:#eff6ff;color:var(--color-primary-dark);border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;">⬜ Marcar lograda</button>
+                    </div>
                     <span>Construye una fila con secuencia <strong>ABAB</strong> (rojo-azul-rojo-azul) o <strong>AAB</strong> (grande-grande-pequeño) y pídele adivinar qué pieza continúa. Es la base directa del pensamiento algorítmico, la pre-codificación STEM y la lectoescritura.</span>
                 </li>
-                <li class="card" data-ages="4-6" style="padding:var(--space-5);">
-                    <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);display:block;margin-bottom:var(--space-1);">4. Medición matemática con bloques: "¿Cuántos bloques mide?" (4 a 6 años)</strong>
+                <li class="card" data-ages="4-6" data-reto-idx="4" style="padding:var(--space-5);">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-1);">
+                        <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);">4. Medición matemática con bloques: "¿Cuántos bloques mide?" (4 a 6 años)</strong>
+                        <button type="button" class="reto-bloq-btn" data-idx="4" onclick="toggleRetoBloque(4, this)" style="border:1px solid var(--color-primary-light);background:#eff6ff;color:var(--color-primary-dark);border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;">⬜ Marcar lograda</button>
+                    </div>
                     <span>Usen bloques iguales como unidad de medida para descubrir cuántos bloques mide su zapato, su cuento favorito o un carrito, registrando el número en una hoja. Introduce la medición estándar, comparación de magnitudes (mayor/menor que) y conteo uno a uno.</span>
                 </li>
-                <li class="card" data-ages="3-4,4-6" style="padding:var(--space-5);">
-                    <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);display:block;margin-bottom:var(--space-1);">5. Ingeniería de puentes y arquitectura simbólica Froebel (3 a 6 años)</strong>
+                <li class="card" data-ages="3-4,4-6" data-reto-idx="5" style="padding:var(--space-5);">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-1);">
+                        <strong style="color:var(--color-primary-dark);font-size:var(--text-lg);">5. Ingeniería de puentes y arquitectura simbólica Froebel (3 a 6 años)</strong>
+                        <button type="button" class="reto-bloq-btn" data-idx="5" onclick="toggleRetoBloque(5, this)" style="border:1px solid var(--color-primary-light);background:#eff6ff;color:var(--color-primary-dark);border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;">⬜ Marcar lograda</button>
+                    </div>
                     <span>Reten al niño a construir un puente por debajo del cual pueda pasar un cochecito sin derribar las columnas, o a recrear su escuela y su casa. Desarrolla planeación ejecutiva, tolerancia a la frustración, simetría espacial y creatividad sin pantallas.</span>
                 </li>
             </ul>
+            <div id="progreso-reto-bloques" data-ux-section="progreso-reto-bloques" style="background:#f0fdf4;border:1px solid #86efac;border-radius:var(--radius-xl);padding:12px 16px;margin-bottom:var(--space-6);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+              <div>
+                <strong id="reto-bloques-status" style="display:block;font-size:0.88rem;color:#14532d;">🏆 Reto Froebel en Casa: 0 de 5 actividades completadas</strong>
+                <span style="font-size:0.78rem;color:#166534;">Marca cada actividad al hacerla en casa y agenda una clase muestra con los <strong>Dones de Froebel originales</strong> en San Juan de Aragón.</span>
+              </div>
+              <a id="reto-bloques-wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20estamos%20haciendo%20las%20actividades%20con%20bloques%20en%20casa%20y%20queremos%20agendar%20clase%20muestra%20STEM" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:7px 14px;border-radius:999px;font-size:0.8rem;font-weight:700;">💬 Agendar Clase Muestra Froebel →</a>
+            </div>
+            <script>
+              (function() {
+                var KEY = 'froebel_reto_bloques_v1';
+                var done = {};
+                try { done = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) {}
+                function renderReto() {
+                  var count = 0;
+                  document.querySelectorAll('.reto-bloq-btn').forEach(function(b) {
+                    var idx = b.getAttribute('data-idx');
+                    if (done[idx]) {
+                      count++;
+                      b.textContent = '✅ ¡Lograda!';
+                      b.style.background = '#16a34a';
+                      b.style.borderColor = '#16a34a';
+                      b.style.color = '#ffffff';
+                    } else {
+                      b.textContent = '⬜ Marcar lograda';
+                      b.style.background = '#eff6ff';
+                      b.style.borderColor = 'var(--color-primary-light)';
+                      b.style.color = 'var(--color-primary-dark)';
+                    }
+                  });
+                  var st = document.getElementById('reto-bloques-status');
+                  if (st) {
+                    st.textContent = count === 5
+                      ? '🎉 ¡Felicidades! Completaron las 5 actividades Froebel en casa'
+                      : '🏆 Reto Froebel en Casa: ' + count + ' de 5 actividades completadas';
+                  }
+                }
+                window.toggleRetoBloque = function(idx) {
+                  done[idx] = !done[idx];
+                  try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (_) {}
+                  renderReto();
+                  if (window.FroebelUX) {
+                    window.FroebelUX.track('cta_click', { element_id: 'reto_bloque_' + idx, element_text: 'Reto Bloque #' + idx });
+                  }
+                };
+                renderReto();
+              })();
+            </script>
         
             
             <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
@@ -619,7 +681,7 @@
 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=24" defer></script>
+<script src="/scripts/main.js?v=25" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>
