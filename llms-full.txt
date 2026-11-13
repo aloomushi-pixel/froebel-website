@@ -42,9 +42,9 @@
   - **Julio (15% de descuento)**: **$3,825 MXN**
   - **Agosto (Tarifa Regular)**: **$4,500 MXN**
 - **Horarios y Estancia Educativa con Comedor**:
-  - **Horario Escolar Base**: 08:30 a 14:00 hrs (recepción matutina desde las 07:30 hrs sin cargo extra).
-  - **Estancia Parcial con Comedor (14:00 a 16:00 hrs)**: **$1,400 MXN/mes** adicionales (total mensual integrado con colegiatura Pronto Pago: **$5,000 MXN/mes**; incluye comida caliente de 3 tiempos + 1 taller vespertino).
-  - **Estancia Completa con Comedor (14:00 a 18:00 hrs)**: **$1,900 MXN/mes** adicionales (total mensual integrado con colegiatura Pronto Pago: **$5,500 MXN/mes**; incluye comida caliente de 3 tiempos + apoyo en tareas + talleres de música, arte, psicomotricidad y activación física).
+  - **Horario Escolar Base**: 08:30 a 13:30 hrs en Maternal y 08:30 a 14:00 hrs en Preescolar (recepción matutina desde las 07:30 hrs sin cargo extra).
+  - **Estancia Parcial con Comedor (13:30/14:00 a 16:00 hrs)**: **$1,400 MXN/mes** adicionales (total mensual integrado con colegiatura Pronto Pago: **$5,000 MXN/mes**; incluye comida caliente de 3 tiempos + 1 taller vespertino).
+  - **Estancia Completa con Comedor (13:30/14:00 a 18:00 hrs)**: **$1,900 MXN/mes** adicionales (total mensual integrado con colegiatura Pronto Pago: **$5,500 MXN/mes**; incluye comida caliente de 3 tiempos + apoyo en tareas + talleres de música, arte, psicomotricidad y activación física).
   - **Hora suelta de estancia (sin comedor)**: **$50 MXN/hora**.
 
 ---
@@ -67,3 +67,16 @@
   Sí. En Maternal Bilingüe (1 a 3 años) recibimos niños con pañal y acompañamos el control de esfínteres sin presiones. Además, somos una escuela inclusiva que brinda acompañamiento personalizado y respetuoso a niños con neurodivergencia o necesidades educativas especiales.
 - **¿Cómo agendar una visita guiada o inscribir en línea?**
   Los padres pueden agendar un recorrido presencial gratuito o completar su inscripción en línea en `https://froebelinstituto.com.mx/inscripciones` (o con grado preseleccionado: `?inscribir=1&programa=maternal`, `?inscribir=1&programa=preescolar_1`, `?inscribir=1&programa=preescolar_2`, `?inscribir=1&programa=preescolar_3`, `?inscribir=1&estancia=completa_18h`) o por WhatsApp directo al `+52 55 5414 8872`.
+
+---
+
+## 6. Directorio de Herramientas Interactivas y Simuladores para Padres (Deep-Links)
+
+1. **Cotizador en Vivo + Auto-Cálculo de Grado SEP por Fecha de Nacimiento**: `https://froebelinstituto.com.mx/inscripciones#wizard-section`
+2. **Simulador de Estancia + Comedor vs. Hora Suelta ($50/h vs. $5,000/$5,500 integrados)**: `https://froebelinstituto.com.mx/horario-extendido-y-comedor#calculadora-estancia-aicm`
+3. **Planificador de Ruta y Visita por Colonia (GAM, Aragón, Romero Rubio, AICM)**: `https://froebelinstituto.com.mx/contacto#planificador-ruta-gam`
+4. **Calculadora de Grado Oficial SEP 2026-2027 (Corte 31-dic)**: `https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html#calculadora-grado-sep`
+5. **Test Interactivo de Maduración de Control de Esfínteres**: `https://froebelinstituto.com.mx/blog/control-de-esfinteres.html#test-control-esfinteres`
+6. **Planificador Personalizado de Adaptación Escolar sin Lágrimas (1–6 años)**: `https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html#plan-adaptacion-kinder`
+7. **Evaluador Interactivo de Seguridad Escolar (5 Puntos en GAM)**: `https://froebelinstituto.com.mx/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html#evaluador-kinder-gam`
+8. **Reto Interactivo de 5 Actividades con Bloques Froebel + Lista Nutritiva $500 MXN**: `https://froebelinstituto.com.mx/blog/5-actividades-con-bloques-para-hacer-en-casa.html#progreso-reto-bloques` y `https://froebelinstituto.com.mx/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html#lista-compras-500`

@@ -145,8 +145,9 @@ function renderStudentStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="s-dob">6. Fecha de nacimiento (opcional)</label>
-          <input type="date" id="s-dob" value="${s.date_of_birth || ''}">
+          <label for="s-dob">6. Fecha de nacimiento (calcula su grado SEP automáticamente)</label>
+          <input type="date" id="s-dob" value="${s.date_of_birth || ''}" min="2019-01-01" max="2026-12-31" onchange="onWizardDobChange()">
+          <div id="s-dob-grade-hint" style="display:none;margin-top:6px;padding:6px 10px;border-radius:8px;background:#f0fdf4;border:1px solid #86efac;color:#14532d;font-size:0.78rem;font-weight:700;line-height:1.35;"></div>
         </div>
       </div>
 
@@ -426,6 +427,86 @@ function onWizardCalculatorChange() {
   }
 }
 
+function computeSepGradeFromDob(dobStr) {
+  if (!dobStr || !/^\d{4}-\d{2}-\d{2}$/.test(dobStr)) return null;
+  const [y, m, d] = dobStr.split('-').map(Number);
+  if (!y || !m || !d) return null;
+  // Official SEP cutoff for Ciclo Escolar 2026-2027: age completed by December 31, 2026
+  const cutoffYear = 2026;
+  const ageAtCutoff = cutoffYear - y;
+  const approxMonthsAtSep2026 = (2026 - y) * 12 + (9 - m);
+  if (approxMonthsAtSep2026 < 11) {
+    return {
+      code: '',
+      message: 'ℹ️ En Maternal Bilingüe recibimos pequeños a partir de los 12 meses cumplidos. Escríbenos por WhatsApp para reservar cupo futuro.'
+    };
+  }
+  if (ageAtCutoff <= 2) {
+    return {
+      code: 'maternal',
+      message: '✅ Por edad SEP al 31-dic-2026 corresponde a Maternal Bilingüe (1 a 3 años · ratio 1:8).'
+    };
+  }
+  if (ageAtCutoff === 3) {
+    return {
+      code: 'preescolar_1',
+      message: '✅ Por corte oficial SEP (3 años al 31-dic-2026) corresponde a Kínder 1 (1° Preescolar SEP).'
+    };
+  }
+  if (ageAtCutoff === 4) {
+    return {
+      code: 'preescolar_2',
+      message: '✅ Por corte oficial SEP (4 años al 31-dic-2026) corresponde a Kínder 2 (2° Preescolar SEP).'
+    };
+  }
+  if (ageAtCutoff === 5 || ageAtCutoff === 6) {
+    return {
+      code: 'preescolar_3',
+      message: '✅ Por corte oficial SEP corresponde a Kínder 3 (3° Preescolar SEP · preparación lectoescritura).'
+    };
+  }
+  return {
+    code: '',
+    message: 'ℹ️ Preescolar SEP comprende de 1 a 6 años. Si requieres orientación personalizada, envíanos WhatsApp en 1 clic.'
+  };
+}
+
+function updateDobGradeHintUI(autoSelectProgram = false) {
+  const dobEl = document.getElementById('s-dob');
+  const hintEl = document.getElementById('s-dob-grade-hint');
+  if (!dobEl || !hintEl) return null;
+  const res = computeSepGradeFromDob(dobEl.value);
+  if (!res) {
+    hintEl.style.display = 'none';
+    hintEl.textContent = '';
+    return null;
+  }
+  hintEl.style.display = 'block';
+  hintEl.textContent = res.message;
+  if (autoSelectProgram && res.code) {
+    const sel = document.getElementById('s-program');
+    if (sel) {
+      sel.value = res.code;
+      wizardData.student.program = res.code;
+    }
+  }
+  return res;
+}
+
+function onWizardDobChange() {
+  trackWizardOpenOnce('Cálculo Automático de Grado SEP por Fecha de Nacimiento');
+  const dobEl = document.getElementById('s-dob');
+  if (dobEl) wizardData.student.date_of_birth = dobEl.value || '';
+  const res = updateDobGradeHintUI(true);
+  updateWizardLiveQuote();
+  if (res && window.FroebelUX && !isAutomatedCrawler()) {
+    window.FroebelUX.track('cta_click', {
+      element_id: 'wizard_dob_autograde',
+      element_text: `Auto-grado SEP: ${res.code || 'orientacion'}`
+    });
+  }
+}
+
 function quickSelectWizardOption(field, val) {
   if (field === 'program') {
     const sel = document.getElementById('s-program');
@@ -471,7 +552,7 @@ function updateWizardLiveQuote() {
   }
 
   let estCost = 0;
-  let estLabel = '08:30–14:00h';
+  let estLabel = progVal === 'maternal' ? '08:30–13:30h' : '08:30–14:00h';
   if (estVal === 'parcial_16h') {
     estCost = 1400;
     estLabel = 'con Estancia + Comedor hasta 16:00h';
@@ -844,6 +925,7 @@ function attachStepListeners() {
     el.addEventListener('blur', () => el.closest('.wizard__field')?.classList.remove('wizard__field--focused'));
   });
   if (currentStep === 0) {
+    updateDobGradeHintUI(false);
     updateWizardLiveQuote();
   }
 }

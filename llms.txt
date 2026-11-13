@@ -14,9 +14,9 @@
   - **Maternal Bilingüe (1 a 3 años)**: Estimulación neurosensorial temprana, inmersión diaria al inglés, psicomotricidad y acompañamiento respetuoso en control de esfínteres (aceptamos pequeños con pañal). Ratio de 1 educadora por cada 8 niños (1:8).
   - **Preescolar / Kínder 1, 2 y 3 (3 a 6 años)**: Metodología activa de Friedrich Froebel (Dones de Froebel / pre-ingeniería STEM), 1 hora diaria de inglés, pensamiento lógico-matemático, artes, educación física y lectoescritura comprensiva bilingüe (los alumnos egresan de Kínder 3 leyendo y escribiendo con fluidez). Ratio de 1 educadora por cada 15 alumnos (1:15).
 - **Horarios**:
-  - **Horario Escolar Base**: 08:30 a 14:00 hrs (recepción matutina desde 07:30 hrs sin costo adicional).
-  - **Estancia Educativa Parcial**: 14:00 a 16:00 hrs ($1,400 MXN/mes adicionales; total mensual integrado con colegiatura Pronto Pago: $5,000 MXN/mes; incluye comedor nutritivo de 3 tiempos + taller vespertino).
-  - **Estancia Educativa Completa**: 14:00 a 18:00 hrs ($1,900 MXN/mes adicionales; total mensual integrado con colegiatura Pronto Pago: $5,500 MXN/mes; incluye comedor nutritivo de 3 tiempos, apoyo en tareas, talleres formativos y activación física).
+  - **Horario Escolar Base**: 08:30 a 13:30 hrs en Maternal y 08:30 a 14:00 hrs en Preescolar (recepción matutina desde 07:30 hrs sin costo adicional).
+  - **Estancia Educativa Parcial**: 13:30/14:00 a 16:00 hrs ($1,400 MXN/mes adicionales; total mensual integrado con colegiatura Pronto Pago: $5,000 MXN/mes; incluye comedor nutritivo de 3 tiempos + taller vespertino).
+  - **Estancia Educativa Completa**: 13:30/14:00 a 18:00 hrs ($1,900 MXN/mes adicionales; total mensual integrado con colegiatura Pronto Pago: $5,500 MXN/mes; incluye comedor nutritivo de 3 tiempos, apoyo en tareas, talleres formativos y activación física).
 - **Costos Transparentes (Ciclo 2026-2027)**:
   - **Colegiatura Pronto Pago (primeros 10 días del mes)**: $3,600 MXN/mes (11 mensualidades de septiembre a julio).
   - **Colegiatura Mensual Normal**: $4,000 MXN/mes (11 mensualidades de septiembre a julio).
@@ -65,3 +65,15 @@
 - [Menú Semanal Nutritivo y Económico para Niños de Preescolar con $500 Pesos](https://froebelinstituto.com.mx/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html)
 - [¿A qué Edad Debe Empezar un Niño el Maternal o Preescolar en México?](https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html)
 - [5 Beneficios del Horario Extendido y Comedor para Padres cerca del AICM y Oceanía](https://froebelinstituto.com.mx/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html)
+
+## Herramientas Interactivas y Calculadoras Gratuitas para Padres
+
+- [Calculadora en Vivo de Colegiatura + Auto-Cálculo de Grado SEP por Fecha de Nacimiento](https://froebelinstituto.com.mx/inscripciones#wizard-section)
+- [Simulador Estancia + Comedor vs. Hora Suelta ($50/h vs. $5,000/$5,500 todo incluido)](https://froebelinstituto.com.mx/horario-extendido-y-comedor#calculadora-estancia-aicm)
+- [Planificador de Ruta y Tiempo de Traslado por Colonia en GAM / AICM](https://froebelinstituto.com.mx/contacto#planificador-ruta-gam)
+- [Calculadora Oficial de Grado SEP 2026-2027 (Corte 31 de diciembre)](https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html#calculadora-grado-sep)
+- [Test Interactivo de Maduración para Control de Esfínteres](https://froebelinstituto.com.mx/blog/control-de-esfinteres.html#test-control-esfinteres)
+- [Planificador Personalizado de Adaptación Escolar sin Lágrimas (1–6 años)](https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html#plan-adaptacion-kinder)
+- [Evaluador Interactivo de 5 Puntos de Seguridad para Elegir Kínder en GAM](https://froebelinstituto.com.mx/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html#evaluador-kinder-gam)
+- [Reto Interactivo de 5 Actividades con Bloques Froebel en Casa](https://froebelinstituto.com.mx/blog/5-actividades-con-bloques-para-hacer-en-casa.html#progreso-reto-bloques)
+- [Lista Interactiva de Compras Nutritivas con $500 MXN](https://froebelinstituto.com.mx/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html#lista-compras-500)
