@@ -27,11 +27,11 @@
 <meta content="Instituto Federico Froebel" property="og:site_name"/>
 <meta content="es_MX" property="og:locale"/>
 <!-- Twitter -->
-<meta content="summary_large_image" property="twitter:card"/>
-<meta content="https://froebelinstituto.com.mx/blog/control-de-esfinteres.html" property="twitter:url"/>
-<meta content="Control de Esfínteres: Señales y Guía para Dejar el Pañal | Instituto Froebel" property="twitter:title"/>
-<meta content="Guía práctica para padres sobre el control de esfínteres entre los 18 y 30 meses: 6 señales de preparación, paso a paso respetuoso y cómo lo acompañamos en Maternal Froebel." property="twitter:description"/>
-<meta content="https://froebelinstituto.com.mx/assets/images/blog/control-de-esfinteres.webp" property="twitter:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://froebelinstituto.com.mx/blog/control-de-esfinteres.html" name="twitter:url"/>
+<meta content="Control de Esfínteres: Señales y Guía para Dejar el Pañal | Froebel GAM" name="twitter:title"/>
+<meta content="Guía práctica para padres sobre el control de esfínteres entre los 18 y 30 meses: 6 señales de preparación, paso a paso respetuoso y apoyo en Maternal Bilingüe." name="twitter:description"/>
+<meta content="https://froebelinstituto.com.mx/assets/images/blog/control-de-esfinteres.webp" name="twitter:image"/>
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
@@ -424,6 +424,57 @@
 <strong>Importante:</strong> No necesitas esperar a que se cumplan TODAS las señales. Con 3-4 de ellas,
                 puedes empezar el proceso gradualmente.
             </p>
+<div id="test-control-esfinteres" data-ux-section="test-control-esfinteres" style="background:linear-gradient(135deg,#ffffff 0%,#f0fdf4 100%);border:2px solid #16a34a;border-radius:16px;padding:18px;margin:var(--space-6) 0 var(--space-8);box-shadow:0 6px 18px rgba(22,163,74,0.08);">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
+    <div>
+      <span style="display:inline-block;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;margin-bottom:4px;">👶 TEST RÁPIDO DE MADUREZ (18 A 36 MESES)</span>
+      <h3 style="margin:0;font-size:1.05rem;color:#14532d;">¿Tu pequeño está listo para iniciar la transición del pañal?</h3>
+    </div>
+    <span id="esfinteres-score-badge" aria-live="polite" style="background:#166534;color:#ffffff;padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:800;">0 / 6 señales</span>
+  </div>
+  <div style="display:grid;gap:7px;font-size:0.87rem;color:#1e293b;">
+    <label style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;"><input type="checkbox" class="js-esfinteres-chk" style="margin-top:3px;width:17px;height:17px;accent-color:#16a34a;"/><span>Permanece con el pañal seco <strong>2 horas o más</strong> durante el día.</span></label>
+    <label style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;"><input type="checkbox" class="js-esfinteres-chk" style="margin-top:3px;width:17px;height:17px;accent-color:#16a34a;"/><span>Muestra incomodidad cuando el pañal está húmedo o sucio.</span></label>
+    <label style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;"><input type="checkbox" class="js-esfinteres-chk" style="margin-top:3px;width:17px;height:17px;accent-color:#16a34a;"/><span>Sigue indicaciones breves ("vamos al baño", "siéntate aquí").</span></label>
+    <label style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;"><input type="checkbox" class="js-esfinteres-chk" style="margin-top:3px;width:17px;height:17px;accent-color:#16a34a;"/><span>Siente curiosidad por la bacinica o por acompañar a adultos al baño.</span></label>
+    <label style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;"><input type="checkbox" class="js-esfinteres-chk" style="margin-top:3px;width:17px;height:17px;accent-color:#16a34a;"/><span>Baja y sube su pantalón elástico con apoyo sencillo.</span></label>
+    <label style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;"><input type="checkbox" class="js-esfinteres-chk" style="margin-top:3px;width:17px;height:17px;accent-color:#16a34a;"/><span>Usa gestos, señas o palabras ("pipí", "popó") antes o durante la evacuación.</span></label>
+  </div>
+  <div style="margin-top:12px;padding-top:10px;border-top:1px dashed #86efac;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+    <p id="esfinteres-verdict" style="margin:0;font-size:0.83rem;color:#14532d;font-weight:700;flex:1 1 260px;">Marca las señales que observas hoy. En Maternal Bilingüe Froebel (1 a 3 años, ratio 1:8) recibimos niños con pañal sin presiones.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="/inscripciones?inscribir=1&programa=maternal" style="background:var(--color-primary);color:#ffffff;padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:800;text-decoration:none;">🍼 Pre-inscribir Maternal ($3,600/mes) →</a>
+      <a id="esfinteres-wa-link" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20hice%20el%20Test%20de%20Control%20de%20Esf%C3%ADnteres%20y%20quiero%20conocer%20Maternal%20Biling%C3%BCe" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:800;text-decoration:none;">💬 Orientación por WhatsApp</a>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var box = document.getElementById('test-control-esfinteres');
+      if (!box) return;
+      var chks = box.querySelectorAll('.js-esfinteres-chk');
+      var badge = document.getElementById('esfinteres-score-badge');
+      var verdict = document.getElementById('esfinteres-verdict');
+      var wa = document.getElementById('esfinteres-wa-link');
+      function update() {
+        var n = 0;
+        chks.forEach(function(c){ if (c.checked) n++; });
+        badge.textContent = n + ' / 6 señales';
+        if (n >= 4) {
+          verdict.textContent = '🌟 ¡Listo para iniciar transición diurna gradual (' + n + '/6)! En Maternal Froebel coordinamos rutinas casa-escuela cada 60–90 min.';
+        } else if (n >= 2) {
+          verdict.textContent = '🌱 Etapa de exploración inicial (' + n + '/6): presenta la bacinica jugando sin prisa. En Maternal Froebel aceptamos pañal.';
+        } else {
+          verdict.textContent = '🍼 Aún en maduración neurológica (' + n + '/6): no fuerces el retiro. En Maternal Bilingüe Froebel (1–3 años) recibimos niños con pañal con total calidez.';
+        }
+        wa.href = 'https://wa.me/525554148872?text=' + encodeURIComponent('Hola Instituto Froebel, mi pequeño obtuvo ' + n + '/6 señales en el Test de Control de Esfínteres y me interesa Maternal Bilingüe');
+        if (window.FroebelUX) {
+          window.FroebelUX.track('cta_click', { element_id: 'test_esfinteres_' + n, element_text: 'Test Esfinteres ' + n + '/6' });
+        }
+      }
+      chks.forEach(function(c){ c.addEventListener('change', update); });
+    })();
+  </script>
+</div>
 <!-- SECTION 3 -->
 <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
                 📋 Paso a paso: Cómo iniciar el proceso</h2>

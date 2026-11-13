@@ -27,11 +27,11 @@
 <meta content="Instituto Federico Froebel" property="og:site_name"/>
 <meta content="es_MX" property="og:locale"/>
 <!-- Twitter -->
-<meta content="summary_large_image" property="twitter:card"/>
-<meta content="https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html" property="twitter:url"/>
-<meta content="¿A qué Edad Debe Empezar un Niño el Maternal o Preescolar en México? | Guía SEP y Neurociencia" property="twitter:title"/>
-<meta content="¿1, 2 o 3 años? Conoce qué dice la neurociencia del desarrollo infantil y los requisitos de edad en México para ingresar a Maternal y Preescolar (Kínder 1, 2 y 3)." property="twitter:description"/>
-<meta content="https://froebelinstituto.com.mx/assets/images/blog/edad-preescolar.webp" property="twitter:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html" name="twitter:url"/>
+<meta content="¿A qué Edad Debe Empezar un Niño el Maternal o Preescolar? | Froebel GAM" name="twitter:title"/>
+<meta content="¿1, 2 o 3 años? Conoce qué dice la neurociencia del desarrollo infantil y los requisitos SEP en México para ingresar a Maternal y Preescolar (Kínder 1, 2 y 3)." name="twitter:description"/>
+<meta content="https://froebelinstituto.com.mx/assets/images/blog/edad-preescolar.webp" name="twitter:image"/>
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
@@ -374,8 +374,128 @@
                 </table>
             </div>
             <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-6);">
-                💡 <strong>Nota para papás que trabajan:</strong> Todos los grados cuentan con <a href="/horario-extendido-y-comedor">Horario Extendido opcional hasta las 18:00 hrs con Comedor Nutritivo</a> (+$1,400 MXN/mes parcial o +$1,900 MXN/mes completo).
+                💡 <strong>Nota para papás que trabajan:</strong> Todos los grados cuentan con <a href="/horario-extendido-y-comedor">Horario Extendido opcional hasta las 18:00 hrs con Comedor Nutritivo</a> (+$1,400 MXN/mes parcial · total Pronto Pago $5,000/mes, o +$1,900 MXN/mes completo · total Pronto Pago $5,500/mes).
             </p>
+
+            <div id="calculadora-grado-sep" data-ux-section="calculadora-grado-sep" style="background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%);border:2px solid var(--color-primary);border-radius:16px;padding:18px;margin-bottom:var(--space-8);box-shadow:0 6px 18px rgba(30,64,175,0.08);">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
+                    <div>
+                        <span style="display:inline-block;background:#dbeafe;color:var(--color-primary-dark);padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;margin-bottom:4px;">🎂 CALCULADORA OFICIAL CORTE SEP (31 DICIEMBRE)</span>
+                        <h3 style="margin:0;font-size:1.08rem;color:var(--color-primary-dark);">¿A qué grado entra tu hijo en el Ciclo Escolar 2026-2027?</h3>
+                    </div>
+                    <span style="font-size:0.78rem;color:#166534;font-weight:800;background:#dcfce7;padding:4px 10px;border-radius:999px;">SEP RVOE 09050141</span>
+                </div>
+                <p style="margin:0 0 12px;font-size:0.86rem;color:var(--color-text);">Selecciona el mes y año de nacimiento de tu pequeño para conocer al instante su grado exacto, ratio del grupo y acceso directo de pre-inscripción:</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:12px;">
+                    <div>
+                        <label for="sep-birth-month" style="display:block;font-size:0.78rem;font-weight:700;color:var(--color-text);margin-bottom:4px;">Mes de nacimiento</label>
+                        <select id="sep-birth-month" style="width:100%;padding:9px 11px;border:1px solid var(--color-border);border-radius:10px;background:#ffffff;font-size:0.9rem;font-family:var(--font-body);color:var(--color-text);">
+                            <option value="Enero">Enero</option>
+                            <option value="Febrero">Febrero</option>
+                            <option value="Marzo">Marzo</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Mayo">Mayo</option>
+                            <option value="Junio" selected>Junio</option>
+                            <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Noviembre">Noviembre</option>
+                            <option value="Diciembre">Diciembre</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sep-birth-year" style="display:block;font-size:0.78rem;font-weight:700;color:var(--color-text);margin-bottom:4px;">Año de nacimiento</label>
+                        <select id="sep-birth-year" style="width:100%;padding:9px 11px;border:1px solid var(--color-border);border-radius:10px;background:#ffffff;font-size:0.9rem;font-family:var(--font-body);color:var(--color-text);">
+                            <option value="2025">2025 (1 año en 2026)</option>
+                            <option value="2024">2024 (2 años en 2026)</option>
+                            <option value="2023" selected>2023 (3 años en 2026)</option>
+                            <option value="2022">2022 (4 años en 2026)</option>
+                            <option value="2021">2021 (5 años en 2026)</option>
+                            <option value="2020">2020 (6 años en 2026)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="sep-grade-result" aria-live="polite" style="background:#ffffff;border:1px solid #bfdbfe;border-radius:12px;padding:12px 14px;">
+                    <div id="sep-grade-title" style="font-size:0.98rem;font-weight:800;color:var(--color-primary-dark);margin-bottom:4px;">🌻 Le corresponde: Kínder 1 (1° Preescolar SEP · Ratio 1:15)</div>
+                    <p id="sep-grade-desc" style="margin:0 0 10px;font-size:0.84rem;color:var(--color-text-light);">Cumple 3 años antes del 31 de diciembre de 2026. Incluye 1 hora diaria de inglés, las 5 vocales, números 1–10 y Dones de Froebel ($3,600/mes Pronto Pago).</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                        <a id="sep-grade-enroll" href="/inscripciones?inscribir=1&programa=preescolar_1" style="background:var(--color-primary);color:#ffffff;padding:7px 14px;border-radius:999px;font-size:0.82rem;font-weight:800;text-decoration:none;">📝 Pre-inscribir en Kínder 1 →</a>
+                        <a id="sep-grade-wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20mi%20peque%C3%B1o%20naci%C3%B3%20en%20Junio%202023%20(K%C3%ADnder%201)%20y%20quiero%20agendar%20visita" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:7px 14px;border-radius:999px;font-size:0.82rem;font-weight:800;text-decoration:none;">💬 Confirmar por WhatsApp</a>
+                    </div>
+                </div>
+                <script>
+                    (function(){
+                        var mSel = document.getElementById('sep-birth-month');
+                        var ySel = document.getElementById('sep-birth-year');
+                        var tEl = document.getElementById('sep-grade-title');
+                        var dEl = document.getElementById('sep-grade-desc');
+                        var eEl = document.getElementById('sep-grade-enroll');
+                        var wEl = document.getElementById('sep-grade-wa');
+                        if (!mSel || !ySel) return;
+                        var map = {
+                            '2025': {
+                                title: '🍼 Le corresponde: Maternal A Bilingüe (1 a 2 años · Ratio 1:8)',
+                                desc: 'Aceptamos pequeños con pañal. Estimulación neurosensorial temprana, canciones en inglés diario, psicomotricidad y enfermera escolar ($3,600/mes Pronto Pago).',
+                                prog: 'maternal',
+                                btn: '📝 Pre-inscribir en Maternal →',
+                                label: 'Maternal A'
+                            },
+                            '2024': {
+                                title: '🍼 Le corresponde: Maternal B Bilingüe (2 a 3 años · Ratio 1:8)',
+                                desc: 'Aceptamos pañal y acompañamos el control de esfínteres sin presiones. Lenguaje bilingüe, socialización y motricidad ($3,600/mes Pronto Pago).',
+                                prog: 'maternal',
+                                btn: '📝 Pre-inscribir en Maternal →',
+                                label: 'Maternal B'
+                            },
+                            '2023': {
+                                title: '🌻 Le corresponde: Kínder 1 (1° Preescolar SEP · Ratio 1:15)',
+                                desc: 'Cumple 3 años al 31 de diciembre de 2026. Incluye 1 hora diaria de inglés, las 5 vocales, números 1–10 y Dones de Froebel ($3,600/mes Pronto Pago).',
+                                prog: 'preescolar_1',
+                                btn: '📝 Pre-inscribir en Kínder 1 →',
+                                label: 'Kínder 1'
+                            },
+                            '2022': {
+                                title: '🧠 Le corresponde: Kínder 2 (2° Preescolar SEP · Ratio 1:15)',
+                                desc: 'Cumple 4 años al 31 de diciembre de 2026. Pre-lectoescritura fonética bilingüe, números 1–20, iniciación a sumas y laboratorio STEM ($3,600/mes Pronto Pago).',
+                                prog: 'preescolar_2',
+                                btn: '📝 Pre-inscribir en Kínder 2 →',
+                                label: 'Kínder 2'
+                            },
+                            '2021': {
+                                title: '🎓 Le corresponde: Kínder 3 (3° Preescolar SEP · Ratio 1:15)',
+                                desc: 'Cumple 5 años al 31 de diciembre de 2026. Egresa leyendo y escribiendo con fluidez, bases sólidas de inglés/STEM y certificado oficial SEP a Primaria ($3,600/mes Pronto Pago).',
+                                prog: 'preescolar_3',
+                                btn: '📝 Pre-inscribir en Kínder 3 →',
+                                label: 'Kínder 3'
+                            },
+                            '2020': {
+                                title: '🏫 Cumple 6 años en 2026: Ingreso a 1° de Primaria (o valoración Kínder 3)',
+                                desc: 'Por corte SEP al 31 de diciembre de 2026 corresponde ingreso a Primaria; si requieres valoración psicopedagógica de madurez para Kínder 3, escríbenos directo.',
+                                prog: 'preescolar_3',
+                                btn: '📝 Solicitar Valoración Kínder 3 →',
+                                label: 'Valoración Kínder 3 / Primaria'
+                            }
+                        };
+                        function updateGrade(trackEvent) {
+                            var yr = ySel.value;
+                            var mo = mSel.value;
+                            var info = map[yr] || map['2023'];
+                            tEl.textContent = info.title;
+                            dEl.textContent = info.desc;
+                            eEl.href = '/inscripciones?inscribir=1&programa=' + info.prog;
+                            eEl.textContent = info.btn;
+                            var msg = 'Hola Instituto Froebel, mi pequeño nació en ' + mo + ' ' + yr + ' (' + info.label + ') y quiero agendar visita';
+                            wEl.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(msg);
+                            if (trackEvent && window.FroebelUX) {
+                                window.FroebelUX.track('cta_click', { element_id: 'calc_grado_sep_' + yr, element_text: mo + ' ' + yr + ' -> ' + info.label });
+                            }
+                        }
+                        mSel.addEventListener('change', function(){ updateGrade(true); });
+                        ySel.addEventListener('change', function(){ updateGrade(true); });
+                    })();
+                </script>
+            </div>
             <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
                 📊 Neurociencia y socialización temprana
             </h2>
