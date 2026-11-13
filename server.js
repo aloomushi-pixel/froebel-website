@@ -91,19 +91,44 @@ const upload = multer({
   },
 });
 
-const createEmailTemplate = (title, data) => `
+const escapeHtml = (val) =>
+  String(val ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const buildAdminWhatsAppReplyUrl = (rawPhone, personName, contextLabel) => {
+  const digits = String(rawPhone || '').replace(/\D/g, '');
+  const tenDigits = digits.length >= 10 ? digits.slice(-10) : '';
+  if (tenDigits.length !== 10) return '';
+  const cleanName = String(personName || 'familia').trim();
+  const msg = `Hola ${cleanName}, te escribimos de Admisiones del Instituto Federico Froebel respecto a tu ${contextLabel}. ¿Cómo podemos ayudarte?`;
+  return `https://wa.me/52${tenDigits}?text=${encodeURIComponent(msg)}`;
+};
+
+const createEmailTemplate = (title, data, whatsappReplyUrl = '') => `
   <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
     <div style="background-color: #0d47a1; color: white; padding: 15px; border-radius: 8px 8px 0 0;">
-      <h2 style="margin: 0;">${title}</h2>
+      <h2 style="margin: 0;">${escapeHtml(title)}</h2>
     </div>
     <div style="background-color: #f5f7fa; padding: 20px; border-radius: 0 0 8px 8px; border: 1px solid #e1e4e8;">
+      ${
+        whatsappReplyUrl
+          ? `<div style="margin-bottom: 16px;">
+              <a href="${whatsappReplyUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #16a34a; color: #ffffff; text-decoration: none; font-weight: bold; padding: 11px 18px; border-radius: 999px; font-size: 14px;">📲 Responder al Tutor por WhatsApp en 1 Clic</a>
+            </div>`
+          : ''
+      }
       <table style="width: 100%; border-collapse: collapse;">
         ${Object.entries(data)
+          .filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '')
           .map(
             ([key, value]) => `
           <tr>
-            <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold; width: 40%;">${key}:</td>
-            <td style="padding: 10px; border-bottom: 1px solid #ddd;">${value || '-'}</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold; width: 40%;">${escapeHtml(key)}:</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">${escapeHtml(value)}</td>
           </tr>
         `
           )
@@ -115,7 +140,7 @@ const createEmailTemplate = (title, data) => `
 
 const createAutoReplyTemplate = (name) => `
   <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-    <h2 style="color: #0d47a1;">¡Hola, ${name}!</h2>
+    <h2 style="color: #0d47a1;">¡Hola, ${escapeHtml(name)}!</h2>
     <p>Hemos recibido tu información exitosamente en <strong>Instituto Federico Froebel</strong> (San Juan de Aragón, Gustavo A. Madero). Nuestro equipo de admisiones se pondrá en contacto contigo muy pronto para darle seguimiento a tu solicitud.</p>
     <p>Si deseas atención inmediata por WhatsApp, escríbenos al <a href="https://wa.me/525554148872">55 5414 8872</a>.</p>
     <p>Atentamente,<br><strong>Instituto Federico Froebel</strong><br>Av. 521 No. 20, San Juan de Aragón I Secc, Gustavo A. Madero, CDMX</p>
@@ -127,11 +152,12 @@ const createAutoReplyTemplate = (name) => `
 app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
+    const cleanName = typeof name === 'string' ? name.trim() : '';
     const cleanEmail = typeof email === 'string' ? email.trim() : '';
     const cleanPhone = typeof phone === 'string' ? phone.trim() : '';
     const hasValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail);
 
-    if (!name || (!hasValidEmail && !cleanPhone)) {
+    if (!cleanName || (!hasValidEmail && !cleanPhone)) {
       return res.status(400).json({ error: 'Nombre y teléfono o correo válido son obligatorios' });
     }
 
@@ -140,17 +166,22 @@ app.post('/api/contact', async (req, res) => {
       return res.status(500).json({ error: 'Configuración de servidor incompleta.' });
     }
 
-    const htmlContent = createEmailTemplate('Nuevo Mensaje / Pre-Registro — Instituto Federico Froebel', {
-      Nombre: name,
-      Teléfono: cleanPhone || 'No proporcionado',
-      Correo: hasValidEmail ? cleanEmail : 'No proporcionado',
-      Mensaje: message,
-    });
+    const waReplyUrl = buildAdminWhatsAppReplyUrl(cleanPhone, cleanName, 'solicitud de informes / apartado');
+    const htmlContent = createEmailTemplate(
+      'Nuevo Mensaje / Pre-Registro — Instituto Federico Froebel',
+      {
+        Nombre: cleanName,
+        'Teléfono / WhatsApp': cleanPhone || 'No proporcionado',
+        Correo: hasValidEmail ? cleanEmail : 'No proporcionado',
+        Mensaje: message || '-',
+      },
+      waReplyUrl
+    );
 
     const emailPayload = {
       from: 'Instituto Federico Froebel Web <info@froebelinstituto.com.mx>',
       to: [DESTINATION_EMAIL],
-      subject: `Nuevo contacto / pre-registro de: ${name}`,
+      subject: `Nuevo contacto / pre-registro de: ${cleanName}`,
       html: htmlContent,
     };
     if (hasValidEmail) {
@@ -169,7 +200,7 @@ app.post('/api/contact', async (req, res) => {
         from: 'Instituto Federico Froebel <info@froebelinstituto.com.mx>',
         to: [cleanEmail],
         subject: 'Recibimos tu solicitud - Instituto Federico Froebel',
-        html: createAutoReplyTemplate(name),
+        html: createAutoReplyTemplate(cleanName),
       });
     }
 
@@ -204,37 +235,77 @@ app.post('/api/enroll', upload.any(), async (req, res) => {
 
     const cleanGuardianEmail = typeof guardian.email === 'string' ? guardian.email.trim() : '';
     const hasValidGuardianEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanGuardianEmail);
-    const estanciaLabels = {
-      ninguna: 'Sin estancia (Horario base)',
-      parcial_16h: 'Estancia Parcial hasta 16:00h (+$1,400/mes)',
-      completa_18h: 'Estancia Completa hasta 18:00h (+$1,900/mes)',
+    const programLabels = {
+      maternal: 'Maternal Bilingüe (1 a 3 años · 08:30–13:30h)',
+      preescolar_1: 'Kínder 1 / 1° Preescolar SEP (3 a 4 años · 08:30–14:00h)',
+      preescolar_2: 'Kínder 2 / 2° Preescolar SEP (4 a 5 años · 08:30–14:00h)',
+      preescolar_3: 'Kínder 3 / 3° Preescolar SEP (5 a 6 años · 08:30–14:00h)',
     };
+    const planLabels = {
+      pronto_pago: 'Pronto Pago ($3,600 MXN/mes · primeros 10 días)',
+      normal: 'Mensual Normal ($4,000 MXN/mes)',
+      anual: 'Pago Anual ($40,480 MXN · 8% de descuento)',
+    };
+    const estanciaLabels = {
+      ninguna: 'Sin estancia (Horario escolar base)',
+      parcial_16h: 'Estancia Parcial hasta 16:00h (+$1,400 MXN/mes)',
+      completa_18h: 'Estancia Completa hasta 18:00h (+$1,900 MXN/mes)',
+    };
+    const baseMonthly = student.plan === 'normal' ? 4000 : 3600;
+    const extraMonthly = student.estancia === 'parcial_16h' ? 1400 : student.estancia === 'completa_18h' ? 1900 : 0;
+    const estimatedSummary =
+      student.plan === 'anual'
+        ? `$40,480 MXN anual${extraMonthly ? ` + $${extraMonthly.toLocaleString('es-MX')} MXN/mes de estancia` : ''}`
+        : `$${(baseMonthly + extraMonthly).toLocaleString('es-MX')} MXN/mes integrado`;
 
-    const htmlContent = createEmailTemplate('Nueva Solicitud de Inscripción — Instituto Federico Froebel', {
-      'Tutor - Nombre': guardian.full_name,
-      'Tutor - Teléfono / WhatsApp': guardian.phone,
-      'Tutor - Correo': hasValidGuardianEmail ? cleanGuardianEmail : 'No proporcionado',
-      'Tutor - Parentesco': guardian.relationship,
-      'Alumno - Nombre': student.full_name,
-      'Alumno - Fecha de Nacimiento': student.birth_date,
-      'Alumno - Programa': student.program,
-      'Alumno - CURP': student.curp,
-      'Plan de Colegiatura': student.plan,
-      'Estancia / Comedor': estanciaLabels[student.estancia] || student.estancia || 'Sin estancia (Horario base)',
-      'Método de Pago Seleccionado': payment.method,
-      'Referencia de Transferencia': payment.transferRef,
-      'Archivos Adjuntos': `${files.length} documento(s)`,
-    });
+    const primaryPhone = guardian.whatsapp || guardian.phone || student.parent_phone || '';
+    const waReplyUrl = buildAdminWhatsAppReplyUrl(
+      primaryPhone,
+      guardian.full_name || student.full_name || 'familia',
+      `solicitud de inscripción (${programLabels[student.program] || student.program || 'Ciclo 2026-2027'})`
+    );
+
+    const htmlContent = createEmailTemplate(
+      'Nueva Solicitud de Inscripción — Instituto Federico Froebel',
+      {
+        'Tutor - Nombre': guardian.full_name || '-',
+        'Tutor - Teléfono': guardian.phone || student.parent_phone || '-',
+        'Tutor - WhatsApp': guardian.whatsapp || guardian.phone || student.parent_phone || '-',
+        'Tutor - Correo': hasValidGuardianEmail ? cleanGuardianEmail : 'No proporcionado',
+        'Tutor - Parentesco': guardian.relationship || '-',
+        'Tutor - Domicilio': guardian.address,
+        'Contacto de Emergencia':
+          guardian.emergency_contact_name || guardian.emergency_contact_phone
+            ? `${guardian.emergency_contact_name || ''} ${guardian.emergency_contact_phone ? `(${guardian.emergency_contact_phone})` : ''}`.trim()
+            : undefined,
+        'Alumno - Nombre': student.full_name || '-',
+        'Alumno - Fecha de Nacimiento': student.date_of_birth || student.birth_date || '-',
+        'Alumno - Género': student.gender,
+        'Alumno - Programa SEP': programLabels[student.program] || student.program || '-',
+        'Alumno - CURP': student.curp,
+        'Alumno - Tipo de Sangre': student.blood_type,
+        'Alumno - Alergias': student.allergies,
+        'Alumno - Notas Médicas': student.medical_notes,
+        'Plan de Colegiatura': planLabels[student.plan] || student.plan || '-',
+        'Estancia / Comedor': estanciaLabels[student.estancia] || student.estancia || 'Sin estancia (Horario escolar base)',
+        'Cotización Estimada': estimatedSummary,
+        'Método de Pago': payment.method === 'acordar_despues' ? 'Acordar en dirección / posteriormente' : payment.method || '-',
+        'Referencia de Transferencia': payment.transferRef,
+        'Archivos Adjuntos': `${files.length} documento(s)`,
+      },
+      waReplyUrl
+    );
 
     const attachments = files.map((file) => ({
       filename: file.originalname,
       content: file.buffer,
     }));
 
+    const humanProgram = programLabels[student.program] ? programLabels[student.program].split(' (')[0] : student.program || 'Preescolar/Maternal';
     const enrollEmailPayload = {
       from: 'Instituto Federico Froebel Inscripciones <info@froebelinstituto.com.mx>',
       to: [DESTINATION_EMAIL],
-      subject: `Inscripción: ${student.full_name || 'Nuevo Alumno'} (${student.program || 'Preescolar/Maternal'})`,
+      subject: `Inscripción: ${student.full_name || 'Nuevo Alumno'} (${humanProgram})`,
       html: htmlContent,
       attachments,
     };

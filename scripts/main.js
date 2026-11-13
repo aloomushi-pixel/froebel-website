@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initFaqAccordions();
     initFacilityPhotoLightbox();
     initInteractiveComparisonTables();
+    initInteractiveActionCards();
+    initHyperlocalNeighborhoodCalculators();
     initInstantLinkPrefetch();
     initCookieConsentBanner();
   };
@@ -163,6 +165,111 @@ function initInteractiveComparisonTables() {
       primaryLink.click();
     });
   });
+}
+
+/* === INTERACTIVE SINGLE-CTA ACTION CARDS (Eliminates Card Surface Dead Clicks) === */
+function initInteractiveActionCards() {
+  document.querySelectorAll('.card').forEach((card) => {
+    const tag = card.tagName.toLowerCase();
+    if (tag === 'a' || tag === 'button' || tag === 'details' || card.hasAttribute('role')) return;
+    if (card.querySelector('input, select, textarea, button, form, table, details')) return;
+
+    const allLinks = Array.from(card.querySelectorAll('a[href]'));
+    if (!allLinks.length) return;
+
+    let primaryLink = null;
+    if (allLinks.length === 1) {
+      primaryLink = allLinks[0];
+    } else {
+      const directLinks = Array.from(card.children).filter((el) => el.tagName && el.tagName.toLowerCase() === 'a' && el.hasAttribute('href'));
+      if (directLinks.length === 1) {
+        primaryLink = directLinks[0];
+      }
+    }
+    if (!primaryLink) return;
+
+    card.style.cursor = 'pointer';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    if (!card.getAttribute('data-ux-id')) {
+      const titleTxt = (card.querySelector('h3, h4, strong')?.textContent || primaryLink.textContent || 'card')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .slice(0, 36);
+      card.setAttribute('data-ux-id', `card-cta-${titleTxt}`);
+    }
+
+    card.addEventListener('click', (ev) => {
+      if (ev.target.closest('a, button, input, select, textarea, summary, label')) return;
+      const sel = window.getSelection ? window.getSelection().toString().trim() : '';
+      if (sel.length > 0) return;
+      primaryLink.click();
+    });
+
+    card.addEventListener('keydown', (ev) => {
+      if (ev.target !== card) return;
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        primaryLink.click();
+      }
+    });
+  });
+}
+
+/* === HYPERLOCAL NEIGHBORHOOD TUITION + COMMUTE CALCULATOR === */
+function initHyperlocalNeighborhoodCalculators() {
+  const box = document.getElementById('cotizador-rapido-colonia');
+  if (!box) return;
+
+  const gradeSel = document.getElementById('colonia-calc-grado');
+  const estSel = document.getElementById('colonia-calc-estancia');
+  const totalOut = document.getElementById('colonia-calc-total');
+  const detailOut = document.getElementById('colonia-calc-detalle');
+  const enrollBtn = document.getElementById('colonia-calc-enroll-btn');
+  const waBtn = document.getElementById('colonia-calc-wa-btn');
+  if (!gradeSel || !estSel || !totalOut || !detailOut || !enrollBtn || !waBtn) return;
+
+  const colonia = box.getAttribute('data-colonia') || 'Gustavo A. Madero';
+  const minutos = box.getAttribute('data-minutos') || 'pocos minutos';
+
+  const gradeMeta = {
+    maternal: { label: 'Maternal Bilingüe (1–3 años)', baseHours: '08:30–13:30h' },
+    preescolar_1: { label: 'Kínder 1 SEP (3–4 años)', baseHours: '08:30–14:00h' },
+    preescolar_2: { label: 'Kínder 2 SEP (4–5 años)', baseHours: '08:30–14:00h' },
+    preescolar_3: { label: 'Kínder 3 SEP (5–6 años)', baseHours: '08:30–14:00h' },
+  };
+  const estMeta = {
+    ninguna: { extra: 0, label: 'Horario escolar base', hoursSuffix: 'recepción desde 07:30h' },
+    parcial_16h: { extra: 1400, label: '+ Estancia 16:00h y Comedor', hoursSuffix: 'hasta 16:00h con Comedor 3 tiempos' },
+    completa_18h: { extra: 1900, label: '+ Estancia Completa 18:00h y Comedor', hoursSuffix: 'hasta 18:00h con Comedor + Talleres' },
+  };
+
+  const renderCalc = (trackChange) => {
+    const gKey = gradeSel.value || 'preescolar_1';
+    const eKey = estSel.value || 'ninguna';
+    const g = gradeMeta[gKey] || gradeMeta.preescolar_1;
+    const e = estMeta[eKey] || estMeta.ninguna;
+    const prontoTotal = 3600 + e.extra;
+    const normalTotal = 4000 + e.extra;
+
+    totalOut.textContent = `$${prontoTotal.toLocaleString('es-MX')} MXN/mes`;
+    detailOut.textContent = `${g.label} (${eKey === 'ninguna' ? g.baseHours + ', ' + e.hoursSuffix : e.hoursSuffix}) · Pronto Pago (regular $${normalTotal.toLocaleString('es-MX')}) · A ${minutos} desde ${colonia}`;
+
+    enrollBtn.href = `/inscripciones?inscribir=1&programa=${encodeURIComponent(gKey)}&estancia=${encodeURIComponent(eKey)}`;
+    const waText = `Hola Instituto Froebel, vivo cerca de ${colonia} (${minutos}) y coticé ${g.label} (${e.label}: $${prontoTotal.toLocaleString('es-MX')}/mes Pronto Pago). Quiero informes o agendar visita.`;
+    waBtn.href = `https://wa.me/525554148872?text=${encodeURIComponent(waText)}`;
+
+    if (trackChange && window.FroebelUX && !window.FroebelUX.isBot()) {
+      window.FroebelUX.track('cta_click', {
+        element_id: `colonia_calc_${gKey}_${eKey}`,
+        element_text: `Cotizador ${colonia}: ${g.label} ($${prontoTotal}/mes)`,
+      });
+    }
+  };
+
+  gradeSel.addEventListener('change', () => renderCalc(true));
+  estSel.addEventListener('change', () => renderCalc(true));
+  renderCalc(false);
 }
 
 /* === HEADER SCROLL EFFECT (rAF-throttled, zero redundant DOM writes) === */
