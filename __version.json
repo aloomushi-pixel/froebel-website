@@ -1,11 +1,11 @@
 {
-  "version": "2.1.51",
-  "cycle": 51,
-  "deployedAt": "2026-11-12T21:29:18.870Z",
+  "version": "2.1.52",
+  "cycle": 52,
+  "deployedAt": "2026-11-13T01:41:40.425Z",
   "standard": "Estándar Maestro v2.1 + GSC + Gobernanza por Magnitud",
   "highlights": [
-    "Main-thread INP optimization in main.js?v=23 (760ms -> <50ms): cached static SEO score, Paint-yielding scheduleTelemetry(), rAF-throttled scroll listeners with cached scrollHeight (zero forced synchronous reflows), and W3C interactionId-filtered INP observer",
-    "Interactive Age Filter (1-3a Maternal, 3-4a K1, 4-6a K2-K3) + 1-click Print/PDF Guide on /blog/5-actividades-con-bloques-para-hacer-en-casa.html following live ChatGPT (utm:chatgpt.com) 97%-scroll session",
-    "Compressed /favicon.png from 530 KB -> 37.8 KB (-92.9% payload, 192x192 SERP standard), inlined wizard.css into /inscripciones (zero FOUC/CLS), added explicit width/height on all 20 remaining img tags, upgraded LCP fetchpriority, normalized Google Fonts swap loader + /manifest.json + theme-color #1E40AF, and hardened sw.js network-first HTML handling"
+    "CRO & Deep-Link Pricing Clarity on /horario-extendido-y-comedor following organic Google session s_158bfc08_mwe2g6x5: added above-the-fold calculator/WhatsApp quick bar, integrated Pronto Pago totals ($5,000/mes 16:00h and $5,500/mes 18:00h), 1-tap CTAs inside Estancia cards, and fixed &estancia=completa_18h / parcial_16h deep links into /inscripciones",
+    "Core Web Vitals LCP & Zero-CLS Optimization across all 23 HTML pages following mobile session s_zbf7imz6_mwe7dn0k: injected metric-adjusted Inter Fallback / Nunito Fallback @font-face declarations, moved critical mobile hero/image layout CSS from deferred JS into inline <style id=\"global-styles\"> (eliminating post-FCP layout shifts), added early <head> WebP LCP preloads on all 21 hero-image pages, and added missing defer to external scripts on 6 pages",
+    "Internal PageRank Hub Linking from 11 high-authority Pillar & Hyperlocal GAM pages directly into the 4 under-linked commercial blog guides (GAM kinder checklist, AICM extended hours, Maternal neurodevelopment vs daycare, and nutritious weekly menu)"
   ]
 }
