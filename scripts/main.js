@@ -11,9 +11,50 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordions();
   initFacilityPhotoLightbox();
   initInteractiveComparisonTables();
+  initInstantLinkPrefetch();
   initFroebelUXTelemetry();
   initCookieConsentBanner();
 });
+
+/* === INSTANT SUBPAGE PREFETCH (iOS Safari & Browsers without Speculation Rules) === */
+function initInstantLinkPrefetch() {
+  try {
+    if (HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const conn = navigator.connection;
+    if (conn && (conn.saveData || /2g/.test(conn.effectiveType || ''))) return;
+  } catch (_) {}
+
+  const prefetched = new Set();
+  const maybePrefetch = (ev) => {
+    const target = ev.target;
+    if (!target || !(target instanceof Element)) return;
+    const anchor = target.closest('a[href]');
+    if (!anchor || prefetched.size >= 8) return;
+    const rawHref = anchor.getAttribute('href') || '';
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:')) return;
+    let url;
+    try {
+      url = new URL(rawHref, window.location.origin);
+    } catch (_) {
+      return;
+    }
+    if (url.origin !== window.location.origin) return;
+    if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+    if (/^\/(api|admin)/i.test(url.pathname)) return;
+    const key = url.pathname + url.search;
+    if (prefetched.has(key)) return;
+    prefetched.add(key);
+
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = key;
+    link.as = 'document';
+    document.head.appendChild(link);
+  };
+
+  document.addEventListener('pointerenter', maybePrefetch, { capture: true, passive: true });
+  document.addEventListener('touchstart', maybePrefetch, { passive: true });
+}
 
 /* === INTERACTIVE PHOTO LIGHTBOX (Eliminates Mobile Photo Dead Clicks + Adds Conversion Bar) === */
 function initFacilityPhotoLightbox() {

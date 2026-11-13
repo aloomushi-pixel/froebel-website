@@ -33,9 +33,9 @@
 
 ## 3. Costos, Colegiaturas y Estancia Vespertina (Ciclo Escolar 2026-2027)
 
-- **Colegiatura Mensual con Pronto Pago (primeros 10 días del mes)**: **$3,600 MXN/mes** (11 mensualidades (septiembre a julio) de septiembre a junio).
-- **Colegiatura Mensual Regular (día 11 en adelante)**: **$4,000 MXN/mes**.
-- **Pago Anual Anticipado**: **$40,480 MXN** (incluye 8% de descuento sobre la colegiatura anual).
+- **Colegiatura Mensual con Pronto Pago (primeros 10 días del mes)**: **$3,600 MXN/mes** (11 mensualidades de septiembre a julio).
+- **Colegiatura Mensual Regular (día 11 en adelante)**: **$4,000 MXN/mes** (11 mensualidades de septiembre a julio).
+- **Pago Anual Anticipado**: **$40,480 MXN** (incluye 8% de descuento sobre la colegiatura anual de $44,000 MXN; ahorro de $3,520 MXN).
 - **Inscripción Anual (incluye seguro escolar anual contra accidentes, credencial y valoración diagnóstica inicial)**:
   - **Marzo – Abril (25% de descuento anticipado)**: **$3,375 MXN**
   - **Mayo – Junio (20% de descuento)**: **$3,600 MXN**
@@ -43,8 +43,8 @@
   - **Agosto (Tarifa Regular)**: **$4,500 MXN**
 - **Horarios y Estancia Educativa con Comedor**:
   - **Horario Escolar Base**: 08:30 a 14:00 hrs (recepción matutina desde las 07:30 hrs sin cargo extra).
-  - **Estancia Parcial con Comedor (14:00 a 16:00 hrs)**: **$1,400 MXN/mes** (incluye comida caliente de 3 tiempos + 1 taller vespertino).
-  - **Estancia Completa con Comedor (14:00 a 18:00 hrs)**: **$1,900 MXN/mes** (incluye comida caliente de 3 tiempos + apoyo en tareas + talleres de música, arte, psicomotricidad y activación física).
+  - **Estancia Parcial con Comedor (14:00 a 16:00 hrs)**: **$1,400 MXN/mes** adicionales (total mensual integrado con colegiatura Pronto Pago: **$5,000 MXN/mes**; incluye comida caliente de 3 tiempos + 1 taller vespertino).
+  - **Estancia Completa con Comedor (14:00 a 18:00 hrs)**: **$1,900 MXN/mes** adicionales (total mensual integrado con colegiatura Pronto Pago: **$5,500 MXN/mes**; incluye comida caliente de 3 tiempos + apoyo en tareas + talleres de música, arte, psicomotricidad y activación física).
   - **Hora suelta de estancia (sin comedor)**: **$50 MXN/hora**.
 
 ---

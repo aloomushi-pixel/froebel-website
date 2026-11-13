@@ -382,6 +382,44 @@
 <!-- BLOG GRID -->
 <section class="section" id="articulos-blog" data-ux-section="articulos-blog">
 <div class="container">
+<div id="filtro-temas-blog" data-ux-section="filtro-temas-blog" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:var(--space-6);padding:12px 14px;background:#f8fafc;border:1px solid var(--color-border);border-radius:14px;">
+  <span style="font-size:0.84rem;font-weight:800;color:var(--color-primary-dark);">🔎 Filtrar por etapa o tema:</span>
+  <div role="group" aria-label="Filtrar artículos del blog por etapa" style="display:flex;flex-wrap:wrap;gap:6px;">
+    <button type="button" class="js-blog-filter" data-targets="all" aria-pressed="true" style="background:var(--color-primary);color:#ffffff;border:1px solid var(--color-primary);padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">Todas (8)</button>
+    <button type="button" class="js-blog-filter" data-targets="post-esfinteres,post-neurodesarrollo,post-llanto" aria-pressed="false" style="background:#ffffff;color:var(--color-text);border:1px solid var(--color-border);padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🍼 Maternal y Pañal (1–3a)</button>
+    <button type="button" class="js-blog-filter" data-targets="post-bloques,post-checklist-seguridad,post-edad-preescolar" aria-pressed="false" style="background:#ffffff;color:var(--color-text);border:1px solid var(--color-border);padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🎓 Kínder SEP y STEM (3–6a)</button>
+    <button type="button" class="js-blog-filter" data-targets="post-horario-extendido,post-menu-500" aria-pressed="false" style="background:#ffffff;color:var(--color-text);border:1px solid var(--color-border);padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🍱 Estancia 18h y Nutrición</button>
+    <button type="button" class="js-blog-filter" data-targets="post-checklist-seguridad,post-llanto,post-neurodesarrollo" aria-pressed="false" style="background:#ffffff;color:var(--color-text);border:1px solid var(--color-border);padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🛡️ Seguridad y Adaptación</button>
+  </div>
+</div>
+<script>
+  (function(){
+    var bar = document.getElementById('filtro-temas-blog');
+    if (!bar) return;
+    var btns = bar.querySelectorAll('.js-blog-filter');
+    var cards = document.querySelectorAll('#articulos-blog article.blog-card');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var raw = btn.getAttribute('data-targets') || 'all';
+        var allowed = raw === 'all' ? null : raw.split(',');
+        btns.forEach(function(b){
+          var active = b === btn;
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+          b.style.background = active ? 'var(--color-primary)' : '#ffffff';
+          b.style.color = active ? '#ffffff' : 'var(--color-text)';
+          b.style.borderColor = active ? 'var(--color-primary)' : 'var(--color-border)';
+        });
+        cards.forEach(function(c){
+          var show = !allowed || allowed.indexOf(c.id) !== -1;
+          c.style.display = show ? 'flex' : 'none';
+        });
+        if (window.FroebelUX) {
+          window.FroebelUX.track('cta_click', { element_id: 'blog_filter_' + raw, element_text: btn.textContent.trim() });
+        }
+      });
+    });
+  })();
+</script>
 <div class="grid grid--3">
 <!-- Post 1 -->
 <article id="post-esfinteres" class="blog-card fade-in" style="border: 2px solid var(--color-accent); border-radius: var(--radius-xl); overflow: hidden; background: white; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all var(--duration-normal) var(--ease-default);">
@@ -598,6 +636,7 @@
 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=23" defer></script>
+<script src="/scripts/main.js?v=24" defer></script>
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

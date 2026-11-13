@@ -358,6 +358,70 @@
         </table>
       </div>
 
+      <div id="evaluador-kinder-gam" data-ux-section="evaluador-kinder-gam" style="background:linear-gradient(135deg,#ffffff 0%,#f0fdf4 100%);border:2px solid #16a34a;border-radius:16px;padding:18px;margin-bottom:var(--space-8);box-shadow:0 6px 18px rgba(22,163,74,0.08);">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;">
+          <div>
+            <span style="display:inline-block;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;margin-bottom:4px;">✅ AUTODIAGNÓSTICO INTERACTIVO PARA VISITAS</span>
+            <h3 style="margin:0;font-size:1.05rem;color:#14532d;">Evalúa el Kínder que estás visitando en 30 segundos</h3>
+          </div>
+          <span id="evaluador-kinder-score" aria-live="polite" style="background:#166534;color:#ffffff;padding:6px 12px;border-radius:999px;font-size:0.82rem;font-weight:800;">0 / 5 verificados</span>
+        </div>
+        <div style="display:grid;gap:8px;font-size:0.88rem;color:#1e293b;">
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
+            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <span><strong>1. RVOE SEP visible:</strong> Muestra acuerdo oficial vigente (en Froebel: <strong>SEP 09050141</strong>).</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
+            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <span><strong>2. CCTV + Enfermera de planta:</strong> Circuito cerrado activo en aulas/patio y enfermería fija toda la jornada.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
+            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <span><strong>3. Grupos reducidos:</strong> Máximo 8 alumnos por educadora en Maternal (1:8) y 15 en Preescolar (1:15).</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
+            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <span><strong>4. Inglés diario + método activo:</strong> 1 hora diaria de inglés y aprendizaje manipulativo STEM sin planas mecánicas.</span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
+            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <span><strong>5. Costos publicados sin sorpresas:</strong> Colegiaturas e inscripción claras por escrito ($3,600/mes Pronto Pago en Froebel).</span>
+          </label>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px dashed #86efac;">
+          <p id="evaluador-kinder-verdict" style="margin:0;font-size:0.82rem;color:#166534;font-weight:700;">Marca los puntos que cumple la escuela. El Instituto Federico Froebel cumple 5/5 verificables en recorrido presencial.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <button type="button" onclick="if(window.FroebelUX)window.FroebelUX.track('cta_click',{element_id:'checklist_print',element_text:'Imprimir Checklist Kinder GAM'});window.print();" style="background:#ffffff;border:1px solid #16a34a;color:#166534;padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ Imprimir Checklist</button>
+            <a id="evaluador-kinder-wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20us%C3%A9%20el%20Checklist%20de%205%20puntos%20y%20quiero%20agendar%20visita%20para%20verificar%20instalaciones" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:6px 14px;border-radius:999px;font-size:0.8rem;font-weight:800;text-decoration:none;">💬 Comprobar 5/5 en Froebel →</a>
+          </div>
+        </div>
+        <script>
+          (function(){
+            var box = document.getElementById('evaluador-kinder-gam');
+            if (!box) return;
+            var checks = box.querySelectorAll('.js-kinder-check');
+            var badge = document.getElementById('evaluador-kinder-score');
+            var verdict = document.getElementById('evaluador-kinder-verdict');
+            function sync() {
+              var n = 0;
+              checks.forEach(function(c){ if (c.checked) n++; });
+              badge.textContent = n + ' / 5 verificados';
+              if (n === 5) {
+                verdict.textContent = '🌟 ¡Excelente estándar (5/5)! Agenda tu visita al Instituto Froebel para comparar en vivo.';
+              } else if (n >= 3) {
+                verdict.textContent = '⚠️ Cumple ' + n + '/5 puntos clave. En el Instituto Froebel puedes verificar los 5/5 en tu recorrido.';
+              } else {
+                verdict.textContent = 'Marca los puntos que cumple la escuela. El Instituto Federico Froebel cumple 5/5 verificables en recorrido presencial.';
+              }
+              if (window.FroebelUX) {
+                window.FroebelUX.track('cta_click', { element_id: 'evaluador_kinder_' + n, element_text: 'Checklist Kinder ' + n + '/5' });
+              }
+            }
+            checks.forEach(function(c){ c.addEventListener('change', sync); });
+          })();
+        </script>
+      </div>
+
       <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">
         1. 🛡️ Seguridad Verificable: Circuito Cerrado (CCTV) y Enfermería Escolar
       </h2>
@@ -385,10 +449,10 @@
       <div style="background:var(--color-primary-50);border-radius:var(--radius-xl);padding:var(--space-6);margin:var(--space-6) 0;">
         <p style="margin-bottom:var(--space-3);"><strong>Un colegio confiable publica sus costos sin letras chiquitas. En el Instituto Federico Froebel (Ciclo 2026-2027):</strong></p>
         <ul style="display:flex;flex-direction:column;gap:var(--space-2);list-style:none;padding:0;margin:0;">
-          <li>✓ <strong>Colegiatura Pronto Pago (primeros 10 días):</strong> $3,600 MXN/mes (10 meses).</li>
-          <li>✓ <strong>Colegiatura Normal:</strong> $4,000 MXN/mes.</li>
+          <li>✓ <strong>Colegiatura Pronto Pago (primeros 10 días):</strong> $3,600 MXN/mes (11 mensualidades de septiembre a julio).</li>
+          <li>✓ <strong>Colegiatura Normal:</strong> $4,000 MXN/mes (o Pago Anual con 8% de descuento: $40,480 MXN).</li>
           <li>✓ <strong>Inscripción con descuento anticipado:</strong> desde $3,375 MXN (incluye seguro escolar anual, credencial y evaluación diagnóstica).</li>
-          <li>✓ <strong>Estancia Educativa con Comedor (opcional):</strong> hasta las 16:00 hrs ($1,400/mes) o hasta las 18:00 hrs ($1,900/mes).</li>
+          <li>✓ <strong>Estancia Educativa con Comedor (opcional):</strong> hasta las 16:00 hrs ($1,400/mes adicionales · total integrado Pronto Pago: $5,000/mes) o hasta las 18:00 hrs ($1,900/mes adicionales · total integrado Pronto Pago: $5,500/mes).</li>
         </ul>
       </div>
 
@@ -530,6 +594,7 @@
 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=23" defer></script>
+<script src="/scripts/main.js?v=24" defer></script>
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

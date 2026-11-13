@@ -2,6 +2,7 @@ import compression from 'compression';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
+import fs from 'fs';
 import multer from 'multer';
 import path from 'path';
 import { Resend } from 'resend';
@@ -20,8 +21,47 @@ const resendKey = process.env.RESEND_API_KEY || process.env.RESEND_MASTER_API_KE
 const resend = resendKey ? new Resend(resendKey) : null;
 const DESTINATION_EMAIL = process.env.DESTINATION_EMAIL || 'info@froebelinstituto.com.mx';
 
+// Pre-warm in-memory HTML & GEO document cache (eliminates disk stat/open/read TTFB overhead)
+const MEMORY_DOC_CACHE = new Map();
+function warmMemoryDocCache(dir, urlPrefix = '') {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name.startsWith('.') || ['node_modules', 'assets', 'scripts', 'styles'].includes(entry.name)) continue;
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      warmMemoryDocCache(fullPath, `${urlPrefix}/${entry.name}`);
+    } else if (/\.(html|txt|xml|json)$/i.test(entry.name) && !/^package(-lock)?\.json$/i.test(entry.name)) {
+      const buf = fs.readFileSync(fullPath);
+      const stat = fs.statSync(fullPath);
+      const etag = `W/"${buf.length.toString(16)}-${Math.trunc(stat.mtimeMs).toString(16)}"`;
+      const ext = path.extname(entry.name).toLowerCase();
+      const contentType =
+        ext === '.html'
+          ? 'text/html; charset=utf-8'
+          : ext === '.xml'
+          ? 'application/xml; charset=utf-8'
+          : ext === '.json'
+          ? 'application/json; charset=utf-8'
+          : 'text/plain; charset=utf-8';
+      const routePath = `${urlPrefix}/${entry.name}`;
+      const record = { buf, etag, contentType, isHtml: ext === '.html' };
+      MEMORY_DOC_CACHE.set(routePath, record);
+      if (entry.name === 'index.html') {
+        MEMORY_DOC_CACHE.set(urlPrefix ? `${urlPrefix}/` : '/', record);
+      } else if (ext === '.html') {
+        MEMORY_DOC_CACHE.set(`${urlPrefix}/${entry.name.slice(0, -5)}`, record);
+      }
+    }
+  }
+}
+try {
+  warmMemoryDocCache(__dirname);
+} catch (err) {
+  console.warn('Memory doc cache warm warning:', err.message);
+}
+
 // Middleware
-app.use(compression());
+app.disable('x-powered-by');
+app.use(compression({ level: 6, threshold: 1024 }));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -290,6 +330,33 @@ app.use((req, res, next) => {
   next();
 });
 
+// Fast in-memory responder for HTML, Sitemap, Robots, LLMs & Version endpoints (<2ms TTFB)
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  const cached = MEMORY_DOC_CACHE.get(req.path || '/');
+  if (!cached) return next();
+
+  res.setHeader('Content-Type', cached.contentType);
+  res.setHeader('ETag', cached.etag);
+  if (cached.isHtml) {
+    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
+    res.setHeader(
+      'Link',
+      '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown"'
+    );
+  } else {
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  }
+
+  if (req.headers['if-none-match'] === cached.etag) {
+    return res.status(304).end();
+  }
+  if (req.method === 'HEAD') {
+    return res.status(200).end();
+  }
+  return res.status(200).send(cached.buf);
+});
+
 // Static assets with bfcache-friendly HTML revalidation, cached JS/CSS, and immutable media
 app.use(
   express.static(__dirname, {
@@ -297,8 +364,11 @@ app.use(
     extensions: ['html', 'htm'],
     setHeaders: (res, reqPath) => {
       if (reqPath.endsWith('.html') || reqPath.endsWith('.htm')) {
-        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-        res.setHeader('Link', '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt"');
+        res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
+        res.setHeader(
+          'Link',
+          '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown"'
+        );
       } else if (reqPath.endsWith('.json') || reqPath.endsWith('.xml') || reqPath.endsWith('.txt')) {
         res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       } else if (reqPath.endsWith('.js') || reqPath.endsWith('.css')) {
@@ -311,6 +381,11 @@ app.use(
 );
 
 app.get('*', (req, res) => {
+  const home = MEMORY_DOC_CACHE.get('/');
+  if (home) {
+    res.setHeader('Content-Type', home.contentType);
+    return res.status(404).send(home.buf);
+  }
   res.status(404).sendFile(path.join(__dirname, 'index.html'));
 });
 

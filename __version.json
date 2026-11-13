@@ -1,11 +1,11 @@
 {
-  "version": "2.1.52",
-  "cycle": 52,
-  "deployedAt": "2026-11-13T01:41:40.425Z",
+  "version": "2.1.53",
+  "cycle": 53,
+  "deployedAt": "2026-11-13T05:54:58.576Z",
   "standard": "Estándar Maestro v2.1 + GSC + Gobernanza por Magnitud",
   "highlights": [
-    "CRO & Deep-Link Pricing Clarity on /horario-extendido-y-comedor following organic Google session s_158bfc08_mwe2g6x5: added above-the-fold calculator/WhatsApp quick bar, integrated Pronto Pago totals ($5,000/mes 16:00h and $5,500/mes 18:00h), 1-tap CTAs inside Estancia cards, and fixed &estancia=completa_18h / parcial_16h deep links into /inscripciones",
-    "Core Web Vitals LCP & Zero-CLS Optimization across all 23 HTML pages following mobile session s_zbf7imz6_mwe7dn0k: injected metric-adjusted Inter Fallback / Nunito Fallback @font-face declarations, moved critical mobile hero/image layout CSS from deferred JS into inline <style id=\"global-styles\"> (eliminating post-FCP layout shifts), added early <head> WebP LCP preloads on all 21 hero-image pages, and added missing defer to external scripts on 6 pages",
-    "Internal PageRank Hub Linking from 11 high-authority Pillar & Hyperlocal GAM pages directly into the 4 under-linked commercial blog guides (GAM kinder checklist, AICM extended hours, Maternal neurodevelopment vs daycare, and nutritious weekly menu)"
+    "Server TTFB & Instant Navigation Upgrade (server.js + main.js?v=24 + W3C Speculation Rules across 23 HTML pages): pre-warmed in-memory HTML/GEO document cache with ETag 304, Link headers for llms.txt/llms-full.txt, compression, and iOS Safari touchstart/pointerenter document prefetching following mobile TTFB=2,655ms session s_zbf7imz6_mwe7dn0k",
+    "Striking Distance Optimization on /nosotros (pos 11.08 for \"colegio federico froebel\", 258 impr; pos 12.93 for \"federico froebel\", 408 impr): aligned OG/Twitter meta tags, expanded FAQPage JSON-LD to all 4 visible FAQs including Friedrich Fröbel methodology, and added #guias-padres-nosotros internal linking strip",
+    "Interactive Level-2 CRO Widgets & 100% Factual Billing Alignment: added interactive 5-point Kínder Evaluator (#evaluador-kinder-gam) with print + WhatsApp CTA on GAM checklist guide, interactive stage/topic filter bar (#filtro-temas-blog) on /blog/, and unified 11-month billing + integrated Pronto Pago Estancia totals ($5,000/mes 16:00h, $5,500/mes 18:00h) across llms.txt, llms-full.txt, and blog guides"
   ]
 }
