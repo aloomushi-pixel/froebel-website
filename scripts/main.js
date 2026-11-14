@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHyperlocalNeighborhoodCalculators();
     initInstantLinkPrefetch();
     initCookieConsentBanner();
+    initMobileStickyConversionBar();
   };
 
   if (typeof window.requestIdleCallback === 'function') {
@@ -556,7 +557,7 @@ function initCookieConsentBanner() {
     'align-items: center',
     'justify-content: space-between',
     'gap: 14px',
-    'transition: opacity 0.25s ease, transform 0.25s ease'
+    'transition: opacity 0.25s ease, transform 0.25s ease, bottom 0.22s ease, right 0.22s ease'
   ].join(';');
 
   banner.innerHTML = `
@@ -598,6 +599,175 @@ function initCookieConsentBanner() {
       setTimeout(() => banner.remove(), 260);
     });
   }
+}
+
+/* === MOBILE STICKY CONVERSION DOCK (Zero-CLS Thumb-Zone Bar on Scroll > 300px) === */
+function initMobileStickyConversionBar() {
+  const path = (window.location.pathname || '/').toLowerCase();
+  if (/^\/admin/i.test(path)) return;
+  if (document.getElementById('froebel-mobile-dock')) return;
+
+  const isInscripciones = path === '/inscripciones' || path === '/inscripciones.html';
+  let enrollHref = '/inscripciones?inscribir=1';
+  let enrollLabel = '📝 Costos $3,600';
+  let waMessage =
+    'Hola Instituto Froebel, vi su sitio desde mi celular y quiero costos 2026-2027 ($3,600/mes) o agendar visita';
+
+  if (isInscripciones) {
+    enrollHref = '#wizard-section';
+    enrollLabel = '🚀 Pre-inscribir';
+    waMessage =
+      'Hola Instituto Froebel, estoy revisando los costos e inscripciones 2026-2027 desde mi celular y quiero informes';
+  } else if (
+    path.includes('maternal') ||
+    path.includes('esfinteres') ||
+    path.includes('neurodesarrollo') ||
+    path.includes('llora')
+  ) {
+    enrollHref = '/inscripciones?inscribir=1&programa=maternal';
+    waMessage =
+      'Hola Instituto Froebel, busco informes de Maternal Bilingüe (1 a 3 años, $3,600/mes Pronto Pago) y agendar visita';
+  } else if (
+    path.includes('preescolar-stem') ||
+    path.includes('edad-debe-empezar') ||
+    path.includes('bloques') ||
+    path.includes('mejor-kinder')
+  ) {
+    enrollHref = '/inscripciones?inscribir=1&programa=preescolar_1';
+    waMessage =
+      'Hola Instituto Froebel, busco informes de Preescolar Bilingüe STEM SEP (3 a 6 años, $3,600/mes Pronto Pago)';
+  } else if (path.includes('horario-extendido') || path.includes('menu-semanal')) {
+    enrollHref = '/inscripciones?inscribir=1&estancia=completa_18h';
+    enrollLabel = '🍱 Cotizar 18h';
+    waMessage =
+      'Hola Instituto Froebel, me interesa el Horario Extendido hasta 18:00h con Comedor (desde $5,000/mes integrado)';
+  } else if (path.includes('/colegio-cerca-de-mi/')) {
+    const colMap = {
+      'san-juan-de-aragon': 'San Juan de Aragón',
+      'romero-rubio': 'Romero Rubio / Oceanía',
+      'penon-de-los-banos': 'Peñón de los Baños / AICM',
+      'gertrudis-sanchez': 'Gertrudis Sánchez / Eduardo Molina',
+      'nueva-tenochtitlan': 'Nueva Tenochtitlán / Bondojito',
+    };
+    const slugMatch = Object.keys(colMap).find((k) => path.includes(k));
+    const colLabel = slugMatch ? colMap[slugMatch] : 'Gustavo A. Madero';
+    waMessage = `Hola Instituto Froebel, vivo cerca de ${colLabel} y quiero informes de Maternal/Kínder ($3,600/mes Pronto Pago)`;
+  }
+
+  const dock = document.createElement('div');
+  dock.id = 'froebel-mobile-dock';
+  dock.setAttribute('role', 'region');
+  dock.setAttribute('aria-label', 'Acciones rápidas de costos, WhatsApp y llamada');
+  dock.setAttribute('aria-hidden', 'true');
+  dock.style.cssText = [
+    'position: fixed',
+    'left: 10px',
+    'right: 10px',
+    'bottom: max(8px, env(safe-area-inset-bottom, 8px))',
+    'z-index: 9997',
+    'background: rgba(15, 23, 42, 0.96)',
+    'backdrop-filter: blur(12px)',
+    '-webkit-backdrop-filter: blur(12px)',
+    'border: 1px solid rgba(59, 130, 246, 0.45)',
+    'border-radius: 999px',
+    'box-shadow: 0 14px 34px rgba(15, 23, 42, 0.38)',
+    'padding: 6px',
+    'display: flex',
+    'align-items: center',
+    'gap: 6px',
+    'font-family: var(--font-body, Inter, system-ui, sans-serif)',
+    'transform: translateY(140%)',
+    'opacity: 0',
+    'pointer-events: none',
+    'transition: transform 0.22s ease, opacity 0.22s ease'
+  ].join(';');
+
+  dock.innerHTML = `
+    <a
+      id="froebel-dock-enroll"
+      data-ux-id="mobile-dock-inscribir"
+      href="${enrollHref}"
+      style="flex: 1.15; display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 40px; padding: 0 10px; border-radius: 999px; background: #ffc107; color: #0f172a; font-size: 12.5px; font-weight: 800; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.28);"
+    >${enrollLabel}</a>
+    <a
+      id="froebel-dock-wa"
+      data-ux-id="mobile-dock-whatsapp"
+      href="https://wa.me/525554148872?text=${encodeURIComponent(waMessage)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 40px; padding: 0 10px; border-radius: 999px; background: #16a34a; color: #ffffff; font-size: 12.5px; font-weight: 800; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);"
+    >💬 WhatsApp</a>
+    <a
+      id="froebel-dock-tel"
+      data-ux-id="mobile-dock-tel"
+      href="tel:+525554148872"
+      aria-label="Llamar al Instituto Federico Froebel 55 5414 8872"
+      style="width: 40px; height: 40px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.28); color: #ffffff; font-size: 16px; text-decoration: none;"
+    >📞</a>
+  `;
+
+  document.body.appendChild(dock);
+
+  if (isInscripciones) {
+    const enrollBtn = document.getElementById('froebel-dock-enroll');
+    if (enrollBtn) {
+      enrollBtn.addEventListener('click', (ev) => {
+        if (typeof window.openEnrollmentWizard === 'function') {
+          ev.preventDefault();
+          window.openEnrollmentWizard();
+        }
+      });
+    }
+  }
+
+  let visible = false;
+  let ticking = false;
+
+  const syncDockState = () => {
+    ticking = false;
+    const isMobile = window.innerWidth <= 768;
+    const scrolledEnough = window.scrollY > 300;
+    const activeTag = document.activeElement ? document.activeElement.tagName : '';
+    const fieldFocused = /^(INPUT|SELECT|TEXTAREA)$/.test(activeTag);
+    const navOpen = Boolean(document.querySelector('.header__nav--open'));
+    const shouldShow = isMobile && scrolledEnough && !fieldFocused && !navOpen;
+
+    if (shouldShow === visible) return;
+    visible = shouldShow;
+
+    dock.style.transform = visible ? 'translateY(0)' : 'translateY(140%)';
+    dock.style.opacity = visible ? '1' : '0';
+    dock.style.pointerEvents = visible ? 'auto' : 'none';
+    dock.setAttribute('aria-hidden', visible ? 'false' : 'true');
+
+    const fab = document.querySelector('.whatsapp-fab');
+    if (fab) {
+      fab.style.opacity = visible ? '0' : '';
+      fab.style.pointerEvents = visible ? 'none' : '';
+    }
+
+    const cookieBanner = document.getElementById('froebel-cookie-banner');
+    if (cookieBanner) {
+      cookieBanner.style.bottom = visible ? '66px' : '12px';
+      cookieBanner.style.right = visible ? '10px' : '84px';
+    }
+  };
+
+  const requestSync = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(syncDockState);
+  };
+
+  window.addEventListener('scroll', requestSync, { passive: true });
+  window.addEventListener('resize', requestSync, { passive: true });
+  document.addEventListener('focusin', requestSync, { passive: true });
+  document.addEventListener('focusout', () => setTimeout(requestSync, 80), { passive: true });
+  const navToggle = document.querySelector('.header__toggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => setTimeout(requestSync, 40));
+  }
+  syncDockState();
 }
 
 /* ============================================================================
