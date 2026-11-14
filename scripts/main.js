@@ -231,6 +231,8 @@ function initHyperlocalNeighborhoodCalculators() {
 
   const colonia = box.getAttribute('data-colonia') || 'Gustavo A. Madero';
   const minutos = box.getAttribute('data-minutos') || 'pocos minutos';
+  const ubicacionTexto = box.getAttribute('data-ubicacion-texto') || `A ${minutos} desde ${colonia}`;
+  const waOrigen = box.getAttribute('data-wa-origen') || `vivo cerca de ${colonia} (${minutos}) y`;
 
   const gradeMeta = {
     maternal: { label: 'Maternal Bilingüe (1–3 años)', baseHours: '08:30–13:30h' },
@@ -253,10 +255,10 @@ function initHyperlocalNeighborhoodCalculators() {
     const normalTotal = 4000 + e.extra;
 
     totalOut.textContent = `$${prontoTotal.toLocaleString('es-MX')} MXN/mes`;
-    detailOut.textContent = `${g.label} (${eKey === 'ninguna' ? g.baseHours + ', ' + e.hoursSuffix : e.hoursSuffix}) · Pronto Pago (regular $${normalTotal.toLocaleString('es-MX')}) · A ${minutos} desde ${colonia}`;
+    detailOut.textContent = `${g.label} (${eKey === 'ninguna' ? g.baseHours + ', ' + e.hoursSuffix : e.hoursSuffix}) · Pronto Pago (regular $${normalTotal.toLocaleString('es-MX')}) · ${ubicacionTexto}`;
 
     enrollBtn.href = `/inscripciones?inscribir=1&programa=${encodeURIComponent(gKey)}&estancia=${encodeURIComponent(eKey)}`;
-    const waText = `Hola Instituto Froebel, vivo cerca de ${colonia} (${minutos}) y coticé ${g.label} (${e.label}: $${prontoTotal.toLocaleString('es-MX')}/mes Pronto Pago). Quiero informes o agendar visita.`;
+    const waText = `Hola Instituto Froebel, ${waOrigen} coticé ${g.label} (${e.label}: $${prontoTotal.toLocaleString('es-MX')}/mes Pronto Pago). Quiero informes o agendar visita.`;
     waBtn.href = `https://wa.me/525554148872?text=${encodeURIComponent(waText)}`;
 
     if (trackChange && window.FroebelUX && !window.FroebelUX.isBot()) {
