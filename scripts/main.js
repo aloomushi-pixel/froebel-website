@@ -107,15 +107,19 @@ function openFroebelPhotoLightbox(imgEl) {
   if (!modal) {
     modal = document.createElement('div');
     modal.id = 'froebel-photo-lightbox';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Vista ampliada de fotografía del plantel');
+    modal.setAttribute('data-ux-ignore-dead', '1');
     modal.style.cssText =
       'position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,0.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity 0.2s ease;';
     modal.innerHTML = `
       <button type="button" id="froebel-lightbox-close" aria-label="Cerrar foto" style="position:absolute;top:1rem;right:1rem;width:42px;height:42px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.14);color:#ffffff;font-size:1.35rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
-      <img id="froebel-lightbox-img" alt="" style="max-width:96vw;max-height:68vh;object-fit:contain;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);" />
+      <img id="froebel-lightbox-img" role="button" tabindex="0" data-ux-id="lightbox-img-close" title="Toca para cerrar" alt="" style="max-width:96vw;max-height:68vh;object-fit:contain;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);cursor:zoom-out;" />
       <p id="froebel-lightbox-caption" style="color:#f8fafc;font-size:0.92rem;text-align:center;max-width:640px;margin:0.85rem 0 0.75rem;line-height:1.4;"></p>
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;">
         <a id="froebel-lightbox-wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20vi%20las%20fotos%20del%20plantel%20y%20quiero%20agendar%20un%20recorrido" target="_blank" rel="noopener noreferrer" style="padding:0.55rem 1.05rem;border-radius:999px;background:#16a34a;color:#ffffff;font-size:0.85rem;font-weight:700;text-decoration:none;">💬 Agendar Recorrido por WhatsApp</a>
-        <a href="/inscripciones" style="padding:0.55rem 1.05rem;border-radius:999px;background:#ffffff;color:#1e3a8a;font-size:0.85rem;font-weight:700;text-decoration:none;">💰 Ver Costos ($3,600/mes) →</a>
+        <a id="froebel-lightbox-enroll" href="/inscripciones?inscribir=1" style="padding:0.55rem 1.05rem;border-radius:999px;background:#ffffff;color:#1e3a8a;font-size:0.85rem;font-weight:700;text-decoration:none;">💰 Ver Costos ($3,600/mes) →</a>
       </div>
     `;
     document.body.appendChild(modal);
@@ -126,7 +130,13 @@ function openFroebelPhotoLightbox(imgEl) {
       }, 180);
     };
     modal.addEventListener('click', (ev) => {
-      if (ev.target === modal || ev.target.id === 'froebel-lightbox-close') closeFn();
+      if (
+        ev.target === modal ||
+        ev.target.id === 'froebel-lightbox-close' ||
+        ev.target.id === 'froebel-lightbox-img'
+      ) {
+        closeFn();
+      }
     });
     document.addEventListener('keydown', (ev) => {
       if (ev.key === 'Escape' && modal.style.display === 'flex') closeFn();
@@ -135,9 +145,24 @@ function openFroebelPhotoLightbox(imgEl) {
 
   const modalImg = document.getElementById('froebel-lightbox-img');
   const modalCap = document.getElementById('froebel-lightbox-caption');
+  const modalEnroll = document.getElementById('froebel-lightbox-enroll');
   modalImg.src = imgEl.currentSrc || imgEl.src;
   modalImg.alt = imgEl.alt || 'Instalaciones Instituto Federico Froebel';
   modalCap.textContent = imgEl.alt || 'Instalaciones seguras del Instituto Federico Froebel en San Juan de Aragón, GAM.';
+  if (modalEnroll) {
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (savedRaw) {
+        const draft = JSON.parse(savedRaw);
+        if (draft && draft.totalMonthly) {
+          const pParam = encodeURIComponent(draft.program || 'preescolar_1');
+          const eParam = encodeURIComponent(draft.estancia || 'ninguna');
+          modalEnroll.href = `/inscripciones?inscribir=1&programa=${pParam}&estancia=${eParam}`;
+          modalEnroll.textContent = `💰 Apartar Cotización ($${Number(draft.totalMonthly).toLocaleString('es-MX')}/mes) →`;
+        }
+      }
+    } catch (_) {}
+  }
   modal.style.display = 'flex';
   requestAnimationFrame(() => {
     modal.style.opacity = '1';
@@ -1359,7 +1384,10 @@ function initFroebelUXTelemetry() {
       } else {
         // Check Dead Click on visual card headers/badges that users might think are links
         const cardCandidate = target.closest('.card, .pricing-card, .feature-card, .testimonial-card, img');
-        if (cardCandidate && !target.closest('form, input, select, textarea, label')) {
+        if (
+          cardCandidate &&
+          !target.closest('form, input, select, textarea, label, #froebel-photo-lightbox, [data-ux-ignore-dead]')
+        ) {
           const deadLabel =
             cardCandidate.querySelector('h3, h4, strong')?.textContent?.trim()?.slice(0, 50) ||
             target.getAttribute('alt') ||

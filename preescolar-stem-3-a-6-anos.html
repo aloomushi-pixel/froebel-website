@@ -55,7 +55,9 @@
         "Centro Educativo Froebel",
         "Centro Escolar Federico Froebel",
         "Centro Infantil Froebel",
-        "Kindergarten Federico Froebel"
+        "Kindergarten Federico Froebel",
+        "Estancia Infantil Federico Froebel",
+        "Guardería y Maternal Federico Froebel"
       ],
       "url": "https://froebelinstituto.com.mx/",
       "logo": "https://froebelinstituto.com.mx/assets/images/logo-froebel.webp",
@@ -367,6 +369,42 @@
     <a href="/horario-extendido-y-comedor#calculadora-estancia-aicm" style="background:#ffffff;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">⏰ Simulador Estancia ($5,000 / $5,500) →</a>
   </div>
 </div>
+<div id="cotizador-rapido-colonia" data-ux-section="cotizador-rapido-preescolar" data-colonia="Preescolar STEM SEP GAM" data-minutos="2 cuadras de Metro Aragón" data-ubicacion-texto="Av. 521 No. 20, San Juan de Aragón (RVOE SEP 09050141 · Ratio 1:15)" data-wa-origen="revisé Kínder 1, 2 y 3 STEM SEP y" style="margin-top:var(--space-3);padding:12px 14px;background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%);border:1.5px solid #93c5fd;border-radius:var(--radius-lg);text-align:left;">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px;">
+    <strong style="font-size:0.86rem;color:var(--color-primary-dark);">🧮 Cotizador Instantáneo de Kínder 1, 2 y 3 SEP + Estancia 2026-2027:</strong>
+    <span style="font-size:0.75rem;font-weight:700;color:#166534;background:#dcfce7;padding:2px 8px;border-radius:999px;">RVOE SEP 09050141 · Tu selección se guarda</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:8px;align-items:end;">
+    <div>
+      <label for="colonia-calc-grado" style="display:block;font-size:0.75rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">1. Grado de tu pequeño(a)</label>
+      <select id="colonia-calc-grado" style="width:100%;padding:7px 9px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-size:0.82rem;font-weight:600;background:#ffffff;color:var(--color-text);">
+        <option value="maternal">🍼 Maternal Bilingüe (1–3 años · Pañal OK)</option>
+        <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3–4 años)</option>
+        <option value="preescolar_2">🧠 Kínder 2 SEP (4–5 años)</option>
+        <option value="preescolar_3">🎓 Kínder 3 SEP (5–6 años · Primaria)</option>
+      </select>
+    </div>
+    <div>
+      <label for="colonia-calc-estancia" style="display:block;font-size:0.75rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">2. Horario / Estancia y Comedor</label>
+      <select id="colonia-calc-estancia" style="width:100%;padding:7px 9px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-size:0.82rem;font-weight:600;background:#ffffff;color:var(--color-text);">
+        <option value="ninguna" selected>🏫 Escolar Base (08:30–14:00h Kínder)</option>
+        <option value="parcial_16h">🍲 + Estancia 16:00h y Comedor (+$1,400)</option>
+        <option value="completa_18h">🌟 + Estancia 18:00h + Talleres (+$1,900)</option>
+      </select>
+    </div>
+    <div style="background:#ffffff;border:1px solid #86efac;border-radius:var(--radius-md);padding:7px 10px;">
+      <div style="font-size:0.72rem;color:var(--color-text-light);font-weight:600;">Total mensual Pronto Pago:</div>
+      <div id="colonia-calc-total" style="font-size:1.05rem;font-weight:800;color:#15803d;line-height:1.2;">$3,600 MXN/mes</div>
+    </div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:8px;border-top:1px dashed #bfdbfe;">
+    <span id="colonia-calc-detalle" style="font-size:0.77rem;color:var(--color-text-light);">Kínder 1 SEP (3–4 años) (08:30–14:00h, recepción desde 07:30h) · Pronto Pago (regular $4,000) · Av. 521 No. 20, San Juan de Aragón</span>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+      <a id="colonia-calc-enroll-btn" href="/inscripciones?inscribir=1&programa=preescolar_1&estancia=ninguna" style="background:var(--color-primary);color:#ffffff;padding:5px 12px;border-radius:999px;font-size:0.78rem;font-weight:700;">Apartar este lugar →</a>
+      <a id="colonia-calc-wa-btn" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20cotic%C3%A9%20K%C3%ADnder%20SEP%20(%243%2C600%2Fmes)%20y%20quiero%20agendar%20visita" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:5px 12px;border-radius:999px;font-size:0.78rem;font-weight:700;">💬 Enviar cotización por WhatsApp</a>
+    </div>
+  </div>
+</div>
 </div>
 </div>
 </div>
@@ -662,7 +700,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=29" defer></script>
+<script src="/scripts/main.js?v=30" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>
