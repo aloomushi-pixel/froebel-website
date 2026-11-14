@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileNav();
+  initHyperlocalNeighborhoodCalculators();
   initFroebelUXTelemetry();
 
   const runDeferredEnhancements = () => {
@@ -15,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initFacilityPhotoLightbox();
     initInteractiveComparisonTables();
     initInteractiveActionCards();
-    initHyperlocalNeighborhoodCalculators();
     initInstantLinkPrefetch();
     initCookieConsentBanner();
     initMobileStickyConversionBar();

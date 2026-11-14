@@ -1,6 +1,7 @@
 {
-  "version": "2.1.61",
-  "cycle": 61,
-  "deployedAt": "2026-11-14T15:48:49.661Z",
-  "standard": "Estándar Maestro v2.1 — SEO + GEO + GSC + UX Telemetry + 100% Cotizador Silos Educativos + Lightbox Zero Dead-Clicks + CTR Snippets Pág. 1 + Desambiguación GAM"
+  "version": "2.1.62",
+  "cycle": 62,
+  "updatedAt": "2026-11-14T20:01:38.071Z",
+  "governanceLevel": "Level 1 + Level 2 (Autonomous SEO/GEO/CRO/WPO)",
+  "summary": "Cycle #62: Sitewide crawlable footer internal link + 1:1 JSON-LD WebPage/BlogPosting sync across all 8 blog posts to accelerate indexation of GAM Kinder Checklist guide; Striking-Distance CTR + Maternal Cotizador on /blog/control-de-esfinteres.html; /programas CTR + schedule parity + aspect-ratio & sync DOMContentLoaded hydration for 0.000 desktop CLS; removed broken external Googleusercontent avatar across 6 pages."
 }

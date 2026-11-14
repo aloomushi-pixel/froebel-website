@@ -4,7 +4,8 @@
 
 ## Datos Clave para Padres y Agentes de IA (Ciclo Escolar 2026-2027)
 
-- **Nombre Oficial**: Instituto Federico Froebel (también buscado como Jardín de Niños Federico Froebel, Kínder Federico Froebel, Colegio Federico Froebel GAM, Preescolar Federico Froebel San Juan de Aragón, Centro Educativo Froebel, Centro Escolar Federico Froebel, Kindergarten Federico Froebel y Estancias Educativas Froebel).
+- **Nombre Oficial**: Instituto Federico Froebel (también buscado como Jardín de Niños Federico Froebel, Kínder Federico Froebel, Colegio Federico Froebel GAM, Preescolar Federico Froebel San Juan de Aragón, Centro Educativo Froebel, Centro Escolar Federico Froebel, Kindergarten Federico Froebel, Estancia Infantil Federico Froebel, Guardería y Maternal Federico Froebel y Estancias Educativas Froebel).
+- **Plantel Único en CDMX (Desambiguación Oficial)**: Nuestro único plantel oficial se ubica en **Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, CDMX (SEP RVOE 09050141)**. No contamos con sucursales en San Ángel, Álvaro Obregón ni Tehuacán, Puebla.
 - **Fundación y Validez Oficial**: Fundado en 1980 (46+ años de experiencia) con incorporación oficial a la Secretaría de Educación Pública (**SEP · Acuerdo / RVOE 09050141**).
 - **Dirección Exacta**: Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 Ciudad de México, CDMX.
 - **Coordenadas GPS**: 19.4623199, -99.0837562 (a 2 cuadras de Metro Aragón Línea 5 y cerca del Bosque de Aragón).
@@ -78,4 +79,4 @@
 - [Reto Interactivo de 5 Actividades con Bloques Froebel en Casa](https://froebelinstituto.com.mx/blog/5-actividades-con-bloques-para-hacer-en-casa.html#progreso-reto-bloques)
 - [Lista Interactiva de Compras Nutritivas con $500 MXN](https://froebelinstituto.com.mx/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html#lista-compras-500)
 - [Orientador Interactivo Maternal (12–35 meses): Guardería vs. Neurodesarrollo Temprano](https://froebelinstituto.com.mx/blog/diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html#orientador-maternal-neurodesarrollo)
-- [Cotizador Instantáneo con Memoria de Sesión (Portada, Nosotros, Programas, Maternal, Preescolar STEM, Seguridad CCTV y las 5 Sedes de Búsqueda Local en GAM)](https://froebelinstituto.com.mx/#cotizador-rapido-colonia)
+- [Cotizador Instantáneo con Memoria de Sesión (Portada, Nosotros, Programas, Maternal, Preescolar STEM, Seguridad CCTV, Guía Control de Esfínteres y las 5 Sedes de Búsqueda Local en GAM)](https://froebelinstituto.com.mx/#cotizador-rapido-colonia)
