@@ -27,6 +27,59 @@ let wizardData = {
   enrollment: null
 };
 
+const FROEBEL_QUOTE_DRAFT_KEY = 'froebel_quote_draft_v1';
+
+function loadWizardSessionDraft() {
+  try {
+    const raw = sessionStorage.getItem(FROEBEL_QUOTE_DRAFT_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    if (!saved || typeof saved !== 'object') return;
+    if (saved.student && typeof saved.student === 'object') {
+      wizardData.student = { ...saved.student, ...wizardData.student };
+    }
+    if (saved.guardian && typeof saved.guardian === 'object') {
+      wizardData.guardian = { ...saved.guardian, ...wizardData.guardian };
+    }
+    if (!wizardData.student.program && saved.program) {
+      const norm = normalizeProgramCode(saved.program);
+      if (norm) wizardData.student.program = norm;
+    }
+    if (!wizardData.student.estancia && saved.estancia && ['ninguna', 'parcial_16h', 'completa_18h'].includes(saved.estancia)) {
+      wizardData.student.estancia = saved.estancia;
+    }
+    if (!wizardData.student.plan && saved.plan && ['pronto_pago', 'normal', 'anual'].includes(saved.plan)) {
+      wizardData.student.plan = saved.plan;
+    }
+  } catch (_) {
+    // Ignore storage read errors in restricted environments
+  }
+}
+
+function saveWizardSessionDraft(extraQuote) {
+  try {
+    let prev = {};
+    const raw = sessionStorage.getItem(FROEBEL_QUOTE_DRAFT_KEY);
+    if (raw) prev = JSON.parse(raw) || {};
+    const s = wizardData.student || {};
+    const g = wizardData.guardian || {};
+    const merged = {
+      ...prev,
+      program: s.program || prev.program || '',
+      plan: s.plan || prev.plan || 'pronto_pago',
+      estancia: s.estancia || prev.estancia || 'ninguna',
+      student: { ...(prev.student || {}), ...s },
+      guardian: { ...(prev.guardian || {}), ...g },
+      ...(extraQuote || {}),
+      updatedAt: Date.now()
+    };
+    sessionStorage.setItem(FROEBEL_QUOTE_DRAFT_KEY, JSON.stringify(merged));
+    window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+  } catch (_) {
+    // Ignore storage write errors
+  }
+}
+
 /* === RENDER WIZARD === */
 function renderWizard() {
   const container = document.getElementById('enrollment-wizard');
@@ -128,7 +181,7 @@ function renderStudentStep() {
         <div class="wizard__field">
           <label for="s-estancia">3. Horario Extendido y Comedor (Opcional)</label>
           <select id="s-estancia" onchange="onWizardCalculatorChange()">
-            <option value="ninguna" ${!s.estancia || s.estancia === 'ninguna' ? 'selected' : ''}>Horario Escolar Base (08:30 a 14:00 hrs — $0 extra)</option>
+            <option value="ninguna" ${!s.estancia || s.estancia === 'ninguna' ? 'selected' : ''}>Horario Escolar Base (08:30–13:30h Maternal / 08:30–14:00h Kínder — recepción 07:30h, $0 extra)</option>
             <option value="parcial_16h" ${s.estancia === 'parcial_16h' ? 'selected' : ''}>Estancia Parcial + Comedor 3 Tiempos (hasta 16:00 hrs — +$1,400/mes)</option>
             <option value="completa_18h" ${s.estancia === 'completa_18h' ? 'selected' : ''}>Estancia Completa + Comedor + Talleres (hasta 18:00 hrs — +$1,900/mes)</option>
           </select>
@@ -214,8 +267,8 @@ function renderGuardianStep() {
         </div>
 
         <div class="wizard__field">
-          <label for="g-email">Correo electrónico *</label>
-          <input type="email" id="g-email" value="${g.email || ''}" required placeholder="correo@ejemplo.com">
+          <label for="g-email">Correo electrónico (opcional — para recibir acuse por email)</label>
+          <input type="email" id="g-email" value="${g.email || ''}" placeholder="correo@ejemplo.com (opcional)">
         </div>
 
         <div class="wizard__field">
@@ -416,7 +469,7 @@ function renderFooter() {
 /* === LIVE QUOTE & EXPRESS WHATSAPP === */
 function onWizardCalculatorChange() {
   trackWizardOpenOnce('Interacción con Calculadora de Colegiatura');
-  updateWizardLiveQuote();
+  updateWizardLiveQuote(true);
   if (window.FroebelUX && !isAutomatedCrawler()) {
     const progVal = document.getElementById('s-program')?.value || 'sin_programa';
     const estVal = document.getElementById('s-estancia')?.value || 'ninguna';
@@ -498,7 +551,7 @@ function onWizardDobChange() {
   const dobEl = document.getElementById('s-dob');
   if (dobEl) wizardData.student.date_of_birth = dobEl.value || '';
   const res = updateDobGradeHintUI(true);
-  updateWizardLiveQuote();
+  updateWizardLiveQuote(true);
   if (res && window.FroebelUX && !isAutomatedCrawler()) {
     window.FroebelUX.track('cta_click', {
       element_id: 'wizard_dob_autograde',
@@ -522,7 +575,7 @@ function quickSelectWizardOption(field, val) {
   onWizardCalculatorChange();
 }
 
-function updateWizardLiveQuote() {
+function updateWizardLiveQuote(persistChange = false) {
   const quoteEl = document.getElementById('wizard-live-quote-text');
   if (!quoteEl) return;
 
@@ -561,11 +614,11 @@ function updateWizardLiveQuote() {
     estLabel = 'con Estancia + Comedor hasta 18:00h';
   }
 
+  const totalMes = baseCost + estCost;
   if (planVal === 'anual') {
     const estExtraText = estCost > 0 ? ` + $${estCost.toLocaleString('es-MX')}/mes (${estLabel})` : ` (${estLabel})`;
     quoteEl.innerHTML = `${progLabel}: <strong>$40,480 MXN/año</strong> (8% desc.)${estExtraText} · Inscripción desde <strong>$3,375 MXN</strong>`;
   } else {
-    const totalMes = baseCost + estCost;
     quoteEl.innerHTML = `${progLabel}: <strong>$${totalMes.toLocaleString('es-MX')} MXN/mes</strong> (${planLabel} ${estLabel}) · Inscripción desde <strong>$3,375 MXN</strong>`;
   }
 
@@ -573,6 +626,20 @@ function updateWizardLiveQuote() {
   if (topWaBtn) {
     const shortName = progShortMap[progVal] || 'Lugar 2026-2027';
     topWaBtn.textContent = `💬 Apartar ${shortName} o Agendar Visita por WhatsApp (1 clic)`;
+  }
+
+  if (persistChange || progVal) {
+    if (progVal) wizardData.student.program = progVal;
+    wizardData.student.plan = planVal;
+    wizardData.student.estancia = estVal;
+    saveWizardSessionDraft({
+      program: progVal || wizardData.student.program || '',
+      plan: planVal,
+      estancia: estVal,
+      totalMonthly: totalMes,
+      programLabel: progLabel,
+      estanciaLabel: estLabel
+    });
   }
 }
 
@@ -604,8 +671,12 @@ async function submitExpressPreRegistration() {
     normal: 'Mensual Normal ($4,000/mes)',
     anual: 'Pago Anual ($40,480/año)'
   };
+  const baseHoursLabel =
+    s.program === 'maternal'
+      ? 'Horario base Maternal (08:30 a 13:30 hrs, recepción 07:30h)'
+      : 'Horario base Preescolar (08:30 a 14:00 hrs, recepción 07:30h)';
   const estMap = {
-    ninguna: 'Horario base (08:30 a 14:00 hrs)',
+    ninguna: baseHoursLabel,
     parcial_16h: 'Estancia Parcial + Comedor hasta 16:00h (+$1,400/mes)',
     completa_18h: 'Estancia Completa + Comedor hasta 18:00h (+$1,900/mes)'
   };
@@ -665,8 +736,12 @@ function sendWizardToWhatsApp() {
     normal: 'Mensual Normal ($4,000/mes)',
     anual: 'Pago Anual ($40,480/año)'
   };
+  const baseHoursWa =
+    s.program === 'maternal'
+      ? 'Horario base Maternal (08:30 a 13:30 hrs, recepción 07:30h)'
+      : 'Horario base Preescolar (08:30 a 14:00 hrs, recepción 07:30h)';
   const estMap = {
-    ninguna: 'Horario base (08:30 a 14:00 hrs)',
+    ninguna: baseHoursWa,
     parcial_16h: 'Estancia Parcial + Comedor hasta 16:00 hrs (+$1,400/mes)',
     completa_18h: 'Estancia Completa + Comedor hasta 18:00 hrs (+$1,900/mes)'
   };
@@ -676,7 +751,7 @@ function sendWizardToWhatsApp() {
   if (s.date_of_birth) parts.push(`• Fecha de nacimiento: ${s.date_of_birth}`);
   parts.push(`• Programa: ${progMap[s.program] || 'Maternal / Preescolar (por confirmar)'}`);
   parts.push(`• Modalidad: ${planMap[s.plan] || 'Pronto Pago ($3,600/mes)'}`);
-  parts.push(`• Horario: ${estMap[s.estancia] || 'Horario base (08:30 a 14:00 hrs)'}`);
+  parts.push(`• Horario: ${estMap[s.estancia] || baseHoursWa}`);
   if (g.full_name) parts.push(`• Tutor: ${g.full_name} (${g.phone || ''})`);
 
   if (window.FroebelUX) {
@@ -729,20 +804,28 @@ function validateCurrentStep() {
 function validateStudentStep() {
   const name = document.getElementById('s-name')?.value?.trim();
   const program = document.getElementById('s-program')?.value;
+  const phone = document.getElementById('s-parent-phone')?.value?.trim() || '';
 
   if (!program) return showError('Selecciona un programa');
   if (!name) return showError('Ingresa el nombre del alumno/a');
+  if (!phone || phone.replace(/\D/g, '').length < 8) {
+    return showError('Ingresa un teléfono o WhatsApp válido (10 dígitos)');
+  }
   return true;
 }
 
 function validateGuardianStep() {
   const name = document.getElementById('g-name')?.value?.trim();
-  const email = document.getElementById('g-email')?.value?.trim();
-  const phone = document.getElementById('g-phone')?.value?.trim();
+  const email = document.getElementById('g-email')?.value?.trim() || '';
+  const phone = document.getElementById('g-phone')?.value?.trim() || '';
 
   if (!name) return showError('Ingresa tu nombre');
-  if (!email || !email.includes('@')) return showError('Ingresa un correo electrónico válido');
-  if (!phone) return showError('Ingresa tu teléfono');
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return showError('Ingresa un correo electrónico válido o déjalo vacío');
+  }
+  if (!phone || phone.replace(/\D/g, '').length < 8) {
+    return showError('Ingresa un teléfono celular válido (10 dígitos)');
+  }
   return true;
 }
 
@@ -787,6 +870,7 @@ function saveCurrentStepData() {
       };
       break;
   }
+  saveWizardSessionDraft();
 }
 
 /* === CREATE RECORDS IN SUPABASE (REMOVED) === */
@@ -963,10 +1047,11 @@ function openEnrollmentWizard(preset) {
       if (preset.plan) wizardData.student.plan = preset.plan;
       if (preset.estancia) wizardData.student.estancia = preset.estancia;
       currentStep = 0;
+      saveWizardSessionDraft();
       renderWizard();
     } else if (!document.querySelector('#enrollment-wizard .wizard')) {
       currentStep = 0;
-      wizardData = { student: {}, guardian: {}, documents: [], payment: {}, enrollment: null };
+      loadWizardSessionDraft();
       renderWizard();
     }
     trackWizardOpenOnce('Abrir Proceso de Inscripción en Línea');
@@ -976,6 +1061,7 @@ function openEnrollmentWizard(preset) {
 
 /* === INIT ON LOAD === */
 document.addEventListener('DOMContentLoaded', () => {
+  loadWizardSessionDraft();
   const params = new URLSearchParams(window.location.search);
   const qProgram = normalizeProgramCode(params.get('programa') || params.get('grado'));
   const qPlan = params.get('plan') || params.get('modalidad');
@@ -988,6 +1074,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (qEstancia && ['ninguna', 'parcial_16h', 'completa_18h'].includes(qEstancia)) {
     wizardData.student.estancia = qEstancia;
+  }
+  if (qProgram || qPlan || qEstancia) {
+    saveWizardSessionDraft();
   }
 
   // Pre-render Step 1 on load so visitors scrolling down #pasos immediately see the interactive wizard

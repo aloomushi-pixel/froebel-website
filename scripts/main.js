@@ -247,6 +247,21 @@ function initHyperlocalNeighborhoodCalculators() {
     completa_18h: { extra: 1900, label: '+ Estancia Completa 18:00h y Comedor', hoursSuffix: 'hasta 18:00h con Comedor + Talleres' },
   };
 
+  try {
+    const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+    if (savedRaw) {
+      const saved = JSON.parse(savedRaw);
+      if (saved && saved.program && gradeMeta[saved.program]) {
+        gradeSel.value = saved.program;
+      }
+      if (saved && saved.estancia && estMeta[saved.estancia]) {
+        estSel.value = saved.estancia;
+      }
+    }
+  } catch (_) {
+    // Ignore storage access errors in strict privacy modes
+  }
+
   const renderCalc = (trackChange) => {
     const gKey = gradeSel.value || 'preescolar_1';
     const eKey = estSel.value || 'ninguna';
@@ -262,11 +277,33 @@ function initHyperlocalNeighborhoodCalculators() {
     const waText = `Hola Instituto Froebel, ${waOrigen} coticé ${g.label} (${e.label}: $${prontoTotal.toLocaleString('es-MX')}/mes Pronto Pago). Quiero informes o agendar visita.`;
     waBtn.href = `https://wa.me/525554148872?text=${encodeURIComponent(waText)}`;
 
-    if (trackChange && window.FroebelUX && !window.FroebelUX.isBot()) {
-      window.FroebelUX.track('cta_click', {
-        element_id: `colonia_calc_${gKey}_${eKey}`,
-        element_text: `Cotizador ${colonia}: ${g.label} ($${prontoTotal}/mes)`,
-      });
+    if (trackChange) {
+      try {
+        let prev = {};
+        const prevRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+        if (prevRaw) prev = JSON.parse(prevRaw) || {};
+        sessionStorage.setItem(
+          'froebel_quote_draft_v1',
+          JSON.stringify({
+            ...prev,
+            program: gKey,
+            estancia: eKey,
+            totalMonthly: prontoTotal,
+            programLabel: g.label,
+            estanciaLabel: e.label,
+            updatedAt: Date.now(),
+          })
+        );
+        window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+      } catch (_) {
+        // Ignore storage write errors
+      }
+      if (window.FroebelUX && !window.FroebelUX.isBot()) {
+        window.FroebelUX.track('cta_click', {
+          element_id: `colonia_calc_${gKey}_${eKey}`,
+          element_text: `Cotizador ${colonia}: ${g.label} ($${prontoTotal}/mes)`,
+        });
+      }
     }
   };
 
@@ -707,6 +744,41 @@ function initMobileStickyConversionBar() {
   `;
 
   document.body.appendChild(dock);
+
+  const applySavedQuoteToDock = () => {
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (!savedRaw) return;
+      const draft = JSON.parse(savedRaw);
+      if (!draft || !draft.totalMonthly) return;
+      const enrollEl = document.getElementById('froebel-dock-enroll');
+      const waEl = document.getElementById('froebel-dock-wa');
+      const formattedTotal = Number(draft.totalMonthly).toLocaleString('es-MX');
+      if (enrollEl) {
+        if (isInscripciones) {
+          enrollEl.textContent = `🚀 Apartar $${formattedTotal}`;
+        } else {
+          enrollEl.textContent = `📝 Cotización $${formattedTotal}`;
+          const pParam = encodeURIComponent(draft.program || 'preescolar_1');
+          const eParam = encodeURIComponent(draft.estancia || 'ninguna');
+          enrollEl.href = `/inscripciones?inscribir=1&programa=${pParam}&estancia=${eParam}`;
+        }
+      }
+      if (waEl) {
+        const extraEst =
+          draft.estancia && draft.estancia !== 'ninguna' && draft.estanciaLabel
+            ? ` ${draft.estanciaLabel}`
+            : '';
+        const customWa = `Hola Instituto Froebel, coticé ${draft.programLabel || 'Maternal/Kínder'} ($${formattedTotal}/mes${extraEst}) y quiero informes o agendar visita`;
+        waEl.href = `https://wa.me/525554148872?text=${encodeURIComponent(customWa)}`;
+      }
+    } catch (_) {
+      // Ignore storage read errors
+    }
+  };
+
+  applySavedQuoteToDock();
+  window.addEventListener('froebel:quote-updated', applySavedQuoteToDock);
 
   if (isInscripciones) {
     const enrollBtn = document.getElementById('froebel-dock-enroll');

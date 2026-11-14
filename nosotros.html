@@ -178,13 +178,13 @@
       ],
       "@id": "https://froebelinstituto.com.mx/nosotros#webpage",
       "url": "https://froebelinstituto.com.mx/nosotros",
-      "name": "Colegio Federico Froebel ★ 4.9 SEP | Kínder y Maternal en GAM CDMX",
-      "description": "Colegio e Instituto Federico Froebel en San Juan de Aragón, GAM (SEP 09050141, desde 1980): Maternal y Kínder 1-3 ★ 4.9, CCTV, Estancia 18h y $3,600/mes.",
+      "name": "Colegio Federico Froebel GAM | SEP 1980 ★ 4.9 · Kínder $3,600/mes",
+      "description": "Colegio e Instituto Federico Froebel en Aragón, GAM (SEP 09050141 desde 1980): $3,600/mes Pronto Pago, Maternal y Kínder 1-3, CCTV y Estancia 18:00h.",
       "inLanguage": "es-MX",
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
       },
-      "dateModified": "2026-11-13",
+      "dateModified": "2026-11-14",
       "mentions": [
         {
           "@type": "Person",
@@ -347,6 +347,42 @@
                       <a class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Colegio%20Federico%20Froebel%2C%20vi%20su%20ficha%20oficial%20SEP%20y%20quiero%20agendar%20visita" rel="noopener noreferrer" target="_blank" style="padding:4px 11px;font-size:0.76rem;">💬 WhatsApp Directo</a>
                     </div>
                   </div>
+                  <div id="cotizador-rapido-colonia" data-ux-section="cotizador-rapido-colonia" data-colonia="Colegio Federico Froebel GAM" data-ubicacion-texto="Av. 521 No. 20, San Juan de Aragón I Secc (SEP 09050141)" data-wa-origen="vi la ficha del Colegio Federico Froebel y" style="width:100%;padding:var(--space-3) var(--space-4);background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:var(--radius-lg);text-align:left;">
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.55rem;">
+                      <strong style="font-size:0.86rem;color:var(--color-primary-dark);">🧮 Calcula tu Mensualidad en el Colegio Federico Froebel 2026-2027</strong>
+                      <span style="font-size:0.74rem;font-weight:700;background:#dcfce7;color:#166534;padding:2px 9px;border-radius:999px;">✓ Sin documentos hoy · SEP 09050141</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:0.55rem;margin-bottom:0.6rem;">
+                      <label style="display:flex;flex-direction:column;gap:3px;font-size:0.76rem;font-weight:700;color:var(--color-text);">
+                        1. Grado o edad de tu pequeño(a):
+                        <select id="colonia-calc-grado" style="padding:6px 9px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.82rem;font-weight:600;color:var(--color-text);">
+                          <option value="maternal">🍼 Maternal Bilingüe (1 a 3 años · 08:30–13:30h)</option>
+                          <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3 a 4 años · 08:30–14:00h)</option>
+                          <option value="preescolar_2">🧠 Kínder 2 SEP (4 a 5 años · 08:30–14:00h)</option>
+                          <option value="preescolar_3">🎓 Kínder 3 SEP (5 a 6 años · 08:30–14:00h)</option>
+                        </select>
+                      </label>
+                      <label style="display:flex;flex-direction:column;gap:3px;font-size:0.76rem;font-weight:700;color:var(--color-text);">
+                        2. Horario de salida requerido:
+                        <select id="colonia-calc-estancia" style="padding:6px 9px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.82rem;font-weight:600;color:var(--color-text);">
+                          <option value="ninguna" selected>📚 Horario Escolar Base ($3,600/mes Pronto Pago)</option>
+                          <option value="parcial_16h">🍽️ + Estancia 16:00h y Comedor (+$1,400 · Total $5,000)</option>
+                          <option value="completa_18h">⏰ + Estancia Completa 18:00h y Comedor (+$1,900 · Total $5,500)</option>
+                        </select>
+                      </label>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.65rem;padding:0.55rem 0.75rem;background:#ffffff;border:1px solid #bfdbfe;border-radius:10px;">
+                      <div>
+                        <div style="font-size:0.74rem;color:var(--color-text-light);">Mensualidad estimada Ciclo 2026-2027:</div>
+                        <div id="colonia-calc-total" style="font-size:1.12rem;font-weight:800;color:var(--color-primary-dark);">$3,600 MXN/mes</div>
+                        <div id="colonia-calc-detalle" style="font-size:0.75rem;color:var(--color-text-light);">Kínder 1 SEP (3–4 años) (08:30–14:00h, recepción desde 07:30h) · Pronto Pago (regular $4,000) · Av. 521 No. 20, San Juan de Aragón I Secc (SEP 09050141)</div>
+                      </div>
+                      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+                        <a id="colonia-calc-enroll-btn" class="btn btn--primary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_1&estancia=ninguna" style="padding:6px 12px;font-size:0.78rem;">📝 Apartar Lugar →</a>
+                        <a id="colonia-calc-wa-btn" class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20vi%20la%20ficha%20del%20Colegio%20Federico%20Froebel%20y%20quiero%20informes%20de%20K%C3%ADnder%20(%243%2C600%2Fmes)" rel="noopener noreferrer" target="_blank" style="padding:6px 12px;font-size:0.78rem;">💬 Enviar a WhatsApp</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 </div>
 </div>
@@ -402,7 +438,7 @@
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:8px 10px;font-weight:700;">🎁 Dones y Bloques Froebel</td>
         <td style="padding:8px 10px;">Cuerpos geométricos manipulativos creados por Friedrich Fröbel para comprender forma, número y proporción jugando.</td>
-        <td style="padding:8px 10px;">Matemáticas constructivas, <a href="/preescolar-stem-3-a-6-anos">robótica infantil STEM</a> y <a href="/blog/5-actividades-con-bloques-para-hacer-en-casa.html">actividades con bloques por edad (1–6 años)</a>.</td>
+        <td style="padding:8px 10px;">Matemáticas constructivas, <a href="/preescolar-stem-3-a-6-anos">robótica infantil STEM</a> y <a href="/blog/5-actividades-con-bloques-para-hacer-en-casa.html#progreso-reto-bloques">actividades con bloques por edad (1–6 años)</a>.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
         <td style="padding:8px 10px;font-weight:700;">🌱 Jardín de Niños (Kindergarten)</td>
@@ -667,7 +703,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=28" defer></script>
+<script src="/scripts/main.js?v=29" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

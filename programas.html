@@ -458,7 +458,7 @@
       <tr style="background:#fefce8;">
         <td style="padding:8px 10px;font-weight:700;"><a href="#estancia">⏰ Estancias Educativas Froebel</a></td>
         <td style="padding:8px 10px;">Alumnos de 1 a 6 años (Comedor 3 tiempos)</td>
-        <td style="padding:8px 10px;">14:00–16:00h o 14:00–18:00h</td>
+        <td style="padding:8px 10px;">13:30 / 14:00 a 16:00h o 18:00h</td>
         <td style="padding:8px 10px;"><strong>+$1,400/mes</strong> (Total <strong>$5,000</strong>) · <strong>+$1,900/mes</strong> (Total <strong>$5,500</strong>) · <a href="/horario-extendido-y-comedor#calculadora-estancia-aicm" style="font-weight:700;color:var(--color-primary);">Simular Estancia →</a></td>
       </tr>
     </tbody>
@@ -467,9 +467,46 @@
     <span style="font-weight:700;color:var(--color-primary-dark);">⚡ ¿Dudas sobre qué grado le toca a tu pequeño(a) en SEP 2026-2027?</span>
     <div style="display:flex;flex-wrap:wrap;gap:6px;">
       <a href="/blog/a-que-edad-debe-empezar-el-preescolar.html#calculadora-grado-sep" style="background:#ffffff;border:1px solid #93c5fd;padding:4px 10px;border-radius:999px;font-weight:700;color:#1e3a8a;">🎂 Calcular Grado SEP por Mes/Año →</a>
+      <a href="/blog/diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html#orientador-maternal-neurodesarrollo" style="background:#ffffff;border:1px solid #93c5fd;padding:4px 10px;border-radius:999px;font-weight:700;color:#1e3a8a;">🧠 Orientador Maternal (1-3a) →</a>
       <a href="/blog/control-de-esfinteres.html#test-control-esfinteres" style="background:#ffffff;border:1px solid #93c5fd;padding:4px 10px;border-radius:999px;font-weight:700;color:#1e3a8a;">🍼 Test Control de Esfínteres →</a>
       <a href="/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html#plan-adaptacion-kinder" style="background:#ffffff;border:1px solid #93c5fd;padding:4px 10px;border-radius:999px;font-weight:700;color:#1e3a8a;">💛 Plan de Adaptación sin Llanto →</a>
       <a href="/horario-extendido-y-comedor#calculadora-estancia-aicm" style="background:#ffffff;border:1px solid #86efac;padding:4px 10px;border-radius:999px;font-weight:700;color:#166534;">⏰ Simulador Estancia 18:00h →</a>
+    </div>
+  </div>
+  <div id="cotizador-rapido-colonia" data-ux-section="cotizador-rapido-colonia" data-colonia="Programas Froebel GAM" data-ubicacion-texto="Av. 521 No. 20, San Juan de Aragón (SEP 09050141)" data-wa-origen="revisé los programas educativos y" style="margin-top:var(--space-3);padding:var(--space-3) var(--space-4);background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:var(--radius-lg);">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.55rem;">
+      <strong style="font-size:0.87rem;color:var(--color-primary-dark);">🧮 Cotizador Instantáneo de Programa + Estancia 2026-2027</strong>
+      <span style="font-size:0.74rem;font-weight:700;background:#dcfce7;color:#166534;padding:2px 9px;border-radius:999px;">✓ Inscripción anticipada desde $3,375 (-25%)</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0.55rem;margin-bottom:0.6rem;">
+      <label style="display:flex;flex-direction:column;gap:3px;font-size:0.76rem;font-weight:700;color:var(--color-text);">
+        1. Nivel educativo de tu pequeño(a):
+        <select id="colonia-calc-grado" style="padding:6px 9px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.82rem;font-weight:600;color:var(--color-text);">
+          <option value="maternal">🍼 Maternal Bilingüe (1 a 3 años · 08:30–13:30h)</option>
+          <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3 a 4 años · 08:30–14:00h)</option>
+          <option value="preescolar_2">🧠 Kínder 2 SEP (4 a 5 años · 08:30–14:00h)</option>
+          <option value="preescolar_3">🎓 Kínder 3 SEP (5 a 6 años · 08:30–14:00h)</option>
+        </select>
+      </label>
+      <label style="display:flex;flex-direction:column;gap:3px;font-size:0.76rem;font-weight:700;color:var(--color-text);">
+        2. Horario de salida requerido:
+        <select id="colonia-calc-estancia" style="padding:6px 9px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.82rem;font-weight:600;color:var(--color-text);">
+          <option value="ninguna" selected>📚 Horario Escolar Base ($3,600/mes Pronto Pago)</option>
+          <option value="parcial_16h">🍽️ + Estancia 16:00h y Comedor (+$1,400 · Total $5,000)</option>
+          <option value="completa_18h">⏰ + Estancia Completa 18:00h y Comedor (+$1,900 · Total $5,500)</option>
+        </select>
+      </label>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.65rem;padding:0.55rem 0.75rem;background:#ffffff;border:1px solid #bfdbfe;border-radius:10px;">
+      <div>
+        <div style="font-size:0.74rem;color:var(--color-text-light);">Mensualidad estimada Ciclo 2026-2027:</div>
+        <div id="colonia-calc-total" style="font-size:1.14rem;font-weight:800;color:var(--color-primary-dark);">$3,600 MXN/mes</div>
+        <div id="colonia-calc-detalle" style="font-size:0.75rem;color:var(--color-text-light);">Kínder 1 SEP (3–4 años) (08:30–14:00h, recepción desde 07:30h) · Pronto Pago (regular $4,000) · Av. 521 No. 20, San Juan de Aragón (SEP 09050141)</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+        <a id="colonia-calc-enroll-btn" class="btn btn--primary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_1&estancia=ninguna" style="padding:6px 12px;font-size:0.78rem;">📝 Apartar Lugar en Línea →</a>
+        <a id="colonia-calc-wa-btn" class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20revis%C3%A9%20los%20programas%20educativos%20y%20quiero%20informes%20de%20K%C3%ADnder%20(%243%2C600%2Fmes)" rel="noopener noreferrer" target="_blank" style="padding:6px 12px;font-size:0.78rem;">💬 Enviar Cotización por WhatsApp</a>
+      </div>
     </div>
   </div>
 </div>
@@ -949,7 +986,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=28" defer></script>
+<script src="/scripts/main.js?v=29" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>
