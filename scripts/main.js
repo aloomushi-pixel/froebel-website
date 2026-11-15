@@ -370,12 +370,55 @@ function initMobileNav() {
   const nav = document.querySelector('.header__nav');
   if (!toggle || !nav) return;
 
+  toggle.setAttribute('aria-expanded', 'false');
+  if (!toggle.querySelector('.header__toggle-label')) {
+    const rawSpans = Array.from(toggle.querySelectorAll('span'));
+    const barsWrap = document.createElement('b');
+    barsWrap.className = 'header__toggle-bars';
+    barsWrap.setAttribute('aria-hidden', 'true');
+    rawSpans.forEach((s) => barsWrap.appendChild(s));
+
+    const labelEl = document.createElement('em');
+    labelEl.className = 'header__toggle-label';
+    labelEl.setAttribute('aria-hidden', 'true');
+    labelEl.textContent = 'Menú';
+
+    toggle.textContent = '';
+    toggle.appendChild(labelEl);
+    toggle.appendChild(barsWrap);
+  }
+
   if (!document.getElementById('froebel-mobile-nav-styles')) {
     const style = document.createElement('style');
     style.id = 'froebel-mobile-nav-styles';
     style.textContent = `
       .mobile-nav-quick-panel { display: none; }
+      .header__toggle-label { display: none; font-style: normal; }
+      .header__toggle-bars { display: inline-flex; flex-direction: column; gap: 5px; }
       @media (max-width: 768px) {
+        .header__toggle {
+          flex-direction: row !important;
+          align-items: center !important;
+          gap: 7px !important;
+          padding: 6px 12px !important;
+          border-radius: 999px !important;
+          background: rgba(239, 246, 255, 0.96) !important;
+          border: 1.5px solid #bfdbfe !important;
+          box-shadow: 0 2px 8px rgba(30, 64, 175, 0.08) !important;
+        }
+        .header__toggle-label {
+          display: inline-block;
+          font-size: 0.8rem;
+          font-weight: 800;
+          color: #1e3a8a;
+          letter-spacing: -0.01em;
+          line-height: 1;
+        }
+        .header__toggle span {
+          width: 18px !important;
+          height: 2px !important;
+          background: #1e3a8a !important;
+        }
         .grid--2 > * { order: initial !important; }
         .hero__image img { max-height: 210px !important; width: 100% !important; }
         img[src*="assets/images/blog/"] { max-height: 200px !important; margin-bottom: 1rem !important; }
@@ -486,31 +529,34 @@ function initMobileNav() {
     nav.appendChild(panel);
   }
 
+  const syncToggleVisual = (isOpen) => {
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    const lbl = toggle.querySelector('.header__toggle-label');
+    if (lbl) lbl.textContent = isOpen ? 'Cerrar' : 'Menú';
+    const spans = toggle.querySelectorAll('span');
+    if (spans.length >= 3) {
+      if (isOpen) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+      }
+    }
+  };
+
   const closeMenu = () => {
     nav.classList.remove('header__nav--open');
     toggle.classList.remove('header__toggle--active');
-    const spans = toggle.querySelectorAll('span');
-    if (spans.length >= 3) {
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
-    }
+    syncToggleVisual(false);
   };
 
   toggle.addEventListener('click', () => {
     nav.classList.toggle('header__nav--open');
     toggle.classList.toggle('header__toggle--active');
-
-    const spans = toggle.querySelectorAll('span');
-    if (toggle.classList.contains('header__toggle--active')) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    } else {
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
-    }
+    syncToggleVisual(toggle.classList.contains('header__toggle--active'));
   });
 
   nav.querySelectorAll('a').forEach((link) => {
@@ -795,7 +841,10 @@ function initMobileStickyConversionBar() {
             ? ` ${draft.estanciaLabel}`
             : '';
         const customWa = `Hola Instituto Froebel, coticé ${draft.programLabel || 'Maternal/Kínder'} ($${formattedTotal}/mes${extraEst}) y quiero informes o agendar visita`;
-        waEl.href = `https://wa.me/525554148872?text=${encodeURIComponent(customWa)}`;
+        const customWaHref = `https://wa.me/525554148872?text=${encodeURIComponent(customWa)}`;
+        waEl.href = customWaHref;
+        const fabEl = document.querySelector('.whatsapp-fab');
+        if (fabEl) fabEl.href = customWaHref;
       }
     } catch (_) {
       // Ignore storage read errors

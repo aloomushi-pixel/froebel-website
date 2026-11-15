@@ -362,6 +362,9 @@ app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  if (/^\/(api(\/|$)|admin(\.html|\/|$))/i.test(req.path || '')) {
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  }
   next();
 });
 
@@ -376,7 +379,7 @@ app.use((req, res, next) => {
   if (p === '/index.html') {
     return res.redirect(301, '/' + qs);
   }
-  if (p === '/blog/index.html') {
+  if (p === '/blog' || p === '/blog/index.html') {
     return res.redirect(301, '/blog/' + qs);
   }
   if (p === '/colegio-cerca-de-mi' || p === '/colegio-cerca-de-mi/') {
@@ -385,6 +388,10 @@ app.use((req, res, next) => {
   const geoMatch = p.match(/^(\/colegio-cerca-de-mi\/[^/]+)\/index\.html$/i);
   if (geoMatch) {
     return res.redirect(301, `${geoMatch[1]}/${qs}`);
+  }
+  const geoNoSlash = p.match(/^(\/colegio-cerca-de-mi\/(san-juan-de-aragon|romero-rubio|penon-de-los-banos|gertrudis-sanchez|nueva-tenochtitlan))$/i);
+  if (geoNoSlash) {
+    return res.redirect(301, `${geoNoSlash[1]}/${qs}`);
   }
   if (p.length > 1 && p.endsWith('/')) {
     const withoutSlash = p.slice(0, -1);
@@ -452,6 +459,7 @@ app.use(
 );
 
 app.get('*', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
   const home = MEMORY_DOC_CACHE.get('/');
   if (home) {
     res.setHeader('Content-Type', home.contentType);
