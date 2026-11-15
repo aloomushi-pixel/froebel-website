@@ -340,22 +340,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom:1px solid var(--color-border);">
+                        <tr data-scroll-target="#plan-adaptacion-kinder" style="border-bottom:1px solid var(--color-border);">
                             <td style="padding:var(--space-3) var(--space-4);font-weight:700;">En la puerta del colegio</td>
                             <td style="padding:var(--space-3) var(--space-4);">Irte a escondidas sin despedirte o prolongar la despedida 15 minutos con angustia.</td>
                             <td style="padding:var(--space-3) var(--space-4);">Despedida breve (30 seg), sonrisa tranquila, vuestro ritual especial y entregarlo con confianza a su Miss.</td>
                         </tr>
-                        <tr style="border-bottom:1px solid var(--color-border);background:rgba(46,125,50,0.02);">
+                        <tr data-scroll-target="#plan-adaptacion-kinder" style="border-bottom:1px solid var(--color-border);background:rgba(46,125,50,0.02);">
                             <td style="padding:var(--space-3) var(--space-4);font-weight:700;">Ante el llanto inicial</td>
                             <td style="padding:var(--space-3) var(--space-4);">Decir <em>"No llores, los niños grandes no lloran"</em> o prometer premios materiales si deja de llorar.</td>
                             <td style="padding:var(--space-3) var(--space-4);">Validar su emoción: <em>"Es válido extrañarnos; aquí tu maestra te cuida y regreso por ti después del almuerzo"</em>.</td>
                         </tr>
-                        <tr style="border-bottom:1px solid var(--color-border);">
+                        <tr data-scroll-target="#plan-adaptacion-kinder" style="border-bottom:1px solid var(--color-border);">
                             <td style="padding:var(--space-3) var(--space-4);font-weight:700;">Semana 1 de adaptación</td>
                             <td style="padding:var(--space-3) var(--space-4);">Llegar a su primer día sin haber conocido nunca el plantel ni a su educadora.</td>
                             <td style="padding:var(--space-3) var(--space-4);">Agendar un recorrido previo con tu pequeño y permitir un objeto de transición (pulsera de mamá o peluche pequeño).</td>
                         </tr>
-                        <tr>
+                        <tr data-scroll-target="#plan-adaptacion-kinder">
                             <td style="padding:var(--space-3) var(--space-4);font-weight:700;">A la hora de la salida</td>
                             <td style="padding:var(--space-3) var(--space-4);">Llegar tarde sin avisar o preguntarle primero <em>"¿Lloraste mucho hoy?"</em>.</td>
                             <td style="padding:var(--space-3) var(--space-4);">Ser puntual (o usar nuestro <a href="/horario-extendido-y-comedor">Horario Extendido hasta 18:00h</a>) y preguntar: <em>"¿Qué fue lo más divertido que construiste hoy?"</em>.</td>
@@ -374,18 +374,25 @@
 
             <!-- PLANIFICADOR INTERACTIVO DE ADAPTACIÓN RESPETUOSA (LEVEL 2 CRO + UX) -->
             <div id="plan-adaptacion-kinder" data-ux-section="plan-adaptacion-kinder" class="card" style="margin:var(--space-8) 0;padding:var(--space-6);background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%);border:2px solid var(--color-primary-light);">
+                <style>
+                  @media print {
+                    .header, .footer, .whatsapp-fab, #froebel-cookie-banner, #froebel-mobile-dock, #cotizador-rapido-colonia, #post-faq-cta-blog, #adap-print-btn, #adap-wa-btn, #adap-enroll-btn { display: none !important; }
+                    body { background: #ffffff !important; color: #000000 !important; }
+                  }
+                </style>
                 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-3);">
                     <h2 style="font-size:var(--text-xl);color:var(--color-primary-dark);margin:0;">💛 Planificador Personalizado de Adaptación Respetuosa (1 a 6 Años)</h2>
-                    <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;">✓ Protocolo Psicopedagógico Froebel</span>
+                    <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;">✓ Protocolo Psicopedagógico Froebel · Se guarda tu selección</span>
                 </div>
-                <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-4);">Selecciona la edad de tu pequeño y su experiencia previa para obtener tu guía exacta de los primeros 5 días en el aula:</p>
+                <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-4);">Selecciona la edad de tu pequeño y su experiencia previa para obtener e imprimir tu guía exacta de los primeros 5 días en el aula:</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-3);margin-bottom:var(--space-4);">
                     <div>
                         <label for="adap-stage" style="display:block;font-size:0.8rem;font-weight:700;color:var(--color-primary-dark);margin-bottom:4px;">1. Etapa y edad de tu hijo/a:</label>
                         <select id="adap-stage" style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid #93c5fd;background:#ffffff;font-family:inherit;font-size:0.88rem;font-weight:600;color:var(--color-text);">
                             <option value="maternal">🍼 Maternal Bilingüe (1 a 2 años · Ratio 1:8)</option>
                             <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3 a 4 años · Ratio 1:15)</option>
-                            <option value="preescolar_2">🎓 Kínder 2 o 3 SEP (4 a 6 años · Ratio 1:15)</option>
+                            <option value="preescolar_2">🧠 Kínder 2 SEP (4 a 5 años · Ratio 1:15)</option>
+                            <option value="preescolar_3">🎓 Kínder 3 SEP (5 a 6 años · Ratio 1:15)</option>
                         </select>
                     </div>
                     <div>
@@ -405,17 +412,20 @@
                     </ul>
                 </div>
                 <div style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;">
+                    <button type="button" id="adap-print-btn" style="background:#ffffff;border:1px solid var(--color-primary-light);color:var(--color-primary-dark);padding:7px 13px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ Imprimir Plan</button>
                     <a id="adap-wa-btn" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20us%C3%A9%20el%20Planificador%20de%20Adaptaci%C3%B3n%20(K%C3%ADnder%201%20-%20Primera%20vez)%20y%20quiero%20agendar%20un%20recorrido%20con%20mi%20peque%C3%B1o" target="_blank" rel="noopener noreferrer" class="btn btn--accent btn--sm" style="font-weight:800;">💬 Agendar Recorrido Previo de Adaptación (Sin Costo)</a>
                     <a id="adap-enroll-btn" href="/inscripciones?inscribir=1&programa=preescolar_1" class="btn btn--primary btn--sm">📝 Pre-inscribir y ver costos ($3,600/mes) →</a>
                 </div>
             </div>
             <script>
             (function(){
+                var STORAGE_KEY = 'froebel_plan_adaptacion_v1';
                 var stEl = document.getElementById('adap-stage');
                 var cxEl = document.getElementById('adap-context');
                 var outEl = document.getElementById('adap-plan-output');
                 var waBtn = document.getElementById('adap-wa-btn');
                 var enBtn = document.getElementById('adap-enroll-btn');
+                var prBtn = document.getElementById('adap-print-btn');
                 if (!stEl || !cxEl || !outEl) return;
                 var plans = {
                     maternal: {
@@ -433,19 +443,58 @@
                         step3: 'Su maestra lo integra de inmediato con los Dones de Froebel sensoriales (ratio 1:15 + CCTV) y te confirmamos su estado de ánimo en la mañana.'
                     },
                     preescolar_2: {
-                        title: 'Kínder 2 o 3 SEP (4 a 6 años · Ratio 1:15)',
+                        title: 'Kínder 2 SEP (4 a 5 años · Ratio 1:15)',
                         step1_primera_vez: 'Involúcralo preparando su mochila la noche anterior y conociendo previamente el laboratorio STEM y patio en San Juan de Aragón.',
                         step1_cambio: 'Valida que extrañar a sus antiguos compañeros es normal y anticípale un reto emocionante de construcción o experimentos que hará en Froebel.',
                         step2: 'Choque de manos especial en la entrada, frase de confianza ("confío en ti y tu Miss te cuida") y puntualidad al recogerlo (o Estancia 18:00h).',
                         step3: 'Asignamos un "compañero anfitrión" en su grupo reducido (1:15) bajo política Cero Bullying para que haga amigos desde el primer recreo.'
+                    },
+                    preescolar_3: {
+                        title: 'Kínder 3 SEP (5 a 6 años · Ratio 1:15)',
+                        step1_primera_vez: 'Recorran juntos su aula de Kínder 3 y platícale que aquí aprenderá a leer, construir puentes STEM y prepararse con alegría para Primaria.',
+                        step1_cambio: 'Reconoce su experiencia previa como una fortaleza ("ya sabes cómo funciona el cole") y muéstrale los retos de robótica e inglés diario de Froebel.',
+                        step2: 'Despedida segura de 20 segundos con acuerdo claro de quién pasa por él/ella (o si disfrutará el Comedor y Talleres de Estancia 18:00h).',
+                        step3: 'Integración inmediata en equipo colaborativo (ratio 1:15 + RVOE SEP 09050141) fortaleciendo su liderazgo, lectoescritura y seguridad socioemocional.'
                     }
                 };
+
+                try {
+                    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+                    if (saved) {
+                        if (saved.st && plans[saved.st]) stEl.value = saved.st;
+                        if (saved.cx && (saved.cx === 'primera_vez' || saved.cx === 'cambio')) cxEl.value = saved.cx;
+                    } else {
+                        var rawDraft0 = sessionStorage.getItem('froebel_quote_draft_v1');
+                        if (rawDraft0) {
+                            var d0 = JSON.parse(rawDraft0);
+                            if (d0 && d0.program && plans[d0.program]) stEl.value = d0.program;
+                        }
+                    }
+                } catch (_) {}
+
+                var syncingFromQuote = false;
                 function renderPlan(track){
                     var st = stEl.value || 'preescolar_1';
                     var cx = cxEl.value || 'primera_vez';
                     var p = plans[st] || plans.preescolar_1;
                     var ctxLabel = cx === 'cambio' ? 'Cambio de guardería/colegio' : 'Primera vez en escuela';
                     var s1 = cx === 'cambio' ? p.step1_cambio : p.step1_primera_vez;
+                    if (track) {
+                        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ st: st, cx: cx })); } catch (_) {}
+                    }
+                    var quoteTotal = 3600;
+                    var quoteEst = '';
+                    try {
+                        var rawDraft = sessionStorage.getItem('froebel_quote_draft_v1');
+                        if (rawDraft) {
+                            var draft = JSON.parse(rawDraft);
+                            if (draft && draft.totalMonthly) {
+                                quoteTotal = Number(draft.totalMonthly) || 3600;
+                                quoteEst = draft.estancia || '';
+                            }
+                        }
+                    } catch (_) {}
+                    var fmtPrice = '$' + quoteTotal.toLocaleString('es-MX') + '/mes';
                     outEl.innerHTML =
                         '<strong style="color:var(--color-primary-dark);display:block;margin-bottom:6px;">📋 Tu Ruta Recomendada para ' + p.title + ' (' + ctxLabel + '):</strong>' +
                         '<ul style="display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none;">' +
@@ -454,25 +503,49 @@
                         '<li>3️⃣ <strong>Acompañamiento Froebel:</strong> ' + p.step3 + '</li>' +
                         '</ul>';
                     if (waBtn) {
-                        var msg = 'Hola Instituto Froebel, usé el Planificador de Adaptación (' + p.title + ' - ' + ctxLabel + ') y quiero agendar un recorrido previo con mi pequeño';
+                        var msg = 'Hola Instituto Froebel, usé el Planificador de Adaptación (' + p.title + ' - ' + ctxLabel + ', ' + fmtPrice + ' Pronto Pago) y quiero agendar un recorrido previo con mi pequeño';
                         waBtn.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(msg);
                     }
                     if (enBtn) {
-                        enBtn.href = '/inscripciones?inscribir=1&programa=' + encodeURIComponent(st);
+                        enBtn.href = '/inscripciones?inscribir=1&programa=' + encodeURIComponent(st) + (quoteEst ? '&estancia=' + encodeURIComponent(quoteEst) : '');
+                        enBtn.textContent = '📝 Pre-inscribir (' + fmtPrice + ') →';
                     }
-                    if (track) {
+                    if (track && !syncingFromQuote) {
                         var calcGrado = document.getElementById('colonia-calc-grado');
                         if (calcGrado && calcGrado.value !== st) {
                             calcGrado.value = st;
-                            calcGrado.dispatchEvent(new Event('change'));
+                            calcGrado.dispatchEvent(new Event('change', { bubbles: true }));
                         }
-                        if (window.FroebelUX) {
+                        if (window.FroebelUX && !window.FroebelUX.isBot()) {
                             window.FroebelUX.track('cta_click', { element_id: 'plan_adaptacion_' + st + '_' + cx, element_text: p.title + ' | ' + ctxLabel });
                         }
                     }
                 }
                 stEl.addEventListener('change', function(){ renderPlan(true); });
                 cxEl.addEventListener('change', function(){ renderPlan(true); });
+                if (prBtn) {
+                    prBtn.addEventListener('click', function(){
+                        if (window.FroebelUX && !window.FroebelUX.isBot()) {
+                            window.FroebelUX.track('cta_click', { element_id: 'plan_adaptacion_print', element_text: 'Imprimir Plan de Adaptacion Escolar' });
+                        }
+                        window.print();
+                    });
+                }
+                window.addEventListener('froebel:quote-updated', function(){
+                    try {
+                        var raw = sessionStorage.getItem('froebel_quote_draft_v1');
+                        if (raw) {
+                            var d = JSON.parse(raw);
+                            if (d && d.program && plans[d.program] && stEl.value !== d.program) {
+                                stEl.value = d.program;
+                            }
+                        }
+                    } catch (_) {}
+                    syncingFromQuote = true;
+                    renderPlan(false);
+                    syncingFromQuote = false;
+                });
+                renderPlan(false);
             })();
             </script>
             <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">

@@ -183,7 +183,7 @@
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
       },
-      "dateModified": "2026-11-14"
+      "dateModified": "2026-11-15"
     },
     {
       "@type": "FAQPage",
@@ -337,21 +337,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr style="border-bottom:1px solid var(--color-border);">
+    <tr data-quote-program="preescolar_1" style="border-bottom:1px solid var(--color-border);">
       <td style="padding:9px 10px;font-weight:700;"><a href="#kinder1">🌻 Kínder 1</a></td>
       <td style="padding:9px 10px;">3 a 4 años · <strong>Ratio 1:15</strong></td>
       <td style="padding:9px 10px;">5 vocales (visual, auditiva y trazo) · Números 1 al 10 y ubicación espacial con Dones de Froebel</td>
       <td style="padding:9px 10px;">1 hora diaria de inglés + Teatro, Artes y Psicomotricidad</td>
       <td style="padding:9px 10px;">08:30–14:00h · <strong>$3,600/mes</strong> · <a href="/inscripciones?inscribir=1&programa=preescolar_1" style="font-weight:700;color:var(--color-primary);">Inscribir K1 →</a></td>
     </tr>
-    <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
+    <tr data-quote-program="preescolar_2" style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
       <td style="padding:9px 10px;font-weight:700;"><a href="#kinder2">🧠 Kínder 2</a></td>
       <td style="padding:9px 10px;">4 a 5 años · <strong>Ratio 1:15</strong></td>
       <td style="padding:9px 10px;">Vocales + 6 consonantes, dictados y rimas · Números 1 al 20 e inicio de sumas y restas</td>
       <td style="padding:9px 10px;">1 hora diaria de inglés + Robótica y expresión artística</td>
       <td style="padding:9px 10px;">08:30–14:00h · <strong>$3,600/mes</strong> · <a href="/inscripciones?inscribir=1&programa=preescolar_2" style="font-weight:700;color:var(--color-primary);">Inscribir K2 →</a></td>
     </tr>
-    <tr style="background:#fefce8;">
+    <tr data-quote-program="preescolar_3" style="background:#fefce8;">
       <td style="padding:9px 10px;font-weight:700;"><a href="#kinder3">🎓 Kínder 3 (Primaria)</a></td>
       <td style="padding:9px 10px;">5 a 6 años · <strong>Certificado SEP RVOE 09050141</strong></td>
       <td style="padding:9px 10px;">Lectura comprensiva y escritura fluida · Números 1 al 100, unidad/decena/centena, sumas y restas</td>
@@ -584,28 +584,34 @@
 </div>
 </div>
 <div id="simulador-egreso-primaria" data-ux-section="simulador-egreso-primaria" class="card fade-in" style="margin-top:var(--space-6);padding:var(--space-6);background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%);border:2px solid var(--color-primary-100);text-align:left;">
+  <style>
+    @media print {
+      .header, .footer, .whatsapp-fab, #froebel-cookie-banner, #froebel-mobile-dock, #cotizador-rapido-colonia, #cta-final-preescolar, #preguntas-frecuentes, #egreso-kinder-print-btn, #egreso-kinder-wa-btn, #egreso-kinder-enroll-btn { display: none !important; }
+      body { background: #ffffff !important; color: #000000 !important; }
+    }
+  </style>
   <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--space-3);">
     <div>
       <strong style="display:block;font-size:1rem;color:var(--color-primary-dark);">🎓 Simulador de Metas de Egreso hacia 1° de Primaria (SEP RVOE 09050141)</strong>
-      <span style="font-size:0.82rem;color:var(--color-text-light);">Marca las competencias que buscas para tu pequeño(a) al graduarse de Kínder 3 y solicita tu clase muestra sin costo:</span>
+      <span style="font-size:0.82rem;color:var(--color-text-light);">Marca las competencias que buscas para tu pequeño(a) al graduarse de Kínder 3 (se guardan automáticamente) y solicita tu clase muestra sin costo:</span>
     </div>
     <span id="egreso-kinder-badge" style="font-size:0.76rem;font-weight:700;background:#dcfce7;color:#166534;padding:4px 10px;border-radius:999px;">✓ 4 de 4 metas incluidas · Ratio 1:15</span>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:8px;margin-bottom:var(--space-4);">
     <label style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:#ffffff;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-size:0.82rem;cursor:pointer;">
-      <input type="checkbox" class="egreso-goal-chk" value="Lectura comprensiva y escritura fluida" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
+      <input type="checkbox" class="egreso-goal-chk" data-key="lectura" value="Lectura comprensiva y escritura fluida" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
       <span><strong>📖 Lectura comprensiva y escritura fluida</strong> (sin planas mecánicas)</span>
     </label>
     <label style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:#ffffff;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-size:0.82rem;cursor:pointer;">
-      <input type="checkbox" class="egreso-goal-chk" value="Matematicas 1 al 100 + sumas y restas STEM" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
+      <input type="checkbox" class="egreso-goal-chk" data-key="mate" value="Matemáticas 1 al 100 + sumas y restas STEM" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
       <span><strong>🔢 Matemáticas 1 al 100, sumas y restas</strong> (Dones de Froebel STEM)</span>
     </label>
     <label style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:#ffffff;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-size:0.82rem;cursor:pointer;">
-      <input type="checkbox" class="egreso-goal-chk" value="Ingles diario + lectoescritura bilingue" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
+      <input type="checkbox" class="egreso-goal-chk" data-key="ingles" value="Inglés diario + lectoescritura bilingüe" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
       <span><strong>🇬🇧 Inglés 1 hora diaria</strong> + inicio de lectoescritura en el idioma</span>
     </label>
     <label style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:#ffffff;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-size:0.82rem;cursor:pointer;">
-      <input type="checkbox" class="egreso-goal-chk" value="Certificado Oficial SEP + Estancia opcional 18h" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
+      <input type="checkbox" class="egreso-goal-chk" data-key="sep" value="Certificado Oficial SEP + Estancia opcional 18h" checked style="margin-top:2px;accent-color:var(--color-primary);"/>
       <span><strong>🎓 Certificado Oficial SEP Primaria</strong> + Estancia opcional 18:00h</span>
     </label>
   </div>
@@ -614,32 +620,93 @@
       <div id="egreso-kinder-resumen" style="font-size:0.84rem;font-weight:700;color:var(--color-primary-dark);">✅ Plan Kínder STEM SEP cubre tus 4 prioridades · Colegiatura $3,600 MXN/mes Pronto Pago</div>
       <div style="font-size:0.76rem;color:var(--color-text-light);">Av. 521 No. 20, San Juan de Aragón I Secc, GAM (a 2 cuadras de Metro Aragón L5) · Inscripción desde $3,375 MXN</div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <button type="button" id="egreso-kinder-print-btn" style="background:#f8fafc;border:1px solid var(--color-border);color:var(--color-primary-dark);padding:7px 12px;border-radius:999px;font-size:0.78rem;font-weight:700;cursor:pointer;">🖨️ Imprimir Perfil</button>
       <a id="egreso-kinder-wa-btn" class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20revis%C3%A9%20el%20Perfil%20de%20Egreso%20a%20Primaria%20SEP%20(lectoescritura%2C%20matem%C3%A1ticas%20STEM%20e%20ingl%C3%A9s)%20y%20quiero%20agendar%20clase%20muestra" target="_blank" rel="noopener noreferrer" style="padding:7px 13px;font-size:0.8rem;">💬 Agendar Clase Muestra Kínder</a>
       <a id="egreso-kinder-enroll-btn" class="btn btn--primary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_3" style="padding:7px 13px;font-size:0.8rem;">📝 Apartar Lugar Kínder ($3,600/mes) →</a>
     </div>
   </div>
   <script>
     (function() {
+      var STORAGE_KEY = 'froebel_egreso_primaria_v1';
       var boxes = Array.prototype.slice.call(document.querySelectorAll('#simulador-egreso-primaria .egreso-goal-chk'));
       var badge = document.getElementById('egreso-kinder-badge');
       var resumen = document.getElementById('egreso-kinder-resumen');
       var waBtn = document.getElementById('egreso-kinder-wa-btn');
+      var enrollBtn = document.getElementById('egreso-kinder-enroll-btn');
+      var printBtn = document.getElementById('egreso-kinder-print-btn');
       if (!boxes.length || !badge || !resumen || !waBtn) return;
+
+      try {
+        var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        if (saved && typeof saved === 'object') {
+          boxes.forEach(function(c) {
+            var k = c.getAttribute('data-key');
+            if (k && Object.prototype.hasOwnProperty.call(saved, k)) {
+              c.checked = Boolean(saved[k]);
+            }
+          });
+        }
+      } catch (_) {}
+
       function syncEgreso(track) {
-        var picked = boxes.filter(function(c) { return c.checked; }).map(function(c) { return c.value; });
+        var state = {};
+        var picked = [];
+        boxes.forEach(function(c) {
+          var k = c.getAttribute('data-key');
+          if (k) state[k] = c.checked;
+          if (c.checked) picked.push(c.value);
+        });
+        if (track) {
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {}
+        }
+
+        var quoteTotal = 3600;
+        var quoteProg = 'preescolar_3';
+        var quoteEst = '';
+        var quoteLabel = 'Kínder STEM SEP';
+        try {
+          var rawDraft = sessionStorage.getItem('froebel_quote_draft_v1');
+          if (rawDraft) {
+            var draft = JSON.parse(rawDraft);
+            if (draft && draft.totalMonthly) {
+              quoteTotal = Number(draft.totalMonthly) || 3600;
+              quoteEst = draft.estancia || '';
+              if (draft.program && draft.program.indexOf('preescolar_') === 0) {
+                quoteProg = draft.program;
+                quoteLabel = draft.programLabel || 'Kínder STEM SEP';
+              }
+            }
+          }
+        } catch (_) {}
+
         var count = picked.length;
+        var fmtPrice = '$' + quoteTotal.toLocaleString('es-MX') + ' MXN/mes Pronto Pago';
         badge.textContent = count > 0 ? ('✓ ' + count + ' de 4 metas seleccionadas · Ratio 1:15') : 'Selecciona al menos 1 meta para tu pequeño(a)';
         resumen.textContent = count > 0
-          ? ('✅ Plan Kínder STEM SEP cubre tus ' + count + ' prioridades · Colegiatura $3,600 MXN/mes Pronto Pago')
-          : '💡 Marca las habilidades clave que deseas fortalecer antes de 1° de Primaria ($3,600 MXN/mes Pronto Pago)';
+          ? ('✅ Plan ' + quoteLabel + ' cubre tus ' + count + ' prioridades · Colegiatura ' + fmtPrice)
+          : ('💡 Marca las habilidades clave que deseas fortalecer antes de 1° de Primaria (' + fmtPrice + ')');
         var goalsStr = count > 0 ? picked.join(', ') : 'lectoescritura, matemáticas STEM e inglés';
-        waBtn.href = 'https://wa.me/525554148872?text=' + encodeURIComponent('Hola Instituto Froebel, me interesa Kínder SEP ($3,600/mes Pronto Pago) con enfoque en: ' + goalsStr + '. Quiero agendar clase muestra.');
+        waBtn.href = 'https://wa.me/525554148872?text=' + encodeURIComponent('Hola Instituto Froebel, me interesa ' + quoteLabel + ' ($' + quoteTotal.toLocaleString('es-MX') + '/mes Pronto Pago) con enfoque en: ' + goalsStr + '. Quiero agendar clase muestra.');
+        if (enrollBtn) {
+          enrollBtn.href = '/inscripciones?inscribir=1&programa=' + encodeURIComponent(quoteProg) + (quoteEst ? '&estancia=' + encodeURIComponent(quoteEst) : '');
+          enrollBtn.textContent = '📝 Apartar Lugar Kínder ($' + quoteTotal.toLocaleString('es-MX') + '/mes) →';
+        }
         if (track && window.FroebelUX && !window.FroebelUX.isBot()) {
           window.FroebelUX.track('cta_click', { element_id: 'simulador_egreso_' + count, element_text: 'Simulador Egreso Primaria: ' + count + ' metas' });
         }
       }
       boxes.forEach(function(c) { c.addEventListener('change', function() { syncEgreso(true); }); });
+      if (printBtn) {
+        printBtn.addEventListener('click', function() {
+          if (window.FroebelUX && !window.FroebelUX.isBot()) {
+            window.FroebelUX.track('cta_click', { element_id: 'simulador_egreso_print', element_text: 'Imprimir Perfil de Egreso Primaria SEP' });
+          }
+          window.print();
+        });
+      }
+      window.addEventListener('froebel:quote-updated', function() { syncEgreso(false); });
+      syncEgreso(false);
     })();
   </script>
 </div>

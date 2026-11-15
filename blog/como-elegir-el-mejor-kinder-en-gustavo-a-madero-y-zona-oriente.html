@@ -332,27 +332,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom:1px solid var(--color-border);">
+            <tr data-scroll-target="#evaluador-kinder-gam" style="border-bottom:1px solid var(--color-border);">
               <td style="padding:9px 10px;font-weight:700;">🏛️ Validez Oficial SEP</td>
               <td style="padding:9px 10px;">A veces en trámite o sin RVOE visible</td>
               <td style="padding:9px 10px;"><strong>Incorporación SEP RVOE 09050141</strong> (Certificado oficial a Primaria)</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
+            <tr data-scroll-target="#evaluador-kinder-gam" style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
               <td style="padding:9px 10px;font-weight:700;">📹 Seguridad y Salud</td>
               <td style="padding:9px 10px;">Sin cámaras o sin enfermera fija</td>
               <td style="padding:9px 10px;"><strong>CCTV sin puntos ciegos + Enfermera de planta</strong> + Entrega con credencial</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--color-border);">
+            <tr data-scroll-target="#evaluador-kinder-gam" style="border-bottom:1px solid var(--color-border);">
               <td style="padding:9px 10px;font-weight:700;">👩‍🏫 Ratio por Salón</td>
               <td style="padding:9px 10px;">25 a 30 alumnos por grupo</td>
               <td style="padding:9px 10px;"><strong>Ratio 1:8 en Maternal y 1:15 en Preescolar</strong> (atención personalizada)</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
+            <tr data-scroll-target="#evaluador-kinder-gam" style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
               <td style="padding:9px 10px;font-weight:700;">🇬🇧 Método e Inglés</td>
               <td style="padding:9px 10px;">Planas mecánicas e inglés 2 veces/semana</td>
               <td style="padding:9px 10px;"><strong>1 hora diaria de inglés + Dones de Froebel (STEM)</strong> y lectoescritura fluida</td>
             </tr>
-            <tr style="background:#fefce8;">
+            <tr data-scroll-target="#evaluador-kinder-gam" style="background:#fefce8;">
               <td style="padding:9px 10px;font-weight:700;">💳 Costos y Horario</td>
               <td style="padding:9px 10px;">Precios ocultos hasta agendar cita</td>
               <td style="padding:9px 10px;"><strong>$3,600/mes Pronto Pago</strong> · Inscripción desde $3,375 · Estancia hasta 18:00h</td>
@@ -362,65 +362,119 @@
       </div>
 
       <div id="evaluador-kinder-gam" data-ux-section="evaluador-kinder-gam" style="background:linear-gradient(135deg,#ffffff 0%,#f0fdf4 100%);border:2px solid #16a34a;border-radius:16px;padding:18px;margin-bottom:var(--space-8);box-shadow:0 6px 18px rgba(22,163,74,0.08);">
+        <style>
+          @media print {
+            .header, .footer, .whatsapp-fab, #froebel-cookie-banner, #froebel-mobile-dock, #cotizador-rapido-colonia, #post-faq-cta-blog, #evaluador-kinder-print, #evaluador-kinder-wa, #evaluador-kinder-enroll { display: none !important; }
+            body { background: #ffffff !important; color: #000000 !important; }
+          }
+        </style>
         <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;">
           <div>
-            <span style="display:inline-block;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;margin-bottom:4px;">✅ AUTODIAGNÓSTICO INTERACTIVO PARA VISITAS</span>
+            <span style="display:inline-block;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;margin-bottom:4px;">✅ AUTODIAGNÓSTICO INTERACTIVO PARA VISITAS · SE GUARDA TU AVANCE</span>
             <h3 style="margin:0;font-size:1.05rem;color:#14532d;">Evalúa el Kínder que estás visitando en 30 segundos</h3>
           </div>
           <span id="evaluador-kinder-score" aria-live="polite" style="background:#166534;color:#ffffff;padding:6px 12px;border-radius:999px;font-size:0.82rem;font-weight:800;">0 / 5 verificados</span>
         </div>
         <div style="display:grid;gap:8px;font-size:0.88rem;color:#1e293b;">
           <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
-            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <input type="checkbox" class="js-kinder-check" data-key="sep" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
             <span><strong>1. RVOE SEP visible:</strong> Muestra acuerdo oficial vigente (en Froebel: <strong>SEP 09050141</strong>).</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
-            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <input type="checkbox" class="js-kinder-check" data-key="cctv" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
             <span><strong>2. CCTV + Enfermera de planta:</strong> Circuito cerrado activo en aulas/patio y enfermería fija toda la jornada.</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
-            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <input type="checkbox" class="js-kinder-check" data-key="ratio" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
             <span><strong>3. Grupos reducidos:</strong> Máximo 8 alumnos por educadora en Maternal (1:8) y 15 en Preescolar (1:15).</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
-            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <input type="checkbox" class="js-kinder-check" data-key="ingles" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
             <span><strong>4. Inglés diario + método activo:</strong> 1 hora diaria de inglés y aprendizaje manipulativo STEM sin planas mecánicas.</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:#ffffff;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;">
-            <input type="checkbox" class="js-kinder-check" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
+            <input type="checkbox" class="js-kinder-check" data-key="costos" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;"/>
             <span><strong>5. Costos publicados sin sorpresas:</strong> Colegiaturas e inscripción claras por escrito ($3,600/mes Pronto Pago en Froebel).</span>
           </label>
         </div>
         <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px dashed #86efac;">
           <p id="evaluador-kinder-verdict" style="margin:0;font-size:0.82rem;color:#166534;font-weight:700;">Marca los puntos que cumple la escuela. El Instituto Federico Froebel cumple 5/5 verificables en recorrido presencial.</p>
           <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            <button type="button" onclick="if(window.FroebelUX)window.FroebelUX.track('cta_click',{element_id:'checklist_print',element_text:'Imprimir Checklist Kinder GAM'});window.print();" style="background:#ffffff;border:1px solid #16a34a;color:#166534;padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ Imprimir Checklist</button>
+            <button type="button" id="evaluador-kinder-print" onclick="if(window.FroebelUX && !window.FroebelUX.isBot())window.FroebelUX.track('cta_click',{element_id:'checklist_print',element_text:'Imprimir Checklist Kinder GAM'});window.print();" style="background:#ffffff;border:1px solid #16a34a;color:#166534;padding:6px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ Imprimir Checklist</button>
+            <a id="evaluador-kinder-enroll" href="/inscripciones?inscribir=1" style="background:#1e40af;color:#ffffff;padding:6px 13px;border-radius:999px;font-size:0.8rem;font-weight:800;text-decoration:none;">📝 Pre-inscribir ($3,600/mes) →</a>
             <a id="evaluador-kinder-wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20us%C3%A9%20el%20Checklist%20de%205%20puntos%20y%20quiero%20agendar%20visita%20para%20verificar%20instalaciones" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:6px 14px;border-radius:999px;font-size:0.8rem;font-weight:800;text-decoration:none;">💬 Comprobar 5/5 en Froebel →</a>
           </div>
         </div>
         <script>
           (function(){
+            var STORAGE_KEY = 'froebel_evaluador_kinder_v1';
             var box = document.getElementById('evaluador-kinder-gam');
             if (!box) return;
             var checks = box.querySelectorAll('.js-kinder-check');
             var badge = document.getElementById('evaluador-kinder-score');
             var verdict = document.getElementById('evaluador-kinder-verdict');
-            function sync() {
+            var waBtn = document.getElementById('evaluador-kinder-wa');
+            var enrollBtn = document.getElementById('evaluador-kinder-enroll');
+            try {
+              var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+              if (saved && typeof saved === 'object') {
+                checks.forEach(function(c){
+                  var k = c.getAttribute('data-key');
+                  if (k && Object.prototype.hasOwnProperty.call(saved, k)) c.checked = Boolean(saved[k]);
+                });
+              }
+            } catch (_) {}
+            function sync(userTriggered) {
               var n = 0;
-              checks.forEach(function(c){ if (c.checked) n++; });
+              var state = {};
+              checks.forEach(function(c){
+                var k = c.getAttribute('data-key');
+                if (k) state[k] = c.checked;
+                if (c.checked) n++;
+              });
+              if (userTriggered) {
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {}
+              }
+              var quoteTotal = 3600;
+              var quoteProg = '';
+              var quoteEst = '';
+              var quoteLabel = '';
+              try {
+                var rawDraft = sessionStorage.getItem('froebel_quote_draft_v1');
+                if (rawDraft) {
+                  var draft = JSON.parse(rawDraft);
+                  if (draft && draft.totalMonthly) {
+                    quoteTotal = Number(draft.totalMonthly) || 3600;
+                    quoteProg = draft.program || '';
+                    quoteEst = draft.estancia || '';
+                    quoteLabel = draft.programLabel || '';
+                  }
+                }
+              } catch (_) {}
+              var fmtPrice = '$' + quoteTotal.toLocaleString('es-MX') + '/mes';
               badge.textContent = n + ' / 5 verificados';
               if (n === 5) {
-                verdict.textContent = '🌟 ¡Excelente estándar (5/5)! Agenda tu visita al Instituto Froebel para comparar en vivo.';
+                verdict.textContent = '🌟 ¡Excelente estándar (5/5)! Agenda tu visita al Instituto Froebel (' + fmtPrice + ' Pronto Pago) para comparar en vivo.';
               } else if (n >= 3) {
-                verdict.textContent = '⚠️ Cumple ' + n + '/5 puntos clave. En el Instituto Froebel puedes verificar los 5/5 en tu recorrido.';
+                verdict.textContent = '⚠️ Cumple ' + n + '/5 puntos clave. En el Instituto Froebel verificas los 5/5 en tu recorrido (' + fmtPrice + ' Pronto Pago).';
               } else {
-                verdict.textContent = 'Marca los puntos que cumple la escuela. El Instituto Federico Froebel cumple 5/5 verificables en recorrido presencial.';
+                verdict.textContent = 'Marca los puntos que cumple la escuela. El Instituto Federico Froebel cumple 5/5 verificables (' + fmtPrice + ' Pronto Pago).';
               }
-              if (window.FroebelUX) {
+              if (enrollBtn) {
+                enrollBtn.href = '/inscripciones?inscribir=1' + (quoteProg ? '&programa=' + encodeURIComponent(quoteProg) : '') + (quoteEst ? '&estancia=' + encodeURIComponent(quoteEst) : '');
+                enrollBtn.textContent = '📝 Pre-inscribir (' + fmtPrice + ') →';
+              }
+              if (waBtn) {
+                var extra = quoteLabel ? (' para ' + quoteLabel + ' (' + fmtPrice + ')') : (' (' + fmtPrice + ' Pronto Pago)');
+                waBtn.href = 'https://wa.me/525554148872?text=' + encodeURIComponent('Hola Instituto Froebel, usé el Checklist de ' + (n || 5) + '/5 puntos' + extra + ' y quiero agendar visita para verificar instalaciones');
+              }
+              if (userTriggered && window.FroebelUX && !window.FroebelUX.isBot()) {
                 window.FroebelUX.track('cta_click', { element_id: 'evaluador_kinder_' + n, element_text: 'Checklist Kinder ' + n + '/5' });
               }
             }
-            checks.forEach(function(c){ c.addEventListener('change', sync); });
+            checks.forEach(function(c){ c.addEventListener('change', function(){ sync(true); }); });
+            window.addEventListener('froebel:quote-updated', function(){ sync(false); });
+            sync(false);
           })();
         </script>
       </div>
