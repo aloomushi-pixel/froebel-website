@@ -332,29 +332,29 @@
     </tr>
   </thead>
   <tbody>
-    <tr style="border-bottom:1px solid var(--color-border);">
+    <tr data-quote-estancia="ninguna" data-scroll-target="#calculadora-estancia-aicm" style="border-bottom:1px solid var(--color-border);">
       <td style="padding:8px 10px;font-weight:700;">🏫 Horario Escolar Base</td>
       <td style="padding:8px 10px;">08:30 a 13:30 / 14:00 hrs (Recepción desde 07:30h)</td>
       <td style="padding:8px 10px;">Programa SEP Bilingüe + Dones de Froebel + Enfermería y CCTV</td>
-      <td style="padding:8px 10px;"><strong>$3,600 MXN/mes</strong> Pronto Pago ($4,000 normal)</td>
+      <td style="padding:8px 10px;"><strong>$3,600 MXN/mes</strong> Pronto Pago ($4,000 normal) · <span style="color:var(--color-primary);font-weight:700;">Cotizar →</span></td>
     </tr>
-    <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
+    <tr data-quote-estancia="parcial_16h" data-scroll-target="#calculadora-estancia-aicm" style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
       <td style="padding:8px 10px;font-weight:700;">🎨 Estancia Parcial + Comedor</td>
       <td style="padding:8px 10px;">13:30 / 14:00 a 16:00 hrs</td>
       <td style="padding:8px 10px;">Comida caliente de 3 tiempos + filtro de higiene + 1 actividad vespertina</td>
-      <td style="padding:8px 10px;"><strong>+$1,400 MXN/mes</strong> <span style="display:block;font-size:0.76rem;color:#166534;font-weight:700;">Total integrado: $5,000/mes con Pronto Pago</span></td>
+      <td style="padding:8px 10px;"><strong>+$1,400 MXN/mes</strong> <span style="display:block;font-size:0.76rem;color:#166534;font-weight:700;">Total integrado: $5,000/mes con Pronto Pago · Simular →</span></td>
     </tr>
-    <tr style="border-bottom:1px solid var(--color-border);background:#fefce8;">
+    <tr data-quote-estancia="completa_18h" data-scroll-target="#calculadora-estancia-aicm" style="border-bottom:1px solid var(--color-border);background:#fefce8;">
       <td style="padding:8px 10px;font-weight:700;">🌟 Estancia Completa + Comedor</td>
       <td style="padding:8px 10px;">13:30 / 14:00 a 18:00 hrs</td>
       <td style="padding:8px 10px;">Comida de 3 tiempos + apoyo en tareas + talleres (arte, zumba, bloques) + colación</td>
-      <td style="padding:8px 10px;"><strong>+$1,900 MXN/mes</strong> <span style="display:block;font-size:0.76rem;color:#854d0e;font-weight:700;">Total integrado: $5,500/mes todo incluido</span></td>
+      <td style="padding:8px 10px;"><strong>+$1,900 MXN/mes</strong> <span style="display:block;font-size:0.76rem;color:#854d0e;font-weight:700;">Total integrado: $5,500/mes todo incluido · Simular →</span></td>
     </tr>
-    <tr>
+    <tr data-quote-estancia="suelta_15h" data-scroll-target="#calculadora-estancia-aicm">
       <td style="padding:8px 10px;font-weight:700;">⏱️ Hora Suelta / Adicional</td>
       <td style="padding:8px 10px;">Por hora extraordinaria</td>
       <td style="padding:8px 10px;">Estancia supervisada para imprevistos laborales o tráfico en GAM / AICM</td>
-      <td style="padding:8px 10px;"><strong>$50 MXN/hora</strong> (o $400/mes hora fija sin comedor)</td>
+      <td style="padding:8px 10px;"><strong>$50 MXN/hora</strong> (o $400/mes hora fija sin comedor) · <span style="color:var(--color-primary);font-weight:700;">Calcular →</span></td>
     </tr>
   </tbody>
 </table>
@@ -491,15 +491,18 @@
 
       if (!silentHydrate) {
         try {
-          sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify({
+          var prev = {};
+          var prevRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+          if (prevRaw) prev = JSON.parse(prevRaw) || {};
+          sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify(Object.assign({}, prev, {
             program: gradoCode,
             estancia: estanciaParam,
             totalMonthly: totalIntegrado,
             programLabel: gradoLabel,
             estanciaLabel: estanciaShortLabel,
             updatedAt: Date.now()
-          }));
-          window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+          })));
+          window.dispatchEvent(new CustomEvent('froebel:quote-updated', { detail: { source: 'sim-estancia-' + pfx } }));
         } catch (_) {}
         if (window.FroebelUX) {
           window.FroebelUX.track('cta_click', {
@@ -511,22 +514,31 @@
     };
   }
   (function() {
-    try {
-      var raw = sessionStorage.getItem('froebel_quote_draft_v1');
-      if (!raw) return;
-      var draft = JSON.parse(raw);
-      var gEl = document.getElementById('sim-grado-main');
-      var hEl = document.getElementById('sim-hora-main');
-      if (gEl && draft && draft.program && gEl.querySelector('option[value="' + draft.program + '"]')) {
-        gEl.value = draft.program;
-      }
-      if (hEl && draft && draft.estancia === 'parcial_16h') {
-        hEl.value = '16';
-      } else if (hEl && draft && draft.estancia === 'completa_18h') {
-        hEl.value = '18';
-      }
-      window.updateSimuladorEstanciaFroebel('main', true);
-    } catch (_) {}
+    function hydrateEstanciaMain() {
+      try {
+        var raw = sessionStorage.getItem('froebel_quote_draft_v1');
+        if (!raw) return;
+        var draft = JSON.parse(raw);
+        var gEl = document.getElementById('sim-grado-main');
+        var hEl = document.getElementById('sim-hora-main');
+        if (gEl && draft && draft.program && gEl.querySelector('option[value="' + draft.program + '"]')) {
+          gEl.value = draft.program;
+        }
+        if (hEl && draft && draft.estancia === 'parcial_16h') {
+          hEl.value = '16';
+        } else if (hEl && draft && draft.estancia === 'completa_18h') {
+          hEl.value = '18';
+        } else if (hEl && draft && draft.estancia === 'ninguna') {
+          hEl.value = '15';
+        }
+        window.updateSimuladorEstanciaFroebel('main', true);
+      } catch (_) {}
+    }
+    hydrateEstanciaMain();
+    window.addEventListener('froebel:quote-updated', function(ev) {
+      if (ev && ev.detail && ev.detail.source === 'sim-estancia-main') return;
+      hydrateEstanciaMain();
+    });
   })();
 </script>
 <div class="grid grid--2">
@@ -705,7 +717,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=34" defer></script>
+<script src="/scripts/main.js?v=35" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

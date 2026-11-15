@@ -1,12 +1,12 @@
 {
-  "version": "2.1.66",
-  "cycle": 66,
-  "deployedAt": "2026-11-15T13:12:00.000Z",
+  "version": "2.1.67",
+  "cycle": 67,
+  "deployedAt": "2026-11-15T17:32:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "highlights": [
-    "Level 2 Session-Quote Hydration & Bidirectional Reactivity on /inscripciones (#inscripcion-form + #inscripcion-form-quote-pill in main.js?v=34) + 23/23 page live quote calculator coverage",
-    "Level 2 Blocks Age Filter -> Tuition Calculator live sync in blog/5-actividades-con-bloques-para-hacer-en-casa.html (pos 8.58, 141 impr) + 'qué hacer con bloques' CTR title/meta + FAQ #4",
-    "Page-1 GSC CTR title/meta & schema upgrades on /contacto (pos 9.60, 188 impr), /nosotros (pos 8.49, 848 impr), and blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html (pos 7.35, 86 impr)",
-    "Full 8/8 Interactive Blog Tool Crawl-Equity Matrix across /, /programas, and /inscripciones to accelerate Googlebot & Bingbot indexation"
+    "Level 2 Zero-CLS Cookie Banner GPU Transform + Touch :hover Guard + Interactive Quote-Selecting Table Rows in main.js?v=35 (resolving mobile CLS 0.0357 & rage:hero-maternal-bilingue)",
+    "Level 2 Interactive 6-Protocol Safety & SEP Tour Checklist (#verificador-visita-seguridad) on /instalaciones-y-seguridad completing 4/4 interactive pillar coverage",
+    "Level 2 Safe Draft Merge (...prev) & Bidirectional froebel:quote-updated Reactivity across Maternal & Estancia 18:00h simulators",
+    "Level 2 localStorage Persistence + Session-Quote Sync + GSC CTR Title/Meta upgrade on blog/control-de-esfinteres.html"
   ]
 }

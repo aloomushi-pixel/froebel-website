@@ -178,9 +178,14 @@ function initInteractiveComparisonTables() {
       row.querySelector('a[href*="/inscripciones"]') ||
       row.querySelector('a[href*="/colegio-cerca-de-mi/"]') ||
       row.querySelector('a[href]');
-    if (!primaryLink) return;
+    const quoteProg = row.getAttribute('data-quote-program');
+    const quoteEst = row.getAttribute('data-quote-estancia');
+    const scrollTargetSel = row.getAttribute('data-scroll-target');
+    if (!primaryLink && !quoteProg && !quoteEst && !scrollTargetSel) return;
+
     row.style.cursor = 'pointer';
     row.setAttribute('role', 'button');
+    if (!row.hasAttribute('tabindex')) row.setAttribute('tabindex', '0');
     if (!row.getAttribute('data-ux-id')) {
       const label = (row.cells[0]?.textContent || 'fila-tabla')
         .toLowerCase()
@@ -188,9 +193,63 @@ function initInteractiveComparisonTables() {
         .slice(0, 32);
       row.setAttribute('data-ux-id', `table-row-${label}`);
     }
-    row.addEventListener('click', (ev) => {
-      if (ev.target.closest('a, button, input, select')) return;
-      primaryLink.click();
+
+    const activateRow = (ev) => {
+      if (ev && ev.target && ev.target.closest('a, button, input, select')) return;
+      if (quoteProg || quoteEst || scrollTargetSel) {
+        const colGrado = document.getElementById('colonia-calc-grado');
+        const colEst = document.getElementById('colonia-calc-estancia');
+        const estGrado = document.getElementById('sim-grado-main') || document.getElementById('sim-grado-blog');
+        const estHora = document.getElementById('sim-hora-main') || document.getElementById('sim-hora-blog');
+        let changed = false;
+        if (quoteProg && colGrado && colGrado.value !== quoteProg) {
+          colGrado.value = quoteProg;
+          changed = true;
+        }
+        if (quoteEst && colEst && colEst.value !== quoteEst) {
+          colEst.value = quoteEst;
+          changed = true;
+        }
+        if (changed && (colGrado || colEst)) {
+          (colEst || colGrado).dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        let simChanged = false;
+        if (quoteProg && estGrado && estGrado.value !== quoteProg) {
+          estGrado.value = quoteProg;
+          simChanged = true;
+        }
+        const pickupMap = { ninguna: '15', parcial_16h: '16', completa_18h: '18', suelta_15h: '15' };
+        if (quoteEst && estHora && pickupMap[quoteEst] && estHora.value !== pickupMap[quoteEst]) {
+          estHora.value = pickupMap[quoteEst];
+          simChanged = true;
+        }
+        if (simChanged && typeof window.updateSimuladorEstanciaFroebel === 'function') {
+          window.updateSimuladorEstanciaFroebel(document.getElementById('sim-grado-main') ? 'main' : 'blog');
+        }
+        const dest =
+          (scrollTargetSel && document.querySelector(scrollTargetSel)) ||
+          document.getElementById('cotizador-rapido-colonia') ||
+          document.getElementById('calculadora-estancia-aicm');
+        if (dest) {
+          const topY = dest.getBoundingClientRect().top + window.scrollY - 88;
+          window.scrollTo({ top: Math.max(0, topY), behavior: 'smooth' });
+          const prevOutline = dest.style.outline;
+          dest.style.outline = '2px solid #16a34a';
+          setTimeout(() => {
+            dest.style.outline = prevOutline;
+          }, 900);
+          return;
+        }
+      }
+      if (primaryLink) primaryLink.click();
+    };
+
+    row.addEventListener('click', activateRow);
+    row.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        activateRow(ev);
+      }
     });
   });
 }
@@ -863,6 +922,13 @@ function initMobileNav() {
           box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
         }
       }
+      @media (hover: none) {
+        .card:hover,
+        .btn:hover,
+        .org-chart__node:hover {
+          transform: none !important;
+        }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -997,6 +1063,9 @@ function initCookieConsentBanner() {
 
   if (document.getElementById('froebel-cookie-banner')) return;
 
+  const existingDock = document.getElementById('froebel-mobile-dock');
+  const dockAlreadyVisible = existingDock && existingDock.getAttribute('aria-hidden') === 'false';
+
   const banner = document.createElement('div');
   banner.id = 'froebel-cookie-banner';
   banner.setAttribute('role', 'region');
@@ -1021,7 +1090,8 @@ function initCookieConsentBanner() {
     'align-items: center',
     'justify-content: space-between',
     'gap: 14px',
-    'transition: opacity 0.25s ease, transform 0.25s ease, bottom 0.22s ease, right 0.22s ease'
+    dockAlreadyVisible ? 'transform: translateY(-54px)' : 'transform: translateY(0)',
+    'transition: opacity 0.25s ease, transform 0.22s ease'
   ].join(';');
 
   banner.innerHTML = `
@@ -1249,9 +1319,8 @@ function initMobileStickyConversionBar() {
     }
 
     const cookieBanner = document.getElementById('froebel-cookie-banner');
-    if (cookieBanner) {
-      cookieBanner.style.bottom = visible ? '66px' : '12px';
-      cookieBanner.style.right = visible ? '10px' : '84px';
+    if (cookieBanner && cookieBanner.style.opacity !== '0') {
+      cookieBanner.style.transform = visible ? 'translateY(-54px)' : 'translateY(0)';
     }
   };
 
