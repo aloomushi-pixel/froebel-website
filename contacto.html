@@ -183,7 +183,7 @@
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
       },
-      "dateModified": "2026-11-14"
+      "dateModified": "2026-11-15"
     },
     {
       "@type": "FAQPage",
@@ -470,6 +470,103 @@
 </div>
 </div>
 </div>
+
+<div class="grid grid--2" style="gap:var(--space-8);margin-top:var(--space-10);align-items:start;">
+  <div class="card fade-in" data-ux-section="formulario-visita-contacto" style="padding:var(--space-6);border:2px solid var(--color-primary-100);background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-2);">
+      <h2 style="font-size:var(--text-xl);color:var(--color-primary-dark);margin:0;">📅 Agendar Visita Guiada o Pedir Informes en 15s</h2>
+      <span style="font-size:0.75rem;font-weight:800;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;">✓ Sin compromiso</span>
+    </div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-light);margin-bottom:var(--space-3);">Déjanos tu nombre y WhatsApp para confirmar tu recorrido presencial en <strong>Av. 521 No. 20, San Juan de Aragón I Secc</strong> (correo electrónico opcional).</p>
+    <div id="contact-quote-pill" style="display:none;margin-bottom:var(--space-3);padding:5px 11px;border-radius:999px;background:#eff6ff;border:1px solid #93c5fd;color:var(--color-primary-dark);font-size:0.78rem;font-weight:700;"></div>
+    <form id="formulario-visita-contacto" style="display:flex;flex-direction:column;gap:0.75rem;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:0.65rem;">
+        <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+          Nombre de mamá, papá o tutor *
+          <input id="contact-visit-name" type="text" required autocomplete="name" placeholder="Ej. Mariana Gómez" style="padding:8px 11px;border-radius:8px;border:1px solid var(--color-border);background:#ffffff;font-size:0.88rem;font-family:var(--font-body);"/>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+          WhatsApp o teléfono celular (10 dígitos) *
+          <input id="contact-visit-phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="Ej. 55 1234 5678" style="padding:8px 11px;border-radius:8px;border:1px solid var(--color-border);background:#ffffff;font-size:0.88rem;font-family:var(--font-body);"/>
+        </label>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:0.65rem;">
+        <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+          Nivel de interés para tu pequeño(a)
+          <select id="contact-visit-program" style="padding:8px 10px;border-radius:8px;border:1px solid var(--color-border);background:#ffffff;font-size:0.84rem;font-weight:600;color:var(--color-text);">
+            <option value="maternal">🍼 Maternal Bilingüe (1 a 3 años · Ratio 1:8)</option>
+            <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3 a 4 años · Ratio 1:15)</option>
+            <option value="preescolar_2">🧠 Kínder 2 SEP (4 a 5 años · Ratio 1:15)</option>
+            <option value="preescolar_3">🎓 Kínder 3 SEP (5 a 6 años · Ratio 1:15)</option>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+          Horario preferido de visita o llamada
+          <select id="contact-visit-schedule" style="padding:8px 10px;border-radius:8px;border:1px solid var(--color-border);background:#ffffff;font-size:0.84rem;font-weight:600;color:var(--color-text);">
+            <option value="09:30 hrs (Ver clases en vivo)">09:30 hrs · Ver clases bilingües y STEM</option>
+            <option value="11:00 hrs (Recorrido de aulas y CCTV)" selected>11:00 hrs · Recorrido de aulas y CCTV</option>
+            <option value="13:00 hrs (Informes rápidos)">13:00 hrs · Informes y costos ($3,600/mes)</option>
+            <option value="14:30 hrs (Conocer Comedor y Estancia 18h)">14:30 hrs · Conocer Comedor y Estancia 18h</option>
+          </select>
+        </label>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:0.65rem;">
+        <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+          Correo electrónico (opcional, para copia de confirmación)
+          <input id="contact-visit-email" type="email" autocomplete="email" placeholder="opcional@ejemplo.com" style="padding:8px 11px;border-radius:8px;border:1px solid var(--color-border);background:#ffffff;font-size:0.86rem;font-family:var(--font-body);"/>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+          Duda adicional (opcional: pañal, estancia, fecha de ingreso)
+          <input id="contact-visit-notes" type="text" placeholder="Ej. Cumple 2 años en septiembre / requiero estancia" style="padding:8px 11px;border-radius:8px;border:1px solid var(--color-border);background:#ffffff;font-size:0.86rem;font-family:var(--font-body);"/>
+        </label>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;margin-top:4px;">
+        <button id="contact-visit-submit" type="submit" class="btn btn--primary" style="padding:10px 18px;font-size:0.88rem;">📅 Enviar Solicitud de Visita / Informes →</button>
+        <span style="font-size:0.76rem;color:var(--color-text-muted);">🔒 Respuesta directa de Dirección Escolar · <a href="/contacto#aviso-privacidad">Aviso de Privacidad</a></span>
+      </div>
+      <div id="contact-visit-feedback" role="status" aria-live="polite" style="display:none;padding:10px 12px;border-radius:10px;border:1px solid #86efac;font-size:0.83rem;line-height:1.45;"></div>
+    </form>
+  </div>
+
+  <!-- COTIZADOR INSTANTÁNEO CON CONTINUIDAD DE SESIÓN -->
+  <div id="cotizador-rapido-colonia" data-ux-section="cotizador-rapido-colonia" data-colonia="San Juan de Aragón / GAM" data-ubicacion-texto="Plantel único Av. 521 No. 20 (a 2 cuadras de Metro Aragón L5)" data-wa-origen="revisé ubicación y contacto en Av. 521 No. 20 y" style="padding:var(--space-6);background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.65rem;">
+      <strong style="font-size:0.95rem;color:var(--color-primary-dark);">💰 Cotizador Rápido 2026-2027 antes de tu Visita Presencial</strong>
+      <span style="font-size:0.75rem;font-weight:700;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;">✓ RVOE SEP 09050141 · CCTV</span>
+    </div>
+    <p style="font-size:0.82rem;color:var(--color-text-light);margin-bottom:0.75rem;">Calcula tu colegiatura mensual (se vincula automáticamente al formulario de visita y a tu pre-inscripción en línea):</p>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:0.75rem;">
+      <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+        1. Etapa actual de tu pequeño(a):
+        <select id="colonia-calc-grado" style="padding:8px 10px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.84rem;font-weight:600;color:var(--color-text);">
+          <option value="maternal">🍼 Maternal Bilingüe (1 a 3 años · 08:30–13:30h)</option>
+          <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3 a 4 años · 08:30–14:00h)</option>
+          <option value="preescolar_2">🧠 Kínder 2 SEP (4 a 5 años · 08:30–14:00h)</option>
+          <option value="preescolar_3">🎓 Kínder 3 SEP (5 a 6 años · 08:30–14:00h)</option>
+        </select>
+      </label>
+      <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+        2. Horario y comedor requerido:
+        <select id="colonia-calc-estancia" style="padding:8px 10px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.84rem;font-weight:600;color:var(--color-text);">
+          <option value="ninguna" selected>📚 Horario Escolar Base ($3,600/mes Pronto Pago)</option>
+          <option value="parcial_16h">🍽️ + Estancia 16:00h y Comedor (+$1,400 · Total $5,000)</option>
+          <option value="completa_18h">⏰ + Estancia Completa 18:00h y Comedor (+$1,900 · Total $5,500)</option>
+        </select>
+      </label>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.65rem;padding:0.75rem 0.9rem;background:#ffffff;border:1px solid #bfdbfe;border-radius:10px;">
+      <div>
+        <div style="font-size:0.75rem;color:var(--color-text-light);">Mensualidad estimada Ciclo 2026-2027:</div>
+        <div id="colonia-calc-total" style="font-size:1.22rem;font-weight:800;color:var(--color-primary-dark);">$3,600 MXN/mes</div>
+        <div id="colonia-calc-detalle" style="font-size:0.76rem;color:var(--color-text-light);">Kínder 1 SEP (3–4 años) (08:30–14:00h, recepción desde 07:30h) · Pronto Pago (regular $4,000) · Plantel único Av. 521 No. 20 (a 2 cuadras de Metro Aragón L5)</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+        <a id="colonia-calc-enroll-btn" class="btn btn--primary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_1&estancia=ninguna" style="padding:7px 13px;font-size:0.8rem;">📝 Pre-inscribir con esta Cotización →</a>
+        <a id="colonia-calc-wa-btn" class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20revis%C3%A9%20ubicaci%C3%B3n%20y%20contacto%20en%20Av.%20521%20No.%2020%20y%20cotic%C3%A9%20K%C3%ADnder%201%20SEP%20(%243%2C600%2Fmes).%20Quiero%20agendar%20visita." rel="noopener noreferrer" target="_blank" style="padding:7px 13px;font-size:0.8rem;">💬 Confirmar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 </section>
 <!-- RUTAS POR COLONIA Y CONECTIVIDAD -->
@@ -634,7 +731,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=32" defer></script>
+<script src="/scripts/main.js?v=33" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

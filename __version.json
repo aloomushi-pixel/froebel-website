@@ -1,14 +1,13 @@
 {
-  "version": "2.1.64",
-  "cycle": 64,
-  "deployedAt": "2026-11-15T04:35:00.000Z",
+  "version": "2.1.65",
+  "cycle": 65,
+  "deployedAt": "2026-11-15T08:50:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "highlights": [
-    "Canonical 301 blog normalization in server.js (accented UTF-8/Latin-1/mangled slugs, extensionless /blog/:slug -> .html, and legacy llanto slug alias)",
-    "Cross-page sessionStorage quote continuity (froebel_quote_draft_v1 + froebel:quote-updated) across Estancia Simulators and Maternal Neuro-Advisor",
-    "Interactive Maternal Care & Stage Simulator (#simulador-cuidado-maternal) + 11/6 image aspect-ratios on maternal-bilingue-1-a-3-anos and horario-extendido-y-comedor",
-    "Page-1 CTR title/meta + embedded #cotizador-rapido-colonia + Adaptation Planner quote sync on blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html (342 GSC impr, pos 7.92)",
-    "GSC query-driven FAQPage schema + HTML expansion ('¿Qué significa el control de esfínteres?') on blog/control-de-esfinteres.html",
-    "Clean /blog/ crawl hub links across Maternal, Estancia, and Instalaciones silos"
+    "Express 15s Visit & Callback Form (#formulario-visita-contacto -> POST /api/contact + Resend + FroebelUX) and #cotizador-rapido-colonia on /contacto, fulfilling FAQ #2 promise",
+    "Bidirectional same-page quote reactivity (froebel:quote-updated + froebel_quote_draft_v1) in main.js?v=33 across #cotizador-rapido-colonia, #calculadora-grado-sep, and /contacto",
+    "Page-1 GSC CTR title/meta + Comedor-default #cotizador-rapido-colonia on blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html (pos 7.16, 32 impr)",
+    "Page-1 GSC CTR title/meta + SEP Birth-Date Calculator session sync + #cotizador-rapido-colonia on blog/a-que-edad-debe-empezar-el-preescolar.html (pos 7.28, 18 impr)",
+    "Root-relative canonical /blog/... links + #cotizador-rapido-colonia on /blog/ and blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html to accelerate Google indexation"
   ]
 }

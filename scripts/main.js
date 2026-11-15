@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileNav();
   initHyperlocalNeighborhoodCalculators();
+  initContactVisitForm();
   initFroebelUXTelemetry();
 
   const runDeferredEnhancements = () => {
@@ -319,7 +320,7 @@ function initHyperlocalNeighborhoodCalculators() {
             updatedAt: Date.now(),
           })
         );
-        window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+        window.dispatchEvent(new CustomEvent('froebel:quote-updated', { detail: { source: 'colonia-calc' } }));
       } catch (_) {
         // Ignore storage write errors
       }
@@ -334,7 +335,187 @@ function initHyperlocalNeighborhoodCalculators() {
 
   gradeSel.addEventListener('change', () => renderCalc(true));
   estSel.addEventListener('change', () => renderCalc(true));
+  window.addEventListener('froebel:quote-updated', (ev) => {
+    if (ev && ev.detail && ev.detail.source === 'colonia-calc') return;
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (!savedRaw) return;
+      const saved = JSON.parse(savedRaw);
+      if (saved && saved.program && gradeMeta[saved.program]) {
+        gradeSel.value = saved.program;
+      }
+      if (saved && saved.estancia && estMeta[saved.estancia]) {
+        estSel.value = saved.estancia;
+      }
+      renderCalc(false);
+    } catch (_) {
+      // Ignore storage access errors
+    }
+  });
   renderCalc(false);
+}
+
+/* === EXPRESS VISIT & CALLBACK FORM (/contacto -> POST /api/contact + Session Quote Sync) === */
+function initContactVisitForm() {
+  const form = document.getElementById('formulario-visita-contacto');
+  if (!form) return;
+
+  const nameInput = document.getElementById('contact-visit-name');
+  const phoneInput = document.getElementById('contact-visit-phone');
+  const emailInput = document.getElementById('contact-visit-email');
+  const progSel = document.getElementById('contact-visit-program');
+  const schedSel = document.getElementById('contact-visit-schedule');
+  const notesInput = document.getElementById('contact-visit-notes');
+  const submitBtn = document.getElementById('contact-visit-submit');
+  const feedbackBox = document.getElementById('contact-visit-feedback');
+  const quotePill = document.getElementById('contact-quote-pill');
+
+  const progLabels = {
+    maternal: 'Maternal Bilingüe (1 a 3 años)',
+    preescolar_1: 'Kínder 1 SEP (3 a 4 años)',
+    preescolar_2: 'Kínder 2 SEP (4 a 5 años)',
+    preescolar_3: 'Kínder 3 SEP (5 a 6 años)',
+  };
+
+  const syncQuoteToContactForm = () => {
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (!savedRaw) return;
+      const saved = JSON.parse(savedRaw);
+      if (!saved) return;
+      if (progSel && saved.program && progLabels[saved.program]) {
+        progSel.value = saved.program;
+      }
+      if (quotePill && saved.totalMonthly) {
+        const totalFmt = Number(saved.totalMonthly).toLocaleString('es-MX');
+        const estTxt =
+          saved.estancia && saved.estancia !== 'ninguna' && saved.estanciaLabel
+            ? ` · ${saved.estanciaLabel}`
+            : '';
+        quotePill.textContent = `✓ Cotización vinculada: ${saved.programLabel || progLabels[saved.program] || 'Maternal/Kínder'} ($${totalFmt}/mes${estTxt})`;
+        quotePill.style.display = 'inline-block';
+      }
+    } catch (_) {}
+  };
+
+  syncQuoteToContactForm();
+  window.addEventListener('froebel:quote-updated', (ev) => {
+    if (ev && ev.detail && ev.detail.source === 'contact-form') return;
+    syncQuoteToContactForm();
+  });
+
+  if (progSel) {
+    progSel.addEventListener('change', () => {
+      try {
+        let prev = {};
+        const prevRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+        if (prevRaw) prev = JSON.parse(prevRaw) || {};
+        const pKey = progSel.value || 'preescolar_1';
+        const estKey = prev.estancia || 'ninguna';
+        const extra = estKey === 'parcial_16h' ? 1400 : estKey === 'completa_18h' ? 1900 : 0;
+        sessionStorage.setItem(
+          'froebel_quote_draft_v1',
+          JSON.stringify({
+            ...prev,
+            program: pKey,
+            estancia: estKey,
+            totalMonthly: 3600 + extra,
+            programLabel: progLabels[pKey] || 'Kínder 1 SEP (3 a 4 años)',
+            estanciaLabel: prev.estanciaLabel || 'Horario escolar base',
+            updatedAt: Date.now(),
+          })
+        );
+        window.dispatchEvent(new CustomEvent('froebel:quote-updated', { detail: { source: 'contact-form' } }));
+        syncQuoteToContactForm();
+      } catch (_) {}
+    });
+  }
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const cleanName = (nameInput?.value || '').trim();
+    const cleanPhone = (phoneInput?.value || '').trim();
+    const cleanEmail = (emailInput?.value || '').trim();
+    const pKey = progSel?.value || 'preescolar_1';
+    const pLabel = progLabels[pKey] || pKey;
+    const schedLabel = schedSel?.value || '11:00 hrs (Recorrido de aulas y CCTV)';
+    const extraNotes = (notesInput?.value || '').trim();
+
+    if (!cleanName || (!cleanPhone && !cleanEmail)) {
+      if (feedbackBox) {
+        feedbackBox.style.display = 'block';
+        feedbackBox.style.background = '#fef2f2';
+        feedbackBox.style.borderColor = '#fca5a5';
+        feedbackBox.style.color = '#991b1b';
+        feedbackBox.textContent = 'Por favor ingresa tu nombre y tu número de WhatsApp/teléfono (o correo electrónico).';
+      }
+      return;
+    }
+
+    let quoteContext = '$3,600/mes Pronto Pago';
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (savedRaw) {
+        const saved = JSON.parse(savedRaw);
+        if (saved && saved.totalMonthly) {
+          quoteContext = `$${Number(saved.totalMonthly).toLocaleString('es-MX')}/mes (${saved.estanciaLabel || 'Horario base'})`;
+        }
+      }
+    } catch (_) {}
+
+    const fullMessage = `Solicitud desde /contacto · Nivel: ${pLabel} · Horario preferido: ${schedLabel} · Cotización: ${quoteContext}${extraNotes ? ` · Comentarios: ${extraNotes}` : ''}`;
+    const waText = `Hola Instituto Froebel, soy ${cleanName}. Solicité visita/informes en línea para ${pLabel} (${schedLabel}, ${quoteContext}).`;
+    const waFallbackHref = `https://wa.me/525554148872?text=${encodeURIComponent(waText)}`;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando solicitud...';
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: cleanName,
+          phone: cleanPhone,
+          email: cleanEmail,
+          message: fullMessage,
+        }),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      if (window.FroebelUX) {
+        window.FroebelUX.track('form_submit', {
+          element_id: 'formulario-visita-contacto',
+          element_text: `Visita Contacto: ${pLabel} (${schedLabel})`,
+        });
+      }
+
+      if (feedbackBox) {
+        feedbackBox.style.display = 'block';
+        feedbackBox.style.background = '#f0fdf4';
+        feedbackBox.style.borderColor = '#86efac';
+        feedbackBox.style.color = '#14532d';
+        feedbackBox.innerHTML = `✅ <strong>¡Solicitud recibida, ${cleanName.replace(/[<>&"']/g, '')}!</strong> Dirección Escolar te confirmará muy pronto. Si deseas respuesta en este instante: <a href="${waFallbackHref}" target="_blank" rel="noopener noreferrer" style="font-weight:800;color:#15803d;text-decoration:underline;">Confirmar en 1 clic por WhatsApp →</a>`;
+      }
+      if (submitBtn) {
+        submitBtn.textContent = '✓ Solicitud Enviada';
+      }
+    } catch (_) {
+      if (feedbackBox) {
+        feedbackBox.style.display = 'block';
+        feedbackBox.style.background = '#eff6ff';
+        feedbackBox.style.borderColor = '#93c5fd';
+        feedbackBox.style.color = '#1e3a8a';
+        feedbackBox.innerHTML = `📲 Continúa tu confirmación directa con Admisiones aquí: <a href="${waFallbackHref}" target="_blank" rel="noopener noreferrer" style="font-weight:800;color:#1d4ed8;text-decoration:underline;">Abrir WhatsApp con mis datos precargados →</a>`;
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '📅 Enviar Solicitud de Visita / Informes →';
+      }
+    }
+  });
 }
 
 /* === HEADER SCROLL EFFECT (rAF-throttled, zero redundant DOM writes) === */
