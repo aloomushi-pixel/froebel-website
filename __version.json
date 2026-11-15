@@ -1,13 +1,12 @@
 {
-  "version": "2.1.65",
-  "cycle": 65,
-  "deployedAt": "2026-11-15T08:50:00.000Z",
+  "version": "2.1.66",
+  "cycle": 66,
+  "deployedAt": "2026-11-15T13:12:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "highlights": [
-    "Express 15s Visit & Callback Form (#formulario-visita-contacto -> POST /api/contact + Resend + FroebelUX) and #cotizador-rapido-colonia on /contacto, fulfilling FAQ #2 promise",
-    "Bidirectional same-page quote reactivity (froebel:quote-updated + froebel_quote_draft_v1) in main.js?v=33 across #cotizador-rapido-colonia, #calculadora-grado-sep, and /contacto",
-    "Page-1 GSC CTR title/meta + Comedor-default #cotizador-rapido-colonia on blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html (pos 7.16, 32 impr)",
-    "Page-1 GSC CTR title/meta + SEP Birth-Date Calculator session sync + #cotizador-rapido-colonia on blog/a-que-edad-debe-empezar-el-preescolar.html (pos 7.28, 18 impr)",
-    "Root-relative canonical /blog/... links + #cotizador-rapido-colonia on /blog/ and blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html to accelerate Google indexation"
+    "Level 2 Session-Quote Hydration & Bidirectional Reactivity on /inscripciones (#inscripcion-form + #inscripcion-form-quote-pill in main.js?v=34) + 23/23 page live quote calculator coverage",
+    "Level 2 Blocks Age Filter -> Tuition Calculator live sync in blog/5-actividades-con-bloques-para-hacer-en-casa.html (pos 8.58, 141 impr) + 'qué hacer con bloques' CTR title/meta + FAQ #4",
+    "Page-1 GSC CTR title/meta & schema upgrades on /contacto (pos 9.60, 188 impr), /nosotros (pos 8.49, 848 impr), and blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html (pos 7.35, 86 impr)",
+    "Full 8/8 Interactive Blog Tool Crawl-Equity Matrix across /, /programas, and /inscripciones to accelerate Googlebot & Bingbot indexation"
   ]
 }

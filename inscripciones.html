@@ -462,6 +462,7 @@
             Si deseas recibir informes personalizados o agendar recorrido en el <strong>Instituto y Colegio Federico Froebel</strong> antes de inscribirte, llena este formulario y te atenderemos por WhatsApp.
           </p>
 <form id="inscripcion-form" style="display:flex;flex-direction:column;gap:var(--space-5);">
+<div id="inscripcion-form-quote-pill" style="display:none;padding:8px 12px;background:#f0fdf4;border:1px solid #86efac;border-radius:12px;font-size:0.82rem;font-weight:700;color:#166534;"></div>
 <div>
 <label for="nombre" style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">Nombre
                 del padre/madre *</label>
@@ -562,12 +563,19 @@
   </div>
 </div>
 <div id="guias-padres-inscripciones" data-ux-section="guias-padres-inscripciones" style="margin-top:var(--space-5);padding:14px 16px;background:#ffffff;border:1px solid var(--color-border);border-radius:14px;">
-  <p style="margin:0 0 8px;font-size:0.84rem;font-weight:800;color:var(--color-primary-dark);">📚 Herramientas para Elegir Grado y Verificar Seguridad en GAM:</p>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
+    <p style="margin:0;font-size:0.84rem;font-weight:800;color:var(--color-primary-dark);">📚 Herramientas Interactivas para Elegir Grado, Adaptación y Seguridad en GAM:</p>
+    <a href="/blog/" style="font-size:0.78rem;font-weight:700;color:var(--color-primary);">Explorar las 8 Guías del Blog →</a>
+  </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.8rem;">
     <a href="/blog/a-que-edad-debe-empezar-el-preescolar.html#calculadora-grado-sep" style="background:#eff6ff;border:1px solid #93c5fd;padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary-dark);">🎂 Calculadora de Grado SEP por Fecha de Nacimiento</a>
     <a href="/blog/diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html#orientador-maternal-neurodesarrollo" style="background:#eff6ff;border:1px solid #93c5fd;padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary-dark);">🧠 Orientador Maternal (1–3 años)</a>
     <a href="/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html#evaluador-kinder-gam" style="background:#f8fafc;border:1px solid var(--color-border);padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary);">✅ Checklist 5 Puntos Kínder GAM</a>
     <a href="/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html#calculadora-estancia-aicm-blog" style="background:#f8fafc;border:1px solid var(--color-border);padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary);">🍱 Simulador Estancia 18:00h</a>
+    <a href="/blog/5-actividades-con-bloques-para-hacer-en-casa.html#progreso-reto-bloques" style="background:#eff6ff;border:1px solid #93c5fd;padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary-dark);">🧱 5 Actividades con Bloques Froebel</a>
+    <a href="/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html#plan-adaptacion-kinder" style="background:#eff6ff;border:1px solid #93c5fd;padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary-dark);">💛 Plan de Adaptación sin Llanto</a>
+    <a href="/blog/control-de-esfinteres.html#test-control-esfinteres" style="background:#f8fafc;border:1px solid var(--color-border);padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary);">🧪 Test Control de Esfínteres</a>
+    <a href="/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html#lista-compras-500" style="background:#f8fafc;border:1px solid var(--color-border);padding:5px 10px;border-radius:999px;font-weight:700;color:var(--color-primary);">🛒 Menú Nutritivo con $500 MXN</a>
     <a href="/colegio-cerca-de-mi/san-juan-de-aragon/" style="background:#f0fdf4;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">📍 San Juan de Aragón</a>
     <a href="/colegio-cerca-de-mi/romero-rubio/" style="background:#f0fdf4;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">📍 Romero Rubio / Oceanía</a>
     <a href="/colegio-cerca-de-mi/penon-de-los-banos/" style="background:#f0fdf4;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">📍 Peñón de los Baños / AICM</a>
@@ -634,63 +642,8 @@
 </svg>
 </a>
 <!-- App Scripts -->
-<script src="/scripts/main.js?v=33" defer></script>
+<script src="/scripts/main.js?v=34" defer></script>
 <script src="/scripts/inscripcion-wizard.js?v=13" defer></script>
-<script>
-    const infoForm = document.getElementById('inscripcion-form');
-    if (infoForm) {
-      infoForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('btn-info-submit');
-        const originalText = btn.innerHTML;
-        btn.disabled = true;
-        btn.textContent = 'Enviando...';
-
-        try {
-          const formData = new FormData(infoForm);
-          const data = {
-            name: formData.get('nombre'),
-            phone: formData.get('telefono'),
-            email: (formData.get('email') || '').trim(),
-            message: 'Edad de interés: ' + formData.get('edad-hijo')
-          };
-
-          const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          });
-
-          if (response.ok) {
-            btn.textContent = '✅ ¡Solicitud Recibida!';
-            btn.style.backgroundColor = 'var(--color-nature)';
-            btn.style.borderColor = 'var(--color-nature)';
-            const edadLabel = data.message.replace('Edad de interés: ', '');
-            const waFollowupMsg = 'Hola Instituto Froebel, soy ' + (data.name || 'mamá/papá') + ' y acabo de solicitar informes en línea para edad ' + edadLabel + '. Me gustaría recibir costos o agendar visita.';
-            let followupBox = document.getElementById('info-form-wa-followup');
-            if (!followupBox) {
-              followupBox = document.createElement('div');
-              followupBox.id = 'info-form-wa-followup';
-              followupBox.style.cssText = 'padding:12px 14px;background:#f0fdf4;border:1px solid #86efac;border-radius:12px;text-align:center;';
-              infoForm.appendChild(followupBox);
-            }
-            followupBox.innerHTML = '<p style="margin:0 0 8px;font-size:0.86rem;color:#14532d;font-weight:700;">¡Gracias! Recibimos tus datos. Si deseas atención inmediata por WhatsApp:</p><a data-ux-id="info-form-wa-instant" href="https://wa.me/525554148872?text=' + encodeURIComponent(waFollowupMsg) + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Confirmar ahora por WhatsApp →</a>';
-            infoForm.reset();
-          } else {
-            btn.textContent = 'Error. Intenta de nuevo.';
-            btn.disabled = false;
-          }
-        } catch (err) {
-          btn.textContent = 'Error de red.';
-          btn.disabled = false;
-        }
-
-        setTimeout(() => {
-          if (btn.disabled === false) btn.innerHTML = originalText;
-        }, 3000);
-      });
-    }
-  </script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

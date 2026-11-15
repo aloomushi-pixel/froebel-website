@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHyperlocalNeighborhoodCalculators();
   initContactVisitForm();
+  initInscripcionInfoForm();
   initFroebelUXTelemetry();
 
   const runDeferredEnhancements = () => {
@@ -513,6 +514,180 @@ function initContactVisitForm() {
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = '📅 Enviar Solicitud de Visita / Informes →';
+      }
+    }
+  });
+}
+
+/* === INFO & CALLBACK FORM ON /inscripciones (#inscripcion-form + Session Quote Sync) === */
+function initInscripcionInfoForm() {
+  const infoForm = document.getElementById('inscripcion-form');
+  if (!infoForm) return;
+
+  const nameEl = document.getElementById('nombre');
+  const phoneEl = document.getElementById('telefono');
+  const emailEl = document.getElementById('email');
+  const ageSel = document.getElementById('edad-hijo');
+  const quotePill = document.getElementById('inscripcion-form-quote-pill');
+  const submitBtn = document.getElementById('btn-info-submit');
+
+  const programToAgeVal = {
+    maternal: '1-2',
+    preescolar_1: '3-4',
+    preescolar_2: '4-5',
+    preescolar_3: '5-6',
+  };
+  const ageValToProgram = {
+    '1-2': { key: 'maternal', label: 'Maternal Bilingüe (1 a 2 años)' },
+    '2-3': { key: 'maternal', label: 'Maternal Bilingüe (2 a 3 años)' },
+    '3-4': { key: 'preescolar_1', label: 'Kínder 1 SEP (3 a 4 años)' },
+    '4-5': { key: 'preescolar_2', label: 'Kínder 2 SEP (4 a 5 años)' },
+    '5-6': { key: 'preescolar_3', label: 'Kínder 3 SEP (5 a 6 años)' },
+  };
+
+  const syncQuoteToInfoForm = () => {
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (!savedRaw) return;
+      const saved = JSON.parse(savedRaw);
+      if (!saved) return;
+
+      if (ageSel && saved.program && programToAgeVal[saved.program]) {
+        if (!(saved.program === 'maternal' && ageSel.value === '2-3')) {
+          ageSel.value = programToAgeVal[saved.program];
+        }
+      }
+      if (saved.guardian && typeof saved.guardian === 'object') {
+        if (nameEl && !nameEl.value && saved.guardian.name) nameEl.value = saved.guardian.name;
+        if (phoneEl && !phoneEl.value && saved.guardian.phone) phoneEl.value = saved.guardian.phone;
+        if (emailEl && !emailEl.value && saved.guardian.email) emailEl.value = saved.guardian.email;
+      }
+      if (quotePill) {
+        const estKey = saved.estancia || 'ninguna';
+        const extra = estKey === 'parcial_16h' ? 1400 : estKey === 'completa_18h' ? 1900 : 0;
+        const monthly = saved.totalMonthly || (saved.program ? 3600 + extra : 0);
+        if (monthly) {
+          const totalFmt = Number(monthly).toLocaleString('es-MX');
+          const estTxt =
+            estKey !== 'ninguna' && saved.estanciaLabel
+              ? ` · ${saved.estanciaLabel}`
+              : estKey === 'parcial_16h'
+              ? ' · Estancia 16:00h + Comedor'
+              : estKey === 'completa_18h'
+              ? ' · Estancia 18:00h + Comedor'
+              : ' · Pronto Pago';
+          const pName =
+            saved.programLabel ||
+            (ageSel && ageValToProgram[ageSel.value]?.label) ||
+            'Maternal / Kínder SEP';
+          quotePill.textContent = `✓ Cotización vinculada: ${pName} ($${totalFmt} MXN/mes${estTxt})`;
+          quotePill.style.display = 'block';
+        }
+      }
+    } catch (_) {}
+  };
+
+  syncQuoteToInfoForm();
+  window.addEventListener('froebel:quote-updated', (ev) => {
+    if (ev && ev.detail && ev.detail.source === 'inscripcion-info-form') return;
+    syncQuoteToInfoForm();
+  });
+
+  if (ageSel) {
+    ageSel.addEventListener('change', () => {
+      const mapped = ageValToProgram[ageSel.value];
+      if (!mapped) return;
+      try {
+        let prev = {};
+        const prevRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+        if (prevRaw) prev = JSON.parse(prevRaw) || {};
+        const estKey = prev.estancia || 'ninguna';
+        const extra = estKey === 'parcial_16h' ? 1400 : estKey === 'completa_18h' ? 1900 : 0;
+        sessionStorage.setItem(
+          'froebel_quote_draft_v1',
+          JSON.stringify({
+            ...prev,
+            program: mapped.key,
+            estancia: estKey,
+            totalMonthly: 3600 + extra,
+            programLabel: mapped.label,
+            estanciaLabel: prev.estanciaLabel || 'Horario escolar base',
+            updatedAt: Date.now(),
+          })
+        );
+        window.dispatchEvent(
+          new CustomEvent('froebel:quote-updated', { detail: { source: 'inscripcion-info-form' } })
+        );
+        syncQuoteToInfoForm();
+      } catch (_) {}
+    });
+  }
+
+  infoForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const originalText = submitBtn ? submitBtn.innerHTML : 'Solicitar Información →';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+    }
+
+    const formData = new FormData(infoForm);
+    const cleanName = String(formData.get('nombre') || '').trim();
+    const cleanPhone = String(formData.get('telefono') || '').trim();
+    const cleanEmail = String(formData.get('email') || '').trim();
+    const ageVal = String(formData.get('edad-hijo') || '').trim();
+    const ageHuman = ageValToProgram[ageVal]?.label || ageVal || 'Maternal / Preescolar';
+
+    let quoteContext = '$3,600/mes Pronto Pago';
+    try {
+      const savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (savedRaw) {
+        const saved = JSON.parse(savedRaw);
+        if (saved && saved.totalMonthly) {
+          quoteContext = `$${Number(saved.totalMonthly).toLocaleString('es-MX')}/mes (${saved.estanciaLabel || 'Pronto Pago'})`;
+        }
+      }
+    } catch (_) {}
+
+    const waFollowupMsg = `Hola Instituto Froebel, soy ${cleanName || 'mamá/papá'} y solicité informes en línea para ${ageHuman} (${quoteContext}). Me gustaría recibir costos o agendar visita.`;
+    const waHref = `https://wa.me/525554148872?text=${encodeURIComponent(waFollowupMsg)}`;
+
+    let followupBox = document.getElementById('info-form-wa-followup');
+    if (!followupBox) {
+      followupBox = document.createElement('div');
+      followupBox.id = 'info-form-wa-followup';
+      followupBox.style.cssText =
+        'padding:12px 14px;background:#f0fdf4;border:1px solid #86efac;border-radius:12px;text-align:center;';
+      infoForm.appendChild(followupBox);
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: cleanName,
+          phone: cleanPhone,
+          email: cleanEmail,
+          message: `Solicitud desde /inscripciones · Edad/Grado: ${ageHuman} · Cotización: ${quoteContext}`,
+        }),
+      });
+
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+
+      if (submitBtn) {
+        submitBtn.textContent = '✅ ¡Solicitud Recibida!';
+        submitBtn.style.backgroundColor = 'var(--color-nature)';
+        submitBtn.style.borderColor = 'var(--color-nature)';
+      }
+      followupBox.innerHTML = `<p style="margin:0 0 8px;font-size:0.86rem;color:#14532d;font-weight:700;">¡Gracias! Recibimos tus datos (${quoteContext.replace(/[<>&"']/g, '')}). Si deseas atención inmediata por WhatsApp:</p><a data-ux-id="info-form-wa-instant" href="${waHref}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Confirmar ahora por WhatsApp →</a>`;
+      infoForm.reset();
+      syncQuoteToInfoForm();
+    } catch (_) {
+      followupBox.innerHTML = `<p style="margin:0 0 8px;font-size:0.86rem;color:#1e3a8a;font-weight:700;">Continúa tu solicitud directamente por WhatsApp con tus datos precargados:</p><a data-ux-id="info-form-wa-fallback" href="${waHref}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Enviar Solicitud por WhatsApp →</a>`;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
       }
     }
   });
