@@ -464,10 +464,20 @@
           };
 
           var horarios = {
-            ninguna: { total: 3600, regular: 4000, label: '08:30–13:30h (recepción 07:30h)' },
-            parcial_16h: { total: 5000, regular: 5400, label: '07:30–16:00h con Comedor 3 tiempos' },
-            completa_18h: { total: 5500, regular: 5900, label: '07:30–18:00h con Comedor + Talleres' }
+            ninguna: { total: 3600, regular: 4000, label: '08:30–13:30h (recepción 07:30h)', shortEstancia: 'Horario Escolar Base' },
+            parcial_16h: { total: 5000, regular: 5400, label: '07:30–16:00h con Comedor 3 tiempos', shortEstancia: 'con Estancia Parcial 16:00h + Comedor' },
+            completa_18h: { total: 5500, regular: 5900, label: '07:30–18:00h con Comedor + Talleres', shortEstancia: 'con Estancia Completa 18:00h + Comedor' }
           };
+
+          try {
+            var savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+            if (savedRaw) {
+              var draft = JSON.parse(savedRaw);
+              if (draft && draft.estancia && horarios[draft.estancia]) {
+                horSel.value = draft.estancia;
+              }
+            }
+          } catch (_) {}
 
           function update(track) {
             var aKey = ageSel.value || '18_24m';
@@ -485,11 +495,24 @@
             var waMsg = 'Hola Instituto Froebel, mi bebé tiene ' + a.short + ', mi prioridad es ' + p.short + ' y me interesa una Clase Muestra en Maternal (' + h.label + ' · $' + h.total.toLocaleString('es-MX') + '/mes Pronto Pago).';
             waBtn.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(waMsg);
 
-            if (track && window.FroebelUX && !window.FroebelUX.isBot()) {
-              window.FroebelUX.track('cta_click', {
-                element_id: 'orientador_maternal_' + aKey + '_' + pKey + '_' + hKey,
-                element_text: 'Orientador Maternal: ' + a.short + ' ($' + h.total + ')'
-              });
+            if (track) {
+              try {
+                sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify({
+                  program: 'maternal',
+                  estancia: hKey,
+                  totalMonthly: h.total,
+                  programLabel: 'Maternal Bilingüe (' + a.short + ')',
+                  estanciaLabel: h.shortEstancia,
+                  updatedAt: Date.now()
+                }));
+                window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+              } catch (_) {}
+              if (window.FroebelUX && !window.FroebelUX.isBot()) {
+                window.FroebelUX.track('cta_click', {
+                  element_id: 'orientador_maternal_' + aKey + '_' + pKey + '_' + hKey,
+                  element_text: 'Orientador Maternal: ' + a.short + ' ($' + h.total + ')'
+                });
+              }
             }
           }
 

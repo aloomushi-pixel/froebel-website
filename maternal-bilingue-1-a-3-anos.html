@@ -451,7 +451,7 @@
 <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-5);padding:10px 12px;background:#f8fafc;border:1px solid var(--color-border);border-radius:var(--radius-lg);font-size:0.82rem;color:var(--color-text-light);">
 <span style="font-weight:600;color:var(--color-primary-dark);">🍼 1 a 2 años 11 meses (Aceptamos pañal)</span>
 <span>·</span>
-<span>🕐 8:30–13:30h (+Estancia 18:00h)</span>
+<span>🕐 08:30–13:30h (+Estancia 18:00h)</span>
 <span>·</span>
 <a href="/inscripciones#costos" style="font-weight:700;color:#854d0e;background:#fef9c3;padding:2px 8px;border-radius:999px;">💳 $3,600/mes Pronto Pago</a>
 </div>
@@ -461,7 +461,7 @@
 </div>
 </div>
 <div class="fade-in">
-<img alt="Salón de Maternal Bilingüe con estimulación temprana" height="1536" loading="lazy" src="/assets/images/salon-maternal-bilingue-froebel.webp" style="width:100%;height:auto;border-radius:var(--radius-2xl);box-shadow:var(--shadow-lg);" width="2816" decoding="async"/>
+<img alt="Salón de Maternal Bilingüe con estimulación temprana" height="1536" loading="lazy" src="/assets/images/salon-maternal-bilingue-froebel.webp" style="width:100%;height:auto;aspect-ratio:11/6;object-fit:cover;border-radius:var(--radius-2xl);box-shadow:var(--shadow-lg);" width="2816" decoding="async"/>
 </div>
 </div>
 </div>
@@ -487,6 +487,132 @@
 <h3 class="card__title" style="color:var(--color-primary);">💳 Colegiatura Transparente 2026-2027</h3>
 <p class="card__text">Colegiatura desde <strong>$3,600 MXN/mes</strong> (Pronto Pago) e inscripción desde <strong>$3,375 MXN</strong>. Opción de <a href="/horario-extendido-y-comedor">Estancia y Comedor hasta las 18:00 hrs</a>.</p>
 </div>
+</div>
+<div id="simulador-cuidado-maternal" data-ux-section="simulador-cuidado-maternal" class="card fade-in" style="margin-top:var(--space-6);padding:var(--space-6);background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%);border:2px solid #86efac;box-shadow:var(--shadow-sm);">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:var(--space-3);">
+    <div>
+      <span style="display:inline-block;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:800;margin-bottom:4px;">🍼 SIMULADOR INTERACTIVO DE ETAPA MATERNAL (12 A 35 MESES)</span>
+      <h3 style="font-size:1.15rem;color:var(--color-primary-dark);margin:0;">Personaliza la rutina diaria, cuidado clínico y colegiatura de tu bebé</h3>
+    </div>
+    <span style="font-size:0.78rem;font-weight:700;background:#ffffff;border:1px solid #86efac;color:#166534;padding:4px 10px;border-radius:999px;">✓ Ratio 1:8 · Enfermera · CCTV</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-4);margin-bottom:var(--space-4);">
+    <label style="display:flex;flex-direction:column;gap:4px;font-size:0.8rem;font-weight:700;color:var(--color-text);">
+      1. Edad actual de tu pequeño(a):
+      <select id="mat-sim-edad" style="padding:9px 11px;border-radius:var(--radius-lg);border:1px solid #93c5fd;background:#ffffff;font-size:0.86rem;font-weight:600;color:var(--color-text);">
+        <option value="12_17m">👶 12 a 17 meses (Marcha segura y apego)</option>
+        <option value="18_24m" selected>🗣️ 18 a 24 meses (Explosión de lenguaje e inglés)</option>
+        <option value="25_35m">🚽 25 a 35 meses (Control de pañal y puente a Kínder 1)</option>
+      </select>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:4px;font-size:0.8rem;font-weight:700;color:var(--color-text);">
+      2. Horario de salida y comedor requerido:
+      <select id="mat-sim-horario" style="padding:9px 11px;border-radius:var(--radius-lg);border:1px solid #93c5fd;background:#ffffff;font-size:0.86rem;font-weight:600;color:var(--color-text);">
+        <option value="ninguna" selected>📚 Base Maternal 08:30–13:30h ($3,600/mes Pronto Pago)</option>
+        <option value="parcial_16h">🍽️ + Estancia 16:00h y Comedor 3 Tiempos ($5,000/mes)</option>
+        <option value="completa_18h">⏰ + Estancia Completa 18:00h y Comedor ($5,500/mes)</option>
+      </select>
+    </label>
+  </div>
+  <div style="background:#ffffff;border:1px solid #bfdbfe;border-radius:var(--radius-lg);padding:var(--space-4);">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0.5rem;margin-bottom:0.5rem;padding-bottom:0.5rem;border-bottom:1px solid var(--color-border-light);">
+      <strong id="mat-sim-titulo" style="font-size:0.96rem;color:var(--color-primary-dark);">Etapa 18 a 24 meses · Explosión Neuro-Lingüística y Coordinación Fina</strong>
+      <span id="mat-sim-precio" style="font-size:0.95rem;font-weight:800;color:#166534;background:#f0fdf4;border:1px solid #86efac;padding:3px 11px;border-radius:999px;">$3,600 MXN/mes Pronto Pago</span>
+    </div>
+    <p id="mat-sim-detalle" style="font-size:0.86rem;color:var(--color-text-light);margin-bottom:var(--space-3);line-height:1.55;">
+      <strong>Rutina diaria personalizada:</strong> Filtro sanitario con enfermera titulada (recepción desde 07:30h), circuitos motores en piso amortiguante, primeros Dones de Froebel, 30 min diarios de canciones/fonemas en inglés y acompañamiento con pañal sin presiones.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.55rem;align-items:center;">
+      <a id="mat-sim-enroll" class="btn btn--primary btn--sm" href="/inscripciones?inscribir=1&programa=maternal&estancia=ninguna">📝 Apartar Lugar Maternal ($3,600/mes) →</a>
+      <a id="mat-sim-wa" class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20mi%20beb%C3%A9%20tiene%2018%20a%2024%20meses%20y%20quiero%20agendar%20Clase%20Muestra%20en%20Maternal%20Biling%C3%BCe%20(%243%2C600%2Fmes%20Pronto%20Pago)" rel="noopener noreferrer" target="_blank">💬 Agendar Clase Muestra Gratuita por WhatsApp</a>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var ageEl = document.getElementById('mat-sim-edad');
+      var horEl = document.getElementById('mat-sim-horario');
+      var titEl = document.getElementById('mat-sim-titulo');
+      var prcEl = document.getElementById('mat-sim-precio');
+      var detEl = document.getElementById('mat-sim-detalle');
+      var enrEl = document.getElementById('mat-sim-enroll');
+      var waEl = document.getElementById('mat-sim-wa');
+      if (!ageEl || !horEl || !titEl) return;
+
+      var etapas = {
+        '12_17m': {
+          short: '12 a 17 meses',
+          titulo: 'Etapa 12 a 17 meses · Apego Seguro, Marcha y Descubrimiento Sensorial',
+          detalle: '<strong>Rutina diaria personalizada:</strong> Despedida cálida con objeto de apego, consolidación de marcha en área amortiguante, estimulación auditiva bilingüe, cambios higiénicos de pañal frecuentes y supervisión de enfermera escolar + CCTV (Ratio 1:8).'
+        },
+        '18_24m': {
+          short: '18 a 24 meses',
+          titulo: 'Etapa 18 a 24 meses · Explosión Neuro-Lingüística y Coordinación Fina',
+          detalle: '<strong>Rutina diaria personalizada:</strong> Filtro sanitario con enfermera titulada (recepción desde 07:30h), circuitos motores en piso amortiguante, primeros Dones de Froebel, 30 min diarios de canciones/fonemas en inglés y acompañamiento con pañal sin presiones.'
+        },
+        '25_35m': {
+          short: '25 a 35 meses',
+          titulo: 'Etapa 25 a 35 meses · Control de Esfínteres Respetuoso y Puente a Kínder 1 SEP',
+          detalle: '<strong>Rutina diaria personalizada:</strong> Transición respetuosa del pañal en baños infantiles a su medida, frases completas en español/inglés, bloques geométricos pre-matemáticos y pase directo a nuestro Kínder 1 SEP (RVOE 09050141).'
+        }
+      };
+
+      var planesHorario = {
+        ninguna: { total: 3600, label: '08:30–13:30h (recepción 07:30h)', shortEstancia: 'Horario Escolar Base' },
+        parcial_16h: { total: 5000, label: '07:30–16:00h + Comedor 3 Tiempos', shortEstancia: 'con Estancia Parcial 16:00h + Comedor' },
+        completa_18h: { total: 5500, label: '07:30–18:00h + Comedor + Talleres', shortEstancia: 'con Estancia Completa 18:00h + Comedor' }
+      };
+
+      try {
+        var savedRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+        if (savedRaw) {
+          var draft = JSON.parse(savedRaw);
+          if (draft && draft.estancia && planesHorario[draft.estancia]) {
+            horEl.value = draft.estancia;
+          }
+        }
+      } catch (_) {}
+
+      function syncMaternal(userChanged) {
+        var aKey = ageEl.value || '18_24m';
+        var hKey = horEl.value || 'ninguna';
+        var et = etapas[aKey] || etapas['18_24m'];
+        var pl = planesHorario[hKey] || planesHorario.ninguna;
+        var fmt = pl.total.toLocaleString('es-MX');
+
+        titEl.textContent = et.titulo;
+        prcEl.textContent = '$' + fmt + ' MXN/mes Pronto Pago (' + pl.label + ')';
+        detEl.innerHTML = et.detalle;
+        enrEl.href = '/inscripciones?inscribir=1&programa=maternal&estancia=' + encodeURIComponent(hKey);
+        enrEl.textContent = '📝 Apartar Lugar Maternal ($' + fmt + '/mes) →';
+        var waMsg = 'Hola Instituto Froebel, mi bebé tiene ' + et.short + ' y quiero agendar Clase Muestra en Maternal Bilingüe (' + pl.label + ' · $' + fmt + '/mes Pronto Pago)';
+        waEl.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(waMsg);
+
+        if (userChanged) {
+          try {
+            sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify({
+              program: 'maternal',
+              estancia: hKey,
+              totalMonthly: pl.total,
+              programLabel: 'Maternal Bilingüe (' + et.short + ')',
+              estanciaLabel: pl.shortEstancia,
+              updatedAt: Date.now()
+            }));
+            window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+          } catch (_) {}
+          if (window.FroebelUX && !window.FroebelUX.isBot()) {
+            window.FroebelUX.track('cta_click', {
+              element_id: 'sim_maternal_' + aKey + '_' + hKey,
+              element_text: 'Simulador Maternal: ' + et.short + ' ($' + pl.total + ')'
+            });
+          }
+        }
+      }
+
+      ageEl.addEventListener('change', function() { syncMaternal(true); });
+      horEl.addEventListener('change', function() { syncMaternal(true); });
+      syncMaternal(false);
+    })();
+  </script>
 </div>
 </div>
 </section>
@@ -541,7 +667,10 @@
       </div>
     </div>
     <div id="guias-padres-maternal" data-ux-section="guias-padres-maternal" class="card fade-in" style="margin-top:var(--space-5);padding:var(--space-5);background:#ffffff;border:1px solid var(--color-border);text-align:left;">
-      <h3 style="font-size:0.95rem;color:var(--color-primary-dark);margin-bottom:var(--space-3);">📚 Guías de Neurodesarrollo y Crianza para Maternal (1 a 3 años)</h3>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:var(--space-3);">
+        <h3 style="font-size:0.95rem;color:var(--color-primary-dark);margin:0;">📚 Guías de Neurodesarrollo y Crianza para Maternal (1 a 3 años)</h3>
+        <a href="/blog/" style="font-size:0.8rem;font-weight:700;color:var(--color-primary);">📖 Ver las 8 Guías del Blog →</a>
+      </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0.65rem;font-size:0.84rem;">
         <a href="/blog/diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html#orientador-maternal-neurodesarrollo" style="padding:0.65rem 0.85rem;background:#f8fafc;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-weight:700;color:var(--color-primary-dark);text-decoration:none;display:block;">🧠 Orientador Interactivo: Guardería vs. Maternal con neurodesarrollo →</a>
         <a href="/blog/control-de-esfinteres.html#test-control-esfinteres" style="padding:0.65rem 0.85rem;background:#f8fafc;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-weight:700;color:var(--color-primary-dark);text-decoration:none;display:block;">🚽 Test Interactivo de Madurez para Control de Esfínteres →</a>

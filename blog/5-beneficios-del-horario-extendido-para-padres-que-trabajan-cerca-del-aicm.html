@@ -446,7 +446,7 @@
 </div>
 <script>
   if (typeof window.updateSimuladorEstanciaFroebel !== 'function') {
-    window.updateSimuladorEstanciaFroebel = function(pfx) {
+    window.updateSimuladorEstanciaFroebel = function(pfx, silentHydrate) {
       var gradoEl = document.getElementById('sim-grado-' + pfx);
       var horaEl = document.getElementById('sim-hora-' + pfx);
       var diasEl = document.getElementById('sim-dias-' + pfx);
@@ -465,13 +465,15 @@
       var ctaWa = document.getElementById('sim-cta-wa-' + pfx);
 
       var modalidadNombre = '';
-      var estanciaParam = 'sin_estancia';
+      var estanciaParam = 'ninguna';
+      var estanciaShortLabel = 'Horario Escolar Base';
       var totalIntegrado = base;
 
       if (sueltaMes < 1200 && dias <= 2) {
         modalidadNombre = 'Hora Suelta Flexible ($50 MXN/hora)';
         totalIntegrado = base + sueltaMes;
-        estanciaParam = pickup <= 16 ? 'parcial_16h' : 'completa_18h';
+        estanciaParam = 'ninguna';
+        estanciaShortLabel = 'con Horas Sueltas (' + dias + 'd/sem)';
         badgeEl.textContent = '💡 Modalidad sugerida por uso ocasional: ' + modalidadNombre;
         totalEl.innerHTML = 'Total mensual estimado: $' + totalIntegrado.toLocaleString('es-MX') + ' MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 Pronto Pago + $' + sueltaMes.toLocaleString('es-MX') + ' en horas sueltas sin comedor)</span>';
         ahorroEl.innerHTML = 'Ideal si solo requieres apoyo ' + dias + ' día(s)/semana hasta las ' + pickup + ':00 hrs. Si deseas incluir <strong>Comedor caliente de 3 tiempos todos los días</strong>, la Estancia Parcial (16:00h) queda en <strong>$5,000/mes</strong>.';
@@ -479,6 +481,7 @@
         modalidadNombre = 'Estancia Parcial 16:00h + Comedor 3 Tiempos';
         totalIntegrado = base + 1400;
         estanciaParam = 'parcial_16h';
+        estanciaShortLabel = 'con Estancia Parcial 16:00h + Comedor';
         var diff16 = sueltaMes - 1400;
         badgeEl.textContent = '✅ Modalidad recomendada: ' + modalidadNombre;
         totalEl.innerHTML = 'Total mensual integrado: $5,000 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,400 estancia 16:00h)</span>';
@@ -487,6 +490,7 @@
         modalidadNombre = 'Estancia Completa 18:00h + Comedor 3 Tiempos';
         totalIntegrado = base + 1900;
         estanciaParam = 'completa_18h';
+        estanciaShortLabel = 'con Estancia Completa 18:00h + Comedor';
         var diff18 = sueltaMes - 1900;
         badgeEl.textContent = '✅ Modalidad recomendada: ' + modalidadNombre;
         totalEl.innerHTML = 'Total mensual integrado: $5,500 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,900 estancia 18:00h)</span>';
@@ -498,14 +502,45 @@
       var waMsg = 'Hola Instituto Froebel, calculé ' + gradoLabel + ' con salida a las ' + pickup + ':00 hrs (' + modalidadNombre + ' · $' + totalIntegrado.toLocaleString('es-MX') + '/mes Pronto Pago) y me gustaría agendar visita';
       ctaWa.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(waMsg);
 
-      if (window.FroebelUX) {
-        window.FroebelUX.track('cta_click', {
-          element_id: 'sim_estancia_' + pfx + '_' + gradoCode + '_' + pickup + 'h',
-          element_text: 'Simulador Estancia: ' + gradoCode + ' ' + pickup + 'h (' + dias + 'd)',
-        });
+      if (!silentHydrate) {
+        try {
+          sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify({
+            program: gradoCode,
+            estancia: estanciaParam,
+            totalMonthly: totalIntegrado,
+            programLabel: gradoLabel,
+            estanciaLabel: estanciaShortLabel,
+            updatedAt: Date.now()
+          }));
+          window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+        } catch (_) {}
+        if (window.FroebelUX) {
+          window.FroebelUX.track('cta_click', {
+            element_id: 'sim_estancia_' + pfx + '_' + gradoCode + '_' + pickup + 'h',
+            element_text: 'Simulador Estancia: ' + gradoCode + ' ' + pickup + 'h (' + dias + 'd)',
+          });
+        }
       }
     };
   }
+  (function() {
+    try {
+      var raw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (!raw) return;
+      var draft = JSON.parse(raw);
+      var gEl = document.getElementById('sim-grado-blog');
+      var hEl = document.getElementById('sim-hora-blog');
+      if (gEl && draft && draft.program && gEl.querySelector('option[value="' + draft.program + '"]')) {
+        gEl.value = draft.program;
+      }
+      if (hEl && draft && draft.estancia === 'parcial_16h') {
+        hEl.value = '16';
+      } else if (hEl && draft && draft.estancia === 'completa_18h') {
+        hEl.value = '18';
+      }
+      window.updateSimuladorEstanciaFroebel('blog', true);
+    } catch (_) {}
+  })();
 </script>
 
       <h2 style="font-size:var(--text-2xl);color:var(--color-text);margin-top:var(--space-10);margin-bottom:var(--space-4);">

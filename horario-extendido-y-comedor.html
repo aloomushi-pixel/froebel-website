@@ -433,7 +433,7 @@
 </div>
 <script>
   if (typeof window.updateSimuladorEstanciaFroebel !== 'function') {
-    window.updateSimuladorEstanciaFroebel = function(pfx) {
+    window.updateSimuladorEstanciaFroebel = function(pfx, silentHydrate) {
       var gradoEl = document.getElementById('sim-grado-' + pfx);
       var horaEl = document.getElementById('sim-hora-' + pfx);
       var diasEl = document.getElementById('sim-dias-' + pfx);
@@ -452,13 +452,15 @@
       var ctaWa = document.getElementById('sim-cta-wa-' + pfx);
 
       var modalidadNombre = '';
-      var estanciaParam = 'sin_estancia';
+      var estanciaParam = 'ninguna';
+      var estanciaShortLabel = 'Horario Escolar Base';
       var totalIntegrado = base;
 
       if (sueltaMes < 1200 && dias <= 2) {
         modalidadNombre = 'Hora Suelta Flexible ($50 MXN/hora)';
         totalIntegrado = base + sueltaMes;
-        estanciaParam = pickup <= 16 ? 'parcial_16h' : 'completa_18h';
+        estanciaParam = 'ninguna';
+        estanciaShortLabel = 'con Horas Sueltas (' + dias + 'd/sem)';
         badgeEl.textContent = '💡 Modalidad sugerida por uso ocasional: ' + modalidadNombre;
         totalEl.innerHTML = 'Total mensual estimado: $' + totalIntegrado.toLocaleString('es-MX') + ' MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 Pronto Pago + $' + sueltaMes.toLocaleString('es-MX') + ' en horas sueltas sin comedor)</span>';
         ahorroEl.innerHTML = 'Ideal si solo requieres apoyo ' + dias + ' día(s)/semana hasta las ' + pickup + ':00 hrs. Si deseas incluir <strong>Comedor caliente de 3 tiempos todos los días</strong>, la Estancia Parcial (16:00h) queda en <strong>$5,000/mes</strong>.';
@@ -466,6 +468,7 @@
         modalidadNombre = 'Estancia Parcial 16:00h + Comedor 3 Tiempos';
         totalIntegrado = base + 1400;
         estanciaParam = 'parcial_16h';
+        estanciaShortLabel = 'con Estancia Parcial 16:00h + Comedor';
         var diff16 = sueltaMes - 1400;
         badgeEl.textContent = '✅ Modalidad recomendada: ' + modalidadNombre;
         totalEl.innerHTML = 'Total mensual integrado: $5,000 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,400 estancia 16:00h)</span>';
@@ -474,6 +477,7 @@
         modalidadNombre = 'Estancia Completa 18:00h + Comedor 3 Tiempos';
         totalIntegrado = base + 1900;
         estanciaParam = 'completa_18h';
+        estanciaShortLabel = 'con Estancia Completa 18:00h + Comedor';
         var diff18 = sueltaMes - 1900;
         badgeEl.textContent = '✅ Modalidad recomendada: ' + modalidadNombre;
         totalEl.innerHTML = 'Total mensual integrado: $5,500 MXN/mes <span style="font-size:0.82rem;font-weight:600;color:var(--color-text-light);">($3,600 colegiatura Pronto Pago + $1,900 estancia 18:00h)</span>';
@@ -485,14 +489,45 @@
       var waMsg = 'Hola Instituto Froebel, calculé ' + gradoLabel + ' con salida a las ' + pickup + ':00 hrs (' + modalidadNombre + ' · $' + totalIntegrado.toLocaleString('es-MX') + '/mes Pronto Pago) y me gustaría agendar visita';
       ctaWa.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(waMsg);
 
-      if (window.FroebelUX) {
-        window.FroebelUX.track('cta_click', {
-          element_id: 'sim_estancia_' + pfx + '_' + gradoCode + '_' + pickup + 'h',
-          element_text: 'Simulador Estancia: ' + gradoCode + ' ' + pickup + 'h (' + dias + 'd)',
-        });
+      if (!silentHydrate) {
+        try {
+          sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify({
+            program: gradoCode,
+            estancia: estanciaParam,
+            totalMonthly: totalIntegrado,
+            programLabel: gradoLabel,
+            estanciaLabel: estanciaShortLabel,
+            updatedAt: Date.now()
+          }));
+          window.dispatchEvent(new CustomEvent('froebel:quote-updated'));
+        } catch (_) {}
+        if (window.FroebelUX) {
+          window.FroebelUX.track('cta_click', {
+            element_id: 'sim_estancia_' + pfx + '_' + gradoCode + '_' + pickup + 'h',
+            element_text: 'Simulador Estancia: ' + gradoCode + ' ' + pickup + 'h (' + dias + 'd)',
+          });
+        }
       }
     };
   }
+  (function() {
+    try {
+      var raw = sessionStorage.getItem('froebel_quote_draft_v1');
+      if (!raw) return;
+      var draft = JSON.parse(raw);
+      var gEl = document.getElementById('sim-grado-main');
+      var hEl = document.getElementById('sim-hora-main');
+      if (gEl && draft && draft.program && gEl.querySelector('option[value="' + draft.program + '"]')) {
+        gEl.value = draft.program;
+      }
+      if (hEl && draft && draft.estancia === 'parcial_16h') {
+        hEl.value = '16';
+      } else if (hEl && draft && draft.estancia === 'completa_18h') {
+        hEl.value = '18';
+      }
+      window.updateSimuladorEstanciaFroebel('main', true);
+    } catch (_) {}
+  })();
 </script>
 <div class="grid grid--2">
 <div class="card fade-in" style="text-align:center;border-top:4px solid var(--color-secondary);display:flex;flex-direction:column;justify-content:space-between;">
@@ -556,7 +591,7 @@
 </div>
 </div>
 <div class="fade-in">
-<img src="/assets/images/comedor-nutritivo-zona-aicm.webp" alt="Comedor nutritivo infantil y estancia vespertina en Instituto Federico Froebel GAM" loading="lazy" width="2816" height="1536" style="width:100%;height:auto;border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);" decoding="async"/>
+<img src="/assets/images/comedor-nutritivo-zona-aicm.webp" alt="Comedor nutritivo infantil y estancia vespertina en Instituto Federico Froebel GAM" loading="lazy" width="2816" height="1536" style="width:100%;height:auto;aspect-ratio:11/6;object-fit:cover;border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);" decoding="async"/>
 </div>
 </div>
 </div>
@@ -602,7 +637,10 @@
       </div>
     </div>
     <div id="guias-padres-estancia" data-ux-section="guias-padres-estancia" class="card fade-in" style="margin-top:var(--space-5);padding:var(--space-5);background:#ffffff;border:1px solid var(--color-border);">
-      <h3 style="font-size:0.95rem;color:var(--color-primary-dark);margin-bottom:var(--space-3);">📚 Guías recomendadas para familias que trabajan en GAM, Oceanía y zona AICM</h3>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:var(--space-3);">
+        <h3 style="font-size:0.95rem;color:var(--color-primary-dark);margin:0;">📚 Guías recomendadas para familias que trabajan en GAM, Oceanía y zona AICM</h3>
+        <a href="/blog/" style="font-size:0.8rem;font-weight:700;color:var(--color-primary);">📖 Ver las 8 Guías del Blog →</a>
+      </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.65rem;font-size:0.84rem;">
         <a href="/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html#calculadora-estancia-aicm-blog" style="padding:0.65rem 0.85rem;background:#f8fafc;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-weight:700;color:var(--color-primary-dark);">✈️ Simulador Estancia + Traslado para padres cerca del AICM →</a>
         <a href="/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html#lista-compras-500" style="padding:0.65rem 0.85rem;background:#f8fafc;border:1px solid var(--color-primary-100);border-radius:var(--radius-lg);font-weight:700;color:var(--color-primary-dark);">🛒 Menú infantil nutritivo y lista interactiva de $500 MXN →</a>

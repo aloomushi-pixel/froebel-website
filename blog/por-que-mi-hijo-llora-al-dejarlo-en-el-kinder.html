@@ -15,22 +15,22 @@
 <link href="/manifest.json" rel="manifest"/>
 <meta content="#1E40AF" name="theme-color"/>
 <!-- INICIO SEO META TAGS -->
-<title>¿Por qué mi hijo llora al dejarlo en el Kínder? 5 Pasos sin Lágrimas</title>
-<meta content="¿Tu hijo llora al quedarse en el kínder o maternal? Conoce por qué pasa y aplica nuestro plan práctico de 5 pasos de apego seguro y despedida en 30 segundos." name="description"/>
+<title>¿Por qué mi hijo llora al dejarlo en el Kínder? Guía en 5 Pasos (1–6a)</title>
+<meta content="¿Tu hijo llora al dejarlo en el kínder o maternal? Descubre cuánto dura (1–3 semanas), qué hacer en 30s y usa gratis el Planificador de Apego Seguro." name="description"/>
 <link href="https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html" rel="canonical"/>
 <!-- Open Graph / Facebook -->
 <meta content="article" property="og:type"/>
 <meta content="https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html" property="og:url"/>
-<meta content="¿Por qué mi hijo llora al dejarlo en el Kínder? 5 Pasos sin Lágrimas" property="og:title"/>
-<meta content="¿Tu hijo llora al quedarse en el kínder o maternal? Conoce por qué pasa y aplica nuestro plan práctico de 5 pasos de apego seguro y despedida en 30 segundos." property="og:description"/>
+<meta content="¿Por qué mi hijo llora al dejarlo en el Kínder? Guía en 5 Pasos (1–6a)" property="og:title"/>
+<meta content="¿Tu hijo llora al dejarlo en el kínder o maternal? Descubre cuánto dura (1–3 semanas), qué hacer en 30s y usa gratis el Planificador de Apego Seguro." property="og:description"/>
 <meta content="https://froebelinstituto.com.mx/assets/images/blog/llanto-kinder.webp" property="og:image"/>
 <meta content="Instituto Federico Froebel" property="og:site_name"/>
 <meta content="es_MX" property="og:locale"/>
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html" name="twitter:url"/>
-<meta content="¿Por qué mi hijo llora al dejarlo en el Kínder? 5 Pasos sin Lágrimas" name="twitter:title"/>
-<meta content="¿Tu hijo llora al quedarse en el kínder o maternal? Conoce por qué pasa y aplica nuestro plan práctico de 5 pasos de apego seguro y despedida en 30 segundos." name="twitter:description"/>
+<meta content="¿Por qué mi hijo llora al dejarlo en el Kínder? Guía en 5 Pasos (1–6a)" name="twitter:title"/>
+<meta content="¿Tu hijo llora al dejarlo en el kínder o maternal? Descubre cuánto dura (1–3 semanas), qué hacer en 30s y usa gratis el Planificador de Apego Seguro." name="twitter:description"/>
 <meta content="https://froebelinstituto.com.mx/assets/images/blog/llanto-kinder.webp" name="twitter:image"/>
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -178,8 +178,8 @@
       "@type": "WebPage",
       "@id": "https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html#webpage",
       "url": "https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html",
-      "name": "¿Por qué mi hijo llora al dejarlo en el Kínder? 5 Pasos sin Lágrimas",
-      "description": "¿Tu hijo llora al quedarse en el kínder o maternal? Conoce por qué pasa y aplica nuestro plan práctico de 5 pasos de apego seguro y despedida en 30 segundos.",
+      "name": "¿Por qué mi hijo llora al dejarlo en el Kínder? Guía en 5 Pasos (1–6a)",
+      "description": "¿Tu hijo llora al dejarlo en el kínder o maternal? Descubre cuánto dura (1–3 semanas), qué hacer en 30s y usa gratis el Planificador de Apego Seguro.",
       "inLanguage": "es-MX",
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
@@ -188,8 +188,8 @@
     },
     {
       "@type": "BlogPosting",
-      "headline": "¿Por qué mi hijo llora al dejarlo en el Kínder? 5 Pasos sin Lágrimas",
-      "description": "¿Tu hijo llora al quedarse en el kínder o maternal? Conoce por qué pasa y aplica nuestro plan práctico de 5 pasos de apego seguro y despedida en 30 segundos.",
+      "headline": "¿Por qué mi hijo llora al dejarlo en el Kínder? Guía en 5 Pasos (1–6a)",
+      "description": "¿Tu hijo llora al dejarlo en el kínder o maternal? Descubre cuánto dura (1–3 semanas), qué hacer en 30s y usa gratis el Planificador de Apego Seguro.",
       "image": "https://froebelinstituto.com.mx/assets/images/blog/llanto-kinder.webp",
       "author": {
         "@id": "https://froebelinstituto.com.mx/#organization"
@@ -460,8 +460,15 @@
                     if (enBtn) {
                         enBtn.href = '/inscripciones?inscribir=1&programa=' + encodeURIComponent(st);
                     }
-                    if (track && window.FroebelUX) {
-                        window.FroebelUX.track('cta_click', { element_id: 'plan_adaptacion_' + st + '_' + cx, element_text: p.title + ' | ' + ctxLabel });
+                    if (track) {
+                        var calcGrado = document.getElementById('colonia-calc-grado');
+                        if (calcGrado && calcGrado.value !== st) {
+                            calcGrado.value = st;
+                            calcGrado.dispatchEvent(new Event('change'));
+                        }
+                        if (window.FroebelUX) {
+                            window.FroebelUX.track('cta_click', { element_id: 'plan_adaptacion_' + st + '_' + cx, element_text: p.title + ' | ' + ctxLabel });
+                        }
                     }
                 }
                 stEl.addEventListener('change', function(){ renderPlan(true); });
@@ -530,6 +537,44 @@
             
         </div>
     
+            <!-- COTIZADOR INSTANTÁNEO CON CONTINUIDAD DE SESIÓN -->
+            <div id="cotizador-rapido-colonia" data-ux-section="cotizador-rapido-colonia" data-colonia="Guía Adaptación Escolar" data-ubicacion-texto="Adaptación con Apego Seguro + CCTV · Av. 521 No. 20, Aragón GAM" data-wa-origen="leí la guía de adaptación sin lágrimas y" style="margin:var(--space-8) 0;padding:var(--space-5);background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #86efac;border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.65rem;">
+                    <strong style="font-size:0.92rem;color:var(--color-primary-dark);">💛 Cotizador Maternal (Ratio 1:8) y Kínder SEP (Ratio 1:15) con Adaptación Respetuosa</strong>
+                    <span style="font-size:0.75rem;font-weight:700;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;">✓ Recorrido Previo Gratis · CCTV</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0.6rem;margin-bottom:0.65rem;">
+                    <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+                        1. Etapa actual de tu pequeño(a):
+                        <select id="colonia-calc-grado" style="padding:7px 10px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.84rem;font-weight:600;color:var(--color-text);">
+                            <option value="maternal">🍼 Maternal Bilingüe (1 a 3 años · 08:30–13:30h)</option>
+                            <option value="preescolar_1" selected>🌻 Kínder 1 SEP (3 a 4 años · 08:30–14:00h)</option>
+                            <option value="preescolar_2">🧠 Kínder 2 SEP (4 a 5 años · 08:30–14:00h)</option>
+                            <option value="preescolar_3">🎓 Kínder 3 SEP (5 a 6 años · 08:30–14:00h)</option>
+                        </select>
+                    </label>
+                    <label style="display:flex;flex-direction:column;gap:3px;font-size:0.78rem;font-weight:700;color:var(--color-text);">
+                        2. Horario y comedor requerido:
+                        <select id="colonia-calc-estancia" style="padding:7px 10px;border-radius:8px;border:1px solid #93c5fd;background:#ffffff;font-size:0.84rem;font-weight:600;color:var(--color-text);">
+                            <option value="ninguna" selected>📚 Horario Escolar Base ($3,600/mes Pronto Pago)</option>
+                            <option value="parcial_16h">🍽️ + Estancia 16:00h y Comedor (+$1,400 · Total $5,000)</option>
+                            <option value="completa_18h">⏰ + Estancia Completa 18:00h y Comedor (+$1,900 · Total $5,500)</option>
+                        </select>
+                    </label>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.7rem;padding:0.65rem 0.85rem;background:#ffffff;border:1px solid #bfdbfe;border-radius:10px;">
+                    <div>
+                        <div style="font-size:0.75rem;color:var(--color-text-light);">Mensualidad estimada Ciclo 2026-2027:</div>
+                        <div id="colonia-calc-total" style="font-size:1.18rem;font-weight:800;color:var(--color-primary-dark);">$3,600 MXN/mes</div>
+                        <div id="colonia-calc-detalle" style="font-size:0.76rem;color:var(--color-text-light);">Kínder 1 SEP (3–4 años) (08:30–14:00h, recepción desde 07:30h) · Pronto Pago (regular $4,000) · Adaptación con Apego Seguro + CCTV · Av. 521 No. 20, Aragón GAM</div>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+                        <a id="colonia-calc-enroll-btn" class="btn btn--primary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_1&estancia=ninguna" style="padding:7px 13px;font-size:0.8rem;">📝 Apartar Lugar en Línea →</a>
+                        <a id="colonia-calc-wa-btn" class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20le%C3%AD%20la%20gu%C3%ADa%20de%20adaptaci%C3%B3n%20sin%20l%C3%A1grimas%20y%20cotic%C3%A9%20K%C3%ADnder%201%20SEP%20(%243%2C600%2Fmes).%20Quiero%20agendar%20visita." rel="noopener noreferrer" target="_blank" style="padding:7px 13px;font-size:0.8rem;">💬 Agendar Visita por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- PREGUNTAS FRECUENTES DEL ARTÍCULO (SEO & GEO) -->
             <div id="faq-articulo" data-ux-section="faq-articulo" style="border-top:1px solid var(--color-border);padding-top:var(--space-8);margin-top:var(--space-8);">
                 <h2 style="font-size:var(--text-2xl);margin-bottom:var(--space-4);color:var(--color-text);">Preguntas Frecuentes sobre la Adaptación Escolar sin Lágrimas en Kínder y Maternal</h2>

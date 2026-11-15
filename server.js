@@ -47,8 +47,8 @@ function warmMemoryDocCache(dir, urlPrefix = '') {
       MEMORY_DOC_CACHE.set(routePath, record);
       if (entry.name === 'index.html') {
         MEMORY_DOC_CACHE.set(urlPrefix ? `${urlPrefix}/` : '/', record);
-      } else if (ext === '.html') {
-        MEMORY_DOC_CACHE.set(`${urlPrefix}/${entry.name.slice(0, -5)}`, record);
+      } else if (ext === '.html' && !urlPrefix) {
+        MEMORY_DOC_CACHE.set(`/${entry.name.slice(0, -5)}`, record);
       }
     }
   }
@@ -381,6 +381,32 @@ app.use((req, res, next) => {
   }
   if (p === '/blog' || p === '/blog/index.html') {
     return res.redirect(301, '/blog/' + qs);
+  }
+  if (p.startsWith('/blog/') && p !== '/blog/') {
+    const rawPathOnly = req.url.split('?')[0];
+    let decodedBlog = p;
+    try {
+      decodedBlog = decodeURIComponent(rawPathOnly);
+    } catch {
+      decodedBlog = rawPathOnly
+        .replace(/%([0-9A-Fa-f]{2})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+        .replace(/\u00c3([\u00a0-\u00ff])/g, '$1');
+    }
+    let asciiBlog = decodedBlog
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/\/+$/, '');
+    if (
+      asciiBlog === '/blog/por-que-mi-hijo-llora-al-dejarlo-en-kinder.html' ||
+      asciiBlog === '/blog/por-que-mi-hijo-llora-al-dejarlo-en-kinder'
+    ) {
+      return res.redirect(301, '/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html' + qs);
+    }
+    const candidateHtml = asciiBlog.endsWith('.html') ? asciiBlog : `${asciiBlog}.html`;
+    if (MEMORY_DOC_CACHE.has(candidateHtml) && rawPathOnly !== candidateHtml) {
+      return res.redirect(301, candidateHtml + qs);
+    }
   }
   if (p === '/colegio-cerca-de-mi' || p === '/colegio-cerca-de-mi/') {
     return res.redirect(301, '/contacto' + (qs || '#como-llegar'));
