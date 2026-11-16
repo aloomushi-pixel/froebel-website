@@ -3,7 +3,68 @@
    + Autonomous UX, CWV, SEO & Parent Intent Telemetry Engine v2.1
    ============================================ */
 
+const FROEBEL_SESSION_QUOTE_KEY = 'froebel_quote_draft_v1';
+const FROEBEL_PERSIST_QUOTE_KEY = 'froebel_quote_draft_persist_v1';
+const FROEBEL_PERSIST_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+let hydratedFromPersistentStore = false;
+(function hydratePersistentQuoteDraftOnBoot() {
+  try {
+    const existingSession = sessionStorage.getItem(FROEBEL_SESSION_QUOTE_KEY);
+    if (existingSession) return;
+    const persistedRaw = localStorage.getItem(FROEBEL_PERSIST_QUOTE_KEY);
+    if (!persistedRaw) return;
+    const parsed = JSON.parse(persistedRaw);
+    if (!parsed || typeof parsed !== 'object') return;
+    if (parsed.updatedAt && Date.now() - Number(parsed.updatedAt) > FROEBEL_PERSIST_TTL_MS) {
+      localStorage.removeItem(FROEBEL_PERSIST_QUOTE_KEY);
+      return;
+    }
+    const safeDraft = {
+      program: typeof parsed.program === 'string' ? parsed.program : '',
+      plan: typeof parsed.plan === 'string' ? parsed.plan : 'pronto_pago',
+      estancia: typeof parsed.estancia === 'string' ? parsed.estancia : 'ninguna',
+      totalMonthly: Number(parsed.totalMonthly) || 0,
+      programLabel: typeof parsed.programLabel === 'string' ? parsed.programLabel : '',
+      estanciaLabel: typeof parsed.estanciaLabel === 'string' ? parsed.estanciaLabel : '',
+      updatedAt: Number(parsed.updatedAt) || Date.now(),
+    };
+    sessionStorage.setItem(FROEBEL_SESSION_QUOTE_KEY, JSON.stringify(safeDraft));
+    hydratedFromPersistentStore = true;
+  } catch (_) {}
+})();
+
+function initPersistentQuoteDraftBridge() {
+  window.addEventListener('froebel:quote-updated', (ev) => {
+    if (ev && ev.detail && ev.detail.source === 'localstorage-bridge') return;
+    try {
+      const raw = sessionStorage.getItem(FROEBEL_SESSION_QUOTE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return;
+      // Persist only non-PII quote selections (never persist student/guardian PII in localStorage)
+      const nonPiiDraft = {
+        program: typeof parsed.program === 'string' ? parsed.program : '',
+        plan: typeof parsed.plan === 'string' ? parsed.plan : 'pronto_pago',
+        estancia: typeof parsed.estancia === 'string' ? parsed.estancia : 'ninguna',
+        totalMonthly: Number(parsed.totalMonthly) || 0,
+        programLabel: typeof parsed.programLabel === 'string' ? parsed.programLabel : '',
+        estanciaLabel: typeof parsed.estanciaLabel === 'string' ? parsed.estanciaLabel : '',
+        updatedAt: Date.now(),
+      };
+      localStorage.setItem(FROEBEL_PERSIST_QUOTE_KEY, JSON.stringify(nonPiiDraft));
+    } catch (_) {}
+  });
+
+  if (hydratedFromPersistentStore) {
+    window.dispatchEvent(
+      new CustomEvent('froebel:quote-updated', { detail: { source: 'localstorage-bridge' } })
+    );
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initPersistentQuoteDraftBridge();
   initHeader();
   initMobileNav();
   initHyperlocalNeighborhoodCalculators();

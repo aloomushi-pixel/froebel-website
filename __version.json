@@ -1,12 +1,12 @@
 {
-  "version": "2.1.69",
-  "cycle": 69,
-  "deployedAt": "2026-11-16T02:08:00.000Z",
+  "version": "2.1.70",
+  "cycle": 70,
+  "deployedAt": "2026-11-16T06:30:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "highlights": [
-    "Level 1 HTTP Link rel=canonical Header in server.js + GSC CTR 1:1 Title/Meta upgrades on /inscripciones (340 impr, ★ 4.9) & /blog/",
-    "Level 2 Desktop Above-the-Fold Hero Height + Single-Campus SEP Disambiguation on Portada (resolving desktop 0% scroll bounce)",
-    "Level 2 100% Coverage (24/24 Interactive Comparison Tables across all 23 pages) including #tabla-desglose-costos-2026 Wizard row triggers",
-    "Level 2 localStorage Persistence + @media print on #calculadora-grado-sep, #lista-compras-500 & #filtro-temas-blog + Crawl Bridges from /inscripciones"
+    "Level 2 Multi-Session Non-PII Quote Persistence Bridge (30-day localStorage <-> sessionStorage sync in main.js?v=36 across all 23 pages)",
+    "Level 2 100% Completion of localStorage + @media print across ALL remaining custom interactive simulators (#simulador-cuidado-maternal, #calculadora-estancia-aicm, #calculadora-estancia-aicm-blog & #orientador-maternal-neurodesarrollo)",
+    "Level 2 Desktop False-Floor Removal (min-height:auto) + Hero Image Aspect Normalization + /blog/ Crawl Bridges across all 5 /colegio-cerca-de-mi/*/ Hyperlocal Pages & /horario-extendido-y-comedor",
+    "Level 1 GSC CTR ★ 4.9 + Tiempo Completo / Maternal / STEM 1:1 Title & Meta Upgrades on /horario-extendido-y-comedor, /maternal-bilingue-1-a-3-anos & /preescolar-stem-3-a-6-anos"
   ]
 }
