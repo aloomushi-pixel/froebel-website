@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initSmoothScroll();
     initFaqAccordions();
+    initInteractiveHeroLabels();
+    initInteractivePhotoGalleryFilters();
     initFacilityPhotoLightbox();
     initInteractiveComparisonTables();
     initInteractiveActionCards();
@@ -90,6 +92,117 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(runDeferredEnhancements, 0);
   }
 });
+
+/* === INTERACTIVE HERO EYEBROW PILLS (Eliminates Mobile Subpage Hero Label Rage-Taps) === */
+function initInteractiveHeroLabels() {
+  const heroLabels = document.querySelectorAll(
+    '.section[id^="hero-"] .section-header__label, .section#contacto-hero .section-header__label'
+  );
+  if (!heroLabels.length) return;
+
+  heroLabels.forEach((lbl) => {
+    if (lbl.tagName.toLowerCase() === 'a' || lbl.closest('a, button')) return;
+    const dest =
+      document.getElementById('cotizador-rapido-colonia') ||
+      document.getElementById('wizard-section') ||
+      document.getElementById('calculadora-estancia-aicm') ||
+      document.getElementById('planificador-ruta-gam') ||
+      document.getElementById('filtro-temas-blog');
+    if (!dest) return;
+
+    lbl.style.cursor = 'pointer';
+    lbl.style.display = 'inline-flex';
+    lbl.style.alignItems = 'center';
+    lbl.style.gap = '6px';
+    lbl.style.padding = '4px 12px';
+    lbl.style.borderRadius = '999px';
+    lbl.style.background = 'rgba(30, 64, 175, 0.08)';
+    lbl.style.border = '1px solid rgba(30, 64, 175, 0.18)';
+    lbl.setAttribute('role', 'button');
+    lbl.setAttribute('tabindex', '0');
+    lbl.setAttribute('data-ux-id', 'hero-eyebrow-jump');
+    if (!lbl.textContent.includes('↓')) {
+      lbl.textContent = `${lbl.textContent.trim()} ↓`;
+    }
+
+    const jump = () => {
+      const topY = dest.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: Math.max(0, topY), behavior: 'smooth' });
+      const prevOutline = dest.style.outline;
+      dest.style.outline = '2px solid #1e40af';
+      setTimeout(() => {
+        dest.style.outline = prevOutline;
+      }, 900);
+    };
+
+    lbl.addEventListener('click', jump);
+    lbl.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        jump();
+      }
+    });
+  });
+}
+
+/* === INTERACTIVE FILTERABLE CAMPUS PHOTO GALLERY (/ & /instalaciones-y-seguridad) === */
+function initInteractivePhotoGalleryFilters() {
+  const GALLERY_KEY = 'froebel_gallery_filter_v1';
+  document.querySelectorAll('[data-gallery-root]').forEach((rootEl) => {
+    const buttons = Array.from(rootEl.querySelectorAll('[data-gallery-filter]'));
+    const items = Array.from(rootEl.querySelectorAll('[data-gallery-cat]'));
+    const countBadge = rootEl.querySelector('[data-gallery-count]');
+    if (!buttons.length || !items.length) return;
+
+    const applyFilter = (cat, persist) => {
+      const activeCat = cat || 'all';
+      let shown = 0;
+      items.forEach((item) => {
+        const cats = (item.getAttribute('data-gallery-cat') || '').split(/\s+/);
+        const match = activeCat === 'all' || cats.includes(activeCat);
+        item.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      buttons.forEach((btn) => {
+        const isCurrent = btn.getAttribute('data-gallery-filter') === activeCat;
+        btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+        btn.style.background = isCurrent ? 'var(--color-primary)' : '#ffffff';
+        btn.style.color = isCurrent ? '#ffffff' : 'var(--color-primary-dark)';
+        btn.style.borderColor = isCurrent ? 'var(--color-primary)' : 'var(--color-primary-100)';
+      });
+      if (countBadge) {
+        countBadge.textContent = `${shown} de ${items.length} espacios visibles · Toca cualquier foto para ampliar`;
+      }
+      if (persist) {
+        try {
+          localStorage.setItem(GALLERY_KEY, activeCat);
+        } catch (_) {}
+        if (window.FroebelUX && !window.FroebelUX.isBot()) {
+          window.FroebelUX.track('cta_click', {
+            element_id: `gallery_filter_${activeCat}`,
+            element_text: `Filtro Galería Fotos: ${activeCat} (${shown})`,
+          });
+        }
+      }
+    };
+
+    let initialCat = 'all';
+    try {
+      const savedCat = localStorage.getItem(GALLERY_KEY);
+      if (savedCat && buttons.some((b) => b.getAttribute('data-gallery-filter') === savedCat)) {
+        initialCat = savedCat;
+      }
+    } catch (_) {}
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        applyFilter(btn.getAttribute('data-gallery-filter') || 'all', true);
+      });
+    });
+
+    applyFilter(initialCat, false);
+  });
+}
 
 /* === INSTANT SUBPAGE PREFETCH (iOS Safari & Browsers without Speculation Rules) === */
 function initInstantLinkPrefetch() {

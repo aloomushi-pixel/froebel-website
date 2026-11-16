@@ -1,12 +1,12 @@
 {
-  "version": "2.1.70",
-  "cycle": 70,
-  "deployedAt": "2026-11-16T06:30:00.000Z",
+  "version": "2.1.71",
+  "cycle": 71,
+  "deployedAt": "2026-11-16T10:45:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "highlights": [
-    "Level 2 Multi-Session Non-PII Quote Persistence Bridge (30-day localStorage <-> sessionStorage sync in main.js?v=36 across all 23 pages)",
-    "Level 2 100% Completion of localStorage + @media print across ALL remaining custom interactive simulators (#simulador-cuidado-maternal, #calculadora-estancia-aicm, #calculadora-estancia-aicm-blog & #orientador-maternal-neurodesarrollo)",
-    "Level 2 Desktop False-Floor Removal (min-height:auto) + Hero Image Aspect Normalization + /blog/ Crawl Bridges across all 5 /colegio-cerca-de-mi/*/ Hyperlocal Pages & /horario-extendido-y-comedor",
-    "Level 1 GSC CTR ★ 4.9 + Tiempo Completo / Maternal / STEM 1:1 Title & Meta Upgrades on /horario-extendido-y-comedor, /maternal-bilingue-1-a-3-anos & /preescolar-stem-3-a-6-anos"
+    "Level 2 Filterable 6-Photo Campus Gallery (#fotos-plantel on / & #galeria-instalaciones + ImageGallery JSON-LD on /instalaciones-y-seguridad) targeting 76-impr 'jardín de niños federico froebel fotos' (pos 2.86)",
+    "Level 2 Universal Interactive Hero Eyebrow Pills in main.js?v=37 eliminating mobile subpage hero rage-tap friction (rage:hero-maternal-bilingue)",
+    "Level 1 GSC High-Impression CTR 1:1 Upgrades on /programas (1,435 impr, ★ 4.9 + SEP + Guardería/Estancias), /instalaciones-y-seguridad & /blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html (342 impr Page 1)",
+    "Level 1 Semantic H2 Alignment ('¿Qué es y qué significa el control de esfínteres en niños?') on /blog/control-de-esfinteres.html + llms.txt/llms-full.txt sync"
   ]
 }

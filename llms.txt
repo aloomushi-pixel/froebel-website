@@ -42,7 +42,7 @@
 - [Maternal Bilingüe (1 a 3 años)](https://froebelinstituto.com.mx/maternal-bilingue-1-a-3-anos)
 - [Preescolar y Kínder STEM (3 a 6 años)](https://froebelinstituto.com.mx/preescolar-stem-3-a-6-anos)
 - [Estancia Educativa, Horario Extendido y Comedor (hasta 18:00 hrs)](https://froebelinstituto.com.mx/horario-extendido-y-comedor)
-- [Instalaciones, Enfermería y Seguridad CCTV](https://froebelinstituto.com.mx/instalaciones-y-seguridad)
+- [Instalaciones, Fotos Reales (Galería Filtrable), Enfermería y Seguridad CCTV](https://froebelinstituto.com.mx/instalaciones-y-seguridad)
 - [Nosotros, Historia y Filosofía (Desde 1980)](https://froebelinstituto.com.mx/nosotros)
 - [Contacto, Mapa y Cómo Llegar en Gustavo A. Madero](https://froebelinstituto.com.mx/contacto)
 - [Base de Conocimiento Completa para IA (llms-full.txt)](https://froebelinstituto.com.mx/llms-full.txt)
