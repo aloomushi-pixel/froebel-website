@@ -186,7 +186,16 @@
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
       },
-      "dateModified": "2026-11-15",
+      "dateModified": "2026-11-16",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "@id": "https://froebelinstituto.com.mx/nosotros#escudo-oficial",
+        "url": "https://froebelinstituto.com.mx/assets/images/logo-froebel.png",
+        "contentUrl": "https://froebelinstituto.com.mx/assets/images/logo-froebel.png",
+        "width": 1033,
+        "height": 609,
+        "caption": "Escudo y Logo Oficial del Colegio e Instituto Federico Froebel en San Juan de Aragón, Gustavo A. Madero, CDMX (SEP RVOE 09050141)"
+      },
       "mentions": [
         {
           "@type": "Person",
@@ -234,6 +243,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Mantenemos costos accesibles y transparentes (11 mensualidades de septiembre a julio): colegiatura mensual de $3,600 MXN con Pronto Pago (primeros 10 días del mes) o $4,000 MXN normal, e inscripción anual desde $3,375 MXN con descuento anticipado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el significado del escudo y logo oficial del Colegio Federico Froebel en GAM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El escudo y logo oficial del Instituto y Colegio Federico Froebel representa la alianza entre familia, vocación docente, juego constructivo (Dones de Froebel) y crecimiento integral desde Maternal hasta Kínder 3. Identifica exclusivamente a nuestro plantel oficial incorporado a la SEP (RVOE 09050141, fundado en 1980) en Av. 521 No. 20, San Juan de Aragón I Sección, Gustavo A. Madero, CDMX."
           }
         }
       ]
@@ -315,7 +332,7 @@
                     46+ años formando niños independientes, bilingües y felices en San Juan de Aragón I Secc (a 2 cuadras de Metro Aragón L5). Maternal (1–3a), Kínder SEP (3–6a) y Estancia hasta 18:00h.
                 </p>
                 <div id="ficha-institucional-froebel" data-ux-section="ficha-institucional-froebel" class="card fade-in" style="max-width:960px;margin:0 auto var(--space-4);padding:var(--space-4);background:var(--color-white);border:2px solid var(--color-primary-100);display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;text-align:left;">
-                  <img src="/assets/images/logo-froebel.webp" alt="Escudo y Logo Oficial del Colegio e Instituto Federico Froebel en Gustavo A. Madero, CDMX" width="64" height="64" loading="eager" style="width:64px;height:64px;border-radius:var(--radius-xl);object-fit:cover;box-shadow:var(--shadow-md);flex-shrink:0;"/>
+                  <img src="/assets/images/logo-froebel.webp" data-allow-lightbox="1" data-lightbox-src="/assets/images/logo-froebel.png" title="Toca para ampliar el Escudo y Logo Oficial Froebel" alt="Escudo y Logo Oficial del Colegio e Instituto Federico Froebel en Gustavo A. Madero, CDMX (SEP RVOE 09050141)" width="64" height="64" loading="eager" style="width:64px;height:64px;border-radius:var(--radius-xl);object-fit:cover;box-shadow:var(--shadow-md);flex-shrink:0;"/>
                   <div style="flex:1;min-width:260px;">
                     <h2 style="font-size:0.95rem;color:var(--color-primary-dark);margin-bottom:var(--space-2);">🛡️ Ficha Oficial SEP, Escudo y Legado de Federico Froebel (Colegio y Centro Escolar en GAM)</h2>
                     <div style="overflow-x:auto;">
@@ -346,6 +363,8 @@
                       <a class="btn btn--secondary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_1" style="padding:4px 10px;font-size:0.76rem;">🌻 Kínder 1 (3a)</a>
                       <a class="btn btn--secondary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_2" style="padding:4px 10px;font-size:0.76rem;">🧠 Kínder 2 (4a)</a>
                       <a class="btn btn--secondary btn--sm" href="/inscripciones?inscribir=1&programa=preescolar_3" style="padding:4px 10px;font-size:0.76rem;">🎓 Kínder 3 (5a)</a>
+                      <a class="btn btn--secondary btn--sm" href="/blog/" style="padding:4px 10px;font-size:0.76rem;background:var(--color-primary-50);">📚 8 Guías Padres →</a>
+                      <button type="button" id="btn-copy-address-nosotros" data-copy-address="Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 CDMX (a 2 cuadras de Metro Aragón Línea 5)" class="btn btn--secondary btn--sm" style="padding:4px 10px;font-size:0.76rem;background:#ffffff;">📋 Copiar Dirección</button>
                       <a class="btn btn--accent btn--sm" href="https://wa.me/525554148872?text=Hola%20Colegio%20Federico%20Froebel%2C%20vi%20su%20ficha%20oficial%20SEP%20y%20quiero%20agendar%20visita" rel="noopener noreferrer" target="_blank" style="padding:4px 11px;font-size:0.76rem;">💬 WhatsApp Directo</a>
                     </div>
                   </div>
@@ -606,6 +625,10 @@
 <summary style="font-weight: 700; color: var(--color-primary-dark); font-size: var(--text-lg); cursor: pointer;">¿Cuáles son los costos de inscripción y colegiatura 2026-2027?</summary>
 <p style="margin-top: var(--space-3); margin-bottom: 0; color: var(--color-text-light);">Mantenemos costos accesibles y transparentes: <strong>colegiatura mensual de $3,600 MXN con Pronto Pago</strong> (primeros 10 días del mes) o $4,000 MXN normal, e <strong>inscripción anual desde $3,375 MXN</strong> con descuento anticipado. <a href="/inscripciones" style="font-weight: 700;">Consulta requisitos e inscribe en línea aquí →</a></p>
 </details>
+<details class="card fade-in faq-item" open style="padding: var(--space-5) var(--space-6);">
+<summary style="font-weight: 700; color: var(--color-primary-dark); font-size: var(--text-lg); cursor: pointer;">¿Cuál es el significado del escudo y logo oficial del Colegio Federico Froebel en GAM?</summary>
+<p style="margin-top: var(--space-3); margin-bottom: 0; color: var(--color-text-light);">El <strong>escudo y logo oficial del Instituto y Colegio Federico Froebel</strong> representa la alianza entre familia, vocación docente, juego constructivo (<em>Dones de Froebel</em>) y crecimiento integral desde Maternal hasta Kínder 3. Identifica exclusivamente a nuestro plantel oficial incorporado a la <strong>SEP (RVOE 09050141, fundado en 1980)</strong> en Av. 521 No. 20, San Juan de Aragón I Sección, Gustavo A. Madero, CDMX (puedes tocar el escudo en la ficha superior para ampliarlo).</p>
+</details>
 </div>
 <div id="post-faq-cta-nosotros" data-ux-section="post-faq-cta-nosotros" class="card fade-in" style="margin-top:var(--space-6);padding:var(--space-6);background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid var(--color-primary);text-align:center;">
   <h3 style="font-size:var(--text-lg);color:var(--color-primary-dark);margin-bottom:var(--space-2);">🏫 ¿Quieres conocer en persona el Colegio Federico Froebel en San Juan de Aragón?</h3>
@@ -707,7 +730,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=37" defer></script>
+<script src="/scripts/main.js?v=38" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

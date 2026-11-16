@@ -183,7 +183,7 @@
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
       },
-      "dateModified": "2026-11-15"
+      "dateModified": "2026-11-16"
     },
     {
       "@type": "FAQPage",
@@ -210,7 +210,7 @@
           "name": "¿El Colegio Instituto Federico Froebel tiene otros planteles o sucursales?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nuestro único plantel oficial del Colegio Instituto Federico Froebel se ubica en Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, Ciudad de México (CDMX). No contamos con sucursales en otros estados de la República."
+            "text": "Nuestro único plantel oficial del Colegio e Instituto Federico Froebel (SEP RVOE 09050141) se ubica en Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, Ciudad de México (CDMX). No tenemos relación ni sucursales en Tehuacán (Puebla), San Ángel ni otras alcaldías."
           }
         }
       ]
@@ -345,10 +345,18 @@
       <a href="/inscripciones?inscribir=1&programa=maternal" style="background:#ffffff;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">🍼 Maternal (1-3a) →</a>
       <a href="/inscripciones?inscribir=1&programa=preescolar_1" style="background:#ffffff;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">🧒 Kínder 1 (3-4a) →</a>
       <a href="/inscripciones?inscribir=1&programa=preescolar_2" style="background:#ffffff;border:1px solid #86efac;padding:5px 10px;border-radius:999px;font-weight:700;color:#166534;">👧 Kínder 2/3 (4-6a) →</a>
+      <a href="/blog/" style="background:#eff6ff;border:1px solid #93c5fd;padding:5px 10px;border-radius:999px;font-weight:700;color:#1e3a8a;">📚 8 Guías Padres →</a>
       <a href="https://maps.app.goo.gl/gAZ6ZtXKoNPa157g6" target="_blank" rel="noopener noreferrer" style="background:#1e40af;color:#ffffff;padding:5px 12px;border-radius:999px;font-weight:700;">📍 Cómo Llegar (Google Maps) ↗</a>
     </div>
   </div>
   <div id="planificador-ruta-gam" data-ux-section="planificador-ruta-gam" style="margin-top:var(--space-3);padding:12px 14px;background:linear-gradient(135deg,#eff6ff 0%,#ffffff 100%);border:1px solid var(--color-primary-light);border-radius:var(--radius-lg);text-align:left;">
+    <style>
+      @media print {
+        .header, .footer, .whatsapp-fab, #froebel-cookie-banner, #froebel-mobile-dock, #selector-visita-contacto, #formulario-visita-contacto, #cotizador-rapido-colonia, #post-faq-cta-contacto, #guias-padres-contacto, #ruta-wa-btn, #btn-copy-address-contacto, #ruta-print-btn, iframe { display: none !important; }
+        body { background: #ffffff !important; color: #000000 !important; }
+        #contacto-hero { padding-top: 0 !important; background: #ffffff !important; }
+      }
+    </style>
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
       <strong style="font-size:0.86rem;color:var(--color-primary-dark);">🧭 Planificador Rápido de Ruta y Visita Guiada desde tu Colonia:</strong>
       <span style="font-size:0.75rem;font-weight:700;color:#1e40af;background:#dbeafe;padding:2px 8px;border-radius:999px;">Plantel único · Av. 521 No. 20 (Metro Aragón L5)</span>
@@ -381,6 +389,8 @@
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
       <a id="ruta-wa-btn" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20les%20escribo%20desde%20San%20Juan%20de%20Arag%C3%B3n%20para%20agendar%20visita%20guiada%20a%20las%2011%3A00%20hrs" target="_blank" rel="noopener noreferrer" style="background:#16a34a;color:#ffffff;padding:6px 13px;border-radius:999px;font-size:0.8rem;font-weight:700;">💬 Agendar recorrido (11:00 hrs) por WhatsApp →</a>
       <a href="https://www.google.com/maps/dir/?api=1&destination=19.4623199,-99.0837562&travelmode=driving" target="_blank" rel="noopener noreferrer" style="background:#ffffff;border:1px solid var(--color-primary);color:var(--color-primary-dark);padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;">🗺️ Trazar ruta GPS desde mi ubicación ↗</a>
+      <button type="button" id="btn-copy-address-contacto" data-copy-address="Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 CDMX (a 2 cuadras de Metro Aragón Línea 5)" style="background:#ffffff;border:1px solid var(--color-border);color:var(--color-text);padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">📋 Copiar Dirección Exacta</button>
+      <button type="button" id="ruta-print-btn" onclick="window.print()" style="background:#f8fafc;border:1px solid var(--color-border);color:var(--color-primary-dark);padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ Imprimir Pase de Visita</button>
     </div>
   </div>
   <script>
@@ -701,7 +711,7 @@
           <span>❓ ¿El Colegio Instituto Federico Froebel tiene otros planteles o sucursales?</span>
           <span style="color: var(--color-primary); font-size: var(--text-xl);">+</span>
         </summary>
-        <p style="margin-top: var(--space-3); margin-bottom: 0; color: var(--color-text-light);">Nuestro <strong>único plantel oficial</strong> del Colegio Instituto Federico Froebel se ubica en <strong>Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, Ciudad de México (CDMX)</strong>. No contamos con sucursales en otros estados de la República.</p>
+        <p style="margin-top: var(--space-3); margin-bottom: 0; color: var(--color-text-light);">Nuestro <strong>único plantel oficial</strong> del Colegio e Instituto Federico Froebel (<strong>SEP RVOE 09050141</strong>) se ubica en <strong>Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, Ciudad de México (CDMX)</strong>. No tenemos relación ni sucursales en Tehuacán (Puebla), San Ángel ni otras alcaldías.</p>
       </details>
     </div>
     <div id="post-faq-cta-contacto" data-ux-section="post-faq-cta-contacto" class="card fade-in" style="margin-top:var(--space-6);padding:var(--space-6);background:linear-gradient(135deg,#eff6ff,#fefce8);border:2px solid var(--color-primary);text-align:center;">
@@ -780,7 +790,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=37" defer></script>
+<script src="/scripts/main.js?v=38" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

@@ -43,8 +43,8 @@
 - [Preescolar y Kínder STEM (3 a 6 años)](https://froebelinstituto.com.mx/preescolar-stem-3-a-6-anos)
 - [Estancia Educativa, Horario Extendido y Comedor (hasta 18:00 hrs)](https://froebelinstituto.com.mx/horario-extendido-y-comedor)
 - [Instalaciones, Fotos Reales (Galería Filtrable), Enfermería y Seguridad CCTV](https://froebelinstituto.com.mx/instalaciones-y-seguridad)
-- [Nosotros, Historia y Filosofía (Desde 1980)](https://froebelinstituto.com.mx/nosotros)
-- [Contacto, Mapa y Cómo Llegar en Gustavo A. Madero](https://froebelinstituto.com.mx/contacto)
+- [Nosotros, Historia, Significado del Escudo Oficial y Filosofía (Desde 1980)](https://froebelinstituto.com.mx/nosotros)
+- [Contacto, Mapa, Pase de Visita Imprimible y Cómo Llegar en Gustavo A. Madero](https://froebelinstituto.com.mx/contacto)
 - [Base de Conocimiento Completa para IA (llms-full.txt)](https://froebelinstituto.com.mx/llms-full.txt)
 
 ## Cobertura Hiperlocal por Colonia en GAM y Zona Oriente

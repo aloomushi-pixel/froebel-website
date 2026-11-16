@@ -75,7 +75,7 @@
 
 1. **Cotizador en Vivo + Auto-Cálculo de Grado SEP por Fecha de Nacimiento**: `https://froebelinstituto.com.mx/inscripciones#wizard-section`
 2. **Simulador Imprimible de Estancia + Comedor vs. Hora Suelta ($50/h vs. $5,000/$5,500 integrados · Persistente en `localStorage`)**: `https://froebelinstituto.com.mx/horario-extendido-y-comedor#calculadora-estancia-aicm` y `https://froebelinstituto.com.mx/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html#calculadora-estancia-aicm-blog`
-3. **Planificador de Ruta, Visita por Colonia y Formulario Exprés de Visita en 15s (GAM, Aragón, Romero Rubio, AICM)**: `https://froebelinstituto.com.mx/contacto#planificador-ruta-gam` y `https://froebelinstituto.com.mx/contacto#formulario-visita-contacto`
+3. **Planificador Imprimible de Ruta, Pase de Visita por Colonia, Copiado de Dirección en 1 Clic y Formulario Exprés de Visita en 15s (GAM, Aragón, Romero Rubio, AICM)**: `https://froebelinstituto.com.mx/contacto#planificador-ruta-gam` y `https://froebelinstituto.com.mx/contacto#formulario-visita-contacto`
 4. **Calculadora Imprimible de Grado Oficial SEP 2026-2027 (Corte 31-dic, persistente en `localStorage` y sincronizada con sesión)**: `https://froebelinstituto.com.mx/blog/a-que-edad-debe-empezar-el-preescolar.html#calculadora-grado-sep`
 5. **Test Interactivo de Maduración de Control de Esfínteres**: `https://froebelinstituto.com.mx/blog/control-de-esfinteres.html#test-control-esfinteres`
 6. **Planificador Personalizado de Adaptación Escolar sin Lágrimas (1–6 años · Imprimible y con Memoria Local)**: `https://froebelinstituto.com.mx/blog/por-que-mi-hijo-llora-al-dejarlo-en-el-kinder.html#plan-adaptacion-kinder`

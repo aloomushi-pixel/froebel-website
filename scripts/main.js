@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initInteractiveHeroLabels();
     initInteractivePhotoGalleryFilters();
     initFacilityPhotoLightbox();
+    initCopyAddressButtons();
     initInteractiveComparisonTables();
     initInteractiveActionCards();
     initInstantLinkPrefetch();
@@ -244,10 +245,58 @@ function initInstantLinkPrefetch() {
   document.addEventListener('touchstart', maybePrefetch, { passive: true });
 }
 
+/* === 1-CLICK COPY OFFICIAL ADDRESS BUTTONS (Shareable Campus Location for Visits) === */
+function initCopyAddressButtons() {
+  const buttons = document.querySelectorAll('[data-copy-address]');
+  if (!buttons.length) return;
+
+  const copyTextSafe = async (txt) => {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      await navigator.clipboard.writeText(txt);
+      return true;
+    }
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0;';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  };
+
+  buttons.forEach((btn) => {
+    const originalHtml = btn.innerHTML;
+    let resetTimer = null;
+    btn.setAttribute('aria-live', 'polite');
+    btn.addEventListener('click', async () => {
+      const addressTxt =
+        btn.getAttribute('data-copy-address') ||
+        'Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 CDMX (a 2 cuadras de Metro Aragón Línea 5)';
+      try {
+        await copyTextSafe(addressTxt);
+        btn.textContent = '✓ Dirección copiada';
+        if (resetTimer) clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+          btn.innerHTML = originalHtml;
+        }, 2600);
+        if (window.FroebelUX && !window.FroebelUX.isBot()) {
+          window.FroebelUX.track('cta_click', {
+            element_id: btn.id || 'copy_official_address',
+            element_text: 'Copiar Dirección Exacta GAM',
+          });
+        }
+      } catch (_) {}
+    });
+  });
+}
+
 /* === INTERACTIVE PHOTO LIGHTBOX (Eliminates Mobile Photo Dead Clicks + Adds Conversion Bar) === */
 function initFacilityPhotoLightbox() {
   const candidates = Array.from(document.querySelectorAll('main img, section img, article img')).filter((img) => {
     if (img.closest('a, button, header, footer')) return false;
+    if (img.getAttribute('data-allow-lightbox') === '1') return true;
     const src = img.getAttribute('src') || '';
     if (src.includes('logo-froebel')) return false;
     const wAttr = parseInt(img.getAttribute('width') || '0', 10);
@@ -322,7 +371,7 @@ function openFroebelPhotoLightbox(imgEl) {
   const modalImg = document.getElementById('froebel-lightbox-img');
   const modalCap = document.getElementById('froebel-lightbox-caption');
   const modalEnroll = document.getElementById('froebel-lightbox-enroll');
-  modalImg.src = imgEl.currentSrc || imgEl.src;
+  modalImg.src = imgEl.getAttribute('data-lightbox-src') || imgEl.currentSrc || imgEl.src;
   modalImg.alt = imgEl.alt || 'Instalaciones Instituto Federico Froebel';
   modalCap.textContent = imgEl.alt || 'Instalaciones seguras del Instituto Federico Froebel en San Juan de Aragón, GAM.';
   if (modalEnroll) {
