@@ -184,7 +184,7 @@
       "isPartOf": {
         "@id": "https://froebelinstituto.com.mx/#organization"
       },
-      "dateModified": "2026-11-15"
+      "dateModified": "2026-11-16"
     },
     {
       "@type": "BlogPosting",
@@ -199,7 +199,7 @@
       },
       "mainEntityOfPage": "https://froebelinstituto.com.mx/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html",
       "datePublished": "2026-02-16",
-      "dateModified": "2026-11-15"
+      "dateModified": "2026-11-16"
     },
     {
       "@type": "FAQPage",
@@ -339,31 +339,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom:1px solid var(--color-border);">
+                        <tr data-scroll-target="#lista-compras-500" style="border-bottom:1px solid var(--color-border);">
                             <td style="padding:9px 10px;font-weight:700;">Lunes</td>
                             <td style="padding:9px 10px;">Avena con manzana + rollitos de huevo con espinaca</td>
                             <td style="padding:9px 10px;">Lentejas guisadas con plátano macho y arroz</td>
                             <td style="padding:9px 10px;">Hierro, fibra y proteína vegetal + animal</td>
                         </tr>
-                        <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
+                        <tr data-scroll-target="#lista-compras-500" style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
                             <td style="padding:9px 10px;font-weight:700;">Martes</td>
                             <td style="padding:9px 10px;">Molletes con frijol y queso panela + naranja</td>
                             <td style="padding:9px 10px;">Tinga de zanahoria con pollo deshebrado</td>
                             <td style="padding:9px 10px;">Vitamina A, C, calcio y proteína magra</td>
                         </tr>
-                        <tr style="border-bottom:1px solid var(--color-border);">
+                        <tr data-scroll-target="#lista-compras-500" style="border-bottom:1px solid var(--color-border);">
                             <td style="padding:9px 10px;font-weight:700;">Miércoles</td>
                             <td style="padding:9px 10px;">Hot cakes de avena y plátano + zanahoria cocida</td>
                             <td style="padding:9px 10px;">Sopa de fideo con espinaca y tortitas de papa</td>
                             <td style="padding:9px 10px;">Energía de liberación lenta y ácido fólico</td>
                         </tr>
-                        <tr style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
+                        <tr data-scroll-target="#lista-compras-500" style="border-bottom:1px solid var(--color-border);background:#f8fafc;">
                             <td style="padding:9px 10px;font-weight:700;">Jueves</td>
                             <td style="padding:9px 10px;">Taquitos de huevo con calabacita + papaya</td>
                             <td style="padding:9px 10px;">Frijoles caseros sin grasa con huevo y verdura</td>
                             <td style="padding:9px 10px;">Colina para memoria, digestión y aminoácidos</td>
                         </tr>
-                        <tr style="background:#fefce8;">
+                        <tr data-scroll-target="#lista-compras-500" style="background:#fefce8;">
                             <td style="padding:9px 10px;font-weight:700;">Viernes</td>
                             <td style="padding:9px 10px;">Quesadillas de queso panela y aguacate + manzana</td>
                             <td style="padding:9px 10px;">Enfrijoladas con queso panela y aguacate</td>
@@ -394,11 +394,17 @@
         
             
             <div id="lista-compras-500" data-ux-section="lista-compras-500" style="background:white;border:2px solid #93c5fd;border-radius:var(--radius-xl);padding:var(--space-6);margin:var(--space-6) 0;box-shadow:var(--shadow-sm);">
+                <style>
+                  @media print {
+                    .header, .footer, .whatsapp-fab, #froebel-cookie-banner, #froebel-mobile-dock, #cotizador-rapido-colonia, #post-faq-cta-blog, #btn-print-lista-500, #btn-share-lista-500, #btn-simular-comedor-500, #btn-wa-comedor-500 { display: none !important; }
+                    body { background: #ffffff !important; color: #000000 !important; }
+                  }
+                </style>
                 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:var(--space-2);">
                     <h3 style="font-size:var(--text-xl);color:var(--color-primary-dark);margin:0;">🛒 Lista Interactiva del Súper / Tianguis con $500 MXN (GAM y CDMX)</h3>
                     <span id="lista-500-status" style="background:#eff6ff;border:1px solid #93c5fd;color:var(--color-primary-dark);padding:4px 12px;border-radius:999px;font-size:0.78rem;font-weight:800;">0 de 4 grupos listos ($0 / $500 MXN)</span>
                 </div>
-                <p style="margin-bottom:var(--space-3);font-size:var(--text-sm);color:var(--color-text-light);">Marca cada grupo al ir al mercado (se guarda automáticamente en tu celular) o compártela en 1 clic a tu WhatsApp:</p>
+                <p style="margin-bottom:var(--space-3);font-size:var(--text-sm);color:var(--color-text-light);">Marca cada grupo al ir al mercado (se guarda automáticamente en tu celular), imprímela o compártela en 1 clic a tu WhatsApp:</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:0.65rem;font-size:var(--text-sm);margin-bottom:var(--space-4);">
                     <label style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:1px solid var(--color-border);border-radius:10px;background:#f8fafc;cursor:pointer;">
                         <input type="checkbox" class="js-lista-500-item" data-cost="195" value="proteinas" style="margin-top:3px;width:18px;height:18px;accent-color:#16a34a;flex-shrink:0;"/>
@@ -426,9 +432,10 @@
                     <li>• <strong>Viernes:</strong> Quesadillas de maíz con queso panela y aguacate + rodajas de manzana.</li>
                 </ul>
                 <div style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;">
+                    <button type="button" id="btn-print-lista-500" onclick="if(window.FroebelUX && !window.FroebelUX.isBot())window.FroebelUX.track('cta_click',{element_id:'lista_500_print',element_text:'Imprimir Menu y Lista 500 MXN'});window.print();" class="btn btn--secondary btn--sm" style="background:#f8fafc;border-color:var(--color-border);color:var(--color-primary-dark);font-weight:700;">🖨️ Imprimir Menú y Lista</button>
                     <a id="btn-share-lista-500" href="https://wa.me/?text=Lista%20Semanal%20Nutritiva%20%24500%20MXN%20(Instituto%20Froebel)%3A%0A-%20Prote%C3%ADnas%20(%24195)%3A%2015%20huevos%2C%201%2F2kg%20pechuga%2C%201%2F4kg%20panela%0A-%20Leguminosas%20(%24115)%3A%20lenteja%2C%20frijol%2C%20avena%2C%20arroz%2Fpasta%0A-%20Verduras%20(%24105)%3A%20zanahoria%2C%20espinaca%2C%20calabacita%2C%20papa%2C%20aguacate%0A-%20Frutas%20(%2485)%3A%20pl%C3%A1tano%2C%20manzana%2C%20naranja%2Fpapaya%0AGu%C3%ADa%3A%20https%3A%2F%2Ffroebelinstituto.com.mx%2Fblog%2Fmenu-semanal-nutritivo-para-ninos-con-500-pesos.html" target="_blank" rel="noopener noreferrer" class="btn btn--secondary btn--sm" style="border-color:#16a34a;color:#15803d;background:#f0fdf4;font-weight:700;">📤 Compartir Lista en mi WhatsApp</a>
-                    <a href="/horario-extendido-y-comedor#calculadora-estancia-aicm" class="btn btn--primary btn--sm">🧮 Simular Comedor + Estancia ($5,000–$5,500 todo incluido) →</a>
-                    <a href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20vi%20su%20art%C3%ADculo%20del%20Men%C3%BA%20Semanal%20Nutritivo%20y%20me%20gustar%C3%ADa%20conocer%20el%20men%C3%BA%20y%20costos%20de%20su%20Comedor%20Escolar" rel="noopener noreferrer" target="_blank" class="btn btn--accent btn--sm">💬 Consultar Comedor Escolar</a>
+                    <a id="btn-simular-comedor-500" href="/horario-extendido-y-comedor#calculadora-estancia-aicm" class="btn btn--primary btn--sm">🧮 Simular Comedor + Estancia ($5,000–$5,500 todo incluido) →</a>
+                    <a id="btn-wa-comedor-500" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20vi%20su%20art%C3%ADculo%20del%20Men%C3%BA%20Semanal%20Nutritivo%20y%20me%20gustar%C3%ADa%20conocer%20el%20men%C3%BA%20y%20costos%20de%20su%20Comedor%20Escolar" rel="noopener noreferrer" target="_blank" class="btn btn--accent btn--sm">💬 Consultar Comedor Escolar</a>
                 </div>
             </div>
             <script>
@@ -436,6 +443,8 @@
                 var KEY = 'froebel_lista_500_v1';
                 var checks = document.querySelectorAll('#lista-compras-500 .js-lista-500-item');
                 var badge = document.getElementById('lista-500-status');
+                var simBtn = document.getElementById('btn-simular-comedor-500');
+                var waComedor = document.getElementById('btn-wa-comedor-500');
                 if (!checks.length || !badge) return;
                 var saved = [];
                 try { saved = JSON.parse(localStorage.getItem(KEY) || '[]') || []; } catch (_) {}
@@ -458,8 +467,22 @@
                     badge.style.background = count === 4 ? '#dcfce7' : '#eff6ff';
                     badge.style.borderColor = count === 4 ? '#86efac' : '#93c5fd';
                     badge.style.color = count === 4 ? '#166534' : 'var(--color-primary-dark)';
-                    try { localStorage.setItem(KEY, JSON.stringify(active)); } catch (_) {}
-                    if (track && window.FroebelUX) {
+                    if (track) {
+                        try { localStorage.setItem(KEY, JSON.stringify(active)); } catch (_) {}
+                    }
+                    try {
+                        var rawDraft = sessionStorage.getItem('froebel_quote_draft_v1');
+                        if (rawDraft) {
+                            var d = JSON.parse(rawDraft);
+                            if (d && d.totalMonthly) {
+                                var tot = Number(d.totalMonthly) || 5000;
+                                var fmt = '$' + tot.toLocaleString('es-MX') + '/mes';
+                                if (simBtn && tot >= 5000) simBtn.textContent = '🧮 Apartar con Comedor (' + fmt + ' todo incluido) →';
+                                if (waComedor) waComedor.href = 'https://wa.me/525554148872?text=' + encodeURIComponent('Hola Instituto Froebel, vi el Menú Semanal Nutritivo ($500) y coticé ' + (d.programLabel || 'Kínder/Maternal') + ' (' + fmt + '). Quiero informes de su Comedor Escolar.');
+                            }
+                        }
+                    } catch (_) {}
+                    if (track && window.FroebelUX && !window.FroebelUX.isBot()) {
                         window.FroebelUX.track('cta_click', { element_id: 'lista_500_check', element_text: 'Lista $500: ' + count + '/4 ($' + sum + ')' });
                     }
                 }
@@ -467,6 +490,7 @@
                     if (saved.indexOf(cb.value) !== -1) cb.checked = true;
                     cb.addEventListener('change', function(){ refresh(true); });
                 });
+                window.addEventListener('froebel:quote-updated', function(){ refresh(false); });
                 refresh(false);
             })();
             </script>

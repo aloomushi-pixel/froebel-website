@@ -443,10 +443,11 @@ app.use((req, res, next) => {
   res.setHeader('Content-Type', cached.contentType);
   res.setHeader('ETag', cached.etag);
   if (cached.isHtml) {
+    const canonicalPath = req.path || '/';
     res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
     res.setHeader(
       'Link',
-      '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown"'
+      `<https://froebelinstituto.com.mx${canonicalPath}>; rel="canonical", <https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown"`
     );
   } else {
     res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');

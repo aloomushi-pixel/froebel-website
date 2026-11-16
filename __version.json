@@ -1,12 +1,12 @@
 {
-  "version": "2.1.68",
-  "cycle": 68,
-  "deployedAt": "2026-11-15T21:50:00.000Z",
+  "version": "2.1.69",
+  "cycle": 69,
+  "deployedAt": "2026-11-16T02:08:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1_SEARCH_CONSOLE_Y_GOBERNANZA",
   "highlights": [
-    "Level 2 Interactive Quote-Selecting Table Rows across Portada, /programas, /nosotros, /preescolar-stem-3-a-6-anos, /contacto, 5 Hyperlocal GAM Colonias & 3 Blog Guides",
-    "Level 2 localStorage Persistence + @media print + Bidirectional Session-Quote Sync on #simulador-egreso-primaria, #plan-adaptacion-kinder, #evaluador-kinder-gam & #filtro-edad-bloques",
-    "Level 1 GSC CTR Title/Meta 1:1 Optimization on /contacto (★ 4.9, 188 impr) and blog/5-actividades-con-bloques-para-hacer-en-casa.html (141 impr)",
-    "Level 1 Googlebot Smartphone Crawl Discovery Links from Portada Hero & /contacto to /blog/ and Checklist Kínder GAM"
+    "Level 1 HTTP Link rel=canonical Header in server.js + GSC CTR 1:1 Title/Meta upgrades on /inscripciones (340 impr, ★ 4.9) & /blog/",
+    "Level 2 Desktop Above-the-Fold Hero Height + Single-Campus SEP Disambiguation on Portada (resolving desktop 0% scroll bounce)",
+    "Level 2 100% Coverage (24/24 Interactive Comparison Tables across all 23 pages) including #tabla-desglose-costos-2026 Wizard row triggers",
+    "Level 2 localStorage Persistence + @media print on #calculadora-grado-sep, #lista-compras-500 & #filtro-temas-blog + Crawl Bridges from /inscripciones"
   ]
 }
