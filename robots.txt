@@ -1,12 +1,22 @@
-# RFC 9309 Unified Crawler & Generative AI Agent Policy — Instituto Federico Froebel
-User-agent: *
+# RFC 9309 Unified Crawler, Search Discovery & AI Training Policy — Instituto Federico Froebel
+# Estandar SKILL SEO JRGC 202611 (v3.0): separacion explicita entre Descubrimiento y Entrenamiento IA
+
+# 1. Motores de Busqueda y Asistentes IA de Respuesta en Vivo (Descubrimiento)
 User-agent: Googlebot
 User-agent: Bingbot
 User-agent: Applebot
-User-agent: GPTBot
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
 User-agent: PerplexityBot
+User-agent: Claude-SearchBot
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /api/
+
+# 2. Rastreadores de Entrenamiento de Modelos IA (Control granular — ver "Para hacer esto verdad")
+User-agent: GPTBot
 User-agent: ClaudeBot
 User-agent: Claude-Web
 User-agent: Google-Extended
@@ -14,8 +24,14 @@ User-agent: Applebot-Extended
 User-agent: Meta-ExternalAgent
 User-agent: Meta-ExternalFetcher
 User-agent: meta-webindexer
-User-agent: DuckAssistBot
 User-agent: Amazonbot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /api/
+
+# 3. Regla general para otros rastreadores
+User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /admin

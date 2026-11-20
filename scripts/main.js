@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileNav();
   initHyperlocalNeighborhoodCalculators();
+  initInteractiveComparisonTables();
+  initInteractiveActionCards();
   initContactVisitForm();
   initInscripcionInfoForm();
   initFroebelUXTelemetry();
@@ -80,8 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initInteractivePhotoGalleryFilters();
     initFacilityPhotoLightbox();
     initCopyAddressButtons();
-    initInteractiveComparisonTables();
-    initInteractiveActionCards();
     initInstantLinkPrefetch();
     initCookieConsentBanner();
     initMobileStickyConversionBar();
@@ -491,9 +491,16 @@ function initInteractiveActionCards() {
     if (allLinks.length === 1) {
       primaryLink = allLinks[0];
     } else {
-      const directLinks = Array.from(card.children).filter((el) => el.tagName && el.tagName.toLowerCase() === 'a' && el.hasAttribute('href'));
-      if (directLinks.length === 1) {
-        primaryLink = directLinks[0];
+      const primaryBtns = Array.from(card.querySelectorAll('a.btn--primary[href]'));
+      if (primaryBtns.length === 1) {
+        primaryLink = primaryBtns[0];
+      } else {
+        const directLinks = Array.from(card.children).filter(
+          (el) => el.tagName && el.tagName.toLowerCase() === 'a' && el.hasAttribute('href')
+        );
+        if (directLinks.length === 1) {
+          primaryLink = directLinks[0];
+        }
       }
     }
     if (!primaryLink) return;

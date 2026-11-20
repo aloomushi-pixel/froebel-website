@@ -485,14 +485,57 @@ app.use(
   })
 );
 
+const NOT_FOUND_HTML = `<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Página no encontrada (404) — Instituto Federico Froebel</title>
+<style>
+  :root{--color-primary:#1E40AF;--color-primary-dark:#1E3A8A;--color-bg:#F8FAFC;--color-text:#2d3436;--color-text-light:#636e72;--color-border:#dfe6e9;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--color-bg);color:var(--color-text);line-height:1.6;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  main{max-width:620px;width:100%;background:#fff;border:1px solid var(--color-border);border-radius:18px;padding:32px 28px;box-shadow:0 12px 30px rgba(30,64,175,0.08);}
+  .badge{display:inline-block;background:#EFF6FF;color:var(--color-primary-dark);font-weight:700;font-size:0.82rem;padding:4px 12px;border-radius:999px;margin-bottom:14px;}
+  h1{font-size:1.7rem;line-height:1.22;margin-bottom:10px;color:var(--color-primary-dark);}
+  p{font-size:1rem;color:var(--color-text-light);margin-bottom:18px;}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+  a.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 18px;border-radius:999px;font-weight:700;font-size:0.92rem;text-decoration:none;border:1px solid var(--color-primary);}
+  a.primary{background:var(--color-primary);color:#fff;}
+  a.secondary{background:#fff;color:var(--color-primary-dark);}
+  a.wa{background:#16a34a;border-color:#16a34a;color:#fff;}
+  .links{border-top:1px solid var(--color-border);padding-top:14px;font-size:0.9rem;display:flex;flex-wrap:wrap;gap:14px;}
+  .links a{color:var(--color-primary);font-weight:600;text-decoration:none;}
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">Error 404 · Dirección no encontrada</span>
+  <h1>Esta página no existe en el sitio del Instituto Federico Froebel</h1>
+  <p>La URL solicitada pudo haber cambiado o contener un error tipográfico. Aquí tienes acceso directo a nuestras secciones principales en San Juan de Aragón I Secc, Gustavo A. Madero (SEP RVOE 09050141):</p>
+  <div class="actions">
+    <a class="btn primary" href="/">Ir al Inicio</a>
+    <a class="btn secondary" href="/inscripciones">Costos e Inscripciones ($3,600/mes)</a>
+    <a class="btn wa" href="https://wa.me/525554148872?text=Hola%20Instituto%20Froebel%2C%20busco%20informes%20de%20Maternal%20o%20K%C3%ADnder%20en%20GAM" target="_blank" rel="noopener noreferrer">WhatsApp: 55 5414 8872</a>
+  </div>
+  <nav class="links" aria-label="Accesos principales">
+    <a href="/programas">Programas y Costos</a>
+    <a href="/maternal-bilingue-1-a-3-anos">Maternal (1–3 años)</a>
+    <a href="/preescolar-stem-3-a-6-anos">Kínder SEP (3–6 años)</a>
+    <a href="/horario-extendido-y-comedor">Estancia hasta 18:00h</a>
+    <a href="/contacto">Cómo Llegar</a>
+    <a href="/blog/">Blog para Padres</a>
+  </nav>
+</main>
+</body>
+</html>`;
+
 app.get('*', (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex, nofollow');
-  const home = MEMORY_DOC_CACHE.get('/');
-  if (home) {
-    res.setHeader('Content-Type', home.contentType);
-    return res.status(404).send(home.buf);
-  }
-  res.status(404).sendFile(path.join(__dirname, 'index.html'));
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  return res.status(404).send(NOT_FOUND_HTML);
 });
 
 app.listen(port, () => console.log(`Instituto Federico Froebel Server running on port ${port}`));
