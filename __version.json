@@ -1,11 +1,11 @@
 {
-  "version": "2.1.77",
-  "cycle": 77,
-  "deployedAt": "2026-11-20T19:16:00.000Z",
+  "version": "2.1.78",
+  "cycle": 78,
+  "deployedAt": "2026-11-20T23:25:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Level 2 Rankings Push #77 (/nosotros): Aligned 1:1 Title/OG/Twitter/WebPage ('Colegio y Escuela Federico Froebel CDMX (GAM) ★ 4.9 | SEP · $3,600') + 153c Av. 521 Aragón disambiguation description targeting 'colegio/escuela federico froebel' Striking Distance (968 impr, 0.72% CTR, pos 8.51; cooldown until 2026-12-18)",
-    "Level 1 Semantic <main> Landmark Parity (WCAG 2.2 AA / UCP): Wrapped main content in <main>...</main> across the remaining 22 HTML pages (now 23/23 verified by scripts/audit-seo-jrgc-froebel.mjs)",
-    "Level 1 Internal Indexing & Scannability Cleanup: Added clean non-fragment internal links to /blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html across core pages; split >62w paragraphs on /, /nosotros, /inscripciones, /contacto; removed remaining visible em-dashes in H1/H2/aria-label"
+    "Level 2 Rankings Push #78 (/colegio-cerca-de-mi/penon-de-los-banos/): Aligned 1:1 Title/OG/Twitter/WebPage ('Kínder y Maternal Peñón de los Baños y AICM ★ 4.9 | 18h · $3,600') + 159c AICM T1/T2 7 min & 18:00h comedor description targeting pos 6.32 Striking Distance (cooldown until 2026-12-18)",
+    "Level 1 JRGC Fit/No-Fit Coverage Expansion (5 -> 8 pages): Added localized #autocalificacion-fit-nofit + clean non-fragment internal links (/blog/como-elegir...html & /blog/) across /penon-de-los-banos/, /san-juan-de-aragon/, and /romero-rubio/, raising auditor threshold to 8",
+    "Level 1 Scannability <=60w Final Cleanup: Split the remaining 4 unlocked >60-word paragraphs across /, /inscripciones, /blog/control-de-esfinteres.html, and /blog/5-beneficios...aicm.html"
   ]
 }
