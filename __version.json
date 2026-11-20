@@ -1,11 +1,11 @@
 {
-  "version": "2.1.75",
-  "cycle": 75,
-  "deployedAt": "2026-11-20T10:53:00.000Z",
+  "version": "2.1.76",
+  "cycle": 76,
+  "deployedAt": "2026-11-20T15:05:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Level 1 GSC URL Inspection Reliability: Upgraded fetchWithTimeout to 30000ms for inspectGscUrl and increased batch concurrency from 5 to 8 in scripts/gsc-seo-optimizer.mjs",
-    "Level 2 Rankings Push #75 (/blog/): Fixed duplicate og:url (missing twitter:url), refined title/description (62/158 chars) targeting Kínder SEP, Edad & Control de Esfínteres + Inverted Pyramid hero (logged cooldown until 2026-12-18)",
-    "Level 1 Scannability & Anti-Boilerplate on Unlocked Pages: Inverted Pyramid 49w opener + 6 em-dash cleanup on /blog/control-de-esfinteres.html; split 72-75w FAQ paragraphs on /; replaced duplicate cliché heading and em-dashes with colony-specific titles on /colegio-cerca-de-mi/{san-juan-de-aragon,romero-rubio,penon-de-los-banos}/"
+    "Level 1 GSC URL Inspection Reliability: Added 2-attempt retry backoff and 6-URL batch concurrency in scripts/gsc-seo-optimizer.mjs + propagated non-pass errors in scripts/ux-digest-engine.mjs",
+    "Level 2 Rankings Push #76 (/blog/a-que-edad-debe-empezar-el-preescolar.html): Aligned 1:1 Title/OG/Twitter/WebPage/BlogPosting ('¿A qué Edad Empieza el Preescolar? Tabla SEP 2026 y Calculadora') + 154c description + Inverted Pyramid intro with SEP 31-Dec cutoff & Maternal 1-yr info (cooldown until 2026-12-18)",
+    "Level 1 Technical & E-E-A-T Parity: 8/8 blog articles now carry #blog-author-byline; Inverted Pyramid openers on menu-semanal & 5-beneficios-aicm; fixed property=twitter:url -> name=twitter:url on /horario-extendido-y-comedor; cleaned colonia boilerplate on /gertrudis-sanchez/ & /nueva-tenochtitlan/ and scannability/em-dashes on /inscripciones & /nosotros"
   ]
 }
