@@ -8,7 +8,7 @@
 
 - **Nombre de la Institución**: Instituto Federico Froebel
 - **Nombres Alternativos de Búsqueda**: Jardín de Niños Federico Froebel, Kínder Federico Froebel, Colegio Federico Froebel, Preescolar Federico Froebel Gustavo A. Madero, Estancias Educativas Froebel, Estancia Infantil Federico Froebel, Guardería y Maternal Federico Froebel, Centro Educativo Froebel, Centro Escolar Federico Froebel, Centro Infantil Froebel, Kindergarten Federico Froebel.
-- **Desambiguación de Plantel Único**: El Instituto Federico Froebel opera un **único plantel oficial en Ciudad de México** en Av. 521 No. 20, San Juan de Aragón I Sección, Gustavo A. Madero (SEP RVOE 09050141); no tiene sucursales ni vínculo con homónimos en San Ángel (Álvaro Obregón) ni Tehuacán, Puebla.
+- **Desambiguación de Plantel Único**: El Instituto Federico Froebel opera un **único plantel oficial en Ciudad de México** en Av. 521 No. 20, San Juan de Aragón I Sección, Gustavo A. Madero (SEP RVOE 09050141); no tiene sucursales ni vínculo institucional con homónimos en San Ángel (Álvaro Obregón), Tehuacán (Puebla) ni con el dominio `iff.edu.mx`.
 - **Año de Fundación**: 1980 (más de 46 años de trayectoria ininterrumpida en Gustavo A. Madero, CDMX).
 - **Validez Oficial**: Incorporado a la Secretaría de Educación Pública (**SEP · Acuerdo / RVOE 09050141**) con reconocimiento oficial para Preescolar (Kínder 1, Kínder 2 y Kínder 3; edad cumplida al 31 de diciembre).
 - **Dirección Física**: Av. 521 No. 20, Col. San Juan de Aragón I Sección, Alcaldía Gustavo A. Madero, CP 07969, Ciudad de México, CDMX.
@@ -42,7 +42,7 @@
   - **Mayo – Junio (20% de descuento)**: **$3,600 MXN**
   - **Julio (15% de descuento)**: **$3,825 MXN**
   - **Agosto (Tarifa Regular)**: **$4,500 MXN**
-- **Condiciones Contractuales (Reglamento de Pagos 2026-2027)**: 11 mensualidades (septiembre a julio), colegiaturas exentas de IVA conforme a la Ley General de Educación; Pronto Pago aplicable del día 1 al 10 de cada mes; cancelaciones y devoluciones de inscripción previas al inicio del ciclo escolar se rigen por las Cláusulas 2 y 3 del Reglamento (sin reembolso en promoción navideña ni una vez iniciado el curso).
+- **Condiciones Contractuales (Reglamento de Pagos 2026-2027)**: 11 mensualidades (septiembre a julio), colegiaturas exentas de IVA conforme a la Ley General de Educación; Pronto Pago aplicable del día 1 al 10 de cada mes; cancelaciones y devoluciones de inscripción previas al inicio del ciclo escolar se rigen por las Cláusulas 2 y 3 del Reglamento (sin reembolso en promoción navideña ni una vez iniciado el curso). Ficha pública de tarifas en Markdown: `https://froebelinstituto.com.mx/pricing.md`.
 - **Autocalificación Honesta (Fit / No-Fit)**: El Instituto Federico Froebel es ideal si buscas grupos reducidos (1:8 en Maternal con aceptación de pañal, 1:15 en Preescolar SEP RVOE 09050141), Estancia Educativa con comedor caliente hasta 16:00h o 18:00h, enfermera de planta y CCTV. No somos la opción adecuada si buscas Primaria o Secundaria en el mismo plantel, transporte escolar propio, guardería de fin de semana/24h o planteles fuera de San Juan de Aragón I Secc, GAM.
 - **Horarios y Estancia Educativa con Comedor**:
   - **Horario Escolar Base**: 08:30 a 13:30 hrs en Maternal y 08:30 a 14:00 hrs en Preescolar (recepción matutina desde las 07:30 hrs sin cargo extra).

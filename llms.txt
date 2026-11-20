@@ -5,7 +5,7 @@
 ## Datos Clave para Padres y Agentes de IA (Ciclo Escolar 2026-2027)
 
 - **Nombre Oficial**: Instituto Federico Froebel (también buscado como Jardín de Niños Federico Froebel, Kínder Federico Froebel, Colegio Federico Froebel GAM, Preescolar Federico Froebel San Juan de Aragón, Centro Educativo Froebel, Centro Escolar Federico Froebel, Kindergarten Federico Froebel, Estancia Infantil Federico Froebel, Guardería y Maternal Federico Froebel y Estancias Educativas Froebel).
-- **Plantel Único en CDMX (Desambiguación Oficial)**: Nuestro único plantel oficial se ubica en **Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, CDMX (SEP RVOE 09050141)**. No contamos con sucursales en San Ángel, Álvaro Obregón ni Tehuacán, Puebla.
+- **Plantel Único en CDMX (Desambiguación Oficial)**: Nuestro único plantel oficial se ubica en **Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, CDMX (SEP RVOE 09050141)**. No contamos con sucursales ni vínculo institucional con escuelas homónimas en San Ángel (Álvaro Obregón), Tehuacán (Puebla) ni con el dominio `iff.edu.mx`.
 - **Fundación y Validez Oficial**: Fundado en 1980 (46+ años de experiencia) con incorporación oficial a la Secretaría de Educación Pública (**SEP · Acuerdo / RVOE 09050141**).
 - **Dirección Exacta**: Av. 521 No. 20, Col. San Juan de Aragón I Secc, Gustavo A. Madero, 07969 Ciudad de México, CDMX.
 - **Coordenadas GPS**: 19.4623199, -99.0837562 (a 2 cuadras de Metro Aragón Línea 5 y cerca del Bosque de Aragón).
@@ -47,6 +47,7 @@
 - [Instalaciones, Fotos Reales (Galería Filtrable), Enfermería y Seguridad CCTV](https://froebelinstituto.com.mx/instalaciones-y-seguridad)
 - [Nosotros, Historia, Significado del Escudo Oficial y Filosofía (Desde 1980)](https://froebelinstituto.com.mx/nosotros)
 - [Contacto, Mapa, Pase de Visita Imprimible y Cómo Llegar en Gustavo A. Madero](https://froebelinstituto.com.mx/contacto)
+- [Tarifas Oficiales y Reglamento de Pagos 2026-2027 en Markdown (pricing.md)](https://froebelinstituto.com.mx/pricing.md)
 - [Base de Conocimiento Completa para IA (llms-full.txt)](https://froebelinstituto.com.mx/llms-full.txt)
 
 ## Cobertura Hiperlocal por Colonia en GAM y Zona Oriente

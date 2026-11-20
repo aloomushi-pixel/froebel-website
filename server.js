@@ -29,7 +29,10 @@ function warmMemoryDocCache(dir, urlPrefix = '') {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       warmMemoryDocCache(fullPath, `${urlPrefix}/${entry.name}`);
-    } else if (/\.(html|txt|xml|json)$/i.test(entry.name) && !/^package(-lock)?\.json$/i.test(entry.name)) {
+    } else if (
+      (/\.(html|txt|xml|json)$/i.test(entry.name) && !/^package(-lock)?\.json$/i.test(entry.name)) ||
+      entry.name.toLowerCase() === 'pricing.md'
+    ) {
       const buf = fs.readFileSync(fullPath);
       const stat = fs.statSync(fullPath);
       const etag = `W/"${buf.length.toString(16)}-${Math.trunc(stat.mtimeMs).toString(16)}"`;
@@ -41,6 +44,8 @@ function warmMemoryDocCache(dir, urlPrefix = '') {
           ? 'application/xml; charset=utf-8'
           : ext === '.json'
           ? 'application/json; charset=utf-8'
+          : ext === '.md'
+          ? 'text/markdown; charset=utf-8'
           : 'text/plain; charset=utf-8';
       const routePath = `${urlPrefix}/${entry.name}`;
       const record = { buf, etag, contentType, isHtml: ext === '.html' };
@@ -447,7 +452,7 @@ app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
     res.setHeader(
       'Link',
-      `<https://froebelinstituto.com.mx${canonicalPath}>; rel="canonical", <https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown"`
+      `<https://froebelinstituto.com.mx${canonicalPath}>; rel="canonical", <https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown", <https://froebelinstituto.com.mx/pricing.md>; rel="alternate"; type="text/markdown"; title="Tarifas Oficiales 2026-2027"`
     );
   } else {
     res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
@@ -472,8 +477,11 @@ app.use(
         res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
         res.setHeader(
           'Link',
-          '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown"'
+          '<https://froebelinstituto.com.mx/llms.txt>; rel="llms-txt", <https://froebelinstituto.com.mx/llms-full.txt>; rel="alternate"; type="text/markdown", <https://froebelinstituto.com.mx/pricing.md>; rel="alternate"; type="text/markdown"; title="Tarifas Oficiales 2026-2027"'
         );
+      } else if (reqPath.endsWith('pricing.md')) {
+        res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       } else if (reqPath.endsWith('.json') || reqPath.endsWith('.xml') || reqPath.endsWith('.txt')) {
         res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       } else if (reqPath.endsWith('.js') || reqPath.endsWith('.css')) {

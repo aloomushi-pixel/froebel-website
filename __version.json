@@ -1,12 +1,12 @@
 {
-  "version": "2.1.73",
-  "cycle": 73,
-  "deployedAt": "2026-11-20T02:36:00.000Z",
+  "version": "2.1.74",
+  "cycle": 74,
+  "deployedAt": "2026-11-20T06:45:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Integration of SKILL SEO JRGC 202611 (v3.0) + Verified Business Context (.agents/references/seo-jrgc-contexto-proyecto.md) + 28-Day Rankings Push Cooldown Ledger",
-    "Level 1 Global Technical & Discover Hygiene across 23/23 Pages: Removed obsolete <meta name='keywords'>, enabled max-image-preview:large, upgraded og:image/twitter:image to 1280x698 / 1230x816 JPGs, injected sameAs in EducationalOrganization JSON-LD, added dedicated HTTP 404 (noindex) in server.js & separated Discovery vs Training AI bots in robots.txt",
-    "Level 1 Claim Gate, Anti-Marketese & WCAG 2.2 AA: Replaced unverified 98% stat with verified 4.9★ Google Maps, removed 'No es manipulación, es...' and 'excelencia' clichés, added 8 blog image aria-labels + email <label>",
-    "Level 2 Fit/No-Fit Self-Qualification + 3-Step Plan + Contract Transparency on /, /inscripciones & /programas, plus main.js?v=39 immediate action-card & table binding eliminating 6 real dead_clicks"
+    "Level 1 GSC & UX Engine Hardening: Added ipv4first DNS ordering, 20s fetchWithTimeout, parallel 5-URL GSC inspection batches across all 23 canonical URLs, and removed retired FAQPage rich snippet wording in scripts/gsc-seo-optimizer.mjs + scripts/ux-digest-engine.mjs",
+    "Level 2 Agentic GEO Endpoint (/pricing.md): Published verified 2026-2027 MXN tariff sheet and Reglamento de Pagos in website/pricing.md served with text/markdown Content-Type, in-memory cache, HTTP Link headers, and linked from llms.txt & llms-full.txt",
+    "Level 2 Unlocked Page Optimizations (28d Cooldown Respected):CTR/Inverted-Pyramid experiment on /blog/5-actividades-con-bloques-para-hacer-en-casa.html (logged until 2026-12-18), plus scannability, Fit/No-Fit blocks, and iff.edu.mx/Tehuacán/San Ángel disambiguation on /nosotros and /contacto",
+    "Gate #8 Upgraded: scripts/audit-seo-jrgc-froebel.mjs now enforces >= 5 Fit/No-Fit pages and validates /pricing.md endpoint parity with $3,600/mes & SEP 09050141"
   ]
 }
