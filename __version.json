@@ -1,11 +1,11 @@
 {
-  "version": "2.1.76",
-  "cycle": 76,
-  "deployedAt": "2026-11-20T15:05:00.000Z",
+  "version": "2.1.77",
+  "cycle": 77,
+  "deployedAt": "2026-11-20T19:16:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Level 1 GSC URL Inspection Reliability: Added 2-attempt retry backoff and 6-URL batch concurrency in scripts/gsc-seo-optimizer.mjs + propagated non-pass errors in scripts/ux-digest-engine.mjs",
-    "Level 2 Rankings Push #76 (/blog/a-que-edad-debe-empezar-el-preescolar.html): Aligned 1:1 Title/OG/Twitter/WebPage/BlogPosting ('¿A qué Edad Empieza el Preescolar? Tabla SEP 2026 y Calculadora') + 154c description + Inverted Pyramid intro with SEP 31-Dec cutoff & Maternal 1-yr info (cooldown until 2026-12-18)",
-    "Level 1 Technical & E-E-A-T Parity: 8/8 blog articles now carry #blog-author-byline; Inverted Pyramid openers on menu-semanal & 5-beneficios-aicm; fixed property=twitter:url -> name=twitter:url on /horario-extendido-y-comedor; cleaned colonia boilerplate on /gertrudis-sanchez/ & /nueva-tenochtitlan/ and scannability/em-dashes on /inscripciones & /nosotros"
+    "Level 2 Rankings Push #77 (/nosotros): Aligned 1:1 Title/OG/Twitter/WebPage ('Colegio y Escuela Federico Froebel CDMX (GAM) ★ 4.9 | SEP · $3,600') + 153c Av. 521 Aragón disambiguation description targeting 'colegio/escuela federico froebel' Striking Distance (968 impr, 0.72% CTR, pos 8.51; cooldown until 2026-12-18)",
+    "Level 1 Semantic <main> Landmark Parity (WCAG 2.2 AA / UCP): Wrapped main content in <main>...</main> across the remaining 22 HTML pages (now 23/23 verified by scripts/audit-seo-jrgc-froebel.mjs)",
+    "Level 1 Internal Indexing & Scannability Cleanup: Added clean non-fragment internal links to /blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html across core pages; split >62w paragraphs on /, /nosotros, /inscripciones, /contacto; removed remaining visible em-dashes in H1/H2/aria-label"
   ]
 }
