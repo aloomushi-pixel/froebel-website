@@ -1,11 +1,11 @@
 {
-  "version": "2.1.79",
-  "cycle": 79,
-  "deployedAt": "2026-11-21T03:35:00.000Z",
+  "version": "2.1.80",
+  "cycle": 80,
+  "deployedAt": "2026-11-21T07:45:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Level 2 Rankings Push #79 (/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html): Fixed 71c truncated title -> 62c 1:1 ('Kínder con Horario Extendido cerca del AICM (18:00h) | Froebel') + 160c fact-led description (cooldown until 2026-12-18)",
-    "Level 1 JRGC Fit/No-Fit Colonias 100% Parity (8 -> 10 pages): Added localized #autocalificacion-fit-nofit + clean non-fragment internal links (/blog/como-elegir...html & /blog/) across /gertrudis-sanchez/ and /nueva-tenochtitlan/, raising auditor threshold to 10",
-    "Level 1 100% NN/g Scannability (0 paragraphs >60w across all 23 HTML pages): Split the final 3 >60-word paragraphs across blog/a-que-edad...html, blog/como-elegir...html, and horario-extendido-y-comedor.html"
+    "Level 2 Rankings Push #80 (/colegio-cerca-de-mi/san-juan-de-aragon/): Claim Gate H1 cleanup ('El Mejor' -> 'Preescolar y Maternal Bilingüe SEP') + 1:1 Title 61c & Meta Description 159c (down from 161c) targeting home colonia (pos 5.25 in 7d, cooldown until 2026-12-19)",
+    "Level 1 JRGC Fit/No-Fit 100% Commercial/Pillar Parity (10 -> 14 pages): Added localized #autocalificacion-fit-nofit + clean non-fragment internal links (/blog/como-elegir...html & /blog/) across Maternal, Preescolar STEM, Horario Extendido and Instalaciones, raising auditor threshold to 14",
+    "Level 1 Freshness Sync: Updated WebPage dateModified & sitemap.xml <lastmod> to 2026-11-21 across all 5 modified URLs while maintaining 0 paragraphs >60w sitewide"
   ]
 }
