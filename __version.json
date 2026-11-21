@@ -1,11 +1,11 @@
 {
-  "version": "2.1.78",
-  "cycle": 78,
-  "deployedAt": "2026-11-20T23:25:00.000Z",
+  "version": "2.1.79",
+  "cycle": 79,
+  "deployedAt": "2026-11-21T03:35:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Level 2 Rankings Push #78 (/colegio-cerca-de-mi/penon-de-los-banos/): Aligned 1:1 Title/OG/Twitter/WebPage ('Kínder y Maternal Peñón de los Baños y AICM ★ 4.9 | 18h · $3,600') + 159c AICM T1/T2 7 min & 18:00h comedor description targeting pos 6.32 Striking Distance (cooldown until 2026-12-18)",
-    "Level 1 JRGC Fit/No-Fit Coverage Expansion (5 -> 8 pages): Added localized #autocalificacion-fit-nofit + clean non-fragment internal links (/blog/como-elegir...html & /blog/) across /penon-de-los-banos/, /san-juan-de-aragon/, and /romero-rubio/, raising auditor threshold to 8",
-    "Level 1 Scannability <=60w Final Cleanup: Split the remaining 4 unlocked >60-word paragraphs across /, /inscripciones, /blog/control-de-esfinteres.html, and /blog/5-beneficios...aicm.html"
+    "Level 2 Rankings Push #79 (/blog/5-beneficios-del-horario-extendido-para-padres-que-trabajan-cerca-del-aicm.html): Fixed 71c truncated title -> 62c 1:1 ('Kínder con Horario Extendido cerca del AICM (18:00h) | Froebel') + 160c fact-led description (cooldown until 2026-12-18)",
+    "Level 1 JRGC Fit/No-Fit Colonias 100% Parity (8 -> 10 pages): Added localized #autocalificacion-fit-nofit + clean non-fragment internal links (/blog/como-elegir...html & /blog/) across /gertrudis-sanchez/ and /nueva-tenochtitlan/, raising auditor threshold to 10",
+    "Level 1 100% NN/g Scannability (0 paragraphs >60w across all 23 HTML pages): Split the final 3 >60-word paragraphs across blog/a-que-edad...html, blog/como-elegir...html, and horario-extendido-y-comedor.html"
   ]
 }
