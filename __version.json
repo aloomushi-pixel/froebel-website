@@ -1,11 +1,11 @@
 {
-  "version": "2.1.81",
-  "cycle": 81,
-  "deployedAt": "2026-11-21T11:50:00.000Z",
+  "version": "2.1.82",
+  "cycle": 82,
+  "deployedAt": "2026-11-23T01:46:00.000Z",
   "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
   "highlights": [
-    "Level 2 Rankings Push #81 (/colegio-cerca-de-mi/romero-rubio/): Completed 5/5 colonia parity with SEP H1 alignment ('Preescolar y Maternal Bilingüe SEP cerca de Romero Rubio') + 1:1 Title 61c (★ 4.9 | 18h · $3,600) & Meta Description 155c targeting pos 7.31 (7.69% CTR, cooldown until 2026-12-19)",
-    "Level 1 JRGC Inverted Pyramid & GEO Claim Gate: Replaced slow editorial opening on blog/diferencia-entre-guarderia...html with a 53w direct answer (85% synaptic architecture + ratio 1:8 + $3,600/mes) and applied Claim Gate in website/llms-full.txt FAQ heading",
-    "Level 1 Permanent <=60w Scannability Enforcement (Rule 8c): Added automated body <p> <=60-word check to scripts/audit-seo-jrgc-froebel.mjs and synced dateModified & sitemap.xml <lastmod> to 2026-11-21"
+    "Level 2 Rankings Push #82 (/blog/diferencia-entre-guarderia-y-neurodesarrollo-temprano-en-maternal.html): 1:1 Title 64c ('Guardería vs Maternal: Diferencia y Neurodesarrollo (1–3a) ★ 4.9') & Meta 158c (85% neurodesarrollo, ratio 1:8, inglés diario, pañal aceptado, CCTV, $3,600/mes) targeting pos 12.0 -> Page 1 (cooldown until 2026-12-20)",
+    "Level 1 JRGC Claim Gate Cleanup (website/index.html): Replaced unquantified superlatives ('el mejor Kínder', 'uno de los mejores kínders') in #porque H2, FAQPage #6 JSON-LD & matching <summary> with verifiable geographic/brand framing while keeping locked <title>, <meta> & <h1> untouched",
+    "Signal Hygiene & Telemetry: Updated WebPage/BlogPosting dateModified and sitemap.xml <lastmod> to 2026-11-22 on / and Maternal vs Guardería blog post (cooldown ledger updated to 18 locked URLs)"
   ]
 }
