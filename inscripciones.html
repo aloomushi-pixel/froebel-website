@@ -504,17 +504,17 @@
 <div>
 <label for="nombre" style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">Nombre
                 del padre/madre *</label>
-<input id="nombre" name="nombre" placeholder="Ej: María García López" required="" style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);transition:border-color var(--duration-fast);outline:none;" type="text"/>
+<input id="nombre" name="nombre" placeholder="Ej: María García López" required="" style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);transition:border-color var(--duration-fast);outline:none;" autocomplete="name" type="text"/>
 </div>
 <div>
 <label for="telefono" style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">WhatsApp
                 *</label>
-<input id="telefono" name="telefono" placeholder="55-1234-5678" required="" style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);" type="tel"/>
+<input id="telefono" name="telefono" placeholder="55-1234-5678" required="" style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);" autocomplete="tel" inputmode="tel" type="tel"/>
 </div>
 <div>
 <label for="email" style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">Correo
                 electrónico</label>
-<input id="email" name="email" placeholder="maria@ejemplo.com" style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);" type="email"/>
+<input id="email" name="email" placeholder="maria@ejemplo.com" style="width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);font-family:var(--font-body);" autocomplete="email" inputmode="email" type="email"/>
 </div>
 <div>
 <label for="edad-hijo" style="display:block;font-size:var(--text-sm);font-weight:var(--weight-medium);margin-bottom:var(--space-2);color:var(--color-text);">Edad
@@ -682,8 +682,8 @@
 </svg>
 </a>
 <!-- App Scripts -->
-<script src="/scripts/main.js?v=42" defer></script>
-<script src="/scripts/inscripcion-wizard.js?v=14" defer></script>
+<script src="/scripts/main.js?v=43" defer></script>
+<script src="/scripts/inscripcion-wizard.js?v=15" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

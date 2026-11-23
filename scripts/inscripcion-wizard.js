@@ -189,12 +189,12 @@ function renderStudentStep() {
 
         <div class="wizard__field">
           <label for="s-name">4. Nombre del alumno/a (o del tutor) *</label>
-          <input type="text" id="s-name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
+          <input type="text" id="s-name" autocomplete="name" value="${s.full_name || ''}" required placeholder="Ej: Mateo Hernández">
         </div>
 
         <div class="wizard__field">
           <label for="s-parent-phone">5. Tu WhatsApp o teléfono celular *</label>
-          <input type="tel" id="s-parent-phone" value="${g.phone || s.parent_phone || ''}" required placeholder="Ej: 55 1234 5678">
+          <input type="tel" id="s-parent-phone" autocomplete="tel" inputmode="tel" value="${g.phone || s.parent_phone || ''}" required placeholder="Ej: 55 1234 5678">
         </div>
 
         <div class="wizard__field">
@@ -202,6 +202,11 @@ function renderStudentStep() {
           <input type="date" id="s-dob" value="${s.date_of_birth || ''}" min="2019-01-01" max="2026-12-31" onchange="onWizardDobChange()">
           <div id="s-dob-grade-hint" style="display:none;margin-top:6px;padding:6px 10px;border-radius:8px;background:#f0fdf4;border:1px solid #86efac;color:#14532d;font-size:0.78rem;font-weight:700;line-height:1.35;"></div>
         </div>
+      </div>
+
+      <div id="wizard-express-inline-box" style="margin-top:0.9rem;padding:0.85rem 1rem;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.65rem;">
+        <span style="font-size:0.84rem;color:#14532d;font-weight:700;line-height:1.35;">⚡ ¿Ya pusiste nombre y WhatsApp? Guárdalo directo sin completar el resto:</span>
+        <button type="button" id="wizard-express-inline-btn" class="btn btn--accent" onclick="submitExpressPreRegistration()" style="font-weight:800;min-height:44px;padding:0.6rem 1.05rem;flex:1 1 220px;">⚡ Guardar Pre-Registro (15s)</button>
       </div>
 
       <details id="wizard-optional-medical" style="margin-top:1rem;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:0.75rem 1rem;">
@@ -263,22 +268,22 @@ function renderGuardianStep() {
       <div class="wizard__form-grid">
         <div class="wizard__field">
           <label for="g-name">Nombre completo *</label>
-          <input type="text" id="g-name" value="${g.full_name || ''}" required placeholder="Nombre(s) y Apellidos">
+          <input type="text" id="g-name" autocomplete="name" value="${g.full_name || ''}" required placeholder="Nombre(s) y Apellidos">
         </div>
 
         <div class="wizard__field">
           <label for="g-email">Correo electrónico (opcional — para recibir acuse por email)</label>
-          <input type="email" id="g-email" value="${g.email || ''}" placeholder="correo@ejemplo.com (opcional)">
+          <input type="email" id="g-email" autocomplete="email" inputmode="email" value="${g.email || ''}" placeholder="correo@ejemplo.com (opcional)">
         </div>
 
         <div class="wizard__field">
           <label for="g-phone">Teléfono celular *</label>
-          <input type="tel" id="g-phone" value="${g.phone || ''}" required placeholder="55 1234 5678">
+          <input type="tel" id="g-phone" autocomplete="tel" inputmode="tel" value="${g.phone || ''}" required placeholder="55 1234 5678">
         </div>
 
         <div class="wizard__field">
           <label for="g-whatsapp">WhatsApp (si es diferente)</label>
-          <input type="tel" id="g-whatsapp" value="${g.whatsapp || ''}" placeholder="Dejar vacío si es el mismo">
+          <input type="tel" id="g-whatsapp" autocomplete="tel" inputmode="tel" value="${g.whatsapp || ''}" placeholder="Dejar vacío si es el mismo">
         </div>
 
         <div class="wizard__field">
@@ -643,20 +648,42 @@ function updateWizardLiveQuote(persistChange = false) {
   }
 }
 
+function focusWizardField(fieldId) {
+  const el = document.getElementById(fieldId);
+  if (!el) return;
+  scrollWizardIntoView(el);
+  try {
+    el.focus({ preventScroll: true });
+  } catch (_) {
+    el.focus();
+  }
+}
+
 async function submitExpressPreRegistration() {
   const name = document.getElementById('s-name')?.value?.trim() || '';
   const phone = document.getElementById('s-parent-phone')?.value?.trim() || '';
   const program = document.getElementById('s-program')?.value || '';
-  if (!program) return showError('Selecciona el programa de interés');
-  if (!name) return showError('Ingresa el nombre del alumno/a o tutor');
-  if (!phone || phone.replace(/\D/g, '').length < 8) return showError('Ingresa un teléfono o WhatsApp válido (10 dígitos)');
+  if (!program) {
+    focusWizardField('s-program');
+    return showError('Selecciona el programa de interés');
+  }
+  if (!name) {
+    focusWizardField('s-name');
+    return showError('Ingresa el nombre del alumno/a o tutor');
+  }
+  if (!phone || phone.replace(/\D/g, '').length < 8) {
+    focusWizardField('s-parent-phone');
+    return showError('Ingresa un teléfono o WhatsApp válido (10 dígitos)');
+  }
 
   saveCurrentStepData();
-  const btn = document.getElementById('wizard-express-save-btn');
-  const origText = btn ? btn.innerHTML : '';
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = 'Guardando pre-registro...';
+  const expressBtns = ['wizard-express-save-btn', 'wizard-express-inline-btn']
+    .map((id) => document.getElementById(id))
+    .filter(Boolean)
+    .map((el) => ({ el, html: el.innerHTML }));
+  for (const b of expressBtns) {
+    b.el.disabled = true;
+    b.el.textContent = 'Guardando pre-registro...';
   }
 
   const s = wizardData.student || {};
@@ -702,15 +729,16 @@ async function submitExpressPreRegistration() {
     if (box) {
       box.style.display = 'block';
       box.innerHTML = `✅ <strong>¡Pre-registro recibido para ${progMap[s.program] || 'tu pequeño/a'}!</strong> Nuestro equipo de admisiones te contactará al <strong>${phone}</strong>. ¿Deseas atención inmediata? <a href="#" onclick="sendWizardToWhatsApp();return false;" style="color:#15803d;text-decoration:underline;font-weight:800;">Confirmar ahora por WhatsApp →</a>`;
+      scrollWizardIntoView(box);
     }
-    if (btn) {
-      btn.textContent = '✅ ¡Pre-Registro Guardado!';
+    for (const b of expressBtns) {
+      b.el.textContent = '✅ ¡Pre-Registro Guardado!';
     }
   } catch (err) {
     showError('No se pudo guardar en línea. Por favor envíalo en 1 clic con el botón verde de WhatsApp.');
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = origText;
+    for (const b of expressBtns) {
+      b.el.disabled = false;
+      b.el.innerHTML = b.html;
     }
   }
 }

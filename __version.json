@@ -1,11 +1,10 @@
 {
-  "version": "2.1.86",
-  "cycle": 86,
-  "deployedAt": "2026-11-23T14:10:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Mobile Nav Z-Index, Wizard Clearance & Unindexed Blog Crawl Fix",
+  "version": "2.1.87",
+  "cycle": 87,
+  "deployedAt": "2026-11-23T18:10:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Wizard Mobile Express Conversion & Clean WA Telemetry",
   "highlights": [
-    "Mobile Navigation Stacking & Instant Reveal Fix (website/scripts/main.js?v=42): Added header--menu-open (z-index 10000) to escape the z-index: 30 stacking context trap, eliminated the 350ms opacity:0 link fade-in delay, locked body overflow when open, synced aria-label ('Cerrar menú'), and added Escape/backdrop close after detecting 6 consecutive mobile nav-toggle taps in UX telemetry.",
-    "Enrollment Wizard Scroll-Clearance Fix (website/scripts/inscripcion-wizard.js?v=14): Added scrollWizardIntoView() with 84px top clearance in openEnrollmentWizard(), nextStep(), and prevStep() so the fixed 72px header never overlaps the live quote top bar on mobile.",
-    "Crawl & Indexation Push for Remaining 2 Non-PASS Blog URLs: Added visible <main> links to /blog/ and /blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html on homepage (/) and /inscripciones while preserving 100% of locked cooldown metadata, #froebel-cookie-banner, and Cycle 84 20-40% synthesis bounds."
+    "Wizard WhatsApp Telemetry Deduplication (website/scripts/main.js?v=43): Excluded #wizard-wa-top-btn and #wizard-wa-express-btn from global cta_click capture in initFroebelUXTelemetry() after live mobile telemetry showed duplicate cta_click events 1ms after whatsapp_click (preserving #froebel-cookie-banner intact).",
+    "Step-1 Mobile Express Conversion UX (website/scripts/inscripcion-wizard.js?v=15 & /inscripciones): Added inline 44px #wizard-express-inline-btn directly above the optional medical accordion, added autocomplete/inputmode attributes on student, guardian and /inscripciones form fields, focused empty required fields on validation error, synced saving state across express buttons, and scrolled #wizard-express-success cleanly into view with 84px header clearance."
   ]
 }
