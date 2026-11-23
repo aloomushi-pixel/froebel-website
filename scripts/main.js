@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPersistentQuoteDraftBridge();
   initHeader();
   initMobileNav();
+  initFroebelCollapsibles();
   initHyperlocalNeighborhoodCalculators();
   initInteractiveComparisonTables();
   initInteractiveActionCards();
@@ -127,6 +128,9 @@ function initInteractiveHeroLabels() {
     }
 
     const jump = () => {
+      if (typeof window.FroebelOpenCollapsibleFor === 'function') {
+        window.FroebelOpenCollapsibleFor(dest);
+      }
       const topY = dest.getBoundingClientRect().top + window.scrollY - 88;
       window.scrollTo({ top: Math.max(0, topY), behavior: 'smooth' });
       const prevOutline = dest.style.outline;
@@ -454,6 +458,9 @@ function initInteractiveComparisonTables() {
           document.getElementById('cotizador-rapido-colonia') ||
           document.getElementById('calculadora-estancia-aicm');
         if (dest) {
+          if (typeof window.FroebelOpenCollapsibleFor === 'function') {
+            window.FroebelOpenCollapsibleFor(dest);
+          }
           const topY = dest.getBoundingClientRect().top + window.scrollY - 88;
           window.scrollTo({ top: Math.max(0, topY), behavior: 'smooth' });
           const prevOutline = dest.style.outline;
@@ -482,7 +489,7 @@ function initInteractiveActionCards() {
   document.querySelectorAll('.card').forEach((card) => {
     const tag = card.tagName.toLowerCase();
     if (tag === 'a' || tag === 'button' || tag === 'details' || card.hasAttribute('role')) return;
-    if (card.querySelector('input, select, textarea, button, form, table, details')) return;
+    if (card.querySelector('input, select, textarea, button, form, table, details, .froebel-collapse')) return;
 
     const allLinks = Array.from(card.querySelectorAll('a[href]'));
     if (!allLinks.length) return;
@@ -1239,6 +1246,95 @@ function initScrollAnimations() {
   elements.forEach((el) => observer.observe(el));
 }
 
+/* === ACCESSIBLE COLLAPSIBLES (.froebel-collapse) === */
+window.FroebelOpenCollapsibleFor = function (el) {
+  if (!el || typeof el.closest !== 'function') return false;
+  let opened = false;
+  let panel = el.closest('.froebel-collapse__panel');
+  while (panel) {
+    if (panel.hasAttribute('hidden')) {
+      panel.removeAttribute('hidden');
+      opened = true;
+    }
+    const box = panel.closest('.froebel-collapse');
+    const trig = box
+      ? (panel.id ? box.querySelector(`[aria-controls="${panel.id}"]`) : null) ||
+        box.querySelector('.froebel-collapse__trigger')
+      : null;
+    if (trig) trig.setAttribute('aria-expanded', 'true');
+    panel = box && box.parentElement ? box.parentElement.closest('.froebel-collapse__panel') : null;
+  }
+  let det = el.closest('details');
+  while (det) {
+    if (!det.open) {
+      det.open = true;
+      opened = true;
+    }
+    det = det.parentElement ? det.parentElement.closest('details') : null;
+  }
+  if (opened) {
+    try {
+      window.dispatchEvent(new Event('resize'));
+    } catch (_) {}
+  }
+  return opened;
+};
+
+function initFroebelCollapsibles() {
+  document.querySelectorAll('.froebel-collapse').forEach((box) => {
+    const trigger = box.querySelector('.froebel-collapse__trigger');
+    const panel = box.querySelector('.froebel-collapse__panel');
+    if (!trigger || !panel) return;
+
+    const isInitiallyOpen = !panel.hasAttribute('hidden');
+    trigger.setAttribute('aria-expanded', isInitiallyOpen ? 'true' : 'false');
+
+    trigger.addEventListener('click', (e) => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true' && !panel.hasAttribute('hidden');
+      if (isOpen) {
+        panel.setAttribute('hidden', 'until-found');
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        panel.removeAttribute('hidden');
+        trigger.setAttribute('aria-expanded', 'true');
+        if (
+          e.isTrusted &&
+          window.FroebelUX &&
+          !(typeof window.FroebelUX.isBot === 'function' && window.FroebelUX.isBot())
+        ) {
+          const label = (trigger.textContent || 'collapse').trim().slice(0, 80);
+          window.FroebelUX.track('cta_click', {
+            element_id: panel.id || trigger.getAttribute('aria-controls') || 'froebel-collapse',
+            element_text: label,
+          });
+        }
+      }
+    });
+
+    panel.addEventListener('beforematch', () => {
+      panel.removeAttribute('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+    });
+  });
+
+  const openHashTarget = () => {
+    const raw = (window.location.hash || '').slice(1);
+    if (!raw) return;
+    let target = null;
+    try {
+      target = document.getElementById(decodeURIComponent(raw));
+    } catch (_) {
+      target = document.getElementById(raw);
+    }
+    if (target && typeof window.FroebelOpenCollapsibleFor === 'function') {
+      window.FroebelOpenCollapsibleFor(target);
+    }
+  };
+
+  openHashTarget();
+  window.addEventListener('hashchange', openHashTarget);
+}
+
 /* === SMOOTH SCROLL === */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -1248,6 +1344,9 @@ function initSmoothScroll() {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
+        if (typeof window.FroebelOpenCollapsibleFor === 'function') {
+          window.FroebelOpenCollapsibleFor(target);
+        }
         const headerOffset = 80;
         const elementPosition = target.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - headerOffset;
@@ -1266,6 +1365,14 @@ function initFaqAccordions() {
   document.querySelectorAll('details.faq-item, details').forEach((detail) => {
     const summary = detail.querySelector('summary');
     if (!summary) return;
+    const syncIndicator = () => {
+      const lastSpan = summary.querySelector('span:last-child');
+      if (lastSpan && /^[+\-−]$/.test(lastSpan.textContent.trim())) {
+        lastSpan.textContent = detail.open ? '−' : '+';
+      }
+    };
+    syncIndicator();
+    detail.addEventListener('toggle', syncIndicator);
     summary.addEventListener('click', (e) => {
       if (!e.isTrusted) return;
       if (window.FroebelUX && typeof window.FroebelUX.isBot === 'function' && window.FroebelUX.isBot()) {

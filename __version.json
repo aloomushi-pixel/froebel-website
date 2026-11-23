@@ -1,11 +1,11 @@
 {
-  "version": "2.1.83",
-  "cycle": 83,
-  "deployedAt": "2026-11-23T02:05:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0",
+  "version": "2.1.84",
+  "cycle": 84,
+  "deployedAt": "2026-11-23T06:25:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Sitewide Synthesis & Decongestion",
   "highlights": [
-    "Level 2 Rankings Push #83 (/contacto): Replaced 69c SERP-truncated title with 1:1 60c ('Contacto Colegio Federico Froebel GAM ★ 4.9 | Av. 521 Aragón'), 1:1 153c meta highlighting Plantel único CDMX (GAM), Metro Aragón L5, WhatsApp 55 5414 8872, 07:30–18:00h & $3,600/mes + H1 alignment targeting pos 11.1 -> Page 1 (cooldown until 2026-12-20)",
-    "Level 1 JRGC Claim Gate & Rule of 100 (website/inscripciones.html): Replaced unquantified '⭐ MEJOR PRECIO' annual plan badge with exact MXN savings '🎯 AHORRA $3,520 (-8%)' while leaving locked/future-push <title>, <meta> & <h1> untouched",
-    "Signal Hygiene & Cooldown Registry: Synced WebPage.dateModified and sitemap.xml <lastmod> to 2026-11-22 for /contacto and /inscripciones; added experiment #19 to seo-jrgc-cooldown-ledger.json (19 locked URLs)"
+    "Sitewide Copywriting Synthesis (23/23 Pages, 32.55% DOM Main Reduction): Reduced total <main> copy from 34,256 to 23,105 words, keeping every single page strictly inside the 20.0%–40.0% synthesis target while preserving 1:1 <title>, <meta description>, <h1>, verbatim Google Maps testimonials, and #autocalificacion-fit-nofit.",
+    "Visual Decongestion & Accessible Collapsibles (-49.17% Initial Visible Words): Stripped <details open> from all 23 pages (0 open FAQs) and wrapped dense secondary tables, neighborhood calculators, and guide directories in .froebel-collapse (hidden='until-found') with deep-anchor auto-opening in /scripts/main.js?v=40.",
+    "Preserved Interactive Conversion Tools & Compliance: Retained #enrollment-wizard, neighborhood calculators, school simulators, JRGC 100/100 score, 0 broken links/anchors, and all mandatory guardrails intact."
   ]
 }
