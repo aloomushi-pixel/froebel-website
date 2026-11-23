@@ -1,11 +1,11 @@
 {
-  "version": "2.1.85",
-  "cycle": 85,
-  "deployedAt": "2026-11-23T10:10:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Rankings Push #85 & Collapsible Telemetry Fix",
+  "version": "2.1.86",
+  "cycle": 86,
+  "deployedAt": "2026-11-23T14:10:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Mobile Nav Z-Index, Wizard Clearance & Unindexed Blog Crawl Fix",
   "highlights": [
-    "Rankings Push #85 on Unlocked Page-1 Candidate (/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html, pos 8.9, 10 impr, 0 clicks, stale crawl 2026-11-04): replaced truncated 67-char title with 1:1 62-char SERP title ('Menú Semanal Nutritivo para Niños con $500 Pesos + Lista Súper'), 152-char fact-led description, and dateModified 2026-11-23 while keeping all 19 locked URLs untouched.",
-    "Nivel 1 UX Telemetry Deduplication (website/scripts/main.js?v=41): added 'collapse:' element_id prefix in initFroebelCollapsibles() and excluded .froebel-collapse__trigger from the global cta_click fallback handler in initFroebelUXTelemetry() to eliminate duplicate trigger events without touching #froebel-cookie-banner.",
-    "Preserved All Mandatory Guardrails & 23-Page Compliance: Maintained JRGC 100/100 score, SEO 100/100 across 23 pages, zero broken links/anchors, and cache-buster ?v=41 across all 23 canonical HTML pages."
+    "Mobile Navigation Stacking & Instant Reveal Fix (website/scripts/main.js?v=42): Added header--menu-open (z-index 10000) to escape the z-index: 30 stacking context trap, eliminated the 350ms opacity:0 link fade-in delay, locked body overflow when open, synced aria-label ('Cerrar menú'), and added Escape/backdrop close after detecting 6 consecutive mobile nav-toggle taps in UX telemetry.",
+    "Enrollment Wizard Scroll-Clearance Fix (website/scripts/inscripcion-wizard.js?v=14): Added scrollWizardIntoView() with 84px top clearance in openEnrollmentWizard(), nextStep(), and prevStep() so the fixed 72px header never overlaps the live quote top bar on mobile.",
+    "Crawl & Indexation Push for Remaining 2 Non-PASS Blog URLs: Added visible <main> links to /blog/ and /blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html on homepage (/) and /inscripciones while preserving 100% of locked cooldown metadata, #froebel-cookie-banner, and Cycle 84 20-40% synthesis bounds."
   ]
 }

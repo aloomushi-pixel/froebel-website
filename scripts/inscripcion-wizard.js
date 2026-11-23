@@ -767,6 +767,13 @@ function sendWizardToWhatsApp() {
 }
 
 /* === NAVIGATION === */
+function scrollWizardIntoView(targetEl) {
+  const el = targetEl || document.getElementById('enrollment-wizard') || document.getElementById('wizard-section');
+  if (!el) return;
+  const topY = el.getBoundingClientRect().top + window.scrollY - 84;
+  window.scrollTo({ top: Math.max(0, topY), behavior: 'smooth' });
+}
+
 async function nextStep() {
   if (!validateCurrentStep()) return;
   saveCurrentStepData();
@@ -781,14 +788,14 @@ async function nextStep() {
     });
   }
 
-  window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
+  scrollWizardIntoView(document.getElementById('enrollment-wizard'));
 }
 
 function prevStep() {
   saveCurrentStepData();
   currentStep--;
   renderWizard();
-  window.scrollTo({ top: document.getElementById('enrollment-wizard').offsetTop - 100, behavior: 'smooth' });
+  scrollWizardIntoView(document.getElementById('enrollment-wizard'));
 }
 
 /* === VALIDATION === */
@@ -1055,7 +1062,7 @@ function openEnrollmentWizard(preset) {
       renderWizard();
     }
     trackWizardOpenOnce('Abrir Proceso de Inscripción en Línea');
-    wizardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollWizardIntoView(wizardSection);
   }
 }
 

@@ -1091,11 +1091,20 @@ function initMobileNav() {
           font-size: 0.9rem !important;
           line-height: 1.42 !important;
         }
+        header.header--menu-open {
+          z-index: 10000 !important;
+        }
         .header__nav--open {
           justify-content: flex-start !important;
           padding: 4.75rem 1.25rem 1.5rem !important;
           gap: 0.55rem !important;
           overflow-y: auto !important;
+        }
+        .header__nav--open .header__link,
+        .header__nav--open .header__cta {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
         }
         .header__nav--open .header__link {
           font-size: 1.2rem !important;
@@ -1188,8 +1197,13 @@ function initMobileNav() {
     nav.appendChild(panel);
   }
 
+  const headerEl = toggle.closest('.header');
+
   const syncToggleVisual = (isOpen) => {
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Menú');
+    if (headerEl) headerEl.classList.toggle('header--menu-open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     const lbl = toggle.querySelector('.header__toggle-label');
     if (lbl) lbl.textContent = isOpen ? 'Cerrar' : 'Menú';
     const spans = toggle.querySelectorAll('span');
@@ -1220,6 +1234,16 @@ function initMobileNav() {
 
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
+  });
+
+  nav.addEventListener('click', (e) => {
+    if (e.target === nav) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('header__nav--open')) {
+      closeMenu();
+    }
   });
 }
 
