@@ -1,10 +1,11 @@
 {
-  "version": "2.1.87",
-  "cycle": 87,
-  "deployedAt": "2026-11-23T18:10:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Wizard Mobile Express Conversion & Clean WA Telemetry",
+  "version": "2.1.88",
+  "cycle": 88,
+  "deployedAt": "2026-11-23T22:05:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + LCP Priority Fix, INP Yield & Interactive Collapse Cards",
   "highlights": [
-    "Wizard WhatsApp Telemetry Deduplication (website/scripts/main.js?v=43): Excluded #wizard-wa-top-btn and #wizard-wa-express-btn from global cta_click capture in initFroebelUXTelemetry() after live mobile telemetry showed duplicate cta_click events 1ms after whatsapp_click (preserving #froebel-cookie-banner intact).",
-    "Step-1 Mobile Express Conversion UX (website/scripts/inscripcion-wizard.js?v=15 & /inscripciones): Added inline 44px #wizard-express-inline-btn directly above the optional medical accordion, added autocomplete/inputmode attributes on student, guardian and /inscripciones form fields, focused empty required fields on validation error, synced saving state across express buttons, and scrolled #wizard-express-success cleanly into view with 84px header clearance."
+    "Above-the-Fold LCP Image Priority Fix (6 Core Pages): Switched primary <main> editorial/hero WebP images from loading=\"lazy\" to loading=\"eager\" fetchpriority=\"high\" on /preescolar-stem-3-a-6-anos (real-user LCP 1300ms), /maternal-bilingue-1-a-3-anos, /horario-extendido-y-comedor, /instalaciones-y-seguridad, /programas, and /blog/.",
+    "Restore Whole-Card CTA Navigation with .froebel-collapse & Dead-Click Hygiene (website/scripts/main.js?v=44): Updated initInteractiveActionCards() so cards containing Cycle 84 collapsible panels regain [role=\"button\"] navigation outside .froebel-collapse, and excluded details/.froebel-collapse text clicks from false-positive dead_click events.",
+    "INP Latency Yield Optimization (/blog/5-actividades-con-bloques-para-hacer-en-casa.html): Deferred non-visual localStorage/cross-widget sync into post-paint setTimeout and eliminated duplicate synchronous FroebelUX clicks inside filterBloquesByAge() and toggleRetoBloque() (targeting real-user avg INP 760ms -> <100ms)."
   ]
 }

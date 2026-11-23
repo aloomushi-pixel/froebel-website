@@ -489,16 +489,21 @@ function initInteractiveActionCards() {
   document.querySelectorAll('.card').forEach((card) => {
     const tag = card.tagName.toLowerCase();
     if (tag === 'a' || tag === 'button' || tag === 'details' || card.hasAttribute('role')) return;
-    if (card.querySelector('input, select, textarea, button, form, table, details, .froebel-collapse')) return;
+    const hasBlockingControl = Array.from(
+      card.querySelectorAll('input, select, textarea, button, form, table')
+    ).some((el) => !el.closest('details, .froebel-collapse'));
+    if (hasBlockingControl) return;
 
-    const allLinks = Array.from(card.querySelectorAll('a[href]'));
+    const allLinks = Array.from(card.querySelectorAll('a[href]')).filter(
+      (a) => !a.closest('details, .froebel-collapse')
+    );
     if (!allLinks.length) return;
 
     let primaryLink = null;
     if (allLinks.length === 1) {
       primaryLink = allLinks[0];
     } else {
-      const primaryBtns = Array.from(card.querySelectorAll('a.btn--primary[href]'));
+      const primaryBtns = allLinks.filter((a) => a.classList.contains('btn--primary'));
       if (primaryBtns.length === 1) {
         primaryLink = primaryBtns[0];
       } else {
@@ -524,7 +529,7 @@ function initInteractiveActionCards() {
     }
 
     card.addEventListener('click', (ev) => {
-      if (ev.target.closest('a, button, input, select, textarea, summary, label')) return;
+      if (ev.target.closest('a, button, input, select, textarea, summary, label, details, .froebel-collapse')) return;
       const sel = window.getSelection ? window.getSelection().toString().trim() : '';
       if (sel.length > 0) return;
       primaryLink.click();
@@ -2225,7 +2230,7 @@ function initFroebelUXTelemetry() {
         const cardCandidate = target.closest('.card, .pricing-card, .feature-card, .testimonial-card, img');
         if (
           cardCandidate &&
-          !target.closest('form, input, select, textarea, label, #froebel-photo-lightbox, [data-ux-ignore-dead]')
+          !target.closest('form, input, select, textarea, label, details, .froebel-collapse, #froebel-photo-lightbox, [data-ux-ignore-dead]')
         ) {
           const deadLabel =
             cardCandidate.querySelector('h3, h4, strong')?.textContent?.trim()?.slice(0, 50) ||
