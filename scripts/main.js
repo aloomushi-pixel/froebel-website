@@ -1304,7 +1304,7 @@ function initFroebelCollapsibles() {
         ) {
           const label = (trigger.textContent || 'collapse').trim().slice(0, 80);
           window.FroebelUX.track('cta_click', {
-            element_id: panel.id || trigger.getAttribute('aria-controls') || 'froebel-collapse',
+            element_id: `collapse:${panel.id || trigger.getAttribute('aria-controls') || 'froebel-collapse'}`,
             element_text: label,
           });
         }
@@ -2138,11 +2138,12 @@ function initFroebelUXTelemetry() {
 
       const interactive = target.closest('a, button, [role="button"], input[type="submit"], summary, .btn, .whatsapp-float');
       if (interactive) {
-        // Avoid duplicate cta_click events for <summary> (tracked via initFaqAccordions toggle)
-        // and #froebel-cookie-accept-btn (tracked via initCookieConsentBanner)
+        // Avoid duplicate cta_click events for <summary> (initFaqAccordions),
+        // #froebel-cookie-accept-btn (initCookieConsentBanner), and .froebel-collapse__trigger (initFroebelCollapsibles)
         if (
           interactive.tagName.toLowerCase() === 'summary' ||
-          interactive.id === 'froebel-cookie-accept-btn'
+          interactive.id === 'froebel-cookie-accept-btn' ||
+          interactive.classList.contains('froebel-collapse__trigger')
         ) {
           return;
         }

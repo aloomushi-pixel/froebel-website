@@ -1,11 +1,11 @@
 {
-  "version": "2.1.84",
-  "cycle": 84,
-  "deployedAt": "2026-11-23T06:25:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Sitewide Synthesis & Decongestion",
+  "version": "2.1.85",
+  "cycle": 85,
+  "deployedAt": "2026-11-23T10:10:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Rankings Push #85 & Collapsible Telemetry Fix",
   "highlights": [
-    "Sitewide Copywriting Synthesis (23/23 Pages, 32.55% DOM Main Reduction): Reduced total <main> copy from 34,256 to 23,105 words, keeping every single page strictly inside the 20.0%–40.0% synthesis target while preserving 1:1 <title>, <meta description>, <h1>, verbatim Google Maps testimonials, and #autocalificacion-fit-nofit.",
-    "Visual Decongestion & Accessible Collapsibles (-49.17% Initial Visible Words): Stripped <details open> from all 23 pages (0 open FAQs) and wrapped dense secondary tables, neighborhood calculators, and guide directories in .froebel-collapse (hidden='until-found') with deep-anchor auto-opening in /scripts/main.js?v=40.",
-    "Preserved Interactive Conversion Tools & Compliance: Retained #enrollment-wizard, neighborhood calculators, school simulators, JRGC 100/100 score, 0 broken links/anchors, and all mandatory guardrails intact."
+    "Rankings Push #85 on Unlocked Page-1 Candidate (/blog/menu-semanal-nutritivo-para-ninos-con-500-pesos.html, pos 8.9, 10 impr, 0 clicks, stale crawl 2026-11-04): replaced truncated 67-char title with 1:1 62-char SERP title ('Menú Semanal Nutritivo para Niños con $500 Pesos + Lista Súper'), 152-char fact-led description, and dateModified 2026-11-23 while keeping all 19 locked URLs untouched.",
+    "Nivel 1 UX Telemetry Deduplication (website/scripts/main.js?v=41): added 'collapse:' element_id prefix in initFroebelCollapsibles() and excluded .froebel-collapse__trigger from the global cta_click fallback handler in initFroebelUXTelemetry() to eliminate duplicate trigger events without touching #froebel-cookie-banner.",
+    "Preserved All Mandatory Guardrails & 23-Page Compliance: Maintained JRGC 100/100 score, SEO 100/100 across 23 pages, zero broken links/anchors, and cache-buster ?v=41 across all 23 canonical HTML pages."
   ]
 }
