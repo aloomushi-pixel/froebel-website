@@ -109,6 +109,16 @@ function initInteractiveHeroLabels() {
       document.getElementById('wizard-section') ||
       document.getElementById('calculadora-estancia-aicm') ||
       document.getElementById('planificador-ruta-gam') ||
+      document.getElementById('simulador-egreso-primaria') ||
+      document.getElementById('simulador-cuidado-maternal') ||
+      document.getElementById('verificador-visita-seguridad') ||
+      document.getElementById('calculadora-grado-sep') ||
+      document.getElementById('test-control-esfinteres') ||
+      document.getElementById('plan-adaptacion-kinder') ||
+      document.getElementById('evaluador-kinder-gam') ||
+      document.getElementById('orientador-maternal-neurodesarrollo') ||
+      document.getElementById('lista-compras-500') ||
+      document.getElementById('progreso-reto-bloques') ||
       document.getElementById('filtro-temas-blog');
     if (!dest) return;
 
@@ -1456,7 +1466,7 @@ function initCookieConsentBanner() {
     'align-items: center',
     'justify-content: space-between',
     'gap: 14px',
-    dockAlreadyVisible ? 'transform: translateY(-54px)' : 'transform: translateY(0)',
+    dockAlreadyVisible ? 'transform: translateY(-68px)' : 'transform: translateY(0)',
     'transition: opacity 0.25s ease, transform 0.22s ease'
   ].join(';');
 
@@ -1587,7 +1597,7 @@ function initMobileStickyConversionBar() {
       id="froebel-dock-enroll"
       data-ux-id="mobile-dock-inscribir"
       href="${enrollHref}"
-      style="flex: 1.15; display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 40px; padding: 0 10px; border-radius: 999px; background: #ffc107; color: #0f172a; font-size: 12.5px; font-weight: 800; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.28);"
+      style="flex: 1.15; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 44px; height: 44px; padding: 0 10px; border-radius: 999px; background: #ffc107; color: #0f172a; font-size: 12.5px; font-weight: 800; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.28);"
     >${enrollLabel}</a>
     <a
       id="froebel-dock-wa"
@@ -1595,14 +1605,14 @@ function initMobileStickyConversionBar() {
       href="https://wa.me/525554148872?text=${encodeURIComponent(waMessage)}"
       target="_blank"
       rel="noopener noreferrer"
-      style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 40px; padding: 0 10px; border-radius: 999px; background: #16a34a; color: #ffffff; font-size: 12.5px; font-weight: 800; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);"
+      style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 44px; height: 44px; padding: 0 10px; border-radius: 999px; background: #16a34a; color: #ffffff; font-size: 12.5px; font-weight: 800; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);"
     >💬 WhatsApp</a>
     <a
       id="froebel-dock-tel"
       data-ux-id="mobile-dock-tel"
       href="tel:+525554148872"
       aria-label="Llamar al Instituto Federico Froebel 55 5414 8872"
-      style="width: 40px; height: 40px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.28); color: #ffffff; font-size: 16px; text-decoration: none;"
+      style="width: 44px; height: 44px; min-width: 44px; min-height: 44px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.28); color: #ffffff; font-size: 17px; text-decoration: none;"
     >📞</a>
   `;
 
@@ -1686,7 +1696,7 @@ function initMobileStickyConversionBar() {
 
     const cookieBanner = document.getElementById('froebel-cookie-banner');
     if (cookieBanner && cookieBanner.style.opacity !== '0') {
-      cookieBanner.style.transform = visible ? 'translateY(-54px)' : 'translateY(0)';
+      cookieBanner.style.transform = visible ? 'translateY(-68px)' : 'translateY(0)';
     }
   };
 

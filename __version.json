@@ -1,11 +1,11 @@
 {
-  "version": "2.1.88",
-  "cycle": 88,
-  "deployedAt": "2026-11-23T22:05:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + LCP Priority Fix, INP Yield & Interactive Collapse Cards",
+  "version": "2.1.89",
+  "cycle": 89,
+  "deployedAt": "2026-11-24T02:05:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Above-the-Fold Hero CTAs, WCAG 2.2 44px Dock & GEO Sync",
   "highlights": [
-    "Above-the-Fold LCP Image Priority Fix (6 Core Pages): Switched primary <main> editorial/hero WebP images from loading=\"lazy\" to loading=\"eager\" fetchpriority=\"high\" on /preescolar-stem-3-a-6-anos (real-user LCP 1300ms), /maternal-bilingue-1-a-3-anos, /horario-extendido-y-comedor, /instalaciones-y-seguridad, /programas, and /blog/.",
-    "Restore Whole-Card CTA Navigation with .froebel-collapse & Dead-Click Hygiene (website/scripts/main.js?v=44): Updated initInteractiveActionCards() so cards containing Cycle 84 collapsible panels regain [role=\"button\"] navigation outside .froebel-collapse, and excluded details/.froebel-collapse text clicks from false-positive dead_click events.",
-    "INP Latency Yield Optimization (/blog/5-actividades-con-bloques-para-hacer-en-casa.html): Deferred non-visual localStorage/cross-widget sync into post-paint setTimeout and eliminated duplicate synchronous FroebelUX clicks inside filterBloquesByAge() and toggleRetoBloque() (targeting real-user avg INP 760ms -> <100ms)."
+    "Above-the-Fold Hero Conversion Strips (/preescolar-stem-3-a-6-anos & /programas): Added visible 44px hero CTA pill/button bars directly under section-header__desc so visitors don't hit collapsed or wide comparison tables without immediate enrollment, simulator, and WhatsApp actions (0 locked metadata changes).",
+    "WCAG 2.2 AA 44px Mobile Sticky Dock & Cookie Clearance (website/scripts/main.js?v=45): Upgraded #froebel-dock-enroll, #froebel-dock-wa, and #froebel-dock-tel from 40px to 44px touch targets, lifted #froebel-cookie-banner offset from -54px to -68px when dock is active (banner preserved 100% intact), and extended initInteractiveHeroLabels() jump targets to all page simulators.",
+    "GEO / AI Discovery Alignment (website/llms-full.txt): Removed stale pre-evaluation wording and added direct /sitemap.xml and /pricing.md references for ChatGPT/AI crawler discovery."
   ]
 }
