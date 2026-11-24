@@ -1,10 +1,12 @@
 {
-  "version": "2.1.92",
-  "cycle": 92,
-  "deployedAt": "2026-11-24T14:05:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Capture-Phase DOM Click Deduplication & /contacto Submit Guard",
+  "version": "2.1.94",
+  "cycle": 94,
+  "deployedAt": "2026-11-24T22:08:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Clean Wizard Funnel Telemetry, WCAG 44px Quick Pills & JSON-LD Canonical Offer URLs",
   "highlights": [
-    "Capture-Phase Centralized Click Deduplication (website/scripts/main.js?v=48): Added capture-phase click tracking + WeakSet in initFroebelUXTelemetry() so any explicit FroebelUX.track('cta_click'|'whatsapp_click'|'phone_click') inside simulator print buttons or custom handlers suppresses duplicate bubble-phase cta_click emissions without modifying HTML.",
-    "Clean Contact Visit Form Submit Tracking (/contacto): Marked #formulario-visita-contacto with data-ux-custom-submit=\"1\" and skipped generic submit fallback when present, preventing false form_submit events on validation failure and duplicate events alongside the 200 OK API handler (keeping #froebel-cookie-banner intact)."
+    "Clean Enrollment Wizard Funnel Telemetry (website/scripts/inscripcion-wizard.js?v=16): Prevented passive auto-open via URL parameters (?inscribir=1 / ?programa= / ?estancia=) from inflating wizard_open metrics, keeping tracking strictly tied to real interactive intent.",
+    "WCAG 2.2 AA 44px Quick-Select Pills & Live Active State (website/scripts/inscripcion-wizard.js?v=16): Upgraded #wizard-quick-grade-pills to min-height:44px, added +Estancia 16:00h (+$1,400), and synchronized aria-pressed/visual state in updateWizardLiveQuote().",
+    "HTTP 200 Guard & Autofill Fix on #inscripcion-form (website/scripts/main.js?v=49): Marked #inscripcion-form with data-ux-custom-submit=\"1\", emitted form_submit only after HTTP 200 OK, read saved.guardian.full_name || saved.guardian.name, and enforced min-height:44px on follow-up WhatsApp CTAs (keeping #froebel-cookie-banner intact).",
+    "Canonical JSON-LD Course.offers.url Hygiene: Replaced 6 parameterized /inscripciones?inscribir=1... URLs inside JSON-LD schemas across /programas, /maternal-bilingue-1-a-3-anos, /preescolar-stem-3-a-6-anos, and /horario-extendido-y-comedor with canonical https://froebelinstituto.com.mx/inscripciones."
   ]
 }

@@ -885,6 +885,7 @@ function initContactVisitForm() {
 function initInscripcionInfoForm() {
   const infoForm = document.getElementById('inscripcion-form');
   if (!infoForm) return;
+  infoForm.setAttribute('data-ux-custom-submit', '1');
 
   const nameEl = document.getElementById('nombre');
   const phoneEl = document.getElementById('telefono');
@@ -920,7 +921,8 @@ function initInscripcionInfoForm() {
         }
       }
       if (saved.guardian && typeof saved.guardian === 'object') {
-        if (nameEl && !nameEl.value && saved.guardian.name) nameEl.value = saved.guardian.name;
+        const savedGuardianName = saved.guardian.full_name || saved.guardian.name;
+        if (nameEl && !nameEl.value && savedGuardianName) nameEl.value = savedGuardianName;
         if (phoneEl && !phoneEl.value && saved.guardian.phone) phoneEl.value = saved.guardian.phone;
         if (emailEl && !emailEl.value && saved.guardian.email) emailEl.value = saved.guardian.email;
       }
@@ -1037,16 +1039,24 @@ function initInscripcionInfoForm() {
 
       if (!response.ok) throw new Error('HTTP ' + response.status);
 
+      if (window.FroebelUX) {
+        window.FroebelUX.track('form_submit', {
+          element_id: 'inscripcion-form',
+          element_text: `Solicitud informes /inscripciones (${ageHuman})`,
+          parent_profile: ageValToProgram[ageVal]?.key === 'maternal' ? 'maternal_1_a_3' : 'preescolar_3_a_6',
+        });
+      }
+
       if (submitBtn) {
         submitBtn.textContent = '✅ ¡Solicitud Recibida!';
         submitBtn.style.backgroundColor = 'var(--color-nature)';
         submitBtn.style.borderColor = 'var(--color-nature)';
       }
-      followupBox.innerHTML = `<p style="margin:0 0 8px;font-size:0.86rem;color:#14532d;font-weight:700;">¡Gracias! Recibimos tus datos (${quoteContext.replace(/[<>&"']/g, '')}). Si deseas atención inmediata por WhatsApp:</p><a data-ux-id="info-form-wa-instant" href="${waHref}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Confirmar ahora por WhatsApp →</a>`;
+      followupBox.innerHTML = `<p style="margin:0 0 8px;font-size:0.86rem;color:#14532d;font-weight:700;">¡Gracias! Recibimos tus datos (${quoteContext.replace(/[<>&"']/g, '')}). Si deseas atención inmediata por WhatsApp:</p><a data-ux-id="info-form-wa-instant" href="${waHref}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Confirmar ahora por WhatsApp →</a>`;
       infoForm.reset();
       syncQuoteToInfoForm();
     } catch (_) {
-      followupBox.innerHTML = `<p style="margin:0 0 8px;font-size:0.86rem;color:#1e3a8a;font-weight:700;">Continúa tu solicitud directamente por WhatsApp con tus datos precargados:</p><a data-ux-id="info-form-wa-fallback" href="${waHref}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Enviar Solicitud por WhatsApp →</a>`;
+      followupBox.innerHTML = `<p style="margin:0 0 8px;font-size:0.86rem;color:#1e3a8a;font-weight:700;">Continúa tu solicitud directamente por WhatsApp con tus datos precargados:</p><a data-ux-id="info-form-wa-fallback" href="${waHref}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:9px 16px;border-radius:999px;background:#16a34a;color:#ffffff;font-weight:800;font-size:0.86rem;text-decoration:none;">💬 Enviar Solicitud por WhatsApp →</a>`;
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;

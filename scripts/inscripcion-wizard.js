@@ -137,13 +137,14 @@ function renderStudentStep() {
           </div>
           <span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:999px;font-size:0.76rem;font-weight:700;">✓ SEP RVOE 09050141 · Sin documentos hoy</span>
         </div>
-        <div id="wizard-quick-grade-pills" style="display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center;">
-          <span style="font-size:0.76rem;font-weight:700;color:#166534;">Elige en 1 clic:</span>
-          <button type="button" onclick="quickSelectWizardOption('program','maternal')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🍼 Maternal (1-3a)</button>
-          <button type="button" onclick="quickSelectWizardOption('program','preescolar_1')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🌻 Kínder 1 (3a)</button>
-          <button type="button" onclick="quickSelectWizardOption('program','preescolar_2')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🧠 Kínder 2 (4a)</button>
-          <button type="button" onclick="quickSelectWizardOption('program','preescolar_3')" style="padding:4px 10px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.76rem;font-weight:700;cursor:pointer;">🎓 Kínder 3 (5a)</button>
-          <button type="button" onclick="quickSelectWizardOption('estancia','completa_18h')" style="padding:4px 10px;border-radius:999px;border:1px solid #fde047;background:#fef9c3;color:#854d0e;font-size:0.76rem;font-weight:700;cursor:pointer;">🍽️ +Estancia 18:00h (+$1,900)</button>
+        <div id="wizard-quick-grade-pills" style="display:flex;flex-wrap:wrap;gap:0.45rem;align-items:center;">
+          <span style="font-size:0.78rem;font-weight:700;color:#166534;">Elige en 1 clic:</span>
+          <button type="button" data-quick-field="program" data-quick-val="maternal" aria-pressed="false" onclick="quickSelectWizardOption('program','maternal')" style="min-height:44px;padding:8px 14px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.82rem;font-weight:700;cursor:pointer;">🍼 Maternal (1-3a)</button>
+          <button type="button" data-quick-field="program" data-quick-val="preescolar_1" aria-pressed="false" onclick="quickSelectWizardOption('program','preescolar_1')" style="min-height:44px;padding:8px 14px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.82rem;font-weight:700;cursor:pointer;">🌻 Kínder 1 (3a)</button>
+          <button type="button" data-quick-field="program" data-quick-val="preescolar_2" aria-pressed="false" onclick="quickSelectWizardOption('program','preescolar_2')" style="min-height:44px;padding:8px 14px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.82rem;font-weight:700;cursor:pointer;">🧠 Kínder 2 (4a)</button>
+          <button type="button" data-quick-field="program" data-quick-val="preescolar_3" aria-pressed="false" onclick="quickSelectWizardOption('program','preescolar_3')" style="min-height:44px;padding:8px 14px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;border:1px solid #86efac;background:#ffffff;color:#166534;font-size:0.82rem;font-weight:700;cursor:pointer;">🎓 Kínder 3 (5a)</button>
+          <button type="button" data-quick-field="estancia" data-quick-val="parcial_16h" aria-pressed="false" onclick="quickSelectWizardOption('estancia','parcial_16h')" style="min-height:44px;padding:8px 14px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;border:1px solid #fde047;background:#fef9c3;color:#854d0e;font-size:0.82rem;font-weight:700;cursor:pointer;">🍽️ +Estancia 16:00h (+$1,400)</button>
+          <button type="button" data-quick-field="estancia" data-quick-val="completa_18h" aria-pressed="false" onclick="quickSelectWizardOption('estancia','completa_18h')" style="min-height:44px;padding:8px 14px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;border:1px solid #fde047;background:#fef9c3;color:#854d0e;font-size:0.82rem;font-weight:700;cursor:pointer;">🍽️ +Estancia 18:00h (+$1,900)</button>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:0.55rem;align-items:center;">
           <button type="button" id="wizard-wa-top-btn" onclick="sendWizardToWhatsApp()" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:0.45rem;padding:0.75rem 1rem;border-radius:999px;border:none;background:#16a34a;color:#ffffff;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(22,163,74,0.28);">
@@ -633,6 +634,26 @@ function updateWizardLiveQuote(persistChange = false) {
     topWaBtn.textContent = `💬 Apartar ${shortName} o Agendar Visita por WhatsApp (1 clic)`;
   }
 
+  document.querySelectorAll('#wizard-quick-grade-pills button[data-quick-field]').forEach((btn) => {
+    const field = btn.getAttribute('data-quick-field');
+    const val = btn.getAttribute('data-quick-val');
+    if (field === 'program') {
+      const isActive = val === progVal;
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      btn.style.background = isActive ? '#166534' : '#ffffff';
+      btn.style.color = isActive ? '#ffffff' : '#166534';
+      btn.style.borderColor = isActive ? '#166534' : '#86efac';
+      btn.style.boxShadow = isActive ? '0 2px 8px rgba(22,101,52,0.25)' : 'none';
+    } else if (field === 'estancia') {
+      const isActive = val === estVal;
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      btn.style.background = isActive ? '#854d0e' : '#fef9c3';
+      btn.style.color = isActive ? '#ffffff' : '#854d0e';
+      btn.style.borderColor = isActive ? '#854d0e' : '#fde047';
+      btn.style.boxShadow = isActive ? '0 2px 8px rgba(133,77,14,0.25)' : 'none';
+    }
+  });
+
   if (persistChange || progVal) {
     if (progVal) wizardData.student.program = progVal;
     wizardData.student.plan = planVal;
@@ -1072,7 +1093,8 @@ function normalizeProgramCode(raw) {
 }
 
 /* === OPEN WIZARD (Hot Button) === */
-function openEnrollmentWizard(preset) {
+function openEnrollmentWizard(preset, options = {}) {
+  const isAutoFromUrl = Boolean(options && options.autoFromUrl);
   const wizardSection = document.getElementById('wizard-section');
   if (wizardSection) {
     wizardSection.style.display = 'block';
@@ -1089,7 +1111,9 @@ function openEnrollmentWizard(preset) {
       loadWizardSessionDraft();
       renderWizard();
     }
-    trackWizardOpenOnce('Abrir Proceso de Inscripción en Línea');
+    if (!isAutoFromUrl) {
+      trackWizardOpenOnce('Abrir Proceso de Inscripción en Línea');
+    }
     scrollWizardIntoView(wizardSection);
   }
 }
@@ -1120,6 +1144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderWizard();
   }
   if ((params.has('inscribir') || qProgram || qPlan || qEstancia) && !isAutomatedCrawler()) {
-    openEnrollmentWizard();
+    openEnrollmentWizard(null, { autoFromUrl: true });
   }
 });
