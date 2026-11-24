@@ -2227,15 +2227,16 @@ function initFroebelUXTelemetry() {
 
       const interactive = target.closest('a, button, [role="button"], input[type="submit"], summary, .btn, .whatsapp-float');
       if (interactive) {
-        // Avoid duplicate click events for elements with dedicated handlers:
+        // Avoid duplicate click events for elements with dedicated handlers or pure navigation:
         // <summary> (initFaqAccordions), #froebel-cookie-accept-btn (initCookieConsentBanner),
-        // .froebel-collapse__trigger (initFroebelCollapsibles), and #wizard-wa-* buttons (sendWizardToWhatsApp)
+        // .froebel-collapse__trigger (initFroebelCollapsibles), .froebel-skip-link, and #wizard-wa-*
         if (
           interactive.tagName.toLowerCase() === 'summary' ||
           interactive.id === 'froebel-cookie-accept-btn' ||
           interactive.id === 'wizard-wa-top-btn' ||
           interactive.id === 'wizard-wa-express-btn' ||
-          interactive.classList.contains('froebel-collapse__trigger')
+          interactive.classList.contains('froebel-collapse__trigger') ||
+          interactive.classList.contains('froebel-skip-link')
         ) {
           return;
         }

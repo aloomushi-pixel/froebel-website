@@ -1,11 +1,11 @@
 {
-  "version": "2.1.90",
-  "cycle": 90,
-  "deployedAt": "2026-11-24T06:05:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + 23/23 LCP Image Preloads, Heading Hierarchy Fix & WCAG 2.2 AA Skip-Link/aria-current",
+  "version": "2.1.91",
+  "cycle": 91,
+  "deployedAt": "2026-11-24T10:05:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Maternal INP Yield, Clean Blog Form/Filter Telemetry & Skip-Link Deduplication",
   "highlights": [
-    "23/23 LCP Image Preload Parity (6 Missing Core Pages): Added <link rel=\"preload\" as=\"image\" type=\"image/webp\" fetchpriority=\"high\"/> in <head> for /blog/, /horario-extendido-y-comedor, /instalaciones-y-seguridad, /maternal-bilingue-1-a-3-anos, /preescolar-stem-3-a-6-anos, and /programas.",
-    "Sitewide Heading Hierarchy Fix (/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html): Fixed the sole remaining h1->h3 heading skip in the interactive evaluator card (h3 -> h2) with zero word/metadata delta.",
-    "WCAG 2.2 AA Keyboard Skip-Link & Navigation Landmarks (website/scripts/main.js?v=46): Added initAccessibilityLandmarks() injecting the focus-visible 44px skip-link (#main-content) and dynamic aria-current=\"page\" on active .header__link items (preserving #froebel-cookie-banner intact)."
+    "Maternal Simulator INP Yield (/maternal-bilingue-1-a-3-anos): Deferred non-visual localStorage/sessionStorage writes, cross-widget quote broadcast, and FroebelUX tracking into post-paint setTimeout in syncMaternal() to bring real-user INP (192ms) comfortably below 100ms.",
+    "Blog Lead-Magnet & Topic Filter Fix (/blog/): Eliminated duplicate form_submit & cta_click emissions on #blog-lead-magnet-form and .js-blog-filter, added email autocomplete/inputmode + 44px touch sizing, and ensured visual delivery feedback prior to redirect.",
+    "Skip-Link Telemetry Purity (website/scripts/main.js?v=47): Excluded .froebel-skip-link from global cta_click capture in initFroebelUXTelemetry() (preserving #froebel-cookie-banner intact)."
   ]
 }

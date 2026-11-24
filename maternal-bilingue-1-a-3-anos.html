@@ -609,27 +609,29 @@
         waEl.href = 'https://wa.me/525554148872?text=' + encodeURIComponent(waMsg);
 
         if (userChanged) {
-          try {
-            localStorage.setItem(MAT_STORAGE_KEY, JSON.stringify({ edad: aKey, horario: hKey, updatedAt: Date.now() }));
-            var prev = {};
-            var prevRaw = sessionStorage.getItem('froebel_quote_draft_v1');
-            if (prevRaw) prev = JSON.parse(prevRaw) || {};
-            sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify(Object.assign({}, prev, {
-              program: 'maternal',
-              estancia: hKey,
-              totalMonthly: pl.total,
-              programLabel: 'Maternal Bilingüe (' + et.short + ')',
-              estanciaLabel: pl.shortEstancia,
-              updatedAt: Date.now()
-            })));
-            window.dispatchEvent(new CustomEvent('froebel:quote-updated', { detail: { source: 'sim-maternal' } }));
-          } catch (_) {}
-          if (window.FroebelUX && !window.FroebelUX.isBot()) {
-            window.FroebelUX.track('cta_click', {
-              element_id: 'sim_maternal_' + aKey + '_' + hKey,
-              element_text: 'Simulador Maternal: ' + et.short + ' ($' + pl.total + ')'
-            });
-          }
+          setTimeout(function() {
+            try {
+              localStorage.setItem(MAT_STORAGE_KEY, JSON.stringify({ edad: aKey, horario: hKey, updatedAt: Date.now() }));
+              var prev = {};
+              var prevRaw = sessionStorage.getItem('froebel_quote_draft_v1');
+              if (prevRaw) prev = JSON.parse(prevRaw) || {};
+              sessionStorage.setItem('froebel_quote_draft_v1', JSON.stringify(Object.assign({}, prev, {
+                program: 'maternal',
+                estancia: hKey,
+                totalMonthly: pl.total,
+                programLabel: 'Maternal Bilingüe (' + et.short + ')',
+                estanciaLabel: pl.shortEstancia,
+                updatedAt: Date.now()
+              })));
+              window.dispatchEvent(new CustomEvent('froebel:quote-updated', { detail: { source: 'sim-maternal' } }));
+            } catch (_) {}
+            if (window.FroebelUX && !window.FroebelUX.isBot()) {
+              window.FroebelUX.track('cta_click', {
+                element_id: 'sim_maternal_' + aKey + '_' + hKey,
+                element_text: 'Simulador Maternal: ' + et.short + ' ($' + pl.total + ')'
+              });
+            }
+          }, 0);
         }
       }
 
@@ -813,7 +815,7 @@
 </path>
 </svg>
 </a>
-<script src="/scripts/main.js?v=46" defer></script>
+<script src="/scripts/main.js?v=47" defer></script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}},{"not":{"href_matches":"/admin*"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>
