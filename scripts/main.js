@@ -793,6 +793,7 @@ function initContactVisitForm() {
     });
   }
 
+  form.setAttribute('data-ux-custom-submit', '1');
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const cleanName = (nameInput?.value || '').trim();
@@ -2135,9 +2136,27 @@ function initFroebelUXTelemetry() {
     setTimeout(() => sendTelemetry(eventType, extra, false), 0);
   }
 
+  let activeDomClickEvent = null;
+  const trackedDomClickEvents = new WeakSet();
+  document.addEventListener(
+    'click',
+    (ev) => {
+      activeDomClickEvent = ev;
+    },
+    { capture: true, passive: true }
+  );
+
   // Expose global tracker for Wizard & custom forms
   window.FroebelUX = {
-    track: (eventType, extra) => scheduleTelemetry(eventType, extra, eventType === 'form_submit'),
+    track: (eventType, extra) => {
+      if (
+        activeDomClickEvent &&
+        (eventType === 'cta_click' || eventType === 'whatsapp_click' || eventType === 'phone_click')
+      ) {
+        trackedDomClickEvents.add(activeDomClickEvent);
+      }
+      scheduleTelemetry(eventType, extra, eventType === 'form_submit');
+    },
     getSlug: () => pageSlug,
     isBot: () => isSearchBot || isAiBot,
   };
@@ -2197,6 +2216,8 @@ function initFroebelUXTelemetry() {
   document.addEventListener(
     'click',
     (e) => {
+      const alreadyTrackedExplicitly = trackedDomClickEvents.has(e);
+      if (activeDomClickEvent === e) activeDomClickEvent = null;
       const now = Date.now();
       const target = e.target;
       if (!target || !(target instanceof Element)) return;
@@ -2229,8 +2250,10 @@ function initFroebelUXTelemetry() {
       if (interactive) {
         // Avoid duplicate click events for elements with dedicated handlers or pure navigation:
         // <summary> (initFaqAccordions), #froebel-cookie-accept-btn (initCookieConsentBanner),
-        // .froebel-collapse__trigger (initFroebelCollapsibles), .froebel-skip-link, and #wizard-wa-*
+        // .froebel-collapse__trigger (initFroebelCollapsibles), .froebel-skip-link, #wizard-wa-*,
+        // and any DOM click already tracked explicitly via window.FroebelUX.track()
         if (
+          alreadyTrackedExplicitly ||
           interactive.tagName.toLowerCase() === 'summary' ||
           interactive.id === 'froebel-cookie-accept-btn' ||
           interactive.id === 'wizard-wa-top-btn' ||
@@ -2320,16 +2343,18 @@ function initFroebelUXTelemetry() {
       }
     });
 
-    form.addEventListener('submit', () => {
-      sendTelemetry(
-        'form_submit',
-        {
-          element_id: form.id || 'form',
-          element_text: 'Envío de formulario',
-        },
-        true
-      );
-    });
+    if (form.getAttribute('data-ux-custom-submit') !== '1') {
+      form.addEventListener('submit', () => {
+        sendTelemetry(
+          'form_submit',
+          {
+            element_id: form.id || 'form',
+            element_text: 'Envío de formulario',
+          },
+          true
+        );
+      });
+    }
   });
 
   // 5. Flush CWV & Active Time on visibilitychange / pagehide

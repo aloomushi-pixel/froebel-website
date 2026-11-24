@@ -1,11 +1,10 @@
 {
-  "version": "2.1.91",
-  "cycle": 91,
-  "deployedAt": "2026-11-24T10:05:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Maternal INP Yield, Clean Blog Form/Filter Telemetry & Skip-Link Deduplication",
+  "version": "2.1.92",
+  "cycle": 92,
+  "deployedAt": "2026-11-24T14:05:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Capture-Phase DOM Click Deduplication & /contacto Submit Guard",
   "highlights": [
-    "Maternal Simulator INP Yield (/maternal-bilingue-1-a-3-anos): Deferred non-visual localStorage/sessionStorage writes, cross-widget quote broadcast, and FroebelUX tracking into post-paint setTimeout in syncMaternal() to bring real-user INP (192ms) comfortably below 100ms.",
-    "Blog Lead-Magnet & Topic Filter Fix (/blog/): Eliminated duplicate form_submit & cta_click emissions on #blog-lead-magnet-form and .js-blog-filter, added email autocomplete/inputmode + 44px touch sizing, and ensured visual delivery feedback prior to redirect.",
-    "Skip-Link Telemetry Purity (website/scripts/main.js?v=47): Excluded .froebel-skip-link from global cta_click capture in initFroebelUXTelemetry() (preserving #froebel-cookie-banner intact)."
+    "Capture-Phase Centralized Click Deduplication (website/scripts/main.js?v=48): Added capture-phase click tracking + WeakSet in initFroebelUXTelemetry() so any explicit FroebelUX.track('cta_click'|'whatsapp_click'|'phone_click') inside simulator print buttons or custom handlers suppresses duplicate bubble-phase cta_click emissions without modifying HTML.",
+    "Clean Contact Visit Form Submit Tracking (/contacto): Marked #formulario-visita-contacto with data-ux-custom-submit=\"1\" and skipped generic submit fallback when present, preventing false form_submit events on validation failure and duplicate events alongside the 200 OK API handler (keeping #froebel-cookie-banner intact)."
   ]
 }
