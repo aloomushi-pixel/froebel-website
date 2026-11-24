@@ -63,7 +63,57 @@ function initPersistentQuoteDraftBridge() {
   }
 }
 
+function initAccessibilityLandmarks() {
+  const mainEl = document.querySelector('main');
+  if (mainEl) {
+    if (!mainEl.id) mainEl.id = 'main-content';
+    if (!mainEl.hasAttribute('tabindex')) mainEl.setAttribute('tabindex', '-1');
+    const targetId = mainEl.id;
+
+    if (!document.getElementById('froebel-a11y-skip-style')) {
+      const styleEl = document.createElement('style');
+      styleEl.id = 'froebel-a11y-skip-style';
+      styleEl.textContent = [
+        '.froebel-skip-link{position:fixed;top:-120px;left:12px;z-index:10001;min-height:44px;display:inline-flex;align-items:center;padding:10px 16px;border-radius:999px;background:#1E40AF;color:#ffffff;font-weight:800;font-size:0.9rem;text-decoration:none;box-shadow:0 8px 24px rgba(30,64,175,0.35);}',
+        '.froebel-skip-link:focus{top:12px;outline:3px solid #FFC107;outline-offset:2px;color:#ffffff;}',
+      ].join('');
+      document.head.appendChild(styleEl);
+    }
+
+    if (document.body && !document.querySelector('.froebel-skip-link')) {
+      const skipLink = document.createElement('a');
+      skipLink.className = 'froebel-skip-link';
+      skipLink.href = `#${targetId}`;
+      skipLink.textContent = 'Saltar al contenido principal';
+      skipLink.setAttribute('data-ux-ignore-dead', '1');
+      document.body.insertBefore(skipLink, document.body.firstChild);
+    }
+  }
+
+  const normalizeNavPath = (raw) => {
+    let p = String(raw || '/').split('#')[0].split('?')[0].trim();
+    p = p.replace(/^https?:\/\/[^/]+/i, '');
+    p = p.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '');
+    if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
+    return p || '/';
+  };
+
+  const currentPath = normalizeNavPath(window.location.pathname);
+  document.querySelectorAll('.header__link[href]').forEach((link) => {
+    const linkPath = normalizeNavPath(link.getAttribute('href'));
+    if (
+      linkPath === currentPath ||
+      (linkPath === '/blog' && currentPath.startsWith('/blog'))
+    ) {
+      link.setAttribute('aria-current', 'page');
+    } else if (link.getAttribute('aria-current') === 'page') {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initAccessibilityLandmarks();
   initPersistentQuoteDraftBridge();
   initHeader();
   initMobileNav();

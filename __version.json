@@ -1,11 +1,11 @@
 {
-  "version": "2.1.89",
-  "cycle": 89,
-  "deployedAt": "2026-11-24T02:05:00.000Z",
-  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + Above-the-Fold Hero CTAs, WCAG 2.2 44px Dock & GEO Sync",
+  "version": "2.1.90",
+  "cycle": 90,
+  "deployedAt": "2026-11-24T06:05:00.000Z",
+  "standard": "PROMPT_MAESTRO_V2.1 + SKILL_SEO_JRGC_202611_v3.0 + 23/23 LCP Image Preloads, Heading Hierarchy Fix & WCAG 2.2 AA Skip-Link/aria-current",
   "highlights": [
-    "Above-the-Fold Hero Conversion Strips (/preescolar-stem-3-a-6-anos & /programas): Added visible 44px hero CTA pill/button bars directly under section-header__desc so visitors don't hit collapsed or wide comparison tables without immediate enrollment, simulator, and WhatsApp actions (0 locked metadata changes).",
-    "WCAG 2.2 AA 44px Mobile Sticky Dock & Cookie Clearance (website/scripts/main.js?v=45): Upgraded #froebel-dock-enroll, #froebel-dock-wa, and #froebel-dock-tel from 40px to 44px touch targets, lifted #froebel-cookie-banner offset from -54px to -68px when dock is active (banner preserved 100% intact), and extended initInteractiveHeroLabels() jump targets to all page simulators.",
-    "GEO / AI Discovery Alignment (website/llms-full.txt): Removed stale pre-evaluation wording and added direct /sitemap.xml and /pricing.md references for ChatGPT/AI crawler discovery."
+    "23/23 LCP Image Preload Parity (6 Missing Core Pages): Added <link rel=\"preload\" as=\"image\" type=\"image/webp\" fetchpriority=\"high\"/> in <head> for /blog/, /horario-extendido-y-comedor, /instalaciones-y-seguridad, /maternal-bilingue-1-a-3-anos, /preescolar-stem-3-a-6-anos, and /programas.",
+    "Sitewide Heading Hierarchy Fix (/blog/como-elegir-el-mejor-kinder-en-gustavo-a-madero-y-zona-oriente.html): Fixed the sole remaining h1->h3 heading skip in the interactive evaluator card (h3 -> h2) with zero word/metadata delta.",
+    "WCAG 2.2 AA Keyboard Skip-Link & Navigation Landmarks (website/scripts/main.js?v=46): Added initAccessibilityLandmarks() injecting the focus-visible 44px skip-link (#main-content) and dynamic aria-current=\"page\" on active .header__link items (preserving #froebel-cookie-banner intact)."
   ]
 }
